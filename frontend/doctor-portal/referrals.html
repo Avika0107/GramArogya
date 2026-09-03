@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b6e4f">
+  <title>GramArogya — Referrals</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="referrals">
+
+  <div class="topbar">
+    <div class="brand">🩺 GramArogya<small>PHC Doctor Portal</small></div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="queue.html">OPD Queue</a>
+      <a href="patient.html">Patient / Consult</a>
+      <a href="teleconsult.html">Teleconsult</a>
+      <a href="referrals.html" class="active">Referrals</a>
+      <a href="pharmacy.html">Pharmacy</a>
+    </nav>
+    <div class="who"><b>Dr. Anil Verma</b><span>Medical Officer · PHC Sanda</span></div>
+    <div class="portals"><a href="/asha/">ASHA</a><a href="/lab/">Lab</a><a href="/admin/">Admin</a></div>
+  </div>
+
+  <main>
+    <div class="spread">
+      <h1 class="page-title">Referral Tracking</h1>
+      <div class="row">
+        <select id="ref-filter" style="width:200px">
+          <option value="">All statuses</option>
+          <option value="created">Created</option>
+          <option value="sent">Sent</option>
+          <option value="accepted">Accepted</option>
+          <option value="completed">Completed</option>
+          <option value="no_show">No-show</option>
+          <option value="rejected">Rejected</option>
+        </select>
+        <button class="secondary small" id="refresh-btn" style="margin-top:0">↻ Refresh</button>
+      </div>
+    </div>
+
+    <div class="alert green small" id="referral-flow" hidden></div>
+
+    <div class="card">
+      <table>
+        <thead><tr><th>Patient</th><th>From → To</th><th>Reason</th><th>Pri</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead>
+        <tbody id="ref-body"></tbody>
+      </table>
+      <div id="ref-empty" class="empty">No referrals match this filter.</div>
+    </div>
+
+    <div class="card">
+      <h2>➕ Create a referral</h2>
+      <div class="fields-3">
+        <div class="field"><label>Patient (ABHA search)</label>
+          <input type="search" id="ref-patient" placeholder="14-digit ABHA or name…">
+          <div id="ref-patient-hint" class="muted small" style="margin-top:4px"></div>
+        </div>
+        <div class="field"><label>Receiving facility</label>
+          <select id="ref-to"></select>
+        </div>
+        <div class="field"><label>Priority</label>
+          <select id="ref-priority">
+            <option value="routine">Routine</option>
+            <option value="urgent">Urgent</option>
+            <option value="emergency">Emergency</option>
+          </select>
+        </div>
+      </div>
+      <label>Reason / patient summary</label>
+      <textarea id="ref-reason" rows="2" placeholder="Diagnosis summary, vitals, reason for referral…"></textarea>
+      <button id="create-ref-btn">Create referral (status: created)</button>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="portal.js"></script>
+</body>
+</html>

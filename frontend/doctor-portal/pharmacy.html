@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b6e4f">
+  <title>GramArogya — Pharmacy</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="pharmacy">
+
+  <div class="topbar">
+    <div class="brand">🩺 GramArogya<small>PHC Doctor Portal</small></div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="queue.html">OPD Queue</a>
+      <a href="patient.html">Patient / Consult</a>
+      <a href="teleconsult.html">Teleconsult</a>
+      <a href="referrals.html">Referrals</a>
+      <a href="pharmacy.html" class="active">Pharmacy</a>
+    </nav>
+    <div class="who"><b>Dr. Anil Verma</b><span>Medical Officer · PHC Sanda</span></div>
+    <div class="portals"><a href="/asha/">ASHA</a><a href="/lab/">Lab</a><a href="/admin/">Admin</a></div>
+  </div>
+
+  <main>
+    <div class="spread">
+      <h1 class="page-title">Medicine Availability</h1>
+      <div class="row">
+        <input type="search" id="med-search" placeholder="Search medicine…" style="width:260px">
+        <label style="margin:0"><input type="checkbox" id="low-only"> Low / out of stock only</label>
+        <button class="secondary small" id="refresh-btn" style="margin-top:0">↻ Refresh</button>
+      </div>
+    </div>
+
+    <div class="grid cols-3" id="inv-cards"></div>
+
+    <div class="card">
+      <h2>Facility stock levels</h2>
+      <table>
+        <thead><tr><th>Medicine</th><th>Category</th><th>Stock</th><th>Reorder</th><th>Status</th><th>Nearby fallback</th></tr></thead>
+        <tbody id="inv-body"></tbody>
+      </table>
+      <div id="inv-empty" class="empty">No inventory rows found.</div>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="portal.js"></script>
+</body>
+</html>

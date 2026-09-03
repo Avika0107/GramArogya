@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b6e4f">
+  <title>GramArogya — Sync</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="sync">
+  <header class="app-header">
+    <h1 data-i18n="title.sync">🩺 GramArogya · Sync</h1>
+    <select id="lang-select" class="lang-switch" aria-label="Language">
+      <option value="en">English</option>
+      <option value="hi">हिंदी</option>
+      <option value="mr">मराठी</option>
+      <option value="bn">বাংলা</option>
+    </select>
+    <span id="net-pill" class="status-pill">online</span>
+  </header>
+
+  <nav class="tabs">
+    <a href="index.html" data-i18n="nav.search">Patient Search</a>
+    <a href="triage.html" data-i18n="nav.triage">Triage</a>
+    <a href="tasks.html" data-i18n="nav.task">My Tasks</a>
+    <a href="sync.html" class="active" data-i18n="nav.sync">Sync</a>
+  </nav>
+
+  <main>
+    <div class="hint" data-i18n-html="hint.sync">
+      <b>Simulate Network State</b>
+      Toggle the switch to demo the full offline → online recovery: while
+      <b>Offline</b>, every record queues on this device. Flipping back to
+      <b>Online</b> flushes patient records to the backend <i>and</i> fires the
+      server's queued SMS messages in one flow.
+    </div>
+
+    <div class="card">
+      <div class="toggle-wrap">
+        <div>
+          <div id="network-label" class="network-label online">Network: Online</div>
+          <div class="muted" id="network-sub">Records sync immediately</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="network-toggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="sync.pending">Pending local records</h2>
+      <p class="muted" id="pending-summary">No unsynced records.</p>
+      <table class="queue" id="pending-table">
+        <thead><tr><th data-i18n="th.type">Type</th><th data-i18n="th.created">Created</th><th data-i18n="th.status">Status</th></tr></thead>
+        <tbody id="pending-body"></tbody>
+      </table>
+      <button id="sync-now" data-i18n="btn.sync_now">Sync Now →</button>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="sync.msgqueue">Server message queue</h2>
+      <p class="muted" id="msg-summary">Queued SMS: loading…</p>
+      <div id="dispatch-log" style="font-size:12px;color:var(--muted)"></div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="sync.last">Last sync</h2>
+      <p class="muted" id="last-sync">Never</p>
+    </div>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="db.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

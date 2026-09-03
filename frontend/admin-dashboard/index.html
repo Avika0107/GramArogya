@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b6e4f">
+  <title>GramArogya — District Admin</title>
+  <link rel="stylesheet" href="/doctor/styles.css">
+  <style>
+    .funnel-row { display: flex; align-items: center; gap: 10px; margin: 6px 0; font-size: 13px; }
+    .funnel-row .lbl { width: 110px; text-align: right; color: var(--muted); font-weight: 600; }
+    .funnel-bar-wrap { flex: 1; background: #edf1ef; border-radius: 6px; height: 18px; }
+    .funnel-bar { height: 18px; border-radius: 6px; background: var(--green); min-width: 2px; }
+    .funnel-bar.red { background: var(--red); }
+    .funnel-bar.amber { background: var(--yellow); }
+    .funnel-bar.blue { background: var(--blue); }
+    .funnel-row .cnt { width: 46px; font-weight: 700; }
+    .filters { display: flex; gap: 12px; align-items: end; flex-wrap: wrap; }
+    .filters .field { margin: 0; }
+    .big-num { font-size: 30px; font-weight: 800; color: var(--green-dark); }
+    .chip-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+    @media (max-width: 900px) { .funnel-row .lbl { width: 80px; } }
+  </style>
+</head>
+<body data-page="admin">
+
+  <div class="topbar">
+    <div class="brand">📊 GramArogya<small>Block / District Admin</small></div>
+    <nav>
+      <a href="index.html" class="active">Dashboards</a>
+    </nav>
+    <div class="who"><b>District Health Officer</b><span>Barabanki · Uttar Pradesh</span></div>
+    <div class="portals"><a href="/asha/">ASHA</a><a href="/doctor/">Doctor</a><a href="/lab/">Lab</a></div>
+  </div>
+
+  <main>
+    <div class="spread">
+      <h1 class="page-title">Block / District Dashboard</h1>
+      <button class="secondary small" id="load-btn" style="margin-top:0">↻ Load / refresh</button>
+    </div>
+
+    <div class="card">
+      <div class="filters">
+        <div class="field"><label>District</label><input type="text" id="f-district" value="Barabanki" style="width:160px"></div>
+        <div class="field"><label>Facility type</label>
+          <select id="f-type" style="width:190px">
+            <option value="">All types</option>
+            <option>sub_centre</option>
+            <option>phc</option>
+            <option>chc</option>
+            <option>district_hospital</option>
+          </select>
+        </div>
+        <div class="field"><label>From</label><input type="date" id="f-from"></div>
+        <div class="field"><label>To</label><input type="date" id="f-to"></div>
+        <button id="apply-filters">Apply filters</button>
+      </div>
+    </div>
+
+    <div class="grid cols-4" id="kpis"></div>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <h2>Referral closed-loop funnel</h2>
+        <div id="funnel"></div>
+      </div>
+      <div class="card">
+        <h2>High-risk follow-up status</h2>
+        <div id="followup-status"></div>
+        <p class="muted small" id="followup-note"></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Weekly OPD volume <span class="muted small">(appointments + visits)</span></h2>
+      <div class="chart tall" id="weekly-chart"></div>
+    </div>
+
+    <div class="card">
+      <h2>Facility performance</h2>
+      <table>
+        <thead><tr>
+          <th>Facility</th><th>HFR</th><th>Type</th><th>OPD 7d</th><th>Appts</th>
+          <th>Referrals</th><th>Completion</th><th>Follow-ups due</th><th>Compliance</th>
+          <th>Avg TAT</th><th>Stock-outs</th><th>Pending lab</th>
+        </tr></thead>
+        <tbody id="facility-body"></tbody>
+      </table>
+      <div id="facility-empty" class="empty">No facilities in this filter.</div>
+    </div>
+
+    <div class="card">
+      <h2>Stock-out alerts (district)</h2>
+      <table>
+        <thead><tr><th>Medicine</th><th>Facility</th><th>Stock</th><th>Critical</th></tr></thead>
+        <tbody id="stockout-body"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="admin.js"></script>
+</body>
+</html>

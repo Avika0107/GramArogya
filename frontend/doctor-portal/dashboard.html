@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b6e4f">
+  <title>GramArogya — PHC Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="dashboard">
+
+  <div class="topbar">
+    <div class="brand">🩺 GramArogya<small>PHC Doctor Portal</small></div>
+    <nav>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="queue.html">OPD Queue</a>
+      <a href="patient.html">Patient / Consult</a>
+      <a href="teleconsult.html">Teleconsult</a>
+      <a href="referrals.html">Referrals</a>
+      <a href="pharmacy.html">Pharmacy</a>
+    </nav>
+    <div class="who"><b id="staff-name">Dr. Anil Verma</b><span>Medical Officer · PHC Sanda</span></div>
+    <div class="portals">
+      <a href="/asha/">ASHA</a><a href="/lab/">Lab</a><a href="/admin/">Admin</a>
+    </div>
+  </div>
+
+  <main>
+    <div class="spread">
+      <h1 class="page-title">PHC Dashboard</h1>
+      <div class="row">
+        <label style="margin:0">Facility</label>
+        <select id="facility-select" style="width:320px"></select>
+      </div>
+    </div>
+
+    <div class="alert red" id="red-alert" hidden>
+      <b>🚨 Emergency cases in queue</b>
+      <span id="red-alert-text"></span> — jump to the <a href="queue.html">OPD queue</a> immediately.
+    </div>
+
+    <div class="grid cols-3" id="stat-cards">
+      <div class="card stat-card"><b>—</b><span>Today's OPD</span></div>
+      <div class="card stat-card"><b>—</b><span>Patients in queue</span></div>
+      <div class="card stat-card"><b>—</b><span>Waiting for consult</span></div>
+      <div class="card stat-card danger"><b>—</b><span>RED / emergency</span></div>
+      <div class="card stat-card"><b>—</b><span>Pending referrals</span></div>
+      <div class="card stat-card"><b>—</b><span>Pending lab reports</span></div>
+      <div class="card stat-card warn"><b>—</b><span>Follow-ups due</span></div>
+      <div class="card stat-card warn"><b>—</b><span>Medicine stock-outs</span></div>
+      <div class="card stat-card"><b>—</b><span>Queued SMS</span></div>
+    </div>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <h2>Weekly OPD trend</h2>
+        <div class="chart" id="opd-chart"></div>
+      </div>
+      <div class="card">
+        <h2>Follow-ups due today / overdue</h2>
+        <table>
+          <thead><tr><th>Patient</th><th>Task</th><th>Due</th><th>Pri</th></tr></thead>
+          <tbody id="fu-due-body"></tbody>
+        </table>
+        <div id="fu-empty" class="empty" hidden>Nothing due right now. 🎉</div>
+      </div>
+    </div>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <h2>Next in OPD queue (tokens)</h2>
+        <table>
+          <thead><tr><th>Token</th><th>Patient</th><th>Priority</th><th>Status</th><th></th></tr></thead>
+          <tbody id="queue-preview"></tbody>
+        </table>
+        <p class="muted small"><a href="queue.html">Open the full queue board →</a></p>
+      </div>
+      <div class="card">
+        <h2>Stock alerts</h2>
+        <table>
+          <thead><tr><th>Medicine</th><th>Stock</th><th>Status</th></tr></thead>
+          <tbody id="stock-body"></tbody>
+        </table>
+        <p class="muted small"><a href="pharmacy.html">Open pharmacy →</a></p>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="portal.js"></script>
+</body>
+</html>

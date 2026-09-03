@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b6e4f">
+  <title>GramArogya — My Tasks</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="tasks">
+  <header class="app-header">
+    <h1 data-i18n="title.tasks">🩺 GramArogya · My Tasks</h1>
+    <select id="lang-select" class="lang-switch" aria-label="Language">
+      <option value="en">English</option>
+      <option value="hi">हिंदी</option>
+      <option value="mr">मराठी</option>
+      <option value="bn">বাংলা</option>
+    </select>
+    <span id="net-pill" class="status-pill">online</span>
+  </header>
+
+  <nav class="tabs">
+    <a href="index.html" data-i18n="nav.search">Patient Search</a>
+    <a href="triage.html" data-i18n="nav.triage">Triage</a>
+    <a href="tasks.html" class="active" data-i18n="nav.task">My Tasks</a>
+    <a href="sync.html" data-i18n="nav.sync">Sync</a>
+  </nav>
+
+  <main>
+    <div class="hint" data-i18n-html="hint.tasks">
+      <b>Daily follow-up list</b>
+      High-risk follow-ups assigned to you (maternal, child immunization,
+      diabetes, hypertension, TB, elderly). Mark tasks done — they sync to the
+      PHC and update the completion rate on the dashboards.
+    </div>
+
+    <div class="task-stats" id="task-stats"></div>
+
+    <div class="muted" id="task-note" style="margin:4px 0 10px"></div>
+    <div id="task-lists"></div>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="db.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

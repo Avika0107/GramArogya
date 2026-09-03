@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b6e4f">
+  <title>GramArogya — OPD Queue</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="queue">
+
+  <div class="topbar">
+    <div class="brand">🩺 GramArogya<small>PHC Doctor Portal</small></div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="queue.html" class="active">OPD Queue</a>
+      <a href="patient.html">Patient / Consult</a>
+      <a href="teleconsult.html">Teleconsult</a>
+      <a href="referrals.html">Referrals</a>
+      <a href="pharmacy.html">Pharmacy</a>
+    </nav>
+    <div class="who"><b>Dr. Anil Verma</b><span>Medical Officer · PHC Sanda</span></div>
+    <div class="portals"><a href="/asha/">ASHA</a><a href="/lab/">Lab</a><a href="/admin/">Admin</a></div>
+  </div>
+
+  <main>
+    <div class="spread">
+      <h1 class="page-title">OPD Queue Board</h1>
+      <div class="row">
+        <span class="muted small" id="updated-at"></span>
+        <button class="secondary small" id="refresh-btn" style="margin-top:0">↻ Refresh</button>
+      </div>
+    </div>
+
+    <div class="card" id="triage-queue-card">
+      <h2>🚨 Triage queue (field assessments) <span class="muted small">RED first</span></h2>
+      <table>
+        <thead><tr><th>Patient</th><th>Complaint</th><th>Triage</th><th>Reasons</th><th>Arrived</th><th></th></tr></thead>
+        <tbody id="triage-body"></tbody>
+      </table>
+      <div id="triage-empty" class="empty">No open field assessments right now.</div>
+    </div>
+
+    <div class="card">
+      <div class="spread">
+        <h2 style="margin:0">Today's token queue</h2>
+        <div class="row">
+          <label style="margin:0">Filter</label>
+          <select id="queue-filter" style="width:200px">
+            <option value="all">All</option>
+            <option value="waiting">Waiting</option>
+            <option value="in_consultation">In consultation</option>
+            <option value="completed">Completed</option>
+            <option value="no_show">No-show</option>
+          </select>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Token</th><th>Patient</th><th>Priority</th><th>Reason</th><th>Est. wait</th><th>Status</th><th></th></tr></thead>
+        <tbody id="opd-body"></tbody>
+      </table>
+      <div id="opd-empty" class="empty">No appointments booked for today yet.</div>
+    </div>
+
+    <div class="card">
+      <h2>Book an appointment / walk-in</h2>
+      <div class="fields-3">
+        <div class="field"><label>Patient (ABHA / name search)</label>
+          <input type="search" id="new-appt-patient" placeholder="Search 14-digit ABHA…">
+          <div id="appt-patient-hint" class="muted small" style="margin-top:4px"></div>
+        </div>
+        <div class="field"><label>Priority tag</label>
+          <select id="new-appt-priority">
+            <option value="routine">Routine</option>
+            <option value="urgent">Urgent</option>
+            <option value="emergency">Emergency</option>
+            <option value="pregnant_woman">Pregnant woman</option>
+            <option value="child">Child</option>
+            <option value="elderly">Elderly</option>
+          </select>
+        </div>
+        <div class="field"><label>Reason</label>
+          <input type="text" id="new-appt-reason" placeholder="e.g. Diabetes review"></div>
+      </div>
+      <button id="book-btn">Book appointment (auto token)</button>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="portal.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b6e4f">
+  <title>GramArogya — Patient / Consult</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="patient">
+
+  <div class="topbar">
+    <div class="brand">🩺 GramArogya<small>PHC Doctor Portal</small></div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="queue.html">OPD Queue</a>
+      <a href="patient.html" class="active">Patient / Consult</a>
+      <a href="teleconsult.html">Teleconsult</a>
+      <a href="referrals.html">Referrals</a>
+      <a href="pharmacy.html">Pharmacy</a>
+    </nav>
+    <div class="who"><b>Dr. Anil Verma</b><span>Medical Officer · PHC Sanda</span></div>
+    <div class="portals"><a href="/asha/">ASHA</a><a href="/lab/">Lab</a><a href="/admin/">Admin</a></div>
+  </div>
+
+  <main>
+    <div class="alert blue" id="no-patient" hidden>
+      <b>Open a patient</b>
+      Pick one from the <a href="queue.html">OPD queue</a>, or search by ABHA / name below.
+      <div class="row" style="margin-top:8px">
+        <input type="search" id="patient-search" placeholder="Search ABHA ID, name, village or phone…" style="max-width:380px">
+        <button class="secondary small" id="patient-search-btn" style="margin-top:0">Search</button>
+      </div>
+      <div id="patient-search-results" class="small"></div>
+    </div>
+
+    <div id="patient-main" hidden>
+      <div class="card">
+        <div class="spread">
+          <h1 class="page-title" id="p-name" style="margin:0"></h1>
+          <div class="row">
+            <button class="secondary small" id="print-rx-btn">🖨 Print prescription</button>
+          </div>
+        </div>
+        <div class="kv small" id="p-meta" style="margin-top:6px"></div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h2>✍️ Consultation (encounter <span class="patient-id" id="enc-id"></span>)</h2>
+          <div class="fields-3">
+            <div class="field"><label>Temperature (°C)</label><input type="number" id="v-temp" step="0.1" placeholder="37.0"></div>
+            <div class="field"><label>Pulse (bpm)</label><input type="number" id="v-pulse" placeholder="72"></div>
+            <div class="field"><label>BP systolic</label><input type="number" id="v-sbp" placeholder="120"></div>
+            <div class="field"><label>BP diastolic</label><input type="number" id="v-dbp" placeholder="80"></div>
+            <div class="field"><label>SpO₂ (%)</label><input type="number" id="v-spo2" placeholder="98"></div>
+            <div class="field"><label>Resp. rate</label><input type="number" id="v-rr" placeholder="16"></div>
+          </div>
+          <label>Diagnosis</label>
+          <input type="text" id="c-diagnosis" placeholder="e.g. Essential hypertension">
+          <label>Notes</label>
+          <textarea id="c-notes" rows="2" placeholder="Clinical findings, exam…"></textarea>
+          <label>Advice</label>
+          <textarea id="c-advice" rows="2" placeholder="Lifestyle / home care advice"></textarea>
+          <div class="fields-2">
+            <div class="field"><label>Next follow-up date</label><input type="datetime-local" id="c-followup"></div>
+            <div class="field"><label>Encounter status</label>
+              <select id="c-status"><option value="discharged">Discharged (consult done)</option>
+                <option value="open">Keep open</option></select>
+            </div>
+          </div>
+
+          <h2 style="margin-top:18px">💊 e-Prescription</h2>
+          <div id="rx-items"></div>
+          <button class="secondary small" id="add-med-btn" style="margin-top:6px">+ Add medicine</button>
+
+          <h2 style="margin-top:18px">🔬 Order lab tests</h2>
+          <div id="test-checks" class="small"></div>
+
+          <div class="row" style="margin-top:14px">
+            <button id="save-consult-btn">Save consultation & prescription</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>📋 Longitudinal record</h2>
+          <div id="timeline" class="small"></div>
+        </div>
+      </div>
+
+      <div class="card" id="print-area" style="display:none"></div>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="portal.js"></script>
+</body>
+</html>

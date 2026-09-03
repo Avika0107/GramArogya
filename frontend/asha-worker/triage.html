@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b6e4f">
+  <title>GramArogya — Digital Triage</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="triage">
+  <header class="app-header">
+    <h1 data-i18n="title.triage">🩺 GramArogya · Triage</h1>
+    <select id="lang-select" class="lang-switch" aria-label="Language">
+      <option value="en">English</option>
+      <option value="hi">हिंदी</option>
+      <option value="mr">मराठी</option>
+      <option value="bn">বাংলা</option>
+    </select>
+    <span id="net-pill" class="status-pill">online</span>
+  </header>
+
+  <nav class="tabs">
+    <a href="index.html" data-i18n="nav.search">Patient Search</a>
+    <a href="triage.html" class="active" data-i18n="nav.triage">Triage</a>
+    <a href="tasks.html" data-i18n="nav.task">My Tasks</a>
+    <a href="sync.html" data-i18n="nav.sync">Sync</a>
+  </nav>
+
+  <main>
+    <div class="hint" data-i18n-html="hint.triage">
+      <b>Digital Triage Calculator</b>
+      Tick symptoms and enter vitals, then tap <b>Assess</b>. Runs locally — works
+      fully offline. Results sync to the PHC doctor queue when back online.
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="patient.title">Patient</h2>
+      <label data-i18n="lbl.abha_opt">ABHA ID (optional)</label>
+      <input id="t-abha" type="text" inputmode="numeric" maxlength="14" placeholder="91214455667701">
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="triage.symptoms">Symptoms</h2>
+      <div id="symptom-grid" class="symptom-grid"></div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="triage.vitals">Vitals</h2>
+      <div class="row">
+        <div><label data-i18n="v.pulse">Pulse (bpm)</label><input id="v-pulse" type="number" placeholder="72"></div>
+        <div><label data-i18n="v.spo2">SpO₂ (%)</label><input id="v-spo2" type="number" placeholder="98"></div>
+      </div>
+      <div class="row">
+        <div><label data-i18n="v.sbp">Systolic BP</label><input id="v-sbp" type="number" placeholder="120"></div>
+        <div><label data-i18n="v.dbp">Diastolic BP</label><input id="v-dbp" type="number" placeholder="80"></div>
+      </div>
+      <div class="row">
+        <div><label data-i18n="v.temp">Temperature (°C)</label><input id="v-temp" type="number" step="0.1" placeholder="37.0"></div>
+        <div><label data-i18n="v.rr">Resp. rate (/min)</label><input id="v-rr" type="number" placeholder="16"></div>
+      </div>
+    </div>
+
+    <button id="assess-btn" data-i18n="btn.assess">Assess patient</button>
+    <div id="triage-result"></div>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="db.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

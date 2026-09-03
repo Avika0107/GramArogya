@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Local databases (SQLite fallback mode)
+*.db
+*.sqlite3
+
+# Env files
+.env
+
+# Node (not used yet, but future-proof)
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,14 @@
+{
+  "name": "GramArogya — ASHA Worker",
+  "short_name": "GramArogya",
+  "description": "Offline-first triage, patient search and record sync for ASHA/ANM workers.",
+  "start_url": "/asha/index.html",
+  "scope": "/asha/",
+  "display": "standalone",
+  "background_color": "#0b6e4f",
+  "theme_color": "#0b6e4f",
+  "icons": [
+    { "src": "/asha/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/asha/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b6e4f">
+  <title>GramArogya — Lab Portal</title>
+  <link rel="stylesheet" href="/doctor/styles.css">
+  <style>
+    .pipeline { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 16px; }
+    .pipeline .step { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px; text-align: center; }
+    .pipeline .step b { display: block; font-size: 22px; color: var(--green-dark); }
+    .pipeline .step span { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .3px; font-weight: 700; }
+    .pipeline .step.active { border-color: var(--green); background: #eef7f3; }
+    .order-card { border: 1px solid var(--border); border-left: 4px solid #8aa0b8; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; background: #fff; }
+    .order-card .tests { font-size: 12px; color: var(--muted); margin: 4px 0 8px; }
+    .flag-normal { color: #0a7a46; font-weight: 700; }
+    .flag-high, .flag-low { color: #b26a00; font-weight: 700; }
+    .flag-critical { color: var(--red); font-weight: 800; }
+    @media (max-width: 900px) { .pipeline { grid-template-columns: repeat(3, 1fr); } }
+  </style>
+</head>
+<body data-page="lab">
+
+  <div class="topbar">
+    <div class="brand">🧪 GramArogya<small>Lab Technician Portal</small></div>
+    <nav>
+      <a href="index.html" class="active">Diagnostics</a>
+    </nav>
+    <div class="who"><b id="staff-name">Rajesh Kumar</b><span>Lab Technician · PHC Sanda</span></div>
+    <div class="portals"><a href="/asha/">ASHA</a><a href="/doctor/">Doctor</a><a href="/admin/">Admin</a></div>
+  </div>
+
+  <main>
+    <div class="spread">
+      <h1 class="page-title">Diagnostic Coordination</h1>
+      <div class="row">
+        <span class="muted small" id="updated-at"></span>
+        <button class="secondary small" id="refresh-btn" style="margin-top:0">↻ Refresh</button>
+      </div>
+    </div>
+
+    <div class="pipeline" id="pipeline"></div>
+
+    <div class="alert blue small">
+      <b>Pipeline</b>
+      ordered → sample collected → dispatched → received → processing → report ready.
+      Enter structured results at <b>received / processing</b> — flags (Normal/High/Low/Critical) are
+      computed automatically from the reference range. Reports are linked to the patient timeline and visible to the doctor + ASHA after sync.
+    </div>
+
+    <div class="card">
+      <h2>Orders to act on</h2>
+      <div id="orders"></div>
+      <div id="orders-empty" class="empty">No lab orders yet.</div>
+    </div>
+
+    <div class="card">
+      <h2>📊 Turnaround time (completed orders)</h2>
+      <table>
+        <thead><tr><th>Patient</th><th>Tests</th><th>Ordered</th><th>Ready</th><th>TAT</th><th>Report</th></tr></thead>
+        <tbody id="tat-body"></tbody>
+      </table>
+      <div id="tat-empty" class="empty">No completed orders yet — TAT is measured once a report is ready.</div>
+    </div>
+  </main>
+
+  <!-- Results entry modal -->
+  <div class="call-overlay" id="results-overlay">
+    <div class="call-box" style="max-width:680px">
+      <div style="padding:16px 18px">
+        <div class="spread">
+          <h2 style="margin:0" id="results-title">Enter results</h2>
+          <button class="secondary small" id="results-close" style="margin:0">✕</button>
+        </div>
+        <div class="alert amber small" id="results-flag-note" style="margin-top:10px">
+          Numeric results are auto-flagged against the reference range.
+        </div>
+        <div id="results-rows"></div>
+        <label>Upload report file (PDF/image)</label>
+        <input type="file" id="report-file" accept=".pdf,.png,.jpg,.jpeg">
+        <div class="row spread" style="margin-top:6px">
+          <span class="muted small" id="upload-status"></span>
+          <button id="submit-results">Save results & mark report ready</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="lab.js"></script>
+</body>
+</html>
