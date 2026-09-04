@@ -62,6 +62,9 @@ class Patient(Base):
     family_id: Mapped[Optional[str]] = mapped_column(String(40), nullable=True)  # optional family/ration-card linkage
     blood_group: Mapped[Optional[str]] = mapped_column(String(5), nullable=True)
     allergies: Mapped[Optional[list]] = mapped_column(JSON, nullable=True)  # ["penicillin"]
+    # high_risk_category: multi-select flags, e.g. ["pregnant","diabetic","hypertension","elderly","chronic"]
+    high_risk_category: Mapped[Optional[list]] = mapped_column(JSON, nullable=True)
+    chronic_conditions: Mapped[Optional[str]] = mapped_column(Text, nullable=True)  # free text, e.g. "TB, asthma"
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
     # client_id = offline PWA record id, guarantees idempotent syncs
@@ -151,13 +154,15 @@ class Referral(Base):
 
     __tablename__ = "referrals"
 
+    # Maps current status -> allowed EVENT names (send | accept | reject |
+    # complete | no_show), not the resulting statuses.
     ALLOWED_TRANSITIONS: dict[str, set[str]] = {
-        "created": {"sent"},
-        "sent": {"accepted", "rejected"},
-        "accepted": {"completed", "no_show"},
+        "created": {"send"},
+        "sent": {"accept", "reject"},
+        "accepted": {"complete", "no_show"},
         "completed": set(),
-        "no_show": {"sent"},  # allow re-referral after a no-show
-        "rejected": {"sent"},
+        "no_show": {"send"},  # allow re-referral after a no-show
+        "rejected": {"send"},
     }
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=gen_uuid)
@@ -168,6 +173,9 @@ class Referral(Base):
     priority: Mapped[str] = mapped_column(String(10), default="routine")  # routine | urgent | emergency
     status: Mapped[str] = mapped_column(String(15), default="created", index=True)
     notes: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    # asha_phone: the ASHA worker who created the referral — gets SMS alerts
+    # when the receiving facility accepts / rejects / reports no-show.
+    asha_phone: Mapped[Optional[str]] = mapped_column(String(15), nullable=True)
     client_id: Mapped[Optional[str]] = mapped_column(String(36), unique=True, nullable=True)  # offline sync idempotency
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     sent_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)

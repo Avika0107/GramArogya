@@ -42,7 +42,7 @@ class TriageResponse(BaseModel):
 class SyncRecord(BaseModel):
     """One record produced on the ASHA worker's device while offline."""
 
-    type: Literal["patient", "encounter", "triage"]
+    type: Literal["patient", "encounter", "triage", "referral", "followup", "teleconsult"]
     data: Dict[str, Any] = Field(default_factory=dict)
     client_id: str
     updated_at: datetime
@@ -85,6 +85,8 @@ class PatientCreate(BaseModel):
     family_id: Optional[str] = None
     blood_group: Optional[str] = None
     allergies: Optional[List[str]] = None
+    high_risk_category: Optional[List[str]] = None
+    chronic_conditions: Optional[str] = None
     client_id: Optional[str] = None
 
 
@@ -98,6 +100,8 @@ class PatientUpdate(BaseModel):
     family_id: Optional[str] = None
     blood_group: Optional[str] = None
     allergies: Optional[List[str]] = None
+    high_risk_category: Optional[List[str]] = None
+    chronic_conditions: Optional[str] = None
 
 
 class PatientOut(BaseModel):
@@ -116,6 +120,8 @@ class PatientOut(BaseModel):
     family_id: Optional[str] = None
     blood_group: Optional[str] = None
     allergies: Optional[List[str]] = None
+    high_risk_category: Optional[List[str]] = None
+    chronic_conditions: Optional[str] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 
@@ -162,6 +168,7 @@ class ReferralCreate(BaseModel):
     to_facility_id: str
     reason: Optional[str] = None
     priority: str = "routine"  # routine | urgent | emergency
+    asha_phone: Optional[str] = None
 
 
 class ReferralTrackRequest(BaseModel):
@@ -184,6 +191,7 @@ class ReferralOut(BaseModel):
     priority: str
     status: str
     notes: Optional[str] = None
+    asha_phone: Optional[str] = None
     created_at: Optional[datetime] = None
     sent_at: Optional[datetime] = None
     accepted_at: Optional[datetime] = None
@@ -422,6 +430,7 @@ class FollowUpOut(BaseModel):
     age: Optional[int] = None
     gender: Optional[str] = None
     village: Optional[str] = None
+    patient_phone: Optional[str] = None
     facility_id: Optional[str] = None
     facility_name: Optional[str] = None
     category: str
@@ -557,6 +566,7 @@ class TeleconsultOut(BaseModel):
     accepted_at: Optional[datetime] = None
     started_at: Optional[datetime] = None
     ended_at: Optional[datetime] = None
+    join_url: Optional[str] = None  # WebRTC room link (same for doctor + ASHA)
 
 
 # ---------------------------------------------------------------------------

@@ -38,6 +38,9 @@ class Settings:
         self.twilio_account_sid = os.getenv("TWILIO_ACCOUNT_SID", "")
         self.twilio_auth_token = os.getenv("TWILIO_AUTH_TOKEN", "")
         self.twilio_from_number = os.getenv("TWILIO_FROM_NUMBER", "")
+        # Fallback number for ASHA-worker SMS alerts when the referral record
+        # has no asha_phone (the worker's own number is captured in the PWA).
+        self.asha_alert_phone = os.getenv("ASHA_ALERT_PHONE", "")
 
         # Teleconsult ---------------------------------------------------------------
         # Real video/audio calls use an embedded WebRTC provider:

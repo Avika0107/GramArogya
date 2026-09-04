@@ -719,6 +719,9 @@ async function openCall(id) {
  * TELECONSULT_PROVIDER=daily is configured. Falls back to the simulated
  * avatar/timer UI when the server says the provider is 'simulated'. */
 function buildJoinUrl(req) {
+  // Server supplies the canonical room link so the doctor and the ASHA
+  // worker always see the same join URL.
+  if (req.join_url) return req.join_url;
   const room = 'gramarogya-' + req.id;
   if (TELECONFIG.provider === 'daily' && TELECONFIG.daily_domain) {
     return 'https://' + TELECONFIG.daily_domain + '/' + room;

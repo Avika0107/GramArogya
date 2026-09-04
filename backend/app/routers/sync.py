@@ -25,7 +25,8 @@ router = APIRouter(tags=["sync"])
 
 # Fields the client may update on an existing patient (natural-key merge)
 _PATIENT_UPDATE_FIELDS = ("name", "phone", "village", "district", "state",
-                          "pincode", "family_id", "blood_group", "allergies")
+                          "pincode", "family_id", "blood_group", "allergies",
+                          "high_risk_category", "chronic_conditions")
 
 
 def _resolve_patient_for_sync(db, data: dict, rec: SyncRecord):
@@ -35,6 +36,9 @@ def _resolve_patient_for_sync(db, data: dict, rec: SyncRecord):
         return patient
     if data.get("abha_id"):
         patient, _ = get_or_create_patient(db, data)
+        # The session has autoflush off; flush now so the new patient gets an
+        # id before dependent records (teleconsult/encounter/...) reference it.
+        db.flush()
         return patient
     return None
 
@@ -74,7 +78,8 @@ def _sync_patient(db, rec: SyncRecord) -> SyncRecordResult:
             detail="Server copy is newer — kept server record", server_id=by_abha.id,
         )
 
-    # New patient
+    # New patient — keep the client's updated_at so last-write-wins conflict
+    # resolution can compare it against later client copies.
     patient = Patient(
         abha_id=abha,
         name=data.get("name") or "Unknown Patient",
@@ -88,7 +93,10 @@ def _sync_patient(db, rec: SyncRecord) -> SyncRecordResult:
         family_id=data.get("family_id"),
         blood_group=data.get("blood_group"),
         allergies=data.get("allergies"),
+        high_risk_category=data.get("high_risk_category"),
+        chronic_conditions=data.get("chronic_conditions"),
         client_id=rec.client_id,
+        updated_at=_parse_dt(rec.updated_at) or utcnow(),
     )
     db.add(patient)
     return SyncRecordResult(
@@ -162,6 +170,8 @@ def _sync_referral(db, rec: SyncRecord) -> SyncRecordResult:
             detail="No source/target facility available",
         )
 
+    # The ASHA sending the referral means it is already dispatched: mark it
+    # 'sent' so the ASHA tracking list shows it as Sent immediately.
     referral = Referral(
         patient_id=patient.id,
         from_facility_id=from_fac.id,
@@ -169,8 +179,11 @@ def _sync_referral(db, rec: SyncRecord) -> SyncRecordResult:
         reason=data.get("reason"),
         priority=data.get("priority") or "urgent",
         notes=data.get("notes"),
+        asha_phone=data.get("asha_phone"),
+        status="sent",
         client_id=rec.client_id,
         created_at=_parse_dt(data.get("created_at")) or utcnow(),
+        sent_at=_parse_dt(data.get("created_at")) or utcnow(),
     )
     db.add(referral)
     return SyncRecordResult(
@@ -204,6 +217,8 @@ def _sync_followup(db, rec: SyncRecord) -> SyncRecordResult:
             task.status = "completed"
             task.completed_at = utcnow()
             task.client_id = rec.client_id
+            if data.get("notes"):
+                task.notes = data["notes"]
             return SyncRecordResult(
                 client_id=rec.client_id, type="followup", status="updated",
                 detail="Follow-up marked completed", server_id=task.id,

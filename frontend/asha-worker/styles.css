@@ -195,6 +195,31 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .muted { color: var(--muted); font-size: 13px; }
 .alert-text { color: var(--red); font-weight: 600; }
 
+/* Teleconsult status — doctor accept / call live + join link */
+.tele-status { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.tele-status-chip {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+.tele-status-chip.warn { background: var(--yellow); color: #3c2a00; }
+.tele-status-chip.ok { background: #5c6bc0; }
+.tele-status-chip.live { background: var(--green); animation: flash 1s infinite; }
+.tele-status-chip.error { background: var(--red); }
+.tele-join-btn {
+  display: inline-block;
+  background: var(--green);
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
 /* Network toggle */
 .toggle-wrap { display: flex; align-items: center; justify-content: space-between; }
 .switch { position: relative; width: 64px; height: 34px; }
@@ -276,6 +301,131 @@ table.queue th { color: var(--muted); font-weight: 600; }
   background: #e8f4ef; border: 1px solid #bcded1; border-radius: 10px;
   padding: 10px 12px; font-size: 13px; color: #0a4d36; margin-bottom: 14px;
 }.hint b { display: block; margin-bottom: 2px; }
+
+/* SOS button + modal */
+.sos-btn {
+  background: var(--red); color: #fff; border: 0; border-radius: 999px;
+  font-weight: 800; font-size: 13px; padding: 6px 12px; margin: 0;
+  width: auto; cursor: pointer; letter-spacing: 0.5px;
+  animation: sos-pulse 1.6s infinite;
+}
+@keyframes sos-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.6); }
+  50% { box-shadow: 0 0 0 8px rgba(211, 47, 47, 0); }
+}
+.sos-overlay .modal { border: 2px solid var(--red); }
+.sos-types { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px; }
+.sos-type {
+  margin: 0; padding: 12px 8px; font-size: 13px; border-radius: 10px;
+  background: #fff; border: 1.5px solid var(--border); color: var(--text);
+}
+.sos-type.active { border-color: var(--red); background: #fdecea; color: var(--red); }
+.sos-confirm { background: #fdecea; border: 1px solid var(--red); border-radius: 10px; padding: 12px; margin-top: 12px; }
+.sos-confirm p { margin: 0 0 8px; font-weight: 700; color: var(--red); }
+.sos-result { background: #e8f4ef; border: 1px solid var(--green); border-radius: 10px; padding: 12px; margin-top: 12px; }
+.sos-result b { color: var(--red); }
+
+/* My Patients + referral cards */
+.chip-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+.chip {
+  margin: 0; padding: 7px 12px; font-size: 12px; width: auto; flex: 0 0 auto;
+  border-radius: 999px; background: #eef3f0; color: var(--green-dark);
+  border: 1px solid var(--border); cursor: pointer; font-weight: 600;
+}
+.chip.active { background: var(--green); color: #fff; border-color: var(--green); }
+.mp-card {
+  background: #fbfdfc; border: 1px solid var(--border); border-left: 4px solid var(--green);
+  border-radius: 10px; padding: 10px 12px; margin-bottom: 8px;
+}
+.mp-card.highrisk { border-left-color: var(--red); }
+.mp-main { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.mp-main b { font-size: 15px; }
+.mp-meta { font-size: 12px; margin-top: 3px; }
+.mp-meta.due { color: #b45309; font-weight: 600; }
+.mp-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.mp-actions { margin-top: 8px; gap: 8px; }
+.mp-actions .small, .mp-actions .btn-link { margin: 0; }
+.mp-sync { font-size: 12px; }
+.hr-badge {
+  display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px;
+  border-radius: 999px; color: #fff;
+}
+.hr-pregnant { background: #ec4899; }
+.hr-diabetic { background: #3b82f6; }
+.hr-hypertension { background: #ef4444; }
+.hr-elderly { background: #6b7280; }
+.hr-chronic { background: #8b5cf6; }
+.hr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 4px; }
+.hr-grid label {
+  display: flex; align-items: center; gap: 6px; border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 8px; font-weight: 500; font-size: 12px;
+  margin: 0; background: #fbfdfc;
+}
+.hr-grid input { width: auto; }
+.btn-link {
+  display: inline-block; text-decoration: none; text-align: center;
+  background: var(--green); color: #fff; border-radius: 8px; padding: 8px 14px;
+  font-size: 13px; font-weight: 700; margin: 0;
+}
+.btn-link.small { padding: 8px 10px; font-size: 12px; }
+
+/* Patient + referral detail modal tables */
+table.kv { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.kv td { padding: 6px 4px; border-bottom: 1px solid var(--border); vertical-align: top; }
+table.kv td:first-child { color: var(--muted); font-weight: 600; width: 40%; }
+
+/* Referral status + priority badges */
+.ref-status {
+  display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px;
+  border-radius: 999px; background: #eef3f0; color: var(--muted);
+}
+.ref-status.sent, .ref-status.pending-sync { background: #fff8e6; color: #8a6d00; }
+.ref-status.accepted { background: #e3f3ec; color: #0a4d36; }
+.ref-status.completed { background: #dbeafe; color: #1e40af; }
+.ref-status.no-show, .ref-status.rejected { background: #fdecea; color: var(--red); }
+.ref-priority { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+.ref-priority.routine { background: #e3f3ec; color: #0a4d36; }
+.ref-priority.urgent { background: #fff8e6; color: #8a6d00; }
+.ref-priority.emergency { background: #fdecea; color: var(--red); }
+
+/* Follow-up tasks: overdue + actions + modals */
+.overdue-box {
+  background: #fdecea; border: 1.5px solid var(--red); border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 12px;
+}
+.overdue-box b { color: var(--red); display: block; margin-bottom: 6px; }
+.overdue-row { font-size: 12px; padding: 3px 0; border-top: 1px dashed #f0c4bd; }
+.overdue-txt { color: var(--red); }
+.task-row.overdue { border-left-color: var(--red); background: #fffafa; }
+.task-actions { display: flex; gap: 6px; align-items: center; flex: 0 0 auto; flex-wrap: wrap; justify-content: flex-end; }
+.task-actions .small { margin: 0; }
+.check-line { display: flex; align-items: center; gap: 8px; font-weight: 500; margin: 8px 0; }
+.check-line input { width: auto; }
+
+/* Call modal */
+.call-modal .call-number {
+  font-size: 24px; font-weight: 800; letter-spacing: 1px;
+  background: #e8f4ef; border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px; text-align: center; margin: 6px 0 12px;
+}
+.call-modal .btn-link { width: 100%; }
+
+/* Sync manager */
+.progress-wrap {
+  height: 14px; background: #eef3f0; border-radius: 999px;
+  overflow: hidden; margin: 10px 0 4px;
+}
+.progress-bar {
+  height: 100%; background: var(--green); border-radius: 999px;
+  transition: width 0.3s ease;
+}
+.failed-row {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  background: #fdecea; border: 1px solid #f0c4bd; border-radius: 8px;
+  padding: 8px 10px; margin-bottom: 6px; font-size: 12px;
+}
+.failed-row .row { margin: 0; }
+.failed-row .small { margin: 0; }
 
 /* My Tasks (follow-up list) + emergency escalation */
 .task-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px; }

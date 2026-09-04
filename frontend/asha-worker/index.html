@@ -12,6 +12,7 @@
 <body data-page="index">
   <header class="app-header">
     <h1 data-i18n="title.index">🩺 GramArogya · ASHA</h1>
+    <button id="sos-btn" class="sos-btn" data-i18n="sos.btn" aria-label="Emergency SOS">SOS</button>
     <select id="lang-select" class="lang-switch" aria-label="Language">
       <option value="en">English</option>
       <option value="hi">हिंदी</option>
@@ -45,6 +46,19 @@
       </div>
       <button id="search-btn" data-i18n="find.btn">Search patient</button>
       <div id="patient-result"></div>
+    </div>
+
+    <!-- My Patients dashboard -->
+    <div class="card">
+      <h2 data-i18n="mp.title">👥 My Patients</h2>
+      <input id="mp-search" type="text" data-i18n-placeholder="mp.search_ph">
+      <div class="chip-row" id="mp-filters">
+        <button class="chip active" data-filter="all" data-i18n="mp.f.all">All</button>
+        <button class="chip" data-filter="highrisk" data-i18n="mp.f.highrisk">High-risk</button>
+        <button class="chip" data-filter="followups" data-i18n="mp.f.followups">Follow-ups due</button>
+        <button class="chip" data-filter="pending" data-i18n="mp.f.pending">Pending sync</button>
+      </div>
+      <div id="mp-list"></div>
     </div>
 
     <!-- Offline registration (ABHA-first flow) -->
@@ -106,6 +120,23 @@
         <div><label data-i18n="lbl.state">State</label><input id="np-state" type="text" value="Uttar Pradesh"></div>
         <div><label data-i18n="lbl.pincode">PIN code</label><input id="np-pincode" type="text" inputmode="numeric" maxlength="6"></div>
       </div>
+      <div class="row">
+        <div><label data-i18n="lbl.age">Age (optional, if DOB unknown)</label><input id="np-age" type="number" min="0" max="120"></div>
+      </div>
+      <label data-i18n="reg.highrisk">High-risk category (select all that apply)</label>
+      <div class="hr-grid">
+        <label><input type="checkbox" value="pregnant"> <span data-i18n="hr.pregnant">🤰 Pregnant Woman</span></label>
+        <label><input type="checkbox" value="diabetic"> <span data-i18n="hr.diabetic">💉 Diabetic</span></label>
+        <label><input type="checkbox" value="hypertension"> <span data-i18n="hr.htn">❤️ High BP (HTN)</span></label>
+        <label><input type="checkbox" value="elderly"> <span data-i18n="hr.elderly">👴 Elderly (65+)</span></label>
+        <label><input type="checkbox" value="chronic"> <span data-i18n="hr.chronic">🫁 Chronic Disease</span></label>
+      </div>
+      <div class="row">
+        <div><label data-i18n="reg.allergies">Allergies (optional)</label><input id="np-allergies" type="text" data-i18n-placeholder="reg.allergies_ph"></div>
+      </div>
+      <div class="row">
+        <div><label data-i18n="reg.chronic_conditions">Chronic conditions (optional)</label><input id="np-chronic" type="text" data-i18n-placeholder="reg.chronic_ph"></div>
+      </div>
       <button id="register-btn" data-i18n="btn.save">Save patient locally</button>
     </div>
   </main>
@@ -138,6 +169,54 @@
         <button id="tele-cancel" class="secondary" data-i18n="btn.close">Close</button>
         <button id="tele-send" data-i18n="tele.request">Request call</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Patient detail modal -->
+  <div id="patient-modal" class="modal-overlay">
+    <div class="modal">
+      <h2 id="pmodal-name" style="margin-top:0">—</h2>
+      <div id="pmodal-body"></div>
+      <div class="row">
+        <button id="pmodal-call" class="secondary">📞</button>
+        <button id="pmodal-triage" class="secondary" data-i18n="mp.new_triage">New Triage</button>
+        <button id="pmodal-close" class="secondary" data-i18n="btn.close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Emergency SOS modal -->
+  <div id="sos-modal" class="modal-overlay sos-overlay">
+    <div class="modal sos-modal">
+      <h2 style="margin-top:0;color:var(--red)" data-i18n="sos.title">🚨 Emergency SOS</h2>
+      <label data-i18n="sos.patient">Patient</label>
+      <select id="sos-patient"></select>
+      <label data-i18n="sos.type">Emergency type</label>
+      <div class="sos-types" id="sos-types">
+        <button class="sos-type" data-type="chest_pain" data-i18n="sos.t.chest">🫀 Chest Pain</button>
+        <button class="sos-type" data-type="stroke" data-i18n="sos.t.stroke">🧠 Stroke</button>
+        <button class="sos-type" data-type="bleeding" data-i18n="sos.t.bleed">🩸 Severe Bleeding</button>
+        <button class="sos-type" data-type="unconscious" data-i18n="sos.t.uncon">😵 Unconscious</button>
+        <button class="sos-type" data-type="pregnancy" data-i18n="sos.t.preg">🤰 Pregnancy Complication</button>
+        <button class="sos-type" data-type="convulsions" data-i18n="sos.t.conv">🤒 High Fever + Convulsions</button>
+        <button class="sos-type" data-type="other" data-i18n="sos.t.other">🚑 Other</button>
+      </div>
+      <label data-i18n="sos.location">Location (GPS auto-filled)</label>
+      <input id="sos-location" type="text" placeholder="Lat, Lng">
+      <label data-i18n="sos.details">Additional details (optional)</label>
+      <textarea id="sos-details" rows="2" data-i18n-placeholder="sos.details_ph"></textarea>
+      <div class="row">
+        <button id="sos-cancel" class="secondary" data-i18n="btn.close">Close</button>
+        <button id="sos-send" class="danger" data-i18n="sos.send">Send Emergency Alert</button>
+      </div>
+      <div id="sos-confirm" class="sos-confirm" hidden>
+        <p data-i18n="sos.confirm_txt">Are you sure? This is for emergencies only.</p>
+        <div class="row">
+          <button id="sos-confirm-no" class="secondary" data-i18n="btn.close">Cancel</button>
+          <button id="sos-confirm-yes" class="danger" data-i18n="sos.confirm_yes">Yes, send alert</button>
+        </div>
+      </div>
+      <div id="sos-result" class="sos-result" hidden></div>
     </div>
   </div>
 

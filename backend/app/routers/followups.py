@@ -52,6 +52,7 @@ def _to_out(db: Session, task: FollowUpTask) -> FollowUpOut:
         age=_age(patient.dob) if patient else None,
         gender=patient.gender if patient else None,
         village=patient.village if patient else None,
+        patient_phone=patient.phone if patient else None,
         facility_id=task.facility_id,
         facility_name=fac.name if fac else None,
         category=task.category,

@@ -48,6 +48,15 @@ def _age(dob):
     return today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
 
 
+def _join_url(r: TeleconsultRequest) -> str:
+    """WebRTC room link — the exact room the doctor portal embeds, so the
+    ASHA worker and the doctor always share one join URL."""
+    room = f"gramarogya-{r.id}"
+    if settings.teleconsult_provider == "daily" and settings.daily_domain:
+        return f"https://{settings.daily_domain}/{room}"
+    return f"https://meet.jit.si/GramArogya-{r.id}"
+
+
 def _to_out(db: Session, r: TeleconsultRequest) -> TeleconsultOut:
     patient = db.get(Patient, r.patient_id)
     fac = db.get(Facility, r.facility_id) if r.facility_id else None
@@ -74,6 +83,7 @@ def _to_out(db: Session, r: TeleconsultRequest) -> TeleconsultOut:
         accepted_at=r.accepted_at,
         started_at=r.started_at,
         ended_at=r.ended_at,
+        join_url=_join_url(r),
     )
 
 

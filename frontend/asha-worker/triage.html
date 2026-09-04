@@ -12,6 +12,7 @@
 <body data-page="triage">
   <header class="app-header">
     <h1 data-i18n="title.triage">🩺 GramArogya · Triage</h1>
+    <button id="sos-btn" class="sos-btn" data-i18n="sos.btn" aria-label="Emergency SOS">SOS</button>
     <select id="lang-select" class="lang-switch" aria-label="Language">
       <option value="en">English</option>
       <option value="hi">हिंदी</option>
@@ -22,9 +23,10 @@
   </header>
 
   <nav class="tabs">
-    <a href="index.html" data-i18n="nav.search">Patient Search</a>
+    <a href="index.html" data-i18n="nav.search">Patients</a>
     <a href="triage.html" class="active" data-i18n="nav.triage">Triage</a>
     <a href="tasks.html" data-i18n="nav.task">My Tasks</a>
+    <a href="tracking.html" data-i18n="nav.referrals">Referrals</a>
     <a href="sync.html" data-i18n="nav.sync">Sync</a>
   </nav>
 
@@ -65,6 +67,41 @@
     <button id="assess-btn" data-i18n="btn.assess">Assess patient</button>
     <div id="triage-result"></div>
   </main>
+
+  <!-- Emergency SOS modal -->
+  <div id="sos-modal" class="modal-overlay sos-overlay">
+    <div class="modal sos-modal">
+      <h2 style="margin-top:0;color:var(--red)" data-i18n="sos.title">🚨 Emergency SOS</h2>
+      <label data-i18n="sos.patient">Patient</label>
+      <select id="sos-patient"></select>
+      <label data-i18n="sos.type">Emergency type</label>
+      <div class="sos-types" id="sos-types">
+        <button class="sos-type" data-type="chest_pain" data-i18n="sos.t.chest">🫀 Chest Pain</button>
+        <button class="sos-type" data-type="stroke" data-i18n="sos.t.stroke">🧠 Stroke</button>
+        <button class="sos-type" data-type="bleeding" data-i18n="sos.t.bleed">🩸 Severe Bleeding</button>
+        <button class="sos-type" data-type="unconscious" data-i18n="sos.t.uncon">😵 Unconscious</button>
+        <button class="sos-type" data-type="pregnancy" data-i18n="sos.t.preg">🤰 Pregnancy Complication</button>
+        <button class="sos-type" data-type="convulsions" data-i18n="sos.t.conv">🤒 High Fever + Convulsions</button>
+        <button class="sos-type" data-type="other" data-i18n="sos.t.other">🚑 Other</button>
+      </div>
+      <label data-i18n="sos.location">Location (GPS auto-filled)</label>
+      <input id="sos-location" type="text" placeholder="Lat, Lng">
+      <label data-i18n="sos.details">Additional details (optional)</label>
+      <textarea id="sos-details" rows="2" data-i18n-placeholder="sos.details_ph"></textarea>
+      <div class="row">
+        <button id="sos-cancel" class="secondary" data-i18n="btn.close">Close</button>
+        <button id="sos-send" class="danger" data-i18n="sos.send">Send Emergency Alert</button>
+      </div>
+      <div id="sos-confirm" class="sos-confirm" hidden>
+        <p data-i18n="sos.confirm_txt">Are you sure? This is for emergencies only.</p>
+        <div class="row">
+          <button id="sos-confirm-no" class="secondary" data-i18n="btn.close">Cancel</button>
+          <button id="sos-confirm-yes" class="danger" data-i18n="sos.confirm_yes">Yes, send alert</button>
+        </div>
+      </div>
+      <div id="sos-result" class="sos-result" hidden></div>
+    </div>
+  </div>
 
   <div id="toast" class="toast"></div>
   <script src="db.js"></script>

@@ -68,9 +68,164 @@ const I18N = {
     'tele.queued': 'Call request saved — will sync when online',
     'tele.sent': 'Call request sent to the doctor',
     'tele.no_patient': 'Search or register a patient first',
+    'tele.status.requested': 'Waiting for the doctor to accept the call',
+    'tele.status.accepted': '{0} accepted the call — starting soon',
+    'tele.status.live': 'Call is live — join with the patient now',
+    'tele.status.declined': 'The doctor declined this request',
+    'tele.status.completed': 'Call completed',
+    'tele.doctor': 'The doctor',
+    'tele.join': 'Join call',
+    'tele.notify.accepted': '{0} accepted the call — get ready to join',
+    'tele.notify.live': '📞 The doctor started the call — tap Join call now',
+    'tele.notify.declined': 'The doctor declined this call request',
     'type.referral': 'referral',
     'type.followup': 'follow-up',
     'type.teleconsult': 'teleconsult',
+
+    // new features: dashboard, referrals, tasks, SOS, sync
+    'nav.referrals': 'Referrals',
+    'title.referral': '🩺 GramArogya · New Referral',
+    'title.tracking': '🩺 GramArogya · Referrals',
+    'hint.referral': '<b>Create a referral</b> Send a patient to a higher facility (CHC / district hospital). Saved on this device first, syncs to the PHC when online. The latest triage is attached automatically when available.',
+    'hint.tracking': '<b>Referral tracking</b> Follow every referral you have sent: Sent → Accepted → Completed. Offline referrals appear here as soon as they are queued.',
+    'lbl.age': 'Age (optional, if DOB unknown)',
+    'reg.highrisk': 'High-risk category (select all that apply)',
+    'reg.allergies': 'Allergies (optional)',
+    'reg.allergies_ph': 'e.g. penicillin, peanuts',
+    'reg.chronic_conditions': 'Chronic conditions (optional)',
+    'reg.chronic_ph': 'e.g. TB, asthma, diabetes',
+    'hr.pregnant': 'Pregnant',
+    'hr.diabetic': 'Diabetic',
+    'hr.htn': 'High BP (HTN)',
+    'hr.elderly': 'Elderly (65+)',
+    'hr.chronic': 'Chronic Disease',
+    'mp.title': '👥 My Patients',
+    'mp.search_ph': 'Search by name, ABHA ID or village…',
+    'mp.f.all': 'All',
+    'mp.f.highrisk': 'High-risk',
+    'mp.f.followups': 'Follow-ups due',
+    'mp.f.pending': 'Pending sync',
+    'mp.empty': 'No patients registered yet. Register your first patient!',
+    'mp.view': 'View Record',
+    'mp.new_triage': 'New Triage',
+    'mp.pending': 'Pending sync',
+    'mp.synced': 'Synced',
+    'mp.fu_due': 'Follow-up due this week',
+    'ref.title': 'New Referral',
+    'ref.patient': 'Patient',
+    'ref.patient_ph': 'Search patient name or ABHA…',
+    'ref.reason': 'Reason for referral',
+    'ref.r.specialist': 'Specialist Consultation Needed',
+    'ref.r.diagnostics': 'Diagnostic Tests Required',
+    'ref.r.emergency': 'Emergency Care',
+    'ref.r.routine': 'Routine Checkup',
+    'ref.r.pregnancy': 'Pregnancy Complication',
+    'ref.r.chronic': 'Chronic Disease Management',
+    'ref.priority': 'Priority',
+    'ref.p.routine': '🟢 Routine',
+    'ref.p.urgent': '🟡 Urgent',
+    'ref.p.emergency': '🔴 Emergency',
+    'ref.facility': 'Refer to facility',
+    'ref.facility_ph': 'Select facility…',
+    'ref.notes': 'Additional notes (optional)',
+    'ref.notes_ph': 'e.g. reports to carry, escort needed…',
+    'ref.submit': 'Send Referral',
+    'ref.need_patient': 'Select a patient first',
+    'ref.need_facility': 'Select a facility first',
+    'ref.sent_synced': 'Referral sent! The PHC will review shortly',
+    'ref.sent_queued': 'Referral saved on device — will sync when online',
+    'ref.triage_pending': 'Attaching {0} pending local triage report(s)',
+    'ref.triage_attached': 'Latest triage attached: {0} ({1})',
+    'track.title': 'Referral Tracking',
+    'track.new': '+ New Referral',
+    'track.f.sent': '🟡 Sent',
+    'track.f.accepted': '🟢 Accepted',
+    'track.f.completed': '🔵 Completed',
+    'track.f.noshow': '🔴 No-show',
+    'track.f.rejected': 'Rejected',
+    'track.empty': 'No referrals created yet',
+    'track.to_phc': 'PHC (pending sync)',
+    'track.details': 'View Details',
+    'track.contact': 'Contact PHC',
+    'track.status': 'Status',
+    'track.accepted': 'Accepted',
+    'track.completed': 'Completed',
+    'track.accepted_on': 'Accepted on {0}',
+    'track.s.sent': 'Sent',
+    'track.s.accepted': 'Accepted',
+    'track.s.completed': 'Completed',
+    'track.s.no_show': 'No-show',
+    'track.s.rejected': 'Rejected',
+    'track.s.pending_sync': 'Pending sync',
+    'track.s.created': 'Created',
+    'tasks.overdue_count': '{0} overdue follow-ups',
+    'tasks.overdue_by': '{0} days overdue',
+    'tasks.days_left': '{0} days left',
+    'tasks.due_today': 'Due today',
+    'tasks.resched': 'Reschedule',
+    'tasks.resched_online': 'Connect to the internet to reschedule',
+    'tasks.need_date': 'Pick a new due date',
+    'tasks.resched_done': 'Follow-up rescheduled',
+    'tasks.done_title': 'Mark follow-up completed',
+    'tasks.vitals': 'Vitals recorded (BP, sugar, weight…)',
+    'tasks.advised': 'Patient advised',
+    'tasks.meds': 'Medicines delivered',
+    'tasks.notes': 'Notes (optional)',
+    'tasks.notes_ph': 'e.g. BP 130/85, advised salt restriction…',
+    'tasks.confirm_done': 'Confirm completed',
+    'tasks.all_checks': 'Vitals recorded, patient advised, medicines delivered',
+    'tasks.resched_title': 'Reschedule follow-up',
+    'tasks.new_date': 'New due date',
+    'tasks.confirm_resched': 'Reschedule',
+    'sos.btn': 'SOS',
+    'sos.title': '🚨 Emergency SOS',
+    'sos.patient': 'Patient',
+    'sos.select_patient': 'Select patient…',
+    'sos.type': 'Emergency type',
+    'sos.t.chest': '🫀 Chest Pain',
+    'sos.t.stroke': '🧠 Stroke',
+    'sos.t.bleed': '🩸 Severe Bleeding',
+    'sos.t.uncon': '😵 Unconscious',
+    'sos.t.preg': '🤰 Pregnancy Complication',
+    'sos.t.conv': '🤒 High Fever + Convulsions',
+    'sos.t.other': '🚑 Other',
+    'sos.location': 'Location (GPS auto-filled)',
+    'sos.details': 'Additional details (optional)',
+    'sos.details_ph': 'Describe what happened…',
+    'sos.send': 'Send Emergency Alert',
+    'sos.confirm_txt': 'Are you sure? This is for emergencies only.',
+    'sos.confirm_yes': 'Yes, send alert',
+    'sos.need_patient': 'Select the patient first',
+    'sos.need_type': 'Select the emergency type',
+    'sos.sent': 'Emergency alert sent!',
+    'sos.synced': 'Emergency referral created & synced to the PHC',
+    'sos.queued': 'Alert queued on this device — will sync when online',
+    'sos.eta': 'Ambulance ETA: 15 minutes',
+    'sos.call_phc': 'Call PHC',
+    'sos.call_patient': 'Call patient',
+    'sync.status_title': 'Sync status',
+    'sync.total': 'Total pending',
+    'sync.progress': 'Syncing batch {0} of {1}…',
+    'sync.starting': 'Starting sync…',
+    'sync.auto_sync': 'Internet restored. Syncing pending data…',
+    'sync.failed': '⚠️ Failed items',
+    'sync.retry_all': 'Retry All',
+    'sync.retry': 'Retry',
+    'sync.delete': 'Delete',
+    'sync.failed_short': 'Failed',
+    'sync.pending_short': 'Pending',
+    'th.detail': 'Patient',
+    'call.title': 'Call',
+    'call.dial': 'Call now',
+    'call.copy': 'Copy number',
+    'call.copied': 'Number copied',
+    'call.copy_fail': 'Could not copy — note the number manually',
+    'call.no_number': 'No phone number on file',
+    'asha_phone.title': 'My mobile number (SMS alerts)',
+    'asha_phone.hint': "You'll get an SMS here when a referral you sent is accepted, rejected, or marked no-show.",
+    'asha_phone.save': 'Save',
+    'asha_phone.saved': 'Saved — SMS alerts will be sent here',
+    'asha_phone.cleared': 'Cleared',
 
     // headers / nav
     'title.index': '🩺 GramArogya · ASHA',
@@ -257,9 +412,162 @@ const I18N = {
     'tele.queued': 'कॉल अनुरोध सहेजा गया — ऑनलाइन होने पर सिंक होगा',
     'tele.sent': 'कॉल अनुरोध डॉक्टर को भेज दिया गया',
     'tele.no_patient': 'पहले मरीज़ खोजें या पंजीकृत करें',
+    'tele.status.requested': 'डॉक्टर के कॉल स्वीकार करने का इंतज़ार',
+    'tele.status.accepted': '{0} ने कॉल स्वीकार कर ली — जल्द शुरू होगी',
+    'tele.status.live': 'कॉल लाइव है — अभी मरीज़ के साथ जुड़ें',
+    'tele.status.declined': 'डॉक्टर ने यह अनुरोध अस्वीकार कर दिया',
+    'tele.status.completed': 'कॉल पूरी हुई',
+    'tele.doctor': 'डॉक्टर',
+    'tele.join': 'कॉल जॉइन करें',
+    'tele.notify.accepted': '{0} ने कॉल स्वीकार कर ली — जुड़ने की तैयारी करें',
+    'tele.notify.live': '📞 डॉक्टर ने कॉल शुरू कर दी — अभी जॉइन करें',
+    'tele.notify.declined': 'डॉक्टर ने यह कॉल अनुरोध अस्वीकार कर दिया',
     'type.referral': 'रिफ़रल',
     'type.followup': 'फ़ॉलो-अप',
     'type.teleconsult': 'टेलीकंसल्ट',
+    'nav.referrals': 'रेफरल्स',
+    'title.referral': '🩺 ग्रामआरोग्य · नया रेफरल',
+    'title.tracking': '🩺 ग्रामआरोग्य · रेफरल्स',
+    'hint.referral': '<b>रेफरल बनाएं</b> मरीज़ को उच्च सुविधा (CHC / जिला अस्पताल) पर भेजें। पहले डिवाइस पर सहेजा जाता है, ऑनलाइन होने पर PHC को सिंक होता है। नवीनतम ट्रायेज स्वतः जुड़ जाता है।',
+    'hint.tracking': '<b>रेफरल ट्रैकिंग</b> भेजे गए हर रेफरल को ट्रैक करें: भेजा → स्वीकृत → पूर्ण। ऑफ़लाइन रेफरल क्यू होते ही यहाँ दिखते हैं।',
+    'lbl.age': 'आयु (वैकल्पिक, यदि जन्मतिथि अज्ञात है)',
+    'reg.highrisk': 'उच्च जोखिम श्रेणी (सभी लागू चुनें)',
+    'reg.allergies': 'एलर्जी (वैकल्पिक)',
+    'reg.allergies_ph': 'जैसे पेनिसिलिन, मूंगफली',
+    'reg.chronic_conditions': 'पुरानी बीमारियाँ (वैकल्पिक)',
+    'reg.chronic_ph': 'जैसे टीबी, अस्थमा, मधुमेह',
+    'hr.pregnant': 'गर्भवती',
+    'hr.diabetic': 'मधुमेह',
+    'hr.htn': 'उच्च रक्तचाप',
+    'hr.elderly': 'बुज़ुर्ग (65+)',
+    'hr.chronic': 'पुरानी बीमारी',
+    'mp.title': '👥 मेरे मरीज़',
+    'mp.search_ph': 'नाम, ABHA ID या गांव से खोजें…',
+    'mp.f.all': 'सभी',
+    'mp.f.highrisk': 'उच्च जोखिम',
+    'mp.f.followups': 'फॉलो-अप बकाया',
+    'mp.f.pending': 'सिंक बाकी',
+    'mp.empty': 'अभी कोई मरीज़ पंजीकृत नहीं है। पहला मरीज़ पंजीकृत करें!',
+    'mp.view': 'रिकॉर्ड देखें',
+    'mp.new_triage': 'नया ट्रायेज',
+    'mp.pending': 'सिंक बाकी',
+    'mp.synced': 'सिंक हो गया',
+    'mp.fu_due': 'इस सप्ताह फॉलो-अप बकाया',
+    'ref.title': 'नया रेफरल',
+    'ref.patient': 'मरीज़',
+    'ref.patient_ph': 'मरीज़ का नाम या ABHA खोजें…',
+    'ref.reason': 'रेफरल का कारण',
+    'ref.r.specialist': 'विशेषज्ञ परामर्श आवश्यक',
+    'ref.r.diagnostics': 'डायग्नोस्टिक जांच आवश्यक',
+    'ref.r.emergency': 'आपातकालीन देखभाल',
+    'ref.r.routine': 'नियमित जांच',
+    'ref.r.pregnancy': 'गर्भावस्था जटिलता',
+    'ref.r.chronic': 'पुरानी बीमारी प्रबंधन',
+    'ref.priority': 'प्राथमिकता',
+    'ref.p.routine': '🟢 नियमित',
+    'ref.p.urgent': '🟡 तत्काल',
+    'ref.p.emergency': '🔴 आपातकालीन',
+    'ref.facility': 'किस सुविधा को भेजें',
+    'ref.facility_ph': 'सुविधा चुनें…',
+    'ref.notes': 'अतिरिक्त नोट (वैकल्पिक)',
+    'ref.notes_ph': 'जैसे साथ ले जाने वाली रिपोर्ट…',
+    'ref.submit': 'रेफरल भेजें',
+    'ref.need_patient': 'पहले मरीज़ चुनें',
+    'ref.need_facility': 'पहले सुविधा चुनें',
+    'ref.sent_synced': 'रेफरल भेजा गया! PHC जल्द समीक्षा करेगा',
+    'ref.sent_queued': 'रेफरल डिवाइस पर सहेजा — ऑनलाइन होने पर सिंक होगा',
+    'ref.triage_pending': '{0} लंबित स्थानीय ट्रायेज रिपोर्ट जुड़ रही हैं',
+    'ref.triage_attached': 'नवीनतम ट्रायेज जुड़ा: {0} ({1})',
+    'track.title': 'रेफरल ट्रैकिंग',
+    'track.new': '+ नया रेफरल',
+    'track.f.sent': '🟡 भेजा',
+    'track.f.accepted': '🟢 स्वीकृत',
+    'track.f.completed': '🔵 पूर्ण',
+    'track.f.noshow': '🔴 अनुपस्थित',
+    'track.f.rejected': 'अस्वीकृत',
+    'track.empty': 'अभी कोई रेफरल नहीं बनाया गया',
+    'track.to_phc': 'PHC (सिंक बाकी)',
+    'track.details': 'विवरण देखें',
+    'track.contact': 'PHC से संपर्क',
+    'track.status': 'स्थिति',
+    'track.accepted': 'स्वीकृत',
+    'track.completed': 'पूर्ण',
+    'track.accepted_on': '{0} को स्वीकृत',
+    'track.s.sent': 'भेजा',
+    'track.s.accepted': 'स्वीकृत',
+    'track.s.completed': 'पूर्ण',
+    'track.s.no_show': 'अनुपस्थित',
+    'track.s.rejected': 'अस्वीकृत',
+    'track.s.pending_sync': 'सिंक बाकी',
+    'track.s.created': 'बनाया',
+    'tasks.overdue_count': '{0} विलंबित फॉलो-अप',
+    'tasks.overdue_by': '{0} दिन विलंबित',
+    'tasks.days_left': '{0} दिन बाकी',
+    'tasks.due_today': 'आज नियत',
+    'tasks.resched': 'पुनर्निर्धारित',
+    'tasks.resched_online': 'पुनर्निर्धारण के लिए इंटरनेट से जुड़ें',
+    'tasks.need_date': 'नई तारीख चुनें',
+    'tasks.resched_done': 'फॉलो-अप पुनर्निर्धारित',
+    'tasks.done_title': 'फॉलो-अप पूर्ण चिह्नित करें',
+    'tasks.vitals': 'वाइटल दर्ज (BP, शुगर, वज़न…)',
+    'tasks.advised': 'मरीज़ को सलाह दी',
+    'tasks.meds': 'दवाइयाँ दी गईं',
+    'tasks.notes': 'नोट (वैकल्पिक)',
+    'tasks.notes_ph': 'जैसे BP 130/85, नमक कम करने की सलाह…',
+    'tasks.confirm_done': 'पूर्ण की पुष्टि करें',
+    'tasks.all_checks': 'वाइटल दर्ज, सलाह दी, दवाइयाँ दीं',
+    'tasks.resched_title': 'फॉलो-अप पुनर्निर्धारित करें',
+    'tasks.new_date': 'नई नियत तारीख',
+    'tasks.confirm_resched': 'पुनर्निर्धारित करें',
+    'sos.btn': 'SOS',
+    'sos.title': '🚨 आपातकालीन SOS',
+    'sos.patient': 'मरीज़',
+    'sos.select_patient': 'मरीज़ चुनें…',
+    'sos.type': 'आपातकालीन प्रकार',
+    'sos.t.chest': '🫀 सीने में दर्द',
+    'sos.t.stroke': '🧠 स्ट्रोक',
+    'sos.t.bleed': '🩸 गंभीर रक्तस्राव',
+    'sos.t.uncon': '😵 बेहोश',
+    'sos.t.preg': '🤰 गर्भावस्था जटिलता',
+    'sos.t.conv': '🤒 तेज़ बुखार + ऐंठन',
+    'sos.t.other': '🚑 अन्य',
+    'sos.location': 'स्थान (GPS स्वतः भरा)',
+    'sos.details': 'अतिरिक्त विवरण (वैकल्पिक)',
+    'sos.details_ph': 'क्या हुआ, बताएं…',
+    'sos.send': 'आपातकालीन अलर्ट भेजें',
+    'sos.confirm_txt': 'क्या आप सुनिश्चित हैं? यह केवल आपात स्थिति के लिए है।',
+    'sos.confirm_yes': 'हाँ, अलर्ट भेजें',
+    'sos.need_patient': 'पहले मरीज़ चुनें',
+    'sos.need_type': 'आपातकालीन प्रकार चुनें',
+    'sos.sent': 'आपातकालीन अलर्ट भेजा गया!',
+    'sos.synced': 'आपातकालीन रेफरल बनकर PHC को सिंक हो गया',
+    'sos.queued': 'अलर्ट डिवाइस पर क्यू — ऑनलाइन होने पर सिंक होगा',
+    'sos.eta': 'एम्बुलेंस ETA: 15 मिनट',
+    'sos.call_phc': 'PHC को कॉल करें',
+    'sos.call_patient': 'मरीज़ को कॉल करें',
+    'sync.status_title': 'सिंक स्थिति',
+    'sync.total': 'कुल लंबित',
+    'sync.progress': 'बैच {0} / {1} सिंक हो रहा है…',
+    'sync.starting': 'सिंक शुरू…',
+    'sync.auto_sync': 'इंटरनेट वापस आया। लंबित डेटा सिंक हो रहा है…',
+    'sync.failed': '⚠️ असफल आइटम',
+    'sync.retry_all': 'सभी पुनः प्रयास करें',
+    'sync.retry': 'पुनः प्रयास',
+    'sync.delete': 'हटाएं',
+    'sync.failed_short': 'असफल',
+    'sync.pending_short': 'लंबित',
+    'th.detail': 'मरीज़',
+    'call.title': 'कॉल',
+    'call.dial': 'अभी कॉल करें',
+    'call.copy': 'नंबर कॉपी करें',
+    'call.copied': 'नंबर कॉपी हो गया',
+    'call.copy_fail': 'कॉपी नहीं हो सका — नंबर मैन्युअली नोट करें',
+    'call.no_number': 'फ़ाइल में कोई फ़ोन नंबर नहीं है',
+    'asha_phone.title': 'मेरा मोबाइल नंबर (SMS अलर्ट)',
+    'asha_phone.hint': 'जब आपका भेजा रेफरल स्वीकृत/अस्वीकृत/अनुपस्थित होगा तो यहाँ SMS मिलेगा।',
+    'asha_phone.save': 'सहेजें',
+    'asha_phone.saved': 'सहेजा गया — SMS अलर्ट यहाँ भेजे जाएँगे',
+    'asha_phone.cleared': 'हटा दिया गया',
     'title.index': '\ud83e\ude7a \u0917\u094d\u0930\u093e\u092e\u0906\u0930\u094b\u0917\u094d\u092f \u00b7 \u0906\u0936\u093e',
     'title.triage': '\ud83e\ude7a \u0917\u094d\u0930\u093e\u092e\u0906\u0930\u094b\u0917\u094d\u092f \u00b7 \u091f\u094d\u0930\u093e\u0907\u090f\u091c',
     'title.sync': '\ud83e\ude7a \u0917\u094d\u0930\u093e\u092e\u0906\u0930\u094b\u0917\u094d\u092f \u00b7 \u0938\u093f\u0902\u0915',
@@ -434,9 +742,162 @@ const I18N = {
     'tele.queued': 'कॉल विनंती जतन केली — ऑनलाइन झाल्यावर सिंक होईल',
     'tele.sent': 'कॉल विनंती डॉक्टरांना पाठवली',
     'tele.no_patient': 'आधी रुग्ण शोधा किंवा नोंदणी करा',
+    'tele.status.requested': 'डॉक्टरांनी कॉल स्वीकारण्याची प्रतीक्षा',
+    'tele.status.accepted': '{0} यांनी कॉल स्वीकारली — लवकरच सुरू होईल',
+    'tele.status.live': 'कॉल लाइव्ह आहे — आता रुग्णासोबत जोडा',
+    'tele.status.declined': 'डॉक्टरांनी ही विनंती नाकारली',
+    'tele.status.completed': 'कॉल पूर्ण झाली',
+    'tele.doctor': 'डॉक्टर',
+    'tele.join': 'कॉलमध्ये सामील व्हा',
+    'tele.notify.accepted': '{0} यांनी कॉल स्वीकारली — जोडण्याची तयारी करा',
+    'tele.notify.live': '📞 डॉक्टरांनी कॉल सुरू केली — आता सामील व्हा',
+    'tele.notify.declined': 'डॉक्टरांनी ही कॉल विनंती नाकारली',
     'type.referral': 'रेफरल',
     'type.followup': 'फॉलो-अप',
     'type.teleconsult': 'टेलिकन्सल्ट',
+    'nav.referrals': 'रेफरल्स',
+    'title.referral': '🩺 ग्रामआरोग्य · नवीन रेफरल',
+    'title.tracking': '🩺 ग्रामआरोग्य · रेफरल्स',
+    'hint.referral': '<b>रेफरल तयार करा</b> रुग्णाला उच्च सुविधेवर (CHC / जिल्हा रुग्णालय) पाठवा. प्रथम या डिव्हाइसवर जतन होते, ऑनलाइन झाल्यावर PHC ला सिंक होते. नवीनतम ट्रायेज आपोआप जोडले जाते.',
+    'hint.tracking': '<b>रेफरल ट्रॅकिंग</b> पाठवलेल्या प्रत्येक रेफरलचा मागोवा ठेवा: पाठवले → स्वीकारले → पूर्ण. ऑफलाइन रेफरल क्यू होताच येथे दिसतात.',
+    'lbl.age': 'वय (ऐच्छिक, जर जन्मतारीख माहीत नसेल)',
+    'reg.highrisk': 'उच्च जोखीम श्रेणी (सर्व लागू निवडा)',
+    'reg.allergies': 'अ‍ॅलर्जी (ऐच्छिक)',
+    'reg.allergies_ph': 'उदा. पेनिसिलिन, शेंगदाणे',
+    'reg.chronic_conditions': 'जुनाट आजार (ऐच्छिक)',
+    'reg.chronic_ph': 'उदा. क्षयरोग, दमा, मधुमेह',
+    'hr.pregnant': 'गर्भवती',
+    'hr.diabetic': 'मधुमेह',
+    'hr.htn': 'उच्च रक्तदाब',
+    'hr.elderly': 'ज्येष्ठ (65+)',
+    'hr.chronic': 'जुनाट आजार',
+    'mp.title': '👥 माझे रुग्ण',
+    'mp.search_ph': 'नाव, ABHA ID किंवा गावाने शोधा…',
+    'mp.f.all': 'सर्व',
+    'mp.f.highrisk': 'उच्च जोखीम',
+    'mp.f.followups': 'फॉलो-अप बाकी',
+    'mp.f.pending': 'सिंक बाकी',
+    'mp.empty': 'अद्याप कोणताही रुग्ण नोंदणीकृत नाही. पहिला रुग्ण नोंदवा!',
+    'mp.view': 'रेकॉर्ड पहा',
+    'mp.new_triage': 'नवीन ट्रायेज',
+    'mp.pending': 'सिंक बाकी',
+    'mp.synced': 'सिंक झाले',
+    'mp.fu_due': 'या आठवड्यात फॉलो-अप बाकी',
+    'ref.title': 'नवीन रेफरल',
+    'ref.patient': 'रुग्ण',
+    'ref.patient_ph': 'रुग्णाचे नाव किंवा ABHA शोधा…',
+    'ref.reason': 'रेफरलचे कारण',
+    'ref.r.specialist': 'तज्ज्ञ सल्ला आवश्यक',
+    'ref.r.diagnostics': 'निदान चाचण्या आवश्यक',
+    'ref.r.emergency': 'आपत्कालीन काळजी',
+    'ref.r.routine': 'नियमित तपासणी',
+    'ref.r.pregnancy': 'गर्भधारणा गुंतागुंत',
+    'ref.r.chronic': 'जुनाट आजार व्यवस्थापन',
+    'ref.priority': 'प्राधान्य',
+    'ref.p.routine': '🟢 नियमित',
+    'ref.p.urgent': '🟡 तातडीचे',
+    'ref.p.emergency': '🔴 आपत्कालीन',
+    'ref.facility': 'कोणत्या सुविधेवर पाठवायचे',
+    'ref.facility_ph': 'सुविधा निवडा…',
+    'ref.notes': 'अतिरिक्त नोट्स (ऐच्छिक)',
+    'ref.notes_ph': 'उदा. सोबत नेण्याच्या अहवाल…',
+    'ref.submit': 'रेफरल पाठवा',
+    'ref.need_patient': 'आधी रुग्ण निवडा',
+    'ref.need_facility': 'आधी सुविधा निवडा',
+    'ref.sent_synced': 'रेफरल पाठवले! PHC लवकर पुनरावलोकन करेल',
+    'ref.sent_queued': 'रेफरल डिव्हाइसवर जतन — ऑनलाइन झाल्यावर सिंक होईल',
+    'ref.triage_pending': '{0} प्रलंबित स्थानिक ट्रायेज अहवाल जोडत आहे',
+    'ref.triage_attached': 'नवीनतम ट्रायेज जोडले: {0} ({1})',
+    'track.title': 'रेफरल ट्रॅकिंग',
+    'track.new': '+ नवीन रेफरल',
+    'track.f.sent': '🟡 पाठवले',
+    'track.f.accepted': '🟢 स्वीकारले',
+    'track.f.completed': '🔵 पूर्ण',
+    'track.f.noshow': '🔴 अनुपस्थित',
+    'track.f.rejected': 'नाकारले',
+    'track.empty': 'अद्याप कोणताही रेफरल तयार केलेला नाही',
+    'track.to_phc': 'PHC (सिंक बाकी)',
+    'track.details': 'तपशील पहा',
+    'track.contact': 'PHC शी संपर्क',
+    'track.status': 'स्थिती',
+    'track.accepted': 'स्वीकारले',
+    'track.completed': 'पूर्ण',
+    'track.accepted_on': '{0} रोजी स्वीकारले',
+    'track.s.sent': 'पाठवले',
+    'track.s.accepted': 'स्वीकारले',
+    'track.s.completed': 'पूर्ण',
+    'track.s.no_show': 'अनुपस्थित',
+    'track.s.rejected': 'नाकारले',
+    'track.s.pending_sync': 'सिंक बाकी',
+    'track.s.created': 'तयार केले',
+    'tasks.overdue_count': '{0} विलंबित फॉलो-अप',
+    'tasks.overdue_by': '{0} दिवस विलंबित',
+    'tasks.days_left': '{0} दिवस बाकी',
+    'tasks.due_today': 'आज देय',
+    'tasks.resched': 'पुनर्नियोजन',
+    'tasks.resched_online': 'पुनर्नियोजनासाठी इंटरनेटशी जोडा',
+    'tasks.need_date': 'नवीन तारीख निवडा',
+    'tasks.resched_done': 'फॉलो-अप पुनर्नियोजित',
+    'tasks.done_title': 'फॉलो-अप पूर्ण म्हणून चिन्हांकित करा',
+    'tasks.vitals': 'व्हाइटल्स नोंदवले (BP, साखर, वजन…)',
+    'tasks.advised': 'रुग्णाला सल्ला दिला',
+    'tasks.meds': 'औषधे दिली',
+    'tasks.notes': 'नोट्स (ऐच्छिक)',
+    'tasks.notes_ph': 'उदा. BP 130/85, मीठ कमी करण्याचा सल्ला…',
+    'tasks.confirm_done': 'पूर्ण झाल्याची पुष्टी करा',
+    'tasks.all_checks': 'व्हाइटल्स, सल्ला, औषधे — सर्व नोंदवले',
+    'tasks.resched_title': 'फॉलो-अप पुनर्नियोजित करा',
+    'tasks.new_date': 'नवीन देय तारीख',
+    'tasks.confirm_resched': 'पुनर्नियोजित करा',
+    'sos.btn': 'SOS',
+    'sos.title': '🚨 आपत्कालीन SOS',
+    'sos.patient': 'रुग्ण',
+    'sos.select_patient': 'रुग्ण निवडा…',
+    'sos.type': 'आपत्कालीन प्रकार',
+    'sos.t.chest': '🫀 छातीत दुखणे',
+    'sos.t.stroke': '🧠 स्ट्रोक',
+    'sos.t.bleed': '🩸 तीव्र रक्तस्त्राव',
+    'sos.t.uncon': '😵 बेशुद्ध',
+    'sos.t.preg': '🤰 गर्भधारणा गुंतागुंत',
+    'sos.t.conv': '🤒 ताप + आकडी',
+    'sos.t.other': '🚑 इतर',
+    'sos.location': 'स्थान (GPS आपोआप भरले)',
+    'sos.details': 'अतिरिक्त तपशील (ऐच्छिक)',
+    'sos.details_ph': 'काय घडले ते सांगा…',
+    'sos.send': 'आपत्कालीन अलर्ट पाठवा',
+    'sos.confirm_txt': 'खात्री आहे? हे फक्त आपत्कालीन परिस्थितीसाठी आहे.',
+    'sos.confirm_yes': 'होय, अलर्ट पाठवा',
+    'sos.need_patient': 'आधी रुग्ण निवडा',
+    'sos.need_type': 'आपत्कालीन प्रकार निवडा',
+    'sos.sent': 'आपत्कालीन अलर्ट पाठवला!',
+    'sos.synced': 'आपत्कालीन रेफरल तयार होऊन PHC ला सिंक झाले',
+    'sos.queued': 'अलर्ट डिव्हाइसवर क्यू — ऑनलाइन झाल्यावर सिंक होईल',
+    'sos.eta': 'रुग्णवाहिका ETA: 15 मिनिटे',
+    'sos.call_phc': 'PHC ला कॉल करा',
+    'sos.call_patient': 'रुग्णाला कॉल करा',
+    'sync.status_title': 'सिंक स्थिती',
+    'sync.total': 'एकूण प्रलंबित',
+    'sync.progress': 'बॅच {0} / {1} सिंक होत आहे…',
+    'sync.starting': 'सिंक सुरू…',
+    'sync.auto_sync': 'इंटरनेट परत आले. प्रलंबित डेटा सिंक होत आहे…',
+    'sync.failed': '⚠️ अयशस्वी आयटम',
+    'sync.retry_all': 'सर्व पुन्हा प्रयत्न करा',
+    'sync.retry': 'पुन्हा प्रयत्न',
+    'sync.delete': 'हटवा',
+    'sync.failed_short': 'अयशस्वी',
+    'sync.pending_short': 'प्रलंबित',
+    'th.detail': 'रुग्ण',
+    'call.title': 'कॉल',
+    'call.dial': 'आता कॉल करा',
+    'call.copy': 'क्रमांक कॉपी करा',
+    'call.copied': 'क्रमांक कॉपी झाला',
+    'call.copy_fail': 'कॉपी होऊ शकले नाही — क्रमांक स्वतः नोंदवा',
+    'call.no_number': 'फाईलमध्ये फोन क्रमांक नाही',
+    'asha_phone.title': 'माझा मोबाइल क्रमांक (SMS अलर्ट)',
+    'asha_phone.hint': 'तुमचा पाठवलेला रेफरल स्वीकारला/नाकारला/अनुपस्थित झाला तर इथे SMS येईल.',
+    'asha_phone.save': 'जतन करा',
+    'asha_phone.saved': 'जतन झाले — SMS अलर्ट इथे येतील',
+    'asha_phone.cleared': 'हटवले',
     'title.index': '\ud83e\ude7a \u0917\u094d\u0930\u093e\u092e\u0906\u0930\u094b\u0917\u094d\u092f \u00b7 \u0906\u0936\u093e',
     'title.triage': '\ud83e\ude7a \u0917\u094d\u0930\u093e\u092e\u0906\u0930\u094b\u0917\u094d\u092f \u00b7 \u091f\u094d\u0930\u093e\u092f\u091c',
     'title.sync': '\ud83e\ude7a \u0917\u094d\u0930\u093e\u092e\u0906\u0930\u094b\u0917\u094d\u092f \u00b7 \u0938\u093f\u0902\u0915',
@@ -611,9 +1072,162 @@ const I18N = {
     'tele.queued': 'কল অনুরোধ সংরক্ষিত — অনলাইনে এলে সিঙ্ক হবে',
     'tele.sent': 'কল অনুরোধ ডাক্তারের কাছে পাঠানো হয়েছে',
     'tele.no_patient': 'আগে রোগী খুঁজুন বা নিবন্ধন করুন',
+    'tele.status.requested': 'ডাক্তার কল গ্রহণ করার অপেক্ষায়',
+    'tele.status.accepted': '{0} কল গ্রহণ করেছেন — শীঘ্রই শুরু হবে',
+    'tele.status.live': 'কল চলছে — এখনই রোগীর সাথে যুক্ত হন',
+    'tele.status.declined': 'ডাক্তার এই অনুরোধ প্রত্যাখ্যান করেছেন',
+    'tele.status.completed': 'কল শেষ হয়েছে',
+    'tele.doctor': 'ডাক্তার',
+    'tele.join': 'কলে যোগ দিন',
+    'tele.notify.accepted': '{0} কল গ্রহণ করেছেন — যোগ দেওয়ার প্রস্তুতি নিন',
+    'tele.notify.live': '📞 ডাক্তার কল শুরু করেছেন — এখনই যোগ দিন',
+    'tele.notify.declined': 'ডাক্তার এই কল অনুরোধ প্রত্যাখ্যান করেছেন',
     'type.referral': 'রেফারেল',
     'type.followup': 'ফলো-আপ',
     'type.teleconsult': 'টেলিকনসাল্ট',
+    'nav.referrals': 'রেফারেল',
+    'title.referral': '🩺 গ্রামআরোগ্য · নতুন রেফারেল',
+    'title.tracking': '🩺 গ্রামআরোগ্য · রেফারেল',
+    'hint.referral': '<b>রেফারেল তৈরি করুন</b> রোগীকে উচ্চতর সুবিধায় (CHC / জেলা হাসপাতাল) পাঠান। প্রথমে এই ডিভাইসে সংরক্ষিত হয়, অনলাইনে এলে PHC-তে সিঙ্ক হয়। সর্বশেষ ট্রায়েজ স্বয়ংক্রিয়ভাবে যুক্ত হয়।',
+    'hint.tracking': '<b>রেফারেল ট্র্যাকিং</b> পাঠানো প্রতিটি রেফারেল অনুসরণ করুন: পাঠানো → গৃহীত → সম্পূর্ণ। অফলাইন রেফারেল কুইনে আসামাত্র এখানে দেখা যায়।',
+    'lbl.age': 'বয়স (ঐচ্ছিক, জন্মতারিখ অজানা থাকলে)',
+    'reg.highrisk': 'উচ্চ-ঝুঁকি বিভাগ (সব প্রযোজ্য নির্বাচন করুন)',
+    'reg.allergies': 'অ্যালার্জি (ঐচ্ছিক)',
+    'reg.allergies_ph': 'যেমন পেনিসিলিন, চিনাবাদাম',
+    'reg.chronic_conditions': 'দীর্ঘস্থায়ী রোগ (ঐচ্ছিক)',
+    'reg.chronic_ph': 'যেমন টিবি, হাঁপানি, ডায়াবেটিস',
+    'hr.pregnant': 'গর্ভবতী',
+    'hr.diabetic': 'ডায়াবেটিক',
+    'hr.htn': 'উচ্চ রক্তচাপ',
+    'hr.elderly': 'বয়স্ক (65+)',
+    'hr.chronic': 'দীর্ঘস্থায়ী রোগ',
+    'mp.title': '👥 আমার রোগী',
+    'mp.search_ph': 'নাম, ABHA ID বা গ্রাম দিয়ে খুঁজুন…',
+    'mp.f.all': 'সব',
+    'mp.f.highrisk': 'উচ্চ-ঝুঁকি',
+    'mp.f.followups': 'ফলো-আপ বাকি',
+    'mp.f.pending': 'সিঙ্ক বাকি',
+    'mp.empty': 'এখনো কোনো রোগী নিবন্ধিত নয়। প্রথম রোগী নিবন্ধন করুন!',
+    'mp.view': 'রেকর্ড দেখুন',
+    'mp.new_triage': 'নতুন ট্রায়েজ',
+    'mp.pending': 'সিঙ্ক বাকি',
+    'mp.synced': 'সিঙ্ক হয়েছে',
+    'mp.fu_due': 'এই সপ্তাহে ফলো-আপ বাকি',
+    'ref.title': 'নতুন রেফারেল',
+    'ref.patient': 'রোগী',
+    'ref.patient_ph': 'রোগীর নাম বা ABHA খুঁজুন…',
+    'ref.reason': 'রেফারেলের কারণ',
+    'ref.r.specialist': 'বিশেষজ্ঞ পরামর্শ প্রয়োজন',
+    'ref.r.diagnostics': 'ডায়াগনস্টিক পরীক্ষা প্রয়োজন',
+    'ref.r.emergency': 'জরুরি পরিচর্যা',
+    'ref.r.routine': 'নিয়মিত পরীক্ষা',
+    'ref.r.pregnancy': 'গর্ভাবস্থা জটিলতা',
+    'ref.r.chronic': 'দীর্ঘস্থায়ী রোগ ব্যবস্থাপনা',
+    'ref.priority': 'অগ্রাধিকার',
+    'ref.p.routine': '🟢 নিয়মিত',
+    'ref.p.urgent': '🟡 জরুরি',
+    'ref.p.emergency': '🔴 জরুরি অবস্থা',
+    'ref.facility': 'কোন সুবিধায় পাঠাবেন',
+    'ref.facility_ph': 'সুবিধা নির্বাচন করুন…',
+    'ref.notes': 'অতিরিক্ত নোট (ঐচ্ছিক)',
+    'ref.notes_ph': 'যেমন সাথে নেওয়ার রিপোর্ট…',
+    'ref.submit': 'রেফারেল পাঠান',
+    'ref.need_patient': 'আগে রোগী নির্বাচন করুন',
+    'ref.need_facility': 'আগে সুবিধা নির্বাচন করুন',
+    'ref.sent_synced': 'রেফারেল পাঠানো হয়েছে! PHC শীঘ্রই পর্যালোচনা করবে',
+    'ref.sent_queued': 'রেফারেল ডিভাইসে সংরক্ষিত — অনলাইনে এলে সিঙ্ক হবে',
+    'ref.triage_pending': '{0}টি অপেক্ষমাণ স্থানীয় ট্রায়েজ রিপোর্ট যুক্ত হচ্ছে',
+    'ref.triage_attached': 'সর্বশেষ ট্রায়েজ যুক্ত: {0} ({1})',
+    'track.title': 'রেফারেল ট্র্যাকিং',
+    'track.new': '+ নতুন রেফারেল',
+    'track.f.sent': '🟡 পাঠানো',
+    'track.f.accepted': '🟢 গৃহীত',
+    'track.f.completed': '🔵 সম্পূর্ণ',
+    'track.f.noshow': '🔴 অনুপস্থিত',
+    'track.f.rejected': 'প্রত্যাখ্যাত',
+    'track.empty': 'এখনো কোনো রেফারেল তৈরি হয়নি',
+    'track.to_phc': 'PHC (সিঙ্ক বাকি)',
+    'track.details': 'বিস্তারিত দেখুন',
+    'track.contact': 'PHC-তে যোগাযোগ',
+    'track.status': 'অবস্থা',
+    'track.accepted': 'গৃহীত',
+    'track.completed': 'সম্পূর্ণ',
+    'track.accepted_on': '{0} তারিখে গৃহীত',
+    'track.s.sent': 'পাঠানো',
+    'track.s.accepted': 'গৃহীত',
+    'track.s.completed': 'সম্পূর্ণ',
+    'track.s.no_show': 'অনুপস্থিত',
+    'track.s.rejected': 'প্রত্যাখ্যাত',
+    'track.s.pending_sync': 'সিঙ্ক বাকি',
+    'track.s.created': 'তৈরি',
+    'tasks.overdue_count': '{0}টি বিলম্বিত ফলো-আপ',
+    'tasks.overdue_by': '{0} দিন বিলম্বিত',
+    'tasks.days_left': '{0} দিন বাকি',
+    'tasks.due_today': 'আজ নির্ধারিত',
+    'tasks.resched': 'পুনর্নির্ধারণ',
+    'tasks.resched_online': 'পুনর্নির্ধারণের জন্য ইন্টারনেটে যুক্ত হন',
+    'tasks.need_date': 'নতুন তারিখ নির্বাচন করুন',
+    'tasks.resched_done': 'ফলো-আপ পুনর্নির্ধারিত হয়েছে',
+    'tasks.done_title': 'ফলো-আপ সম্পূর্ণ চিহ্নিত করুন',
+    'tasks.vitals': 'ভাইটাল রেকর্ড করা হয়েছে (BP, শর্করা, ওজন…)',
+    'tasks.advised': 'রোগীকে পরামর্শ দেওয়া হয়েছে',
+    'tasks.meds': 'ঔষধ দেওয়া হয়েছে',
+    'tasks.notes': 'নোট (ঐচ্ছিক)',
+    'tasks.notes_ph': 'যেমন BP 130/85, লবণ কমানোর পরামর্শ…',
+    'tasks.confirm_done': 'সম্পূর্ণ নিশ্চিত করুন',
+    'tasks.all_checks': 'ভাইটাল, পরামর্শ ও ঔষধ — সব রেকর্ড করা হয়েছে',
+    'tasks.resched_title': 'ফলো-আপ পুনর্নির্ধারণ করুন',
+    'tasks.new_date': 'নতুন নির্ধারিত তারিখ',
+    'tasks.confirm_resched': 'পুনর্নির্ধারণ করুন',
+    'sos.btn': 'SOS',
+    'sos.title': '🚨 জরুরি SOS',
+    'sos.patient': 'রোগী',
+    'sos.select_patient': 'রোগী নির্বাচন করুন…',
+    'sos.type': 'জরুরি ধরন',
+    'sos.t.chest': '🫀 বুকে ব্যথা',
+    'sos.t.stroke': '🧠 স্ট্রোক',
+    'sos.t.bleed': '🩸 তীব্র রক্তক্ষরণ',
+    'sos.t.uncon': '😵 অজ্ঞান',
+    'sos.t.preg': '🤰 গর্ভাবস্থা জটিলতা',
+    'sos.t.conv': '🤒 তীব্র জ্বর + খিঁচুনি',
+    'sos.t.other': '🚑 অন্যান্য',
+    'sos.location': 'অবস্থান (GPS স্বয়ংক্রিয়)',
+    'sos.details': 'অতিরিক্ত বিবরণ (ঐচ্ছিক)',
+    'sos.details_ph': 'কী ঘটেছে বর্ণনা করুন…',
+    'sos.send': 'জরুরি সতর্কতা পাঠান',
+    'sos.confirm_txt': 'আপনি কি নিশ্চিত? এটি শুধুমাত্র জরুরি অবস্থার জন্য।',
+    'sos.confirm_yes': 'হ্যাঁ, সতর্কতা পাঠান',
+    'sos.need_patient': 'আগে রোগী নির্বাচন করুন',
+    'sos.need_type': 'জরুরি ধরন নির্বাচন করুন',
+    'sos.sent': 'জরুরি সতর্কতা পাঠানো হয়েছে!',
+    'sos.synced': 'জরুরি রেফারেল তৈরি হয়ে PHC-তে সিঙ্ক হয়েছে',
+    'sos.queued': 'সতর্কতা ডিভাইসে কুইনে — অনলাইনে এলে সিঙ্ক হবে',
+    'sos.eta': 'অ্যাম্বুলেন্স ETA: ১৫ মিনিট',
+    'sos.call_phc': 'PHC-তে কল করুন',
+    'sos.call_patient': 'রোগীকে কল করুন',
+    'sync.status_title': 'সিঙ্ক অবস্থা',
+    'sync.total': 'মোট অপেক্ষমাণ',
+    'sync.progress': 'ব্যাচ {0} / {1} সিঙ্ক হচ্ছে…',
+    'sync.starting': 'সিঙ্ক শুরু হচ্ছে…',
+    'sync.auto_sync': 'ইন্টারনেট ফিরে এসেছে। অপেক্ষমাণ ডেটা সিঙ্ক হচ্ছে…',
+    'sync.failed': '⚠️ ব্যর্থ আইটেম',
+    'sync.retry_all': 'সব পুনরায় চেষ্টা করুন',
+    'sync.retry': 'পুনরায় চেষ্টা',
+    'sync.delete': 'মুছুন',
+    'sync.failed_short': 'ব্যর্থ',
+    'sync.pending_short': 'অপেক্ষমাণ',
+    'th.detail': 'রোগী',
+    'call.title': 'কল',
+    'call.dial': 'এখনই কল করুন',
+    'call.copy': 'নম্বর কপি করুন',
+    'call.copied': 'নম্বর কপি হয়েছে',
+    'call.copy_fail': 'কপি করা যায়নি — নম্বরটি নিজে লিখে নিন',
+    'call.no_number': 'ফাইলে কোনো ফোন নম্বর নেই',
+    'asha_phone.title': 'আমার মোবাইল নম্বর (SMS সতর্কতা)',
+    'asha_phone.hint': 'আপনার পাঠানো রেফারেল গৃহীত/প্রত্যাখ্যাত/অনুপস্থিত হলে এখানে SMS আসবে।',
+    'asha_phone.save': 'সংরক্ষণ',
+    'asha_phone.saved': 'সংরক্ষিত — SMS সতর্কতা এখানে আসবে',
+    'asha_phone.cleared': 'মুছে ফেলা হয়েছে',
     'title.index': '\ud83e\ude7a \u0997\u09cd\u09b0\u09be\u09ae\u0986\u09b0\u09cb\u0997\u09cd\u09af \u00b7 \u0986\u09b6\u09be',
     'title.triage': '\ud83e\ude7a \u0997\u09cd\u09b0\u09be\u09ae\u0986\u09b0\u09cb\u0997\u09cd\u09af \u00b7 \u099f\u09cd\u09b0\u09be\u09af\u09be\u099c',
     'title.sync': '\ud83e\ude7a \u0997\u09cd\u09b0\u09be\u09ae\u0986\u09b0\u09cb\u0997\u09cd\u09af \u00b7 \u09b8\u09bf\u0982\u0995',
@@ -907,25 +1521,58 @@ function localTriage(symptoms, vitals) {
 /* ------------------------------------------------------------------ */
 /* Sync flow                                                            */
 /* ------------------------------------------------------------------ */
-async function flushPending() {
+function chunk(arr, size) {
+  const out = [];
+  for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+  return out;
+}
+
+/* Upload the pending queue in batches of 10. Successful records are removed;
+ * failed/skipped ones stay queued flagged `sync_failed` so the Sync page can
+ * offer Retry / Delete. `opts.onProgress(done, total)` drives the progress bar.
+ */
+async function flushPending(opts = {}) {
   const pending = await db.getPending();
   if (!pending.length) return { synced: 0, results: [] };
 
   const deviceSetting = await db.getSetting('device_id');
   const deviceId = (deviceSetting && deviceSetting.value) || 'asha-demo-device';
-  const res = await apiFetch('/sync', {
-    method: 'POST',
-    body: JSON.stringify({ records: pending, device_id: deviceId }),
-  });
+  const batches = chunk(pending, 10);
+  const results = [];
+  let synced = 0;
 
-  for (const rec of pending) {
-    const r = res.results.find((x) => x.client_id === rec.client_id);
-    if (r && r.status !== 'skipped') {
-      await db.removePending(rec.client_id);
+  for (let i = 0; i < batches.length; i++) {
+    const batch = batches[i];
+    let res;
+    try {
+      res = await apiFetch('/sync', {
+        method: 'POST',
+        body: JSON.stringify({ records: batch, device_id: deviceId }),
+      });
+    } catch (e) {
+      // Network/server error: flag the whole batch, keep for retry
+      for (const rec of batch) {
+        await db.savePending(Object.assign({}, rec, { sync_failed: true, error: e.message }));
+      }
+      if (opts.onProgress) opts.onProgress(i + 1, batches.length);
+      throw e;
     }
+    results.push(...(res.results || []));
+    for (const rec of batch) {
+      const r = (res.results || []).find((x) => x.client_id === rec.client_id);
+      if (r && r.status !== 'skipped') {
+        await db.removePending(rec.client_id);
+        synced++;
+      } else if (r) {
+        // skipped (e.g. unresolvable patient) — flag so the worker can act
+        await db.savePending(Object.assign({}, rec, { sync_failed: true, error: r.detail }));
+      }
+    }
+    if (opts.onProgress) opts.onProgress(i + 1, batches.length);
   }
+
   await db.setSetting('last_sync_at', new Date().toISOString());
-  return res;
+  return { synced: synced, results: results, counts: { created: synced } };
 }
 
 async function dispatchMessages() {
@@ -933,8 +1580,8 @@ async function dispatchMessages() {
   return apiFetch('/messages/dispatch', { method: 'POST' });
 }
 
-async function fullSync() {
-  const syncRes = await flushPending();
+async function fullSync(onProgress) {
+  const syncRes = await flushPending({ onProgress: onProgress });
   const msgRes = await dispatchMessages();
   return { syncRes, msgRes };
 }
@@ -968,7 +1615,11 @@ function renderPatientCard(patient, containerId) {
     (patient.allergies && patient.allergies.length ? '<span class="alert-text">' + t('alert.allergy', [patient.allergies.join(', ')]) + '</span>' : '') +
     '</div>' +
     '</div>' +
-    (PAGE === 'index' ? '<button id="tele-btn" class="secondary" style="width:100%;margin-top:10px">📞 ' + t('btn.tele') + '</button>' : '');
+    (PAGE === 'index'
+      ? '<button id="tele-btn" class="secondary" style="width:100%;margin-top:10px">📞 ' + t('btn.tele') + '</button>' +
+        '<div id="tele-status" class="tele-status"></div>'
+      : '');
+  refreshTeleconsultStatus();
 }
 
 async function searchPatient(abhaId) {
@@ -1108,11 +1759,90 @@ async function requestTeleconsult() {
   } else {
     toast(t('tele.queued'), 'warn');
   }
+  refreshTeleconsultStatus();
+}
+
+/* ---- Teleconsult status for the shown patient ---------------------------
+ * Polls the server so the ASHA worker sees the doctor accept / start the
+ * call and gets the join link — same room the doctor portal embeds. */
+let TELECONFIG = { provider: 'jitsi', daily_domain: '', simulated: false };
+let lastTeleSeen = { abha: null, key: null };  // one-time notification per patient
+
+async function initTeleconfig() {
+  try { TELECONFIG = await apiFetch('/teleconsult/config'); } catch (e) { /* keep default */ }
+}
+
+function buildJoinUrl(req) {
+  if (req.join_url) return req.join_url;
+  const room = 'gramarogya-' + req.id;
+  if (TELECONFIG.provider === 'daily' && TELECONFIG.daily_domain) {
+    return 'https://' + TELECONFIG.daily_domain + '/' + room;
+  }
+  return 'https://meet.jit.si/GramArogya-' + req.id;
+}
+
+async function refreshTeleconsultStatus() {
+  const el = document.getElementById('tele-status');
+  const p = lastShownPatient;
+  if (!el || !p) return;
+  if (!p.abha_id) { el.innerHTML = ''; return; }
+
+  // Offline: reflect what is still queued on this device
+  if (!isOnline()) {
+    const pending = (await db.getPending()) || [];
+    const queued = pending.filter((r) => r.type === 'teleconsult' &&
+      r.data && r.data.abha_id === p.abha_id);
+    el.innerHTML = queued.length
+      ? '<span class="tele-status-chip warn">' + t('tele.queued') + '</span>'
+      : '';
+    return;
+  }
+
+  let reqs = [];
+  try { reqs = await apiFetch('/teleconsult'); } catch (e) { return; }
+  const mine = (reqs || [])
+    .filter((r) => r.abha_id === p.abha_id)
+    .sort((a, b) => String(b.requested_at || '').localeCompare(String(a.requested_at || '')));
+  const r = mine[0];
+  if (!r) { el.innerHTML = ''; return; }
+
+  // One-time notification when the shown patient's request changes state
+  const key = r.status + ':' + (r.started_at ? '1' : '0');
+  const samePatient = lastTeleSeen.abha === p.abha_id;
+  const changed = samePatient && lastTeleSeen.key !== null && lastTeleSeen.key !== key;
+  lastTeleSeen = { abha: p.abha_id, key: key };
+  if (changed) {
+    if (r.status === 'accepted' && r.started_at) toast(t('tele.notify.live'), 'ok');
+    else if (r.status === 'accepted') toast(t('tele.notify.accepted', [r.doctor_name || t('tele.doctor')]), 'ok');
+    else if (r.status === 'declined') toast(t('tele.notify.declined'), 'warn');
+  }
+
+  if (r.status === 'requested') {
+    el.innerHTML = '<span class="tele-status-chip warn">⏳ ' + t('tele.status.requested') + '</span>';
+  } else if (r.status === 'declined') {
+    el.innerHTML = '<span class="tele-status-chip error">✕ ' + t('tele.status.declined') + '</span>';
+  } else if (r.status === 'completed') {
+    el.innerHTML = '<span class="tele-status-chip ok">✓ ' + t('tele.status.completed') + '</span>';
+  } else if (r.status === 'accepted') {
+    if (r.started_at) {
+      el.innerHTML =
+        '<span class="tele-status-chip live">📞 ' + t('tele.status.live') + '</span> ' +
+        '<a class="tele-join-btn" href="' + esc(buildJoinUrl(r)) + '" target="_blank" rel="noopener">' +
+        t('tele.join') + '</a>';
+    } else {
+      el.innerHTML = '<span class="tele-status-chip ok">👨‍⚕️ ' +
+        t('tele.status.accepted', [r.doctor_name || t('tele.doctor')]) + '</span>';
+    }
+  }
 }
 
 function initIndexPage() {
   updateNetPill();
   updateRegModeUI();
+  initTeleconfig();
+  setInterval(refreshTeleconsultStatus, 20000);
+  initMyPatients();
+  initSOS();
 
   const langSel = document.getElementById('lang-select');
   if (langSel) {
@@ -1199,6 +1929,12 @@ function initIndexPage() {
     const state = val('np-state');
     const pincode = val('np-pincode');
     const familyId = val('np-family');
+    const ageStr = val('np-age');
+    const age = ageStr ? Number(ageStr) : null;
+    const highRisk = Array.from(document.querySelectorAll('.hr-grid input:checked'))
+      .map((cb) => cb.value);
+    const allergies = (val('np-allergies') || '').split(',').map((s) => s.trim()).filter(Boolean);
+    const chronic = val('np-chronic');
 
     // Required-field labels (localized) for the validation message
     const fieldKeys = {
@@ -1207,7 +1943,7 @@ function initIndexPage() {
     };
     const missing = [];
     if (mode === 'yes') { if (!val('np-abha')) missing.push('abha'); }
-    else if (!dob) missing.push('dob');
+    else if (!dob && !age) missing.push('dob');
     if (!name) missing.push('name');
     if (!village) missing.push('village');
     if (!district) missing.push('district');
@@ -1224,6 +1960,12 @@ function initIndexPage() {
     if (!/^\d{6}$/.test(pincode)) {
       toast(t('t.pincode_invalid'), 'warn');
       return;
+    }
+    // Age can stand in for an unknown date of birth (approx: born N years ago)
+    if (!dob && age) {
+      const d = new Date();
+      d.setFullYear(d.getFullYear() - age);
+      dob = d.toISOString().slice(0, 10);
     }
 
     let abha;
@@ -1247,17 +1989,21 @@ function initIndexPage() {
       return;
     }
 
+    const clean = (s) => String(s == null ? '' : s).replace(/[<>]/g, '').trim();
     const patient = {
       abha_id: abha,
-      name: name,
+      name: clean(name),
       dob: dob || '2000-01-01',
       gender: document.getElementById('np-gender').value,
-      phone: phone,
-      village: village,
-      district: district,
-      state: state,
-      pincode: pincode,
-      family_id: familyId || undefined,
+      phone: clean(phone),
+      village: clean(village),
+      district: clean(district),
+      state: clean(state),
+      pincode: clean(pincode),
+      family_id: clean(familyId) || undefined,
+      high_risk_category: highRisk.length ? highRisk : undefined,
+      allergies: allergies.length ? allergies : undefined,
+      chronic_conditions: clean(chronic) || undefined,
     };
     await db.savePatient(patient);
     await db.enqueue({
@@ -1304,7 +2050,15 @@ function buildSymptomGrid() {
 
 function initTriagePage() {
   updateNetPill();
+  initSOS();
   buildSymptomGrid();
+
+  // Pre-fill ABHA when arriving from "New Triage" on a patient card
+  const preAbha = new URLSearchParams(location.search).get('abha');
+  if (preAbha) {
+    const abhaInput = document.getElementById('t-abha');
+    if (abhaInput) abhaInput.value = preAbha;
+  }
 
   const langSel = document.getElementById('lang-select');
   if (langSel) {
@@ -1454,6 +2208,7 @@ async function submitEmergencyReferral() {
     priority: 'emergency',
     reason: reason,
     to_facility_id: toFacilityId || undefined,
+    asha_phone: (await getAshaPhone()) || undefined,
     created_at: utcNowIso(),
   };
   const local = await db.getPatient(abha);
@@ -1494,6 +2249,7 @@ function catLabel(c) {
 
 function initTasksPage() {
   updateNetPill();
+  initSOS();
   const langSel = document.getElementById('lang-select');
   if (langSel) {
     langSel.addEventListener('change', () => {
@@ -1503,7 +2259,20 @@ function initTasksPage() {
       renderTasksMarkup();
     });
   }
+  const dm = document.getElementById('task-done-modal');
+  if (dm) {
+    document.getElementById('td-cancel').addEventListener('click', () => dm.classList.remove('open'));
+    document.getElementById('td-submit').addEventListener('click', submitDoneModal);
+    dm.addEventListener('click', (e) => { if (e.target === dm) dm.classList.remove('open'); });
+  }
+  const rm = document.getElementById('task-resched-modal');
+  if (rm) {
+    document.getElementById('tr-cancel').addEventListener('click', () => rm.classList.remove('open'));
+    document.getElementById('tr-submit').addEventListener('click', submitReschedModal);
+    rm.addEventListener('click', (e) => { if (e.target === rm) rm.classList.remove('open'); });
+  }
   loadTasks();
+  setInterval(loadTasks, 45000);
 }
 
 async function loadTasks() {
@@ -1537,6 +2306,8 @@ function renderTasksMarkup() {
   const buckets = {};
   TASK_BUCKETS.forEach((b) => { buckets[b] = tasks.filter((x) => x.bucket === b); });
 
+  renderOverdueAlerts(tasks);
+
   if (statsEl) {
     statsEl.innerHTML = TASK_BUCKETS.map((b) =>
       '<div class="task-stat"><b>' + buckets[b].length + '</b><span>' + t('tasks.stat.' + b) + '</span></div>'
@@ -1554,25 +2325,136 @@ function renderTasksMarkup() {
   bindTaskButtons();
 }
 
+function daysFromDue(task) {
+  const due = new Date(task.due_date + 'T00:00:00');
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return Math.round((due - today) / 86400000);
+}
+
+function renderOverdueAlerts(tasks) {
+  const el = document.getElementById('overdue-alerts');
+  if (!el) return;
+  const overdue = tasks.filter((x) => x.bucket === 'overdue');
+  if (!overdue.length) { el.innerHTML = ''; return; }
+  el.innerHTML = '<div class="overdue-box"><b>⚠️ ' + t('tasks.overdue_count', [overdue.length]) + '</b>' +
+    overdue.map((x) => '<div class="overdue-row">' + esc(x.patient_name || '—') + ' · ' +
+      esc(x.task || catLabel(x.category)) + ' · ' + esc(String(x.due_date || '')) + '</div>').join('') +
+    '</div>';
+}
+
 function taskRow(task) {
   const done = task.status === 'completed';
   const urgent = task.priority === 'urgent' || task.priority === 'emergency';
-  return '<div class="task-row' + (urgent ? ' urgent' : '') + (done ? ' done' : '') + '">' +
-    '<div class="task-main"><b>' + esc(task.patient_name || '\u2014') + '</b>' +
-    '<span class="muted">' + esc(task.task || catLabel(task.category)) + ' \u00b7 ' +
-    t('tasks.due', [esc(String(task.due_date || ''))]) + '</span>' +
-    (task.village ? '<span class="muted">\ud83d\udccd ' + esc(task.village) + '</span>' : '') +
+  const overdue = !done && task.bucket === 'overdue';
+  const days = daysFromDue(task);
+  const dueLabel = overdue
+    ? t('tasks.overdue_by', [Math.abs(days)])
+    : (days === 0 ? t('tasks.due_today') : t('tasks.days_left', [days]));
+  return '<div class="task-row' + (urgent ? ' urgent' : '') + (done ? ' done' : '') + (overdue ? ' overdue' : '') + '">' +
+    '<div class="task-main"><b>' + esc(task.patient_name || '—') + '</b>' +
+    '<span class="muted">' + esc(task.task || catLabel(task.category)) + '</span>' +
+    '<span class="muted">' + (overdue ? '<b class="overdue-txt">⚠️ ' : '') + esc(dueLabel) + (overdue ? '</b>' : '') +
+    ' · ' + t('tasks.due', [esc(String(task.due_date || ''))]) + '</span>' +
+    (task.village ? '<span class="muted">📍 ' + esc(task.village) + '</span>' : '') +
     '</div>' +
+    '<div class="task-actions">' +
+    (task.patient_phone ? '<button class="small btn-link" data-call="' + esc(task.patient_phone) + '" data-call-label="' + esc(task.patient_name || '') + '">📞</button>' : '') +
     (done
       ? '<span class="task-status ok">' + t('tasks.stat.completed') + '</span>'
-      : '<button class="small" data-done="' + task.id + '">' + t('tasks.mark_done') + '</button>') +
-    '</div>';
+      : '<button class="small" data-done="' + task.id + '">' + t('tasks.mark_done') + '</button>' +
+        '<button class="small secondary" data-resched="' + task.id + '">' + t('tasks.resched') + '</button>') +
+    '</div></div>';
 }
 
 function bindTaskButtons() {
   document.querySelectorAll('[data-done]').forEach((btn) => {
-    btn.addEventListener('click', () => markFollowUpDone(btn.getAttribute('data-done')));
+    btn.addEventListener('click', () => openDoneModal(btn.getAttribute('data-done')));
   });
+  document.querySelectorAll('[data-resched]').forEach((btn) => {
+    btn.addEventListener('click', () => openReschedModal(btn.getAttribute('data-resched')));
+  });
+  bindCallButtons();
+}
+
+let activeDoneTask = null;
+let activeReschedTask = null;
+
+function openDoneModal(taskId) {
+  const task = (currentTasks || []).find((x) => x.id === taskId);
+  if (!task) return;
+  activeDoneTask = taskId;
+  document.getElementById('task-done-patient').textContent =
+    (task.patient_name || '—') + ' · ' + t('tasks.due', [esc(String(task.due_date || ''))]);
+  document.getElementById('td-vitals').checked = false;
+  document.getElementById('td-advised').checked = false;
+  document.getElementById('td-meds').checked = false;
+  document.getElementById('td-notes').value = '';
+  document.getElementById('task-done-modal').classList.add('open');
+}
+
+async function submitDoneModal() {
+  if (!activeDoneTask) return;
+  const notes = document.getElementById('td-notes').value.trim();
+  const checks = [
+    document.getElementById('td-vitals').checked,
+    document.getElementById('td-advised').checked,
+    document.getElementById('td-meds').checked,
+  ];
+  const summary = notes || (checks.every(Boolean) ? t('tasks.all_checks') : null);
+  document.getElementById('task-done-modal').classList.remove('open');
+  if (isOnline()) {
+    try {
+      await apiFetch('/followups/' + activeDoneTask, {
+        method: 'PATCH',
+        body: JSON.stringify({ status: 'completed', notes: summary }),
+      });
+      currentTasks = (currentTasks || []).map((x) =>
+        x.id === activeDoneTask ? Object.assign({}, x, { status: 'completed', bucket: 'completed', notes: summary }) : x);
+      toast(t('tasks.done_synced'), 'ok');
+      renderTasksMarkup();
+      refreshTasksCache();
+      return;
+    } catch (e) { /* fall through to offline queueing */ }
+  }
+  await db.enqueue({
+    type: 'followup',
+    client_id: newClientId(),
+    updated_at: utcNowIso(),
+    data: { action: 'complete', task_id: activeDoneTask, notes: summary },
+  });
+  currentTasks = (currentTasks || []).map((x) =>
+    x.id === activeDoneTask ? Object.assign({}, x, { status: 'completed', bucket: 'completed', notes: summary }) : x);
+  toast(t('tasks.done_offline'), 'ok');
+  renderTasksMarkup();
+}
+
+function openReschedModal(taskId) {
+  const task = (currentTasks || []).find((x) => x.id === taskId);
+  if (!task) return;
+  if (!isOnline()) { toast(t('tasks.resched_online'), 'warn'); return; }
+  activeReschedTask = taskId;
+  document.getElementById('task-resched-patient').textContent = task.patient_name || '—';
+  document.getElementById('td-newdate').value = task.due_date || '';
+  document.getElementById('task-resched-modal').classList.add('open');
+}
+
+async function submitReschedModal() {
+  if (!activeReschedTask) return;
+  const due = document.getElementById('td-newdate').value;
+  if (!due) { toast(t('tasks.need_date'), 'warn'); return; }
+  try {
+    await apiFetch('/followups/' + activeReschedTask, {
+      method: 'PATCH',
+      body: JSON.stringify({ due_date: due }),
+    });
+    currentTasks = (currentTasks || []).map((x) =>
+      x.id === activeReschedTask ? Object.assign({}, x, { due_date: due }) : x);
+    toast(t('tasks.resched_done'), 'ok');
+    document.getElementById('task-resched-modal').classList.remove('open');
+    renderTasksMarkup();
+    refreshTasksCache();
+  } catch (e) { toast(e.message, 'error'); }
 }
 
 async function refreshTasksCache() {
@@ -1614,9 +2496,24 @@ async function markFollowUpDone(taskId) {
 /* ------------------------------------------------------------------ */
 function initSyncPage() {
   updateNetPill();
+  initSOS();
+  initAshaPhone();
   const toggle = document.getElementById('network-toggle');
   toggle.checked = isOnline();
   updateNetworkUI();
+
+  const retryAll = document.getElementById('retry-all');
+  if (retryAll) {
+    retryAll.addEventListener('click', async () => {
+      const pending = await db.getPending();
+      for (const rec of pending) {
+        if (rec.sync_failed) {
+          await db.savePending(Object.assign({}, rec, { sync_failed: false, error: undefined }));
+        }
+      }
+      renderSyncPage();
+    });
+  }
 
   const langSel = document.getElementById('lang-select');
   if (langSel) {
@@ -1668,6 +2565,14 @@ async function renderSyncPage() {
   const byType = {};
   pending.forEach((r) => { byType[r.type] = (byType[r.type] || 0) + 1; });
 
+  const countsEl = document.getElementById('sync-counts');
+  if (countsEl) {
+    const types = ['patient', 'triage', 'referral', 'followup', 'teleconsult'];
+    countsEl.innerHTML = types.map((tp) =>
+      '<div class="task-stat"><b>' + (byType[tp] || 0) + '</b><span>' + t('type.' + tp) + '</span></div>').join('') +
+      '<div class="task-stat"><b>' + pending.length + '</b><span>' + t('sync.total') + '</span></div>';
+  }
+
   const summary = document.getElementById('pending-summary');
   const tbody = document.getElementById('pending-body');
   if (!pending.length) {
@@ -1676,13 +2581,47 @@ async function renderSyncPage() {
   } else {
     summary.textContent = t('summary.pending', [
       pending.length,
-      Object.entries(byType).map(([type, n]) => t('type.' + type) + ' \u00d7 ' + n).join(', '),
+      Object.entries(byType).map(([type, n]) => t('type.' + type) + ' × ' + n).join(', '),
     ]);
-    tbody.innerHTML = pending.map((r) =>
-      '<tr><td><span class="badge ' + r.type + '">' + t('type.' + r.type) + '</span></td>' +
-      '<td>' + new Date(r.updated_at).toLocaleTimeString() + '</td>' +
-      '<td class="muted">' + t('status.queued') + '</td></tr>'
-    ).join('');
+    tbody.innerHTML = pending.map((r) => {
+      const patient = r.type === 'patient' ? (r.data && r.data.name) : (r.data && r.data.abha_id) || '';
+      const st = r.sync_failed ? t('sync.failed_short') : t('sync.pending_short');
+      const cls = r.sync_failed ? 'rejected' : 'pending_sync';
+      return '<tr><td><span class="badge ' + r.type + '">' + t('type.' + r.type) + '</span></td>' +
+        '<td>' + esc(patient) + '</td>' +
+        '<td>' + (r.updated_at ? new Date(r.updated_at).toLocaleTimeString() : '') + '</td>' +
+        '<td><span class="ref-status ' + cls + '">' + esc(st) + '</span></td>' +
+        '<td></td></tr>';
+    }).join('');
+  }
+
+  // Failed items with retry / delete
+  const failedCard = document.getElementById('failed-card');
+  const failedList = document.getElementById('failed-list');
+  if (failedCard && failedList) {
+    const failed = pending.filter((r) => r.sync_failed);
+    failedCard.hidden = failed.length === 0;
+    if (failed.length) {
+      failedList.innerHTML = failed.map((r) =>
+        '<div class="failed-row"><span>' + esc(t('type.' + r.type)) + ' · ' + esc(r.error || '') + '</span>' +
+        '<span class="row" style="gap:6px;flex:0 0 auto">' +
+        '<button class="small" data-retry="' + esc(r.client_id) + '">' + t('sync.retry') + '</button>' +
+        '<button class="small danger" data-del="' + esc(r.client_id) + '">' + t('sync.delete') + '</button>' +
+        '</span></div>').join('');
+      document.querySelectorAll('[data-retry]').forEach((b) => {
+        b.addEventListener('click', async () => {
+          const rec = failed.find((x) => x.client_id === b.getAttribute('data-retry'));
+          if (rec) await db.savePending(Object.assign({}, rec, { sync_failed: false, error: undefined }));
+          renderSyncPage();
+        });
+      });
+      document.querySelectorAll('[data-del]').forEach((b) => {
+        b.addEventListener('click', async () => {
+          await db.removePending(b.getAttribute('data-del'));
+          renderSyncPage();
+        });
+      });
+    }
   }
 
   const lastSync = await db.getSetting('last_sync_at');
@@ -1700,12 +2639,22 @@ async function renderSyncPage() {
 }
 
 async function runFullSyncWithUI() {
+  const wrap = document.getElementById('sync-progress-wrap');
+  const bar = document.getElementById('sync-progress-bar');
+  const label = document.getElementById('sync-progress-label');
+  const btn = document.getElementById('sync-now');
+  if (wrap) wrap.hidden = false;
+  if (bar) bar.style.width = '0%';
+  if (label) label.textContent = t('sync.starting');
+  if (btn) btn.disabled = true;
   try {
-    const { syncRes, msgRes } = await fullSync();
-    const created = syncRes ? (syncRes.counts.created || 0) : 0;
-    const updated = syncRes ? (syncRes.counts.updated || 0) : 0;
+    const { syncRes, msgRes } = await fullSync((done, total) => {
+      if (bar) bar.style.width = Math.round((done / total) * 100) + '%';
+      if (label) label.textContent = t('sync.progress', [done, total]);
+    });
+    const created = syncRes ? (syncRes.synced || 0) : 0;
     const sent = msgRes ? msgRes.sent : 0;
-    toast(t('t.sync_done', [created, updated, sent]), 'ok');
+    toast(t('t.sync_done', [created, sent]), 'ok');
     const log = document.getElementById('dispatch-log');
     if (log && msgRes && msgRes.log && msgRes.log.length) {
       log.innerHTML = msgRes.log.map((l) => '<div>\ud83d\udce8 ' + l + '</div>').join('');
@@ -1713,7 +2662,622 @@ async function runFullSyncWithUI() {
   } catch (e) {
     toast(t('t.sync_fail', [e.message]), 'error');
   }
+  if (wrap) wrap.hidden = true;
+  if (btn) btn.disabled = false;
   await renderSyncPage();
+}
+
+/* ------------------------------------------------------------------ */
+/* My Patients dashboard (Feature 2)                                    */
+/* ------------------------------------------------------------------ */
+let myPatientsFilter = 'all';
+let myPatientsQuery = '';
+
+function ageFromDob(dob) {
+  if (!dob) return null;
+  const d = new Date(dob);
+  const now = new Date();
+  return now.getFullYear() - d.getFullYear() -
+    ((now.getMonth() < d.getMonth() || (now.getMonth() === d.getMonth() && now.getDate() < d.getDate())) ? 1 : 0);
+}
+
+function fmtDT(iso) {
+  if (!iso) return '—';
+  try { return new Date(iso).toLocaleString(); } catch (e) { return String(iso); }
+}
+
+function highRiskBadges(p) {
+  const map = {
+    pregnant: ['🤰', 'hr.pregnant'], diabetic: ['💉', 'hr.diabetic'],
+    hypertension: ['❤️', 'hr.htn'], elderly: ['👴', 'hr.elderly'], chronic: ['🫁', 'hr.chronic'],
+  };
+  return (p.high_risk_category || []).map((k) => {
+    const hit = map[k] || ['🏷️', 'hr.chronic'];
+    return '<span class="hr-badge hr-' + esc(k) + '">' + hit[0] + ' ' + t(hit[1]) + '</span>';
+  }).join('');
+}
+
+function patientCard(p) {
+  const age = ageFromDob(p.dob);
+  return '<div class="mp-card' + (p._highrisk ? ' highrisk' : '') + '">' +
+    '<div class="mp-main"><b>' + esc(p.name) + '</b> ' +
+    (p._pending
+      ? '<span class="mp-sync pending" title="' + t('mp.pending') + '">🟡</span>'
+      : '<span class="mp-sync" title="' + t('mp.synced') + '">🟢</span>') +
+    '<span class="muted">' + (age == null ? '?' : age) + ' ' + t('unit.yrs') + ' · ' + genderLabel(p.gender) + ' · ' + esc(p.village || '—') + '</span></div>' +
+    (p.abha_id ? '<div class="mp-meta">ABHA: <b>' + esc(p.abha_id) + '</b></div>' : '') +
+    (p._due ? '<div class="mp-meta due">⏰ ' + t('mp.fu_due') + '</div>' : '') +
+    '<div class="mp-badges">' + highRiskBadges(p) + '</div>' +
+    '<div class="row mp-actions">' +
+    '<button class="small" data-view="' + esc(p.abha_id) + '">' + t('mp.view') + '</button>' +
+    '<button class="small" data-triage="' + esc(p.abha_id) + '">' + t('mp.new_triage') + '</button>' +
+    (p.phone ? '<button class="small btn-link" data-call="' + esc(p.phone) + '" data-call-label="' + esc(p.name || '') + '">📞</button>' : '') +
+    '</div></div>';
+}
+
+async function renderMyPatients() {
+  const list = document.getElementById('mp-list');
+  if (!list) return;
+  const patients = (await db.getAllPatients()) || [];
+  const pending = (await db.getPending()) || [];
+  const pendingAbhas = new Set(
+    pending.filter((r) => r.type === 'patient' && r.data && r.data.abha_id)
+      .map((r) => r.data.abha_id));
+  const cache = await db.getSetting('tasks_cache');
+  const tasks = (cache && cache.value && cache.value.tasks) || [];
+  const weekFromNow = Date.now() + 7 * 86400000;
+  const dueAbhas = new Set(
+    tasks.filter((x) => x.status === 'pending' && x.due_date &&
+      new Date(x.due_date + 'T00:00:00').getTime() <= weekFromNow)
+      .map((x) => x.abha_id));
+
+  let rows = patients.map((p) => Object.assign({}, p, {
+    _pending: pendingAbhas.has(p.abha_id),
+    _highrisk: (p.high_risk_category || []).length > 0,
+    _due: dueAbhas.has(p.abha_id),
+  }));
+
+  if (myPatientsFilter === 'highrisk') rows = rows.filter((p) => p._highrisk);
+  else if (myPatientsFilter === 'pending') rows = rows.filter((p) => p._pending);
+  else if (myPatientsFilter === 'followups') rows = rows.filter((p) => p._due);
+
+  const q = myPatientsQuery.trim().toLowerCase();
+  if (q) {
+    rows = rows.filter((p) =>
+      (p.name || '').toLowerCase().includes(q) ||
+      (p.abha_id || '').includes(q) ||
+      (p.village || '').toLowerCase().includes(q));
+  }
+
+  rows.sort((a, b) => (b._highrisk - a._highrisk) ||
+    String(b.updated_at || '').localeCompare(String(a.updated_at || '')));
+
+  if (!rows.length) { list.innerHTML = '<p class="muted">' + t('mp.empty') + '</p>'; return; }
+  list.innerHTML = rows.map(patientCard).join('');
+  bindPatientCardActions();
+}
+
+function bindPatientCardActions() {
+  document.querySelectorAll('[data-view]').forEach((b) => {
+    b.addEventListener('click', async () => {
+      const p = await db.getPatient(b.getAttribute('data-view'));
+      if (p) openPatientModal(p);
+    });
+  });
+  document.querySelectorAll('[data-triage]').forEach((b) => {
+    b.addEventListener('click', () => {
+      location.href = 'triage.html?abha=' + encodeURIComponent(b.getAttribute('data-triage'));
+    });
+  });
+  bindCallButtons();
+}
+
+function openPatientModal(p) {
+  const modal = document.getElementById('patient-modal');
+  if (!modal) return;
+  document.getElementById('pmodal-name').textContent = p.name || '—';
+  const age = ageFromDob(p.dob);
+  document.getElementById('pmodal-body').innerHTML =
+    '<p class="muted">' + (age == null ? '?' : age) + ' ' + t('unit.yrs') + ' · ' + genderLabel(p.gender) + '</p>' +
+    '<table class="kv">' +
+    (p.abha_id ? '<tr><td>ABHA</td><td>' + esc(p.abha_id) + '</td></tr>' : '') +
+    (p.phone ? '<tr><td>' + t('lbl.phone') + '</td><td>' + esc(p.phone) + '</td></tr>' : '') +
+    (p.family_id ? '<tr><td>' + t('lbl.family') + '</td><td>' + esc(p.family_id) + '</td></tr>' : '') +
+    ((p.village || p.district || p.state) ? '<tr><td>' + t('lbl.village') + '</td><td>' + esc([p.village, p.district, p.state].filter(Boolean).join(', ')) + '</td></tr>' : '') +
+    ((p.high_risk_category || []).length ? '<tr><td>' + t('reg.highrisk') + '</td><td>' + highRiskBadges(p) + '</td></tr>' : '') +
+    ((p.allergies || []).length ? '<tr><td>' + t('reg.allergies') + '</td><td>' + esc(p.allergies.join(', ')) + '</td></tr>' : '') +
+    (p.chronic_conditions ? '<tr><td>' + t('reg.chronic_conditions') + '</td><td>' + esc(p.chronic_conditions) + '</td></tr>' : '') +
+    '</table>';
+  document.getElementById('pmodal-call').onclick = () => showCallModal(p.name || '', p.phone);
+  document.getElementById('pmodal-triage').onclick = () => {
+    location.href = 'triage.html?abha=' + encodeURIComponent(p.abha_id || '');
+  };
+  modal.classList.add('open');
+}
+
+function initMyPatients() {
+  const search = document.getElementById('mp-search');
+  if (search) search.addEventListener('input', () => { myPatientsQuery = search.value; renderMyPatients(); });
+  const filters = document.getElementById('mp-filters');
+  if (filters) {
+    filters.addEventListener('click', (e) => {
+      const btn = e.target.closest('.chip');
+      if (!btn) return;
+      filters.querySelectorAll('.chip').forEach((c) => c.classList.remove('active'));
+      btn.classList.add('active');
+      myPatientsFilter = btn.getAttribute('data-filter');
+      renderMyPatients();
+    });
+  }
+  const pm = document.getElementById('patient-modal');
+  if (pm) {
+    document.getElementById('pmodal-close').addEventListener('click', () => pm.classList.remove('open'));
+    pm.addEventListener('click', (e) => { if (e.target === pm) pm.classList.remove('open'); });
+  }
+  renderMyPatients();
+}
+
+/* ------------------------------------------------------------------ */
+/* Create Referral (Feature 3)                                          */
+/* ------------------------------------------------------------------ */
+async function initReferralPage() {
+  updateNetPill();
+  const langSel = document.getElementById('lang-select');
+  if (langSel) {
+    langSel.addEventListener('change', () => {
+      setLang(langSel.value);
+      applyStaticI18n();
+      updateNetPill();
+      populateReferralPatients();
+    });
+  }
+  initSOS();
+  populateReferralPatients();
+
+  const sel = document.getElementById('ref-facility');
+  if (sel && isOnline()) {
+    try {
+      const facs = await apiFetch('/facilities');
+      (facs || []).filter((f) =>
+        f.facility_type === 'chc' || f.facility_type === 'district_hospital' || f.facility_type === 'phc')
+        .forEach((f) => {
+          const o = document.createElement('option');
+          o.value = f.id;
+          o.textContent = f.name + ' (' + f.facility_type + ')';
+          sel.appendChild(o);
+        });
+    } catch (e) { /* offline: facility select stays empty */ }
+  }
+
+  const input = document.getElementById('ref-patient');
+  if (input) input.addEventListener('input', showRefTriage);
+  document.getElementById('ref-submit').addEventListener('click', submitReferral);
+}
+
+async function populateReferralPatients() {
+  const dl = document.getElementById('ref-patient-list');
+  if (!dl) return;
+  const patients = (await db.getAllPatients()) || [];
+  dl.innerHTML = patients.map((p) =>
+    '<option value="' + esc(p.abha_id) + ' — ' + esc(p.name || '') + '"></option>').join('');
+}
+
+async function findRefPatient(value) {
+  const v = (value || '').trim();
+  const patients = (await db.getAllPatients()) || [];
+  return patients.find((p) => p.abha_id === v || (p.name || '') === v || v.includes(p.abha_id)) || null;
+}
+
+async function showRefTriage() {
+  const note = document.getElementById('ref-triage-note');
+  if (!note) return;
+  const p = await findRefPatient(document.getElementById('ref-patient').value);
+  if (!p) { note.hidden = true; return; }
+  const pending = (await db.getPending()) || [];
+  const localTriage = pending.filter((r) => r.type === 'triage' && r.data && r.data.abha_id === p.abha_id);
+  if (localTriage.length) {
+    note.hidden = false;
+    note.innerHTML = '🧾 ' + t('ref.triage_pending', [localTriage.length]);
+    return;
+  }
+  if (p.id && isOnline()) {
+    try {
+      const fhir = await apiFetch('/patients/' + p.id + '/fhir');
+      const obs = ((fhir && fhir.entry) || [])
+        .filter((e) => e.resource && e.resource.resourceType === 'Observation')
+        .sort((a, b) => String(b.resource.effectiveDateTime || '').localeCompare(String(a.resource.effectiveDateTime || '')));
+      const latest = obs[0];
+      if (latest && latest.resource.interpretation && latest.resource.interpretation[0]) {
+        note.hidden = false;
+        note.innerHTML = '🧾 ' + t('ref.triage_attached', [
+          latest.resource.interpretation[0].text,
+          String(latest.resource.effectiveDateTime || '').slice(0, 10),
+        ]);
+      } else { note.hidden = true; }
+    } catch (e) { note.hidden = true; }
+  } else {
+    note.hidden = true;
+  }
+}
+
+async function submitReferral() {
+  const p = await findRefPatient(document.getElementById('ref-patient').value);
+  if (!p) { toast(t('ref.need_patient'), 'warn'); return; }
+  const priority = (document.querySelector('input[name="ref-priority"]:checked') || {}).value || 'routine';
+  const toFacilityId = document.getElementById('ref-facility').value;
+  if (!toFacilityId) { toast(t('ref.need_facility'), 'warn'); return; }
+  const reason = document.getElementById('ref-reason').value;
+  const notes = document.getElementById('ref-notes').value.trim();
+
+  const data = {
+    abha_id: p.abha_id,
+    patient_id: p.id,
+    priority: priority,
+    reason: reason,
+    notes: notes || undefined,
+    to_facility_id: toFacilityId,
+    asha_phone: (await getAshaPhone()) || undefined,
+    created_at: utcNowIso(),
+  };
+  ['name', 'dob', 'gender', 'phone', 'village', 'district', 'state', 'pincode']
+    .forEach((k) => { if (p[k]) data[k] = p[k]; });
+  await db.enqueue({ type: 'referral', client_id: newClientId(), updated_at: utcNowIso(), data: data });
+
+  const btn = document.getElementById('ref-submit');
+  btn.disabled = true;
+  let msg;
+  let kind = 'ok';
+  if (isOnline()) {
+    try {
+      await flushPending();
+      msg = t('ref.sent_synced');
+    } catch (e) { msg = t('ref.sent_queued'); kind = 'warn'; }
+  } else {
+    msg = t('ref.sent_queued');
+    kind = 'warn';
+  }
+  toast(msg, kind);
+  btn.disabled = false;
+  document.getElementById('ref-notes').value = '';
+  document.getElementById('ref-reason').selectedIndex = 0;
+  document.getElementById('ref-facility').selectedIndex = 0;
+  document.getElementById('ref-triage-note').hidden = true;
+}
+
+/* ------------------------------------------------------------------ */
+/* Referral tracking (Feature 3)                                        */
+/* ------------------------------------------------------------------ */
+let trackFilter = 'all';
+let currentServerRefs = [];
+let currentLocalRefs = [];
+let FACILITY_PHONE = {};
+
+function statusLabel(s) {
+  return t('track.s.' + (s || 'created'));
+}
+
+function priorityBadge(pr) {
+  const cls = { routine: 'routine', urgent: 'urgent', emergency: 'emergency' }[pr] || 'routine';
+  return '<span class="ref-priority ' + cls + '">' + esc(pr) + '</span>';
+}
+
+async function initTrackingPage() {
+  updateNetPill();
+  const langSel = document.getElementById('lang-select');
+  if (langSel) {
+    langSel.addEventListener('change', () => {
+      setLang(langSel.value);
+      applyStaticI18n();
+      updateNetPill();
+      loadReferrals();
+    });
+  }
+  initSOS();
+  const filters = document.getElementById('track-filters');
+  if (filters) {
+    filters.addEventListener('click', (e) => {
+      const btn = e.target.closest('.chip');
+      if (!btn) return;
+      filters.querySelectorAll('.chip').forEach((c) => c.classList.remove('active'));
+      btn.classList.add('active');
+      trackFilter = btn.getAttribute('data-filter');
+      renderReferrals();
+    });
+  }
+  const rm = document.getElementById('ref-modal');
+  if (rm) {
+    document.getElementById('ref-modal-close').addEventListener('click', () => rm.classList.remove('open'));
+    rm.addEventListener('click', (e) => { if (e.target === rm) rm.classList.remove('open'); });
+  }
+  if (isOnline()) {
+    try {
+      const facs = await apiFetch('/facilities');
+      (facs || []).forEach((f) => { if (f.contact_phone) FACILITY_PHONE[f.id] = f.contact_phone; });
+    } catch (e) { /* keep empty map */ }
+  }
+  loadReferrals();
+  setInterval(loadReferrals, 30000);
+}
+
+async function loadReferrals() {
+  const list = document.getElementById('track-list');
+  if (!list) return;
+  let server = [];
+  if (isOnline()) {
+    try { server = await apiFetch('/referrals'); } catch (e) { /* offline */ }
+  }
+  currentServerRefs = server;
+  const pending = (await db.getPending()) || [];
+  currentLocalRefs = pending.filter((r) => r.type === 'referral').map((r) => ({
+    id: r.client_id,
+    local: true,
+    patient_name: (r.data && r.data.name) || null,
+    reason: r.data && r.data.reason,
+    priority: (r.data && r.data.priority) || 'routine',
+    status: 'pending_sync',
+    created_at: r.data && r.data.created_at,
+    notes: r.data && r.data.notes,
+  }));
+  renderReferrals();
+}
+
+function renderReferrals() {
+  const list = document.getElementById('track-list');
+  if (!list) return;
+  let rows = currentLocalRefs.concat(currentServerRefs);
+  if (trackFilter !== 'all') rows = rows.filter((r) => r.status === trackFilter);
+  if (!rows.length) { list.innerHTML = '<p class="muted">' + t('track.empty') + '</p>'; return; }
+  list.innerHTML = rows.map(referralCard).join('');
+  document.querySelectorAll('[data-refid]').forEach((b) => {
+    b.addEventListener('click', () => openReferralModal(b.getAttribute('data-refid')));
+  });
+}
+
+function referralCard(r) {
+  const cls = String(r.status || 'created').replace('_', '-');
+  return '<div class="mp-card">' +
+    '<div class="mp-main"><b>' + esc(r.patient_name || '—') + '</b> ' +
+    '<span class="ref-status ' + cls + '">' + esc(statusLabel(r.status)) + '</span>' +
+    '<span class="muted">' + esc(r.reason || '') + '</span></div>' +
+    '<div class="mp-meta">' + priorityBadge(r.priority) + ' · ' +
+    esc(r.to_facility_name || t('track.to_phc')) + '</div>' +
+    '<div class="mp-meta muted">' + (r.created_at ? fmtDT(r.created_at) : '') + '</div>' +
+    (r.accepted_at ? '<div class="mp-meta">👨‍⚕️ ' + t('track.accepted_on', [fmtDT(r.accepted_at)]) + '</div>' : '') +
+    '<div class="row mp-actions">' +
+    '<button class="small" data-refid="' + esc(r.id) + '">' + t('track.details') + '</button>' +
+    '</div></div>';
+}
+
+function openReferralModal(id) {
+  const r = currentLocalRefs.concat(currentServerRefs).find((x) => x.id === id);
+  if (!r) return;
+  document.getElementById('ref-modal-body').innerHTML =
+    '<table class="kv">' +
+    '<tr><td>' + t('ref.patient') + '</td><td>' + esc(r.patient_name || '—') + '</td></tr>' +
+    '<tr><td>' + t('ref.reason') + '</td><td>' + esc(r.reason || '—') + '</td></tr>' +
+    '<tr><td>' + t('ref.priority') + '</td><td>' + priorityBadge(r.priority) + '</td></tr>' +
+    '<tr><td>' + t('track.status') + '</td><td>' + esc(statusLabel(r.status)) + '</td></tr>' +
+    '<tr><td>' + t('ref.facility') + '</td><td>' + esc(r.to_facility_name || t('track.to_phc')) + '</td></tr>' +
+    '<tr><td>' + t('th.created') + '</td><td>' + (r.created_at ? fmtDT(r.created_at) : '—') + '</td></tr>' +
+    (r.accepted_at ? '<tr><td>' + t('track.accepted') + '</td><td>' + fmtDT(r.accepted_at) + '</td></tr>' : '') +
+    (r.completed_at ? '<tr><td>' + t('track.completed') + '</td><td>' + fmtDT(r.completed_at) + '</td></tr>' : '') +
+    (r.notes ? '<tr><td>' + t('ref.notes') + '</td><td>' + esc(r.notes) + '</td></tr>' : '') +
+    '</table>';
+  const callBtn = document.getElementById('ref-modal-call');
+  const phone = r.to_facility_id && FACILITY_PHONE[r.to_facility_id];
+  callBtn.hidden = !phone;
+  callBtn.onclick = () => showCallModal(r.to_facility_name || t('track.contact'), phone);
+  document.getElementById('ref-modal').classList.add('open');
+}
+
+/* ------------------------------------------------------------------ */
+/* Call modal — tel: links do nothing on desktop, so every call button  */
+/* opens a modal showing the number with Dial + Copy actions.            */
+/* ------------------------------------------------------------------ */
+function showCallModal(label, phone) {
+  if (!phone) { toast(t('call.no_number'), 'warn'); return; }
+  const old = document.getElementById('call-modal');
+  if (old) old.remove();
+  const overlay = document.createElement('div');
+  overlay.id = 'call-modal';
+  overlay.className = 'modal-overlay';
+  overlay.innerHTML =
+    '<div class="modal call-modal">' +
+    '<h2 style="margin-top:0">📞 ' + t('call.title') + '</h2>' +
+    '<p class="muted" id="call-modal-label"></p>' +
+    '<div class="call-number" id="call-modal-number"></div>' +
+    '<div class="row">' +
+    '<a id="call-modal-dial" class="btn-link" href="#" style="text-align:center">📞 ' + t('call.dial') + '</a>' +
+    '<button id="call-modal-copy" class="secondary" style="margin:0">📋 ' + t('call.copy') + '</button>' +
+    '</div>' +
+    '<button id="call-modal-close" class="secondary">' + t('btn.close') + '</button>' +
+    '</div>';
+  document.body.appendChild(overlay);
+  document.getElementById('call-modal-label').textContent = label || '';
+  document.getElementById('call-modal-number').textContent = phone;
+  document.getElementById('call-modal-dial').href = 'tel:' + phone;
+  document.getElementById('call-modal-dial').addEventListener('click', (e) => {
+    e.preventDefault();
+    location.href = 'tel:' + phone;
+  });
+  document.getElementById('call-modal-copy').addEventListener('click', async () => {
+    const n = document.getElementById('call-modal-number').textContent;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(n);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = n;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      toast(t('call.copied'), 'ok');
+    } catch (err) { toast(t('call.copy_fail'), 'error'); }
+  });
+  document.getElementById('call-modal-close').addEventListener('click', () => overlay.classList.remove('open'));
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('open'); });
+  overlay.classList.add('open');
+}
+
+function bindCallButtons(scope) {
+  (scope || document).querySelectorAll('[data-call]').forEach((b) => {
+    b.addEventListener('click', () =>
+      showCallModal(b.getAttribute('data-call-label') || '', b.getAttribute('data-call')));
+  });
+}
+
+/* ASHA worker's own phone — captured once on the Sync page and attached to
+ * every referral/SOS record so the backend can SMS them on status changes. */
+async function getAshaPhone() {
+  const s = await db.getSetting('asha_phone');
+  return (s && s.value) || '';
+}
+
+async function initAshaPhone() {
+  const input = document.getElementById('asha-phone');
+  if (!input) return;
+  input.value = await getAshaPhone();
+  const save = document.getElementById('asha-phone-save');
+  if (save) {
+    save.addEventListener('click', async () => {
+      const v = input.value.trim();
+      if (v && !/^(\+91[\s-]?)?[6-9]\d{9}$/.test(v)) { toast(t('t.phone_invalid'), 'warn'); return; }
+      await db.setSetting('asha_phone', v);
+      toast(v ? t('asha_phone.saved') : t('asha_phone.cleared'), 'ok');
+    });
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Emergency SOS (Feature 5)                                            */
+/* ------------------------------------------------------------------ */
+let sosType = null;
+let PHC_PHONE = null;
+
+async function loadPhcPhone() {
+  if (PHC_PHONE) return PHC_PHONE;
+  try {
+    const facs = await apiFetch('/facilities');
+    const phc = (facs || []).find((f) => f.facility_type === 'phc') || (facs || [])[0];
+    PHC_PHONE = (phc && phc.contact_phone) || null;
+  } catch (e) { PHC_PHONE = null; }
+  return PHC_PHONE;
+}
+
+function initSOS() {
+  const btn = document.getElementById('sos-btn');
+  if (!btn) return;
+  btn.addEventListener('click', openSOS);
+  document.getElementById('sos-cancel').addEventListener('click', closeSOS);
+  document.getElementById('sos-send').addEventListener('click', () => {
+    document.getElementById('sos-confirm').hidden = false;
+  });
+  document.getElementById('sos-confirm-no').addEventListener('click', () => {
+    document.getElementById('sos-confirm').hidden = true;
+  });
+  document.getElementById('sos-confirm-yes').addEventListener('click', sendSOSAlert);
+  const modal = document.getElementById('sos-modal');
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeSOS(); });
+  document.querySelectorAll('.sos-type').forEach((b) => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.sos-type').forEach((x) => x.classList.remove('active'));
+      b.classList.add('active');
+      sosType = b.getAttribute('data-type');
+    });
+  });
+  populateSOSPatients();
+  loadPhcPhone();
+}
+
+async function populateSOSPatients() {
+  const sel = document.getElementById('sos-patient');
+  if (!sel) return;
+  const patients = (await db.getAllPatients()) || [];
+  sel.innerHTML = '<option value="">' + t('sos.select_patient') + '</option>' +
+    patients.map((p) =>
+      '<option value="' + esc(p.abha_id) + '">' + esc(p.name || p.abha_id) + '</option>').join('');
+}
+
+async function openSOS() {
+  sosType = null;
+  document.querySelectorAll('.sos-type').forEach((x) => x.classList.remove('active'));
+  document.getElementById('sos-details').value = '';
+  document.getElementById('sos-confirm').hidden = true;
+  document.getElementById('sos-result').hidden = true;
+  document.getElementById('sos-send').disabled = false;
+  document.getElementById('sos-cancel').textContent = t('btn.close');
+  await populateSOSPatients();
+  const loc = document.getElementById('sos-location');
+  loc.value = '';
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => { loc.value = pos.coords.latitude.toFixed(5) + ', ' + pos.coords.longitude.toFixed(5); },
+      () => { /* GPS unavailable — leave blank */ }
+    );
+  }
+  document.getElementById('sos-modal').classList.add('open');
+}
+
+function closeSOS() {
+  document.getElementById('sos-modal').classList.remove('open');
+}
+
+async function sendSOSAlert() {
+  const abha = document.getElementById('sos-patient').value;
+  if (!abha) { toast(t('sos.need_patient'), 'warn'); return; }
+  if (!sosType) { toast(t('sos.need_type'), 'warn'); return; }
+  const p = await db.getPatient(abha);
+  const location = document.getElementById('sos-location').value.trim();
+  const details = document.getElementById('sos-details').value.trim();
+  const data = {
+    abha_id: abha,
+    priority: 'emergency',
+    reason: t('sos.t.' + sosType) + (details ? ' — ' + details : '') + (location ? ' @ ' + location : ''),
+    to_facility_id: undefined,
+    asha_phone: (await getAshaPhone()) || undefined,
+    created_at: utcNowIso(),
+  };
+  if (p) {
+    ['name', 'dob', 'gender', 'phone', 'village', 'district', 'state', 'pincode']
+      .forEach((k) => { if (p[k]) data[k] = p[k]; });
+  }
+  await db.enqueue({ type: 'referral', client_id: newClientId(), updated_at: utcNowIso(), data: data });
+
+  let synced = false;
+  if (isOnline()) {
+    try { await flushPending(); synced = true; } catch (e) { /* stays queued */ }
+  }
+  // Alert the PHC by SMS through the server message queue (offline-aware)
+  const phcPhone = await loadPhcPhone();
+  if (phcPhone && isOnline()) {
+    try {
+      await apiFetch('/messages', {
+        method: 'POST',
+        body: JSON.stringify({
+          patient_id: p && p.id ? p.id : null,
+          recipient_name: 'PHC Duty Doctor',
+          recipient_phone: phcPhone,
+          message_text: 'EMERGENCY: ' + (p ? p.name : abha) + ' needs immediate care. Type: ' +
+            t('sos.t.' + sosType) + (location ? '. Location: ' + location : '') + ' — GramArogya',
+          channel: 'sms',
+        }),
+      });
+    } catch (e) { /* message queued on next sync */ }
+  }
+
+  const result = document.getElementById('sos-result');
+  result.hidden = false;
+  result.innerHTML =
+    '<b>🚨 ' + t('sos.sent') + '</b>' +
+    '<p>' + (synced ? t('sos.synced') : t('sos.queued')) + '</p>' +
+    '<p>🚑 ' + t('sos.eta') + '</p>' +
+    (phcPhone ? '<button class="btn-link" data-call="' + esc(phcPhone) + '" data-call-label="' + t('sos.call_phc') + '">📞 ' + t('sos.call_phc') + '</button>' : '') +
+    (p && p.phone ? ' <button class="btn-link" data-call="' + esc(p.phone) + '" data-call-label="' + t('sos.call_patient') + '">📞 ' + t('sos.call_patient') + '</button>' : '');
+  bindCallButtons(result);
+  document.getElementById('sos-confirm').hidden = true;
+  document.getElementById('sos-send').disabled = true;
 }
 
 /* ------------------------------------------------------------------ */
@@ -1725,4 +3289,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (PAGE === 'triage') initTriagePage();
   if (PAGE === 'tasks') initTasksPage();
   if (PAGE === 'sync') initSyncPage();
+  if (PAGE === 'referral') initReferralPage();
+  if (PAGE === 'tracking') initTrackingPage();
+
+  // Auto-sync queued records when the network comes back
+  window.addEventListener('online', () => {
+    if (isOnline()) {
+      toast(t('sync.auto_sync'), 'info');
+      flushPending().catch(() => {});
+    }
+  });
 });

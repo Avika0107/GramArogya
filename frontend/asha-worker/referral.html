@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0b6e4f">
-  <title>GramArogya — My Tasks</title>
+  <title>GramArogya — New Referral</title>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-page="tasks">
+<body data-page="referral">
   <header class="app-header">
-    <h1 data-i18n="title.tasks">🩺 GramArogya · My Tasks</h1>
+    <h1 data-i18n="title.referral">🩺 GramArogya · New Referral</h1>
     <button id="sos-btn" class="sos-btn" data-i18n="sos.btn" aria-label="Emergency SOS">SOS</button>
     <select id="lang-select" class="lang-switch" aria-label="Language">
       <option value="en">English</option>
@@ -25,57 +25,63 @@
   <nav class="tabs">
     <a href="index.html" data-i18n="nav.search">Patients</a>
     <a href="triage.html" data-i18n="nav.triage">Triage</a>
-    <a href="tasks.html" class="active" data-i18n="nav.task">My Tasks</a>
+    <a href="tasks.html" data-i18n="nav.task">My Tasks</a>
     <a href="tracking.html" data-i18n="nav.referrals">Referrals</a>
     <a href="sync.html" data-i18n="nav.sync">Sync</a>
   </nav>
 
   <main>
-    <div class="hint" data-i18n-html="hint.tasks">
-      <b>Daily follow-up list</b>
-      High-risk follow-ups assigned to you (maternal, child immunization,
-      diabetes, hypertension, TB, elderly). Mark tasks done — they sync to the
-      PHC and update the completion rate on the dashboards.
+    <div class="hint" data-i18n-html="hint.referral">
+      <b>Create a referral</b>
+      Send a patient to a higher facility (CHC / district hospital). The referral
+      is saved on this device first and syncs to the PHC when online. The latest
+      triage result is attached automatically when available.
     </div>
 
-    <div id="overdue-alerts"></div>
+    <div class="card">
+      <h2 data-i18n="ref.title">New Referral</h2>
 
-    <div class="task-stats" id="task-stats"></div>
+      <label data-i18n="ref.patient">Patient</label>
+      <input id="ref-patient" type="text" list="ref-patient-list" data-i18n-placeholder="ref.patient_ph" autocomplete="off">
+      <datalist id="ref-patient-list"></datalist>
 
-    <div class="muted" id="task-note" style="margin:4px 0 10px"></div>
-    <div id="task-lists"></div>
+      <label data-i18n="ref.reason">Reason for referral</label>
+      <select id="ref-reason">
+        <option value="Specialist Consultation Needed" data-i18n="ref.r.specialist">Specialist Consultation Needed</option>
+        <option value="Diagnostic Tests Required" data-i18n="ref.r.diagnostics">Diagnostic Tests Required</option>
+        <option value="Emergency Care" data-i18n="ref.r.emergency">Emergency Care</option>
+        <option value="Routine Checkup" data-i18n="ref.r.routine">Routine Checkup</option>
+        <option value="Pregnancy Complication" data-i18n="ref.r.pregnancy">Pregnancy Complication</option>
+        <option value="Chronic Disease Management" data-i18n="ref.r.chronic">Chronic Disease Management</option>
+      </select>
+
+      <label data-i18n="ref.priority">Priority</label>
+      <div class="seg">
+        <label class="seg-btn active">
+          <input type="radio" name="ref-priority" value="routine" checked>
+          <span data-i18n="ref.p.routine">🟢 Routine</span>
+        </label>
+        <label class="seg-btn">
+          <input type="radio" name="ref-priority" value="urgent">
+          <span data-i18n="ref.p.urgent">🟡 Urgent</span>
+        </label>
+        <label class="seg-btn">
+          <input type="radio" name="ref-priority" value="emergency">
+          <span data-i18n="ref.p.emergency">🔴 Emergency</span>
+        </label>
+      </div>
+
+      <label data-i18n="ref.facility">Refer to facility</label>
+      <select id="ref-facility"><option value="" data-i18n="ref.facility_ph">Select facility…</option></select>
+
+      <label data-i18n="ref.notes">Additional notes (optional)</label>
+      <textarea id="ref-notes" rows="3" data-i18n-placeholder="ref.notes_ph"></textarea>
+
+      <div class="notice" id="ref-triage-note" hidden></div>
+
+      <button id="ref-submit" data-i18n="ref.submit">Send Referral</button>
+    </div>
   </main>
-
-  <!-- Mark task completed modal -->
-  <div id="task-done-modal" class="modal-overlay">
-    <div class="modal">
-      <h2 style="margin-top:0" data-i18n="tasks.done_title">Mark follow-up completed</h2>
-      <p class="muted" id="task-done-patient">—</p>
-      <label class="check-line"><input type="checkbox" id="td-vitals"> <span data-i18n="tasks.vitals">Vitals recorded (BP, sugar, weight…)</span></label>
-      <label class="check-line"><input type="checkbox" id="td-advised"> <span data-i18n="tasks.advised">Patient advised</span></label>
-      <label class="check-line"><input type="checkbox" id="td-meds"> <span data-i18n="tasks.meds">Medicines delivered</span></label>
-      <label data-i18n="tasks.notes">Notes (optional)</label>
-      <textarea id="td-notes" rows="2" data-i18n-placeholder="tasks.notes_ph"></textarea>
-      <div class="row">
-        <button id="td-cancel" class="secondary" data-i18n="btn.close">Close</button>
-        <button id="td-submit" data-i18n="tasks.confirm_done">Confirm completed</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Reschedule modal -->
-  <div id="task-resched-modal" class="modal-overlay">
-    <div class="modal">
-      <h2 style="margin-top:0" data-i18n="tasks.resched_title">Reschedule follow-up</h2>
-      <p class="muted" id="task-resched-patient">—</p>
-      <label data-i18n="tasks.new_date">New due date</label>
-      <input id="td-newdate" type="date">
-      <div class="row">
-        <button id="tr-cancel" class="secondary" data-i18n="btn.close">Close</button>
-        <button id="tr-submit" data-i18n="tasks.confirm_resched">Reschedule</button>
-      </div>
-    </div>
-  </div>
 
   <!-- Emergency SOS modal -->
   <div id="sos-modal" class="modal-overlay sos-overlay">

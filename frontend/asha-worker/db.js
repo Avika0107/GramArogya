@@ -62,6 +62,7 @@ const db = {
 
   // pending sync queue
   enqueue: (record) => withStore('pending', 'readwrite', (s) => reqToPromise(s.put(record))),
+  savePending: (record) => withStore('pending', 'readwrite', (s) => reqToPromise(s.put(record))),
   getPending: () => withStore('pending', 'readonly', (s) => reqToPromise(s.getAll())),
   removePending: (clientId) => withStore('pending', 'readwrite', (s) => reqToPromise(s.delete(clientId))),
   clearPending: () => withStore('pending', 'readwrite', (s) => reqToPromise(s.clear())),

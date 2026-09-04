@@ -9,13 +9,15 @@
  *    pending queues; the manual "Sync Now" button covers every other case.
  */
 
-const CACHE_NAME = 'gramarogya-asha-v4';
+const CACHE_NAME = 'gramarogya-asha-v9';
 const APP_SHELL = [
   './',
   './index.html',
   './triage.html',
   './tasks.html',
   './sync.html',
+  './referral.html',
+  './tracking.html',
   './styles.css',
   './app.js',
   './db.js',
@@ -76,30 +78,21 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static assets — cache first, revalidate in background
+  // Static assets — network first, cached fallback. While online the app
+  // always gets the latest build (no stale-cache surprises); when offline it
+  // falls back to the cached shell.
   event.respondWith(
-    caches.match(request).then((cached) => {
-      if (cached) {
-        fetch(request)
-          .then((response) => {
-            if (response && response.status === 200) {
-              const copy = response.clone();
-              caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
-            }
-          })
-          .catch(() => {});
-        return cached;
-      }
-      return fetch(request)
-        .then((response) => {
-          if (response && response.status === 200) {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
-          }
-          return response;
-        })
-        .catch(() => caches.match('./index.html'));
-    })
+    fetch(request)
+      .then((response) => {
+        if (response && response.status === 200) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+        }
+        return response;
+      })
+      .catch(() =>
+        caches.match(request).then((cached) => cached || caches.match('./index.html'))
+      )
   );
 });
 

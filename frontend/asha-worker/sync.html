@@ -12,6 +12,7 @@
 <body data-page="sync">
   <header class="app-header">
     <h1 data-i18n="title.sync">🩺 GramArogya · Sync</h1>
+    <button id="sos-btn" class="sos-btn" data-i18n="sos.btn" aria-label="Emergency SOS">SOS</button>
     <select id="lang-select" class="lang-switch" aria-label="Language">
       <option value="en">English</option>
       <option value="hi">हिंदी</option>
@@ -22,9 +23,10 @@
   </header>
 
   <nav class="tabs">
-    <a href="index.html" data-i18n="nav.search">Patient Search</a>
+    <a href="index.html" data-i18n="nav.search">Patients</a>
     <a href="triage.html" data-i18n="nav.triage">Triage</a>
     <a href="tasks.html" data-i18n="nav.task">My Tasks</a>
+    <a href="tracking.html" data-i18n="nav.referrals">Referrals</a>
     <a href="sync.html" class="active" data-i18n="nav.sync">Sync</a>
   </nav>
 
@@ -51,19 +53,46 @@
     </div>
 
     <div class="card">
+      <h2 data-i18n="sync.status_title">Sync status</h2>
+      <div class="task-stats" id="sync-counts"></div>
+      <div class="progress-wrap" id="sync-progress-wrap" hidden>
+        <div class="progress-bar" id="sync-progress-bar" style="width:0%"></div>
+      </div>
+      <p class="muted" id="sync-progress-label"></p>
+      <button id="sync-now" data-i18n="btn.sync_now">Sync Now →</button>
+    </div>
+
+    <div class="card">
       <h2 data-i18n="sync.pending">Pending local records</h2>
       <p class="muted" id="pending-summary">No unsynced records.</p>
       <table class="queue" id="pending-table">
-        <thead><tr><th data-i18n="th.type">Type</th><th data-i18n="th.created">Created</th><th data-i18n="th.status">Status</th></tr></thead>
+        <thead><tr><th data-i18n="th.type">Type</th><th data-i18n="th.detail">Patient</th><th data-i18n="th.created">Created</th><th data-i18n="th.status">Status</th><th></th></tr></thead>
         <tbody id="pending-body"></tbody>
       </table>
-      <button id="sync-now" data-i18n="btn.sync_now">Sync Now →</button>
+    </div>
+
+    <div class="card" id="failed-card" hidden>
+      <h2 data-i18n="sync.failed">⚠️ Failed items</h2>
+      <div id="failed-list"></div>
+      <button id="retry-all" class="secondary" data-i18n="sync.retry_all">Retry All</button>
     </div>
 
     <div class="card">
       <h2 data-i18n="sync.msgqueue">Server message queue</h2>
       <p class="muted" id="msg-summary">Queued SMS: loading…</p>
       <div id="dispatch-log" style="font-size:12px;color:var(--muted)"></div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="asha_phone.title">My mobile number (SMS alerts)</h2>
+      <p class="muted" data-i18n="asha_phone.hint">You'll get an SMS here when a referral you sent is accepted, rejected, or marked no-show.</p>
+      <div class="row" style="align-items:flex-end">
+        <div style="flex:1">
+          <label data-i18n="lbl.phone">Mobile number</label>
+          <input id="asha-phone" type="tel" placeholder="+919876543210">
+        </div>
+        <button id="asha-phone-save" class="secondary" style="flex:0 0 auto;width:auto;margin-top:0" data-i18n="asha_phone.save">Save</button>
+      </div>
     </div>
 
     <div class="card">
