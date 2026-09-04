@@ -458,3 +458,21 @@ textarea {
   width: 100%; font: inherit; padding: 10px; border: 1px solid var(--border);
   border-radius: 8px; margin: 4px 0 10px;
 }
+
+/* Health details block on the search-result card */
+.patient-health {
+  margin-top: 8px;
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--green); border-radius: 10px;
+  padding: 6px 12px 8px;
+}
+.health-title {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.4px; color: var(--green-dark); margin: 6px 0 2px;
+}
+.health-line {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  font-size: 13px; padding: 2px 0;
+}
+.health-line .vitals { color: #4a5550; }
+.health-line .badge { flex: 0 0 auto; }

@@ -85,16 +85,30 @@
                data-i18n-placeholder="ph.abha_search">
       </div>
 
-      <!-- 2b) Create a new ABHA (simulated, ABHA-format) -->
-      <div id="abha-create-box" class="notice" hidden>
-        <b data-i18n="abha.title">Create new ABHA ID from the details below</b>
-        <span data-i18n-html="abha.desc">These are the same fields the official ABHA
-          enrolment form asks (name, gender, date of birth, mobile number, full address).
-          A 14-digit ABHA ID is generated in ABHA format and saved with the patient record.
-          <i>Demo note: the ID is simulated — linking to the real ABHA (ABDM) app comes later.</i></span>
+      <!-- 2b) No ABHA ID -> Aadhaar-based creation first (simulated ABDM flow) -->
+      <div id="abha-create-flow" class="notice" hidden>
+        <div id="abha-create-step">
+          <b data-i18n="abha.step1.title">Create ABHA ID using Aadhaar</b>
+          <p class="muted" data-i18n-html="abha.step1.desc">The beneficiary name and Aadhaar
+            number are verified against ABDM (in production through an Aadhaar OTP).
+            <i>Demo note: simulated — the Aadhaar number is never stored or sent.</i></p>
+          <div class="row">
+            <div><label data-i18n="abha.aadhaar_name">Full name (as on Aadhaar)</label>
+              <input id="np-aadhaar-name" type="text" autocomplete="off"></div>
+            <div><label data-i18n="abha.aadhaar">Aadhaar number (12 digits)</label>
+              <input id="np-aadhaar" type="text" inputmode="numeric" maxlength="14" autocomplete="off"></div>
+          </div>
+          <button id="abha-create-btn" class="secondary" data-i18n="abha.create_btn">Create ABHA ID</button>
+        </div>
+        <div id="abha-created-box" class="notice" hidden>
+          <b data-i18n="abha.created_title">✅ ABHA ID created</b>
+          <p>ABHA: <b id="abha-created-id"></b></p>
+          <p class="muted" data-i18n="abha.created_next">Now complete the beneficiary details below and save the patient.</p>
+        </div>
       </div>
 
-      <!-- Beneficiary details + full address -->
+      <!-- Beneficiary details + full address (step 2 of the no-ABHA flow) -->
+      <div id="reg-details">
       <div class="row">
         <div><label data-i18n="lbl.name">Full name</label><input id="np-name" type="text"></div>
       </div>
@@ -138,6 +152,7 @@
         <div><label data-i18n="reg.chronic_conditions">Chronic conditions (optional)</label><input id="np-chronic" type="text" data-i18n-placeholder="reg.chronic_ph"></div>
       </div>
       <button id="register-btn" data-i18n="btn.save">Save patient locally</button>
+      </div>
     </div>
   </main>
 

@@ -369,6 +369,22 @@ const I18N = {
     't.sync_done': 'Sync complete: {0} created, {1} updated \u00b7 {2} SMS dispatched',
     't.sync_fail': 'Sync failed: {0}',
     't.bg_sync_done': 'Background sync: {0} created',
+    'abha.step1.title': 'Create ABHA ID using Aadhaar',
+    'abha.step1.desc': 'The beneficiary name and Aadhaar number are verified against ABDM (in production through an Aadhaar OTP). <i>Demo note: simulated — the Aadhaar number is never stored or sent.</i>',
+    'abha.aadhaar_name': 'Full name (as on Aadhaar)',
+    'abha.aadhaar': 'Aadhaar number (12 digits)',
+    'abha.create_btn': 'Create ABHA ID',
+    'abha.created_title': '✅ ABHA ID created',
+    'abha.created_next': 'Now complete the beneficiary details below and save the patient.',
+    'abha.aadhaar_invalid': 'Enter a valid 12-digit Aadhaar number',
+    'abha.create_first': 'Create the ABHA ID first',
+    'card.health': 'Health details',
+    'card.hr': 'High-risk',
+    'card.chronic': 'Chronic conditions',
+    'card.latest': 'Latest triage',
+    'card.referral': 'Referral',
+    'card.followup': 'Next follow-up',
+    'card.none': 'No health records yet — run a triage or add a visit note',
   },
 
   hi: {
@@ -699,6 +715,22 @@ const I18N = {
     't.sync_done': '\u0938\u093f\u0902\u0915 \u092a\u0942\u0930\u094d\u0923: {0} \u0928\u090f, {1} \u0905\u092a\u0921\u0947\u091f \u00b7 {2} SMS \u092d\u0947\u091c\u0947 \u0917\u090f',
     't.sync_fail': '\u0938\u093f\u0902\u0915 \u0935\u093f\u092b\u0932: {0}',
     't.bg_sync_done': '\u092c\u0948\u0915\u0917\u094d\u0930\u093e\u0909\u0902\u0921 \u0938\u093f\u0902\u0915: {0} \u0928\u090f \u092c\u0928\u0947',
+    'abha.step1.title': 'आधार से ABHA ID बनाएं',
+    'abha.step1.desc': 'लाभार्थी का नाम और आधार नंबर ABDM से सत्यापित किया जाता है (असल में आधार OTP से)। <i>डेमो नोट: सिम्युलेटेड — आधार नंबर कहीं संग्रहीत या भेजा नहीं जाता।</i>',
+    'abha.aadhaar_name': 'पूरा नाम (आधार के अनुसार)',
+    'abha.aadhaar': 'आधार नंबर (12 अंक)',
+    'abha.create_btn': 'ABHA ID बनाएं',
+    'abha.created_title': '✅ ABHA ID बन गया',
+    'abha.created_next': 'अब नीचे लाभार्थी का विवरण पूरा करें और रोगी सेव करें।',
+    'abha.aadhaar_invalid': 'कृपया 12 अंकों का सही आधार नंबर दर्ज करें',
+    'abha.create_first': 'पहले ABHA ID बनाएं',
+    'card.health': 'स्वास्थ्य विवरण',
+    'card.hr': 'उच्च जोखिम',
+    'card.chronic': 'पुरानी बीमारियाँ',
+    'card.latest': 'नवीनतम जाँच (ट्राइएज)',
+    'card.referral': 'रेफरल',
+    'card.followup': 'अगली फॉलो-अप',
+    'card.none': 'अभी कोई स्वास्थ्य रिकॉर्ड नहीं — ट्राइएज करें या विज़िट नोट जोड़ें',
   },
 
   mr: {
@@ -1029,6 +1061,22 @@ const I18N = {
     't.sync_done': '\u0938\u093f\u0902\u0915 \u092a\u0942\u0930\u094d\u0923: {0} \u0924\u092f\u093e\u0930, {1} \u0905\u092a\u0921\u0947\u091f \u00b7 {2} SMS \u092a\u093e\u0920\u0935\u0932\u094d\u092f\u093e',
     't.sync_fail': '\u0938\u093f\u0902\u0915 \u0905\u092f\u0936\u0938\u094d\u0935\u0940: {0}',
     't.bg_sync_done': '\u092c\u0948\u0915\u0917\u094d\u0930\u093e\u0909\u0902\u0921 \u0938\u093f\u0902\u0915: {0} \u0924\u092f\u093e\u0930',
+    'abha.step1.title': 'आधारवरून ABHA ID तयार करा',
+    'abha.step1.desc': 'लाभार्थ्याचे नाव व आधार क्रमांक ABDM द्वारे सत्यापित केले जातात (प्रत्यक्षात आधार OTP ने). <i>डेमो नोंद: सिम्युलेटेड — आधार क्रमांक कुठेही साठवला किंवा पाठवला जात नाही.</i>',
+    'abha.aadhaar_name': 'पूर्ण नाव (आधाराप्रमाणे)',
+    'abha.aadhaar': 'आधार क्रमांक (12 अंक)',
+    'abha.create_btn': 'ABHA ID तयार करा',
+    'abha.created_title': '✅ ABHA ID तयार झाले',
+    'abha.created_next': 'आता खाली लाभार्थ्याचा तपशील पूर्ण करा आणि रुग्ण जतन करा.',
+    'abha.aadhaar_invalid': 'कृपया 12 अंकांचा योग्य आधार क्रमांक द्या',
+    'abha.create_first': 'आधी ABHA ID तयार करा',
+    'card.health': 'आरोग्य तपशील',
+    'card.hr': 'उच्च धोका',
+    'card.chronic': 'जुनाट आजार',
+    'card.latest': 'अलीकडील तपासणी (ट्रायेज)',
+    'card.referral': 'रेफरल',
+    'card.followup': 'पुढील फॉलो-अप',
+    'card.none': 'अजून आरोग्य नोंदी नाहीत — तपासणी करा किंवा भेट नोंद जोडा',
   },
 
   bn: {
@@ -1359,6 +1407,22 @@ const I18N = {
     't.sync_done': '\u09b8\u09bf\u0982\u0995 \u09b8\u09ae\u09cd\u09aa\u09c2\u09b0\u09cd\u09a3: {0} \u099f\u09bf \u09a4\u09c8\u09b0\u09bf, {1} \u099f\u09bf \u0986\u09aa\u09a1\u09c7\u099f \u00b7 {2} \u099f\u09bf SMS \u09aa\u09be\u09a0\u09be\u09a8\u09cb \u09b9\u09df\u09c7\u099b\u09c7',
     't.sync_fail': '\u09b8\u09bf\u0982\u0995 \u09ac\u09cd\u09af\u09b0\u09cd\u09a5: {0}',
     't.bg_sync_done': '\u09ac\u09cd\u09af\u09be\u0995\u0997\u09cd\u09b0\u09be\u0989\u09a8\u09cd\u09a1 \u09b8\u09bf\u0982\u0995: {0} \u099f\u09bf \u09a4\u09c8\u09b0\u09bf',
+    'abha.step1.title': 'আধার দিয়ে ABHA ID তৈরি করুন',
+    'abha.step1.desc': 'লাভজনকের নাম ও আধার নম্বর ABDM দিয়ে যাচাই করা হয় (প্রকৃতিতে আধার OTP-র মাধ্যমে)। <i>ডেমো নোট: সিমুলেটেড — আধার নম্বর কোথাও সংরক্ষিত বা পাঠানো হয় না।</i>',
+    'abha.aadhaar_name': 'পুরো নাম (আধার অনুযায়ী)',
+    'abha.aadhaar': 'আধার নম্বর (১২ সংখ্যা)',
+    'abha.create_btn': 'ABHA ID তৈরি করুন',
+    'abha.created_title': '✅ ABHA ID তৈরি হয়েছে',
+    'abha.created_next': 'এখন নিচের লাভজনকের বিবরণ সম্পূর্ণ করে রোগী সংরক্ষণ করুন।',
+    'abha.aadhaar_invalid': 'অনুগ্রহ করে ১২ সংখ্যার সঠিক আধার নম্বর দিন',
+    'abha.create_first': 'আগে ABHA ID তৈরি করুন',
+    'card.health': 'স্বাস্থ্য বিবরণ',
+    'card.hr': 'উচ্চ ঝুঁকি',
+    'card.chronic': 'দীর্ঘমেয়াদি রোগ',
+    'card.latest': 'সাম্প্রতিক ট্রায়াজ',
+    'card.referral': 'রেফারেল',
+    'card.followup': 'পরবর্তী ফলো-আপ',
+    'card.none': 'এখনও কোনো স্বাস্থ্য রেকর্ড নেই — ট্রায়াজ করুন বা ভিজিট নোট যোগ করুন',
   },
 };
 
@@ -1681,18 +1745,51 @@ function regMode() {
   return checked && checked.value === 'no' ? 'no' : 'yes';
 }
 
+/* ABHA ID minted in the Aadhaar step when the beneficiary has no ID yet */
+let createdAbha = '';
+
 function updateRegModeUI() {
   const createMode = regMode() === 'no';
   const existingBox = document.getElementById('abha-existing-box');
-  const createBox = document.getElementById('abha-create-box');
+  const createFlow = document.getElementById('abha-create-flow');
+  const createStep = document.getElementById('abha-create-step');
+  const createdBox = document.getElementById('abha-created-box');
+  const details = document.getElementById('reg-details');
   const btn = document.getElementById('register-btn');
   if (existingBox) existingBox.hidden = createMode;
-  if (createBox) createBox.hidden = !createMode;
-  if (btn) btn.textContent = t(createMode ? 'btn.create' : 'btn.save');
+  if (createFlow) createFlow.hidden = !createMode;
+  if (createStep) createStep.hidden = createMode ? !!createdAbha : true;
+  if (createdBox) createdBox.hidden = !createMode || !createdAbha;
+  if (details) details.hidden = createMode && !createdAbha;
+  if (btn) btn.textContent = t('btn.save');
   document.querySelectorAll('.seg-btn').forEach((lb) => {
     const rb = lb.querySelector('input');
     if (rb) lb.classList.toggle('active', rb.checked);
   });
+}
+
+/* Step 1 of the no-ABHA flow: take name + Aadhaar, mint the ABHA ID
+ * (simulated). Mirrors real ABDM enrolment, where the ABHA is created from
+ * the Aadhaar identity — only a format check happens on the number here. */
+async function createAbhaFromAadhaar() {
+  const nameEl = document.getElementById('np-aadhaar-name');
+  const adEl = document.getElementById('np-aadhaar');
+  const name = (nameEl.value || '').trim();
+  const aadhaar = (adEl.value || '').replace(/\s+/g, '');
+  if (!name) { toast(t('t.fill_required', [t('abha.aadhaar_name')]), 'warn'); return; }
+  if (!/^\d{12}$/.test(aadhaar)) { toast(t('abha.aadhaar_invalid'), 'warn'); return; }
+
+  createdAbha = await generateFakeAbhaId();
+  const disp = document.getElementById('abha-created-id');
+  if (disp) {
+    disp.textContent = createdAbha.replace(/(\d{2})(\d{4})(\d{4})(\d{4})/, '$1-$2-$3-$4');
+  }
+  // The name comes from the Aadhaar step — prefill so it isn't asked twice
+  const npName = document.getElementById('np-name');
+  if (npName && !npName.value.trim()) npName.value = name;
+  adEl.value = '';  // never retain the Aadhaar number
+  updateRegModeUI();
+  toast(t('t.abha_created', [disp ? disp.textContent : createdAbha]), 'ok');
 }
 
 async function generateFakeAbhaId() {
@@ -1858,6 +1955,8 @@ function initIndexPage() {
   document.querySelectorAll('input[name="abha-exists"]').forEach((radio) => {
     radio.addEventListener('change', updateRegModeUI);
   });
+  const abhaCreateBtn = document.getElementById('abha-create-btn');
+  if (abhaCreateBtn) abhaCreateBtn.addEventListener('click', createAbhaFromAadhaar);
 
   const abhaInput = document.getElementById('abha-input');
   const searchBtn = document.getElementById('search-btn');
@@ -1977,7 +2076,12 @@ function initIndexPage() {
         return;
       }
     } else {
-      abha = await generateFakeAbhaId();
+      // The ABHA must already have been minted in the Aadhaar step above
+      if (!createdAbha) {
+        toast(t('abha.create_first'), 'warn');
+        return;
+      }
+      abha = createdAbha;
       created = true;
     }
 
@@ -2028,6 +2132,11 @@ function initIndexPage() {
     }
     if (created) savedMsg = t('t.abha_created', [abha]) + ' \u2014 ' + savedMsg;
     toast(savedMsg, kind);
+    // Next registration starts fresh: clear the minted ABHA + Aadhaar step
+    createdAbha = '';
+    const aadhaarNameEl = document.getElementById('np-aadhaar-name');
+    if (aadhaarNameEl) aadhaarNameEl.value = '';
+    updateRegModeUI();
     renderPatientCard(patient, 'patient-result');
   });
 }
