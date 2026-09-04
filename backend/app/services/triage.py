@@ -34,6 +34,20 @@ SYMPTOM_LABELS: Dict[str, str] = {
     "cough_cold": "Cough / cold",
     "fatigue": "Fatigue / weakness",
     "body_ache": "Body ache",
+    # Common outpatient problems added for wider coverage (voice fill)
+    "urination_problem": "Frequent / painful urination",
+    "sore_throat": "Sore throat / throat pain",
+    "joint_pain": "Joint pain / swelling",
+    "back_pain": "Back pain",
+    "skin_rash": "Skin rash / itching",
+    "eye_problem": "Eye redness / watering / pain",
+    "ear_pain": "Ear pain / discharge",
+    "dizziness": "Dizziness / giddiness",
+    "acidity": "Acidity / indigestion / gas",
+    "constipation": "Constipation",
+    "toothache": "Toothache / gum problem",
+    "numbness": "Numbness / tingling",
+    "swelling": "Swelling (face / hands / feet)",
 }
 
 RED_SYMPTOMS = {
@@ -55,7 +69,27 @@ YELLOW_SYMPTOMS = {
 }
 
 # Mild symptoms: 2+ of these escalate GREEN -> YELLOW
-MODERATE_SYMPTOMS = {"abdominal_pain", "diarrhea", "cough_cold", "fatigue", "body_ache"}
+MODERATE_SYMPTOMS = {
+    "abdominal_pain",
+    "diarrhea",
+    "cough_cold",
+    "fatigue",
+    "body_ache",
+    # Common outpatient problems (added with the voice fill feature)
+    "urination_problem",
+    "sore_throat",
+    "joint_pain",
+    "back_pain",
+    "skin_rash",
+    "eye_problem",
+    "ear_pain",
+    "dizziness",
+    "acidity",
+    "constipation",
+    "toothache",
+    "numbness",
+    "swelling",
+}
 
 SCORE = {"RED": 100, "YELLOW": 50, "GREEN": 10}
 

@@ -257,9 +257,10 @@ class Prescription(Base):
 class Appointment(Base):
     """OPD appointment + token queue entry (Feature 3).
 
-    A token number is assigned automatically per facility + calendar day
-    (1, 2, 3, ... in order of booking). status drives the OPD queue board:
-    waiting -> in_consultation -> completed | no_show.
+    A per-day sequence number (`token`) is assigned automatically per
+    facility + department + calendar day (1, 2, 3, ... in order of booking);
+    the human-readable GA-... label is stored in `token_label`. status drives
+    the OPD queue board: waiting -> in_consultation -> completed | no_show.
     """
 
     __tablename__ = "appointments"
@@ -271,11 +272,32 @@ class Appointment(Base):
     patient_id: Mapped[str] = mapped_column(ForeignKey("patients.id", ondelete="CASCADE"), index=True)
     facility_id: Mapped[str] = mapped_column(ForeignKey("facilities.id"), index=True)
     scheduled_for: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
-    token: Mapped[int] = mapped_column(Integer, default=1)
+    token: Mapped[int] = mapped_column(Integer, default=1)  # per-day sequence number
+    token_label: Mapped[Optional[str]] = mapped_column(String(40), nullable=True)  # GA-FAC-DEPT-YYYYMMDD-COUNTER-SEQ
+    department: Mapped[Optional[str]] = mapped_column(String(20), nullable=True, default="GMED")
     priority: Mapped[str] = mapped_column(String(20), default="routine")  # routine|urgent|emergency|pregnant_woman|child|elderly
     reason: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     status: Mapped[str] = mapped_column(String(15), default="waiting", index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
+class DoctorStatus(Base):
+    """Live doctor availability per facility (OPD Queue Manager).
+
+    Drives token generation: when status is 'offline', the portal and kiosk
+    refuse to issue new tokens. Defaults to 'available' when no row exists
+    (demo-friendly — booking keeps working on a fresh database).
+    """
+
+    __tablename__ = "doctor_status"
+
+    STATUSES = ["available", "busy", "on_break", "offline"]
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=gen_uuid)
+    facility_id: Mapped[str] = mapped_column(ForeignKey("facilities.id"), unique=True, index=True)
+    status: Mapped[str] = mapped_column(String(15), default="available")  # available|busy|on_break|offline
+    updated_by: Mapped[Optional[str]] = mapped_column(String(40), nullable=True)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
 
 

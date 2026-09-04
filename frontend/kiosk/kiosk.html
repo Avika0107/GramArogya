@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GramArogya — OPD Kiosk</title>
+  <link rel="stylesheet" href="/doctor/styles.css">
+  <style>
+    body { background: #f4f8f6; }
+    .kiosk-wrap { max-width: 640px; margin: 0 auto; padding: 24px; }
+    .kiosk-token {
+      background: var(--green); color: #fff; border-radius: 14px;
+      padding: 22px; text-align: center; margin-top: 14px;
+    }
+    .kiosk-token .label { font-size: 13px; opacity: 0.9; }
+    .kiosk-token .code {
+      font-size: 30px; font-weight: 800; letter-spacing: 1px;
+      font-family: ui-monospace, Consolas, monospace; word-break: break-all;
+    }
+    .kiosk-token .meta { font-size: 13px; margin-top: 6px; }
+    .queue-token { font-family: ui-monospace, Consolas, monospace; font-weight: 700; }
+    #kiosk-offline-banner { display: none; background: #fdecea; color: var(--red); border: 1px solid #f5c6c0; border-radius: 8px; padding: 10px 12px; margin-top: 12px; font-weight: 600; }
+  </style>
+</head>
+<body data-page="kiosk">
+  <div class="kiosk-wrap">
+    <h1 class="page-title">🏥 OPD Self-Service Kiosk</h1>
+    <p class="muted">Walk-in check-in — enter your ABHA ID to receive your OPD token.</p>
+
+    <div id="kiosk-offline-banner">🔴 The doctor is OFFLINE — token generation is currently disabled. Please wait or visit the reception desk.</div>
+
+    <div class="card">
+      <label>ABHA ID (14 digits)</label>
+      <input type="text" id="k-abha" placeholder="91214455667701" maxlength="14" inputmode="numeric">
+      <div id="k-patient-hint" class="muted small" style="margin-top:6px"></div>
+
+      <div class="fields-3" style="margin-top:10px">
+        <div class="field"><label>Department</label>
+          <select id="k-dept">
+            <option value="GMED">GMED — General Medicine</option>
+            <option value="PED">PED — Paediatrics</option>
+            <option value="OBG">OBG — Obstetrics &amp; Gynaecology</option>
+            <option value="ORT">ORT — Orthopaedics</option>
+          </select>
+        </div>
+        <div class="field"><label>Priority</label>
+          <select id="k-priority">
+            <option value="routine">Routine</option>
+            <option value="urgent">Urgent</option>
+            <option value="emergency">Emergency</option>
+            <option value="pregnant_woman">Pregnant woman</option>
+            <option value="child">Child</option>
+            <option value="elderly">Elderly</option>
+          </select>
+        </div>
+        <div class="field"><label>Reason (optional)</label>
+          <input type="text" id="k-reason" placeholder="e.g. Fever since 2 days"></div>
+      </div>
+
+      <button id="k-issue" style="width:100%">🎫 Generate my OPD token</button>
+      <div id="k-result"></div>
+    </div>
+
+    <div class="card">
+      <div class="spread">
+        <h2 style="margin:0">Today's queue</h2>
+        <span class="muted small" id="k-updated"></span>
+      </div>
+      <table>
+        <thead><tr><th>Token</th><th>Patient</th><th>Priority</th><th>Est. wait</th><th>Status</th></tr></thead>
+        <tbody id="k-queue"></tbody>
+      </table>
+      <div id="k-queue-empty" class="empty">No tokens issued today yet.</div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="kiosk.js"></script>
+</body>
+</html>

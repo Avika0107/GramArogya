@@ -13,7 +13,7 @@ from typing import Callable, Optional
 
 from fastapi import Header, HTTPException
 
-VALID_ROLES = {"asha", "doctor", "lab", "admin"}
+VALID_ROLES = {"asha", "doctor", "lab", "admin", "kiosk"}
 
 
 def require_role(*roles: str) -> Callable:

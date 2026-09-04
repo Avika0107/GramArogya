@@ -9,7 +9,7 @@
  *    pending queues; the manual "Sync Now" button covers every other case.
  */
 
-const CACHE_NAME = 'gramarogya-asha-v9';
+const CACHE_NAME = 'gramarogya-asha-v10';
 const APP_SHELL = [
   './',
   './index.html',
@@ -21,6 +21,8 @@ const APP_SHELL = [
   './styles.css',
   './app.js',
   './db.js',
+  './ai-i18n.js',
+  './ai.js',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',

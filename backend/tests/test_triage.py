@@ -53,3 +53,19 @@ def test_unknown_symptoms_are_ignored(client):
     """Unknown symptom keys must not crash the engine."""
     res = _assess(client, {"made_up_symptom": True}, {"pulse": 80})
     assert res.json()["color"] == "GREEN"
+
+
+def test_urination_problem_is_yellow_with_another_moderate(client):
+    """New urinary complaint + another moderate symptom escalates to YELLOW."""
+    res = _assess(client, {"urination_problem": True, "back_pain": True}, {"pulse": 84, "spo2": 97})
+    body = res.json()
+    assert body["color"] == "YELLOW"
+    assert any("urination" in r.lower() for r in body["reasons"])
+
+
+def test_new_symptoms_only_are_green_or_yellow(client):
+    """New common problems alone are moderate (GREEN unless 2+ are combined)."""
+    res = _assess(client, {"sore_throat": True}, {"pulse": 80, "spo2": 98})
+    assert res.json()["color"] == "GREEN"
+    res2 = _assess(client, {"sore_throat": True, "cough_cold": True}, {"pulse": 80, "spo2": 98})
+    assert res2.json()["color"] == "YELLOW"

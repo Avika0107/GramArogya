@@ -30,6 +30,7 @@ from .routers import (
     facilities,
     followups,
     inventory,
+    kiosk,
     lab,
     messages,
     patients,
@@ -37,6 +38,7 @@ from .routers import (
     sync,
     teleconsult,
     triage,
+    ws,
 )
 from .seed import seed_if_empty, seed_modules_if_empty
 
@@ -97,6 +99,8 @@ api.include_router(followups.router)
 api.include_router(lab.router)
 api.include_router(teleconsult.router)
 api.include_router(dashboard.router)
+api.include_router(kiosk.router)
+api.include_router(ws.router)
 app.include_router(api)
 
 
@@ -123,7 +127,8 @@ def root():
 for _name, _sub in (("asha", "asha-worker"),
                     ("doctor", "doctor-portal"),
                     ("lab", "lab-portal"),
-                    ("admin", "admin-dashboard")):
+                    ("admin", "admin-dashboard"),
+                    ("kiosk", "kiosk")):
     _dir = settings.frontend_dir / _sub
     if _dir.is_dir():
         app.mount(f"/{_name}", StaticFiles(directory=_dir, html=True), name=_name)

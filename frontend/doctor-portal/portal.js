@@ -214,7 +214,7 @@ async function loadDashboard() {
     const rows = await api('/appointments/queue/today?facility_id=' + encodeURIComponent(facId));
     const active = rows.filter((r) => r.status === 'waiting' || r.status === 'in_consultation').slice(0, 6);
     document.getElementById('queue-preview').innerHTML = active.map((r) =>
-      '<tr><td><b>#' + r.token + '</b></td><td>' + esc(r.patient_name) +
+      '<tr><td><b>' + esc(r.token_label || '#' + r.token) + '</b></td><td>' + esc(r.patient_name) +
       '</td><td>' + chip(r.priority, r.priority) + '</td><td>' + chip(r.status.replace('_', ' '), r.status) +
       '</td><td class="small"><a href="patient.html?id=' + r.patient_id + '&appt=' + r.id + '">Consult →</a></td></tr>'
     ).join('');
@@ -230,9 +230,64 @@ async function initQueue() {
   document.getElementById('queue-filter').addEventListener('change', renderOpdTable);
   document.getElementById('book-btn').addEventListener('click', bookAppointment);
   document.getElementById('new-appt-patient').addEventListener('input', debounce(searchApptPatient, 350));
+  document.querySelectorAll('#avail-btns .avail').forEach((b) => {
+    b.addEventListener('click', () => setDoctorAvailability(b.getAttribute('data-status')));
+  });
 
+  await loadAvailability();
   await loadQueue();
-  setInterval(loadQueue, 20000);
+  setInterval(loadQueue, 20000);      // polling fallback
+  connectQueueSocket();               // real-time WebSocket updates
+}
+
+/* --- Doctor availability (🟢 AVAILABLE / 🟡 BUSY / 🟠 ON_BREAK / 🔴 OFFLINE) --- */
+async function loadAvailability() {
+  await ensureFacility();
+  try {
+    const st = await api('/doctor/status?facility_id=' + encodeURIComponent(currentFacilityId));
+    renderAvailability(st.status);
+  } catch (e) { /* keep last state */ }
+}
+
+async function setDoctorAvailability(status) {
+  try {
+    const st = await api('/doctor/status', {
+      method: 'PUT',
+      body: JSON.stringify({ facility_id: currentFacilityId, status: status }),
+    });
+    renderAvailability(st.status);
+    toast('Doctor status → ' + st.status.replace('_', ' ').toUpperCase(), 'ok');
+  } catch (e) { toast('Update failed: ' + e.message, 'error'); }
+}
+
+function renderAvailability(status) {
+  document.querySelectorAll('#avail-btns .avail').forEach((b) => {
+    b.classList.toggle('active', b.getAttribute('data-status') === status);
+  });
+  const bookBtn = document.getElementById('book-btn');
+  if (bookBtn) bookBtn.disabled = status === 'offline';
+  const note = document.getElementById('avail-note');
+  if (note) {
+    note.textContent = status === 'offline'
+      ? '🔴 Doctor OFFLINE — token generation is disabled on the portal and kiosk.'
+      : 'When OFFLINE, token generation is disabled on the portal and kiosk.';
+  }
+}
+
+/* --- Real-time updates via WebSocket (falls back to polling) --- */
+function connectQueueSocket() {
+  if (!currentFacilityId) return;
+  const proto = location.protocol === 'https:' ? 'wss' : 'ws';
+  const sock = new WebSocket(proto + '://' + location.host +
+    '/api/v1/ws/queue?facility_id=' + encodeURIComponent(currentFacilityId));
+  sock.onmessage = (ev) => {
+    try {
+      const m = JSON.parse(ev.data);
+      if (m.type === 'queue_changed') loadQueue();
+      if (m.type === 'availability_changed') { loadQueue(); loadAvailability(); }
+    } catch (e) { /* ignore */ }
+  };
+  sock.onclose = () => setTimeout(() => { if (document.body.dataset.page === 'queue') connectQueueSocket(); }, 5000);
 }
 
 function debounce(fn, ms) {
@@ -279,7 +334,7 @@ function renderOpdTable() {
   const rows = QUEUE_OPD.filter((r) => filter === 'all' || r.status === filter);
   const body = document.getElementById('opd-body');
   body.innerHTML = rows.map((r) =>
-    '<tr><td><b>#' + r.token + '</b></td>' +
+    '<tr><td><b>' + esc(r.token_label || '#' + r.token) + '</b></td>' +
     '<td><b>' + esc(r.patient_name) + '</b><br><span class="patient-id">' + esc(r.abha_id) + '</span></td>' +
     '<td>' + chip(r.priority.replace('_', ' '), r.priority) + '</td>' +
     '<td class="small">' + esc(r.reason || '—') + '</td>' +
@@ -348,7 +403,7 @@ async function bookAppointment() {
         reason: document.getElementById('new-appt-reason').value,
       }),
     });
-    toast('Booked — token #' + appt.token + ' for ' + appt.patient_name + ' (SMS reminder queued)', 'ok');
+    toast('Booked — token ' + (appt.token_label || '#' + appt.token) + ' for ' + appt.patient_name + ' (SMS reminder queued)', 'ok');
     document.getElementById('new-appt-patient').value = '';
     document.getElementById('new-appt-reason').value = '';
     SELECTED_PATIENT = null;

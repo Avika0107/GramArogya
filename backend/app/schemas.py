@@ -374,6 +374,8 @@ class AppointmentCreate(BaseModel):
     scheduled_for: Optional[datetime] = None
     priority: str = "routine"  # routine | urgent | emergency | pregnant_woman | child | elderly
     reason: Optional[str] = None
+    department: str = "GMED"  # OPD department code, part of the GA-... token
+    counter: str = "WEB01"    # issuing counter/device, part of the GA-... token
 
 
 class AppointmentPatch(BaseModel):
@@ -392,11 +394,42 @@ class AppointmentOut(BaseModel):
     facility_name: Optional[str] = None
     scheduled_for: Optional[datetime] = None
     token: int
+    token_label: Optional[str] = None  # GA-FAC-DEPT-YYYYMMDD-COUNTER-SEQ
+    department: Optional[str] = None
     priority: str
     reason: Optional[str] = None
     status: str
     est_wait_min: Optional[int] = None  # computed on list
     created_at: Optional[datetime] = None
+
+
+# ---------------------------------------------------------------------------
+# OPD Queue Manager — doctor availability + kiosk walk-in tokens
+# ---------------------------------------------------------------------------
+class DoctorStatusOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    facility_id: str
+    status: str  # available | busy | on_break | offline
+    updated_by: Optional[str] = None
+    updated_at: Optional[datetime] = None
+
+
+class DoctorStatusPatch(BaseModel):
+    facility_id: str
+    status: str  # available | busy | on_break | offline
+
+
+class KioskTokenCreate(BaseModel):
+    """Self-service kiosk walk-in: same as an appointment, but the counter is
+    fixed to the kiosk device id so tokens read GA-...-KIO01-0000XX."""
+
+    patient_id: str
+    facility_id: str
+    department: str = "GMED"
+    priority: str = "routine"
+    reason: Optional[str] = None
+    counter: str = "KIO01"
 
 
 # ---------------------------------------------------------------------------

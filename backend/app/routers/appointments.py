@@ -1,14 +1,20 @@
-"""Appointments + OPD token queue (Feature 3).
+"""Appointments + OPD token queue (OPD Queue Manager).
 
-ASHA workers and PHC staff book an appointment; the backend assigns the next
-free token number for that facility + day. The OPD queue board lists patients
-with token, priority tag, status and an estimated wait time (7 min per person
-already waiting ahead).
+ASHA workers / kiosks / doctors book or check in a patient; the backend
+assigns the next free per-day sequence for that facility + department and
+issues a GA-<FAC>-<DEPT>-<YYYYMMDD>-<COUNTER>-<SEQ> token label.
+
+Queue rules:
+  * Doctor availability gate — when the doctor is 🔴 OFFLINE, no new tokens
+    are issued anywhere (portal, kiosk): HTTP 409.
+  * Today's token queue sorts by priority first, then arrival sequence.
+  * Live updates: every create/status change broadcasts a `queue_changed`
+    event on the facility's WebSocket room.
 
 GET    /api/v1/appointments            -> list (filter by facility/date/status)
-POST   /api/v1/appointments            -> book (auto token) [asha, doctor]
+POST   /api/v1/appointments            -> book/check-in (auto token) [asha, doctor]
 PATCH  /api/v1/appointments/{id}       -> status/priority change [doctor, asha]
-GET    /api/v1/appointments/queue/today-> today's OPD queue, sorted by token
+GET    /api/v1/appointments/queue/today-> today's OPD queue, priority + token
 """
 
 from datetime import date, datetime, time, timedelta
@@ -21,6 +27,13 @@ from ..deps import require_role
 from ..models import Appointment, Facility, Patient, utcnow
 from ..schemas import AppointmentCreate, AppointmentOut, AppointmentPatch
 from ..services.messaging import queue_message_for_patient
+from ..services.opd import (
+    build_token_label,
+    doctor_available,
+    facility_code,
+    next_token_seq,
+)
+from ..services.ws_manager import hub
 
 router = APIRouter(prefix="/appointments", tags=["appointments"])
 
@@ -36,19 +49,6 @@ def _day_bounds(when: datetime) -> tuple[datetime, datetime]:
     return start, start + timedelta(days=1)
 
 
-def _next_token(db: Session, facility_id: str, when: datetime) -> int:
-    """Next token number for this facility + calendar day."""
-    start, end = _day_bounds(when)
-    existing = (
-        db.query(Appointment)
-        .filter(Appointment.facility_id == facility_id,
-                Appointment.scheduled_for >= start,
-                Appointment.scheduled_for < end)
-        .all()
-    )
-    return max([a.token for a in existing] or [0]) + 1
-
-
 def _to_out(db: Session, appt: Appointment, est_wait: int | None = None) -> AppointmentOut:
     patient = db.get(Patient, appt.patient_id)
     fac = db.get(Facility, appt.facility_id)
@@ -61,6 +61,8 @@ def _to_out(db: Session, appt: Appointment, est_wait: int | None = None) -> Appo
         facility_name=fac.name if fac else None,
         scheduled_for=appt.scheduled_for,
         token=appt.token,
+        token_label=appt.token_label,
+        department=appt.department,
         priority=appt.priority,
         reason=appt.reason,
         status=appt.status,
@@ -112,7 +114,7 @@ def opd_queue_today(
     facility_id: str | None = None,
     db: Session = Depends(get_db),
 ):
-    """Today's OPD queue board — token order, active statuses first."""
+    """Today's OPD queue board — priority first, then arrival sequence."""
     start, end = _day_bounds(utcnow())
     query = (
         db.query(Appointment)
@@ -138,8 +140,12 @@ def opd_queue_today(
 
 
 @router.post("", response_model=AppointmentOut, status_code=201,
-             dependencies=[Depends(require_role("asha", "doctor", "admin"))])
-def create_appointment(payload: AppointmentCreate, db: Session = Depends(get_db)):
+             dependencies=[Depends(require_role("asha", "doctor", "admin", "kiosk"))])
+async def create_appointment(payload: AppointmentCreate, db: Session = Depends(get_db)):
+    """Book / check-in a patient -> issues the next GA-... token.
+
+    Token generation is automatically disabled while the doctor is 🔴 OFFLINE.
+    """
     patient = db.get(Patient, payload.patient_id)
     if not patient:
         raise HTTPException(status_code=404, detail="Patient not found")
@@ -148,13 +154,23 @@ def create_appointment(payload: AppointmentCreate, db: Session = Depends(get_db)
         raise HTTPException(status_code=404, detail="Facility not found")
     if payload.priority not in Appointment.PRIORITY_TAGS:
         raise HTTPException(status_code=422, detail="Unknown priority tag")
+    if not doctor_available(db, payload.facility_id):
+        raise HTTPException(
+            status_code=409,
+            detail="Doctor is OFFLINE — token generation is disabled on the portal.",
+        )
 
     when = payload.scheduled_for or utcnow()
+    seq = next_token_seq(db, payload.facility_id, payload.department, when)
     appt = Appointment(
         patient_id=payload.patient_id,
         facility_id=payload.facility_id,
         scheduled_for=when,
-        token=_next_token(db, payload.facility_id, when),
+        token=seq,
+        token_label=build_token_label(
+            facility_code(facility), payload.department, when, payload.counter, seq,
+        ),
+        department=payload.department,
         priority=payload.priority,
         reason=payload.reason,
         status="waiting",
@@ -164,20 +180,26 @@ def create_appointment(payload: AppointmentCreate, db: Session = Depends(get_db)
     if patient.phone:
         queue_message_for_patient(
             db, patient,
-            f"OPD appointment booked at {facility.name} — token {appt.token}. "
+            f"OPD appointment booked at {facility.name} — token {appt.token_label}. "
             f"Please carry your ABHA card. — GramArogya",
         )
     else:
         db.commit()
 
     db.refresh(appt)
+    await hub.broadcast(payload.facility_id, {
+        "type": "queue_changed",
+        "event": "token_created",
+        "token_label": appt.token_label,
+        "status": appt.status,
+    })
     return _to_out(db, appt)
 
 
 @router.patch("/{appointment_id}", response_model=AppointmentOut,
               dependencies=[Depends(require_role("doctor", "asha", "admin"))])
-def update_appointment(appointment_id: str, payload: AppointmentPatch,
-                       db: Session = Depends(get_db)):
+async def update_appointment(appointment_id: str, payload: AppointmentPatch,
+                             db: Session = Depends(get_db)):
     appt = db.get(Appointment, appointment_id)
     if not appt:
         raise HTTPException(status_code=404, detail="Appointment not found")
@@ -191,4 +213,11 @@ def update_appointment(appointment_id: str, payload: AppointmentPatch,
         appt.priority = payload.priority
     db.commit()
     db.refresh(appt)
+    await hub.broadcast(appt.facility_id, {
+        "type": "queue_changed",
+        "event": "token_updated",
+        "token_label": appt.token_label,
+        "status": appt.status,
+        "priority": appt.priority,
+    })
     return _to_out(db, appt)

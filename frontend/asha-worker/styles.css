@@ -476,3 +476,117 @@ textarea {
 }
 .health-line .vitals { color: #4a5550; }
 .health-line .badge { flex: 0 0 auto; }
+
+/* Voice symptom fill (Web Speech API) */
+.voice-wrap { display: flex; align-items: center; gap: 8px; margin: 2px 0 10px; flex-wrap: wrap; }
+.voice-btn {
+  width: auto; margin: 0; padding: 9px 14px; font-size: 13px;
+  background: var(--green); color: #fff; border-radius: 999px;
+}
+.voice-btn.listening { background: var(--red); animation: flash 1s infinite; }
+.voice-btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+.voice-lang {
+  width: auto; margin: 0; padding: 8px 10px; font-size: 13px; font-weight: 600;
+}
+.voice-status {
+  font-size: 13px; color: var(--green-dark); background: #e8f4ef;
+  border: 1px solid #bcded1; border-radius: 8px; padding: 8px 10px; margin: 0 0 8px;
+}
+.voice-status.err { color: var(--red); background: #fdecea; border-color: #f0c4bd; }
+.voice-detected {
+  background: #fff8e6; border: 1px solid #f0d48a; border-radius: 8px;
+  padding: 6px 10px; margin-bottom: 8px; font-size: 12px;
+}
+.voice-detected b { color: #5c4500; display: block; margin-bottom: 4px; }
+.voice-chip {
+  display: inline-block; background: #fff; border: 1px solid #e6c36a;
+  color: #5c4500; border-radius: 999px; padding: 2px 8px; margin: 2px 3px 2px 0;
+  font-size: 11px; font-weight: 600;
+}
+.voice-clear {
+  width: auto; margin: 0 0 10px; padding: 6px 12px; font-size: 12px;
+  background: #eef3f0; color: var(--green-dark); border: 1px solid var(--border);
+}
+.voice-note { font-size: 12px; color: var(--muted); margin: 6px 0 10px; }
+
+/* AI assistant panel */
+#ai-btn { background: #5c6bc0; }
+#ai-btn:disabled { opacity: 0.5; }
+#reset-btn {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--muted); margin-top: 6px;
+}
+#reset-btn:hover { border-color: var(--red); color: var(--red); }
+.ai-box {
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px; margin-top: 14px;
+}
+.ai-box h2 { margin: 0 0 4px; font-size: 16px; }
+.ai-sub { font-size: 12px; color: var(--muted); margin: 0 0 10px; }
+.risk-badge {
+  display: inline-block; color: #fff; font-weight: 700; font-size: 14px;
+  padding: 8px 14px; border-radius: 999px; margin: 4px 0 2px;
+}
+.risk-badge.RED { background: var(--red); }
+.risk-badge.YELLOW { background: var(--yellow); color: #3c2a00; }
+.risk-badge.GREEN { background: var(--green); }
+.risk-desc { font-size: 13px; color: var(--muted); margin: 4px 0 12px; }
+.ai-card {
+  border-radius: 10px; padding: 10px 12px; margin-bottom: 10px;
+  border: 1px solid var(--border); border-left-width: 5px;
+}
+.ai-card.RED { background: #fdecea; border-left-color: var(--red); }
+.ai-card.YELLOW { background: #fff8e6; border-left-color: var(--yellow); }
+.ai-card.GREEN { background: #e8f4ef; border-left-color: var(--green); }
+.ai-card h3 {
+  margin: 0 0 6px; font-size: 15px;
+}
+.ai-card.RED h3 { color: #9b1c1c; }
+.ai-card.YELLOW h3 { color: #8a6d00; }
+.ai-card.GREEN h3 { color: var(--green-dark); }
+.ai-card ul { margin: 6px 0; padding-left: 20px; font-size: 13px; }
+.ai-card li { margin: 3px 0; }
+.ai-why {
+  background: rgba(255, 255, 255, 0.7); border-radius: 8px;
+  padding: 6px 8px; font-size: 12px; color: #4a5550; margin: 6px 0;
+}
+.ai-warn { font-size: 12px; font-weight: 600; margin: 4px 0; }
+.ai-card.RED .ai-warn { color: var(--red); }
+.ai-card.YELLOW .ai-warn { color: #8a6d00; }
+.ai-card.GREEN .ai-warn { color: var(--green-dark); }
+.ai-cta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.ai-cta .btn-link, .ai-cta button.btn-link { margin: 0; }
+.ai-card.RED .ai-cta .btn-link { background: var(--red); color: #fff; }
+.ai-card.RED .ai-cta button.btn-link { width: auto; }
+
+/* Unified plan (combined analysis of all symptoms) */
+.ai-conds { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 10px; }
+.ai-cond {
+  background: #eef3f0; border: 1px solid #d5e0da; border-radius: 999px;
+  padding: 3px 10px; font-size: 12px; font-weight: 600; color: #2e3a35;
+}
+.ai-card.RED .ai-cond { background: #fdecea; border-color: #f5c6c0; color: var(--red); }
+.ai-card.YELLOW .ai-cond { background: #fdf7e3; border-color: #efe2b0; color: #8a6d00; }
+.ai-acts { margin: 6px 0 10px; padding-left: 22px; }
+.ai-acts li { margin-bottom: 5px; }
+.ai-list { margin: 4px 0 10px; padding-left: 20px; }
+.ai-list li { margin-bottom: 4px; }
+.ai-disclaimer {
+  background: #eef3f0; border-radius: 8px; padding: 8px 10px;
+  font-size: 11px; color: var(--muted); margin-top: 8px;
+}
+.ai-none { text-align: center; color: var(--muted); padding: 10px 0 4px; font-size: 14px; }
+.ai-none span { font-size: 26px; display: block; margin-bottom: 4px; }
+
+/* OPD check-in token */
+.ci-token {
+  background: var(--green); color: #fff; border-radius: 10px;
+  padding: 14px; margin-top: 10px; text-align: center;
+}
+.ci-token b {
+  font-size: 18px; letter-spacing: 0.5px;
+  font-family: ui-monospace, Consolas, monospace;
+  display: block; margin-bottom: 4px; word-break: break-all;
+}
+.ci-token .muted { color: rgba(255, 255, 255, 0.9); }
+

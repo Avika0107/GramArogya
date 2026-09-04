@@ -32,6 +32,19 @@
       </div>
     </div>
 
+    <div class="card">
+      <div class="spread">
+        <h2 style="margin:0">🩺 Doctor availability</h2>
+        <div class="row" id="avail-btns">
+          <button class="secondary small avail" data-status="available" style="margin-top:0">🟢 AVAILABLE</button>
+          <button class="secondary small avail" data-status="busy" style="margin-top:0">🟡 BUSY</button>
+          <button class="secondary small avail" data-status="on_break" style="margin-top:0">🟠 ON_BREAK</button>
+          <button class="secondary small avail" data-status="offline" style="margin-top:0">🔴 OFFLINE</button>
+        </div>
+      </div>
+      <p class="muted small" id="avail-note" style="margin-bottom:0">When OFFLINE, token generation is disabled on the portal and kiosk.</p>
+    </div>
+
     <div class="card" id="triage-queue-card">
       <h2>🚨 Triage queue (field assessments) <span class="muted small">RED first</span></h2>
       <table>

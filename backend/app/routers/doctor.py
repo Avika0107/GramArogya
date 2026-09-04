@@ -18,6 +18,7 @@ from ..database import get_db
 from ..deps import require_role
 from ..models import (
     Appointment,
+    DoctorStatus,
     Encounter,
     Facility,
     FollowUpTask,
@@ -31,6 +32,8 @@ from ..models import (
 )
 from ..schemas import (
     ConsultationSave,
+    DoctorStatusOut,
+    DoctorStatusPatch,
     EncounterCreate,
     PrescriptionCreate,
     PrescriptionOut,
@@ -38,7 +41,9 @@ from ..schemas import (
     TimelineItem,
 )
 from ..services.messaging import queue_message_for_patient
+from ..services.opd import get_doctor_status
 from ..services.triage import assess
+from ..services.ws_manager import hub
 
 router = APIRouter(tags=["doctor"])
 
@@ -107,10 +112,49 @@ def incoming_queue(
     if facility_id:
         items = [i for i in items if i.facility_id == facility_id]
 
-    # RED (score 100) always jumps to the top; then by recency
-    items.sort(key=lambda i: (i.triage_score is None, -(i.triage_score or 0),
+    # Dual queue sorting: RED triage first, then YELLOW, then GREEN; within a
+    # band, most recent arrival first.
+    COLOR_RANK = {"RED": 0, "YELLOW": 1, "GREEN": 2}
+    items.sort(key=lambda i: (COLOR_RANK.get(i.triage_color, 3),
                               i.visited_at or datetime.min))
     return items
+
+
+@router.get("/doctor/status", response_model=DoctorStatusOut)
+def doctor_status(facility_id: str, db: Session = Depends(get_db)):
+    """Live doctor availability for the OPD queue (defaults to available)."""
+    row = get_doctor_status(db, facility_id)
+    return DoctorStatusOut(
+        facility_id=row.facility_id,
+        status=row.status,
+        updated_by=row.updated_by,
+        updated_at=row.updated_at,
+    )
+
+
+@router.put("/doctor/status", response_model=DoctorStatusOut,
+            dependencies=[Depends(require_role("doctor", "admin"))])
+async def set_doctor_status(payload: DoctorStatusPatch,
+                            db: Session = Depends(get_db)):
+    """Set the doctor availability flag (🟢 AVAILABLE / 🟡 BUSY / 🟠 ON_BREAK /
+    🔴 OFFLINE). When OFFLINE, token generation is disabled everywhere."""
+    if payload.status not in DoctorStatus.STATUSES:
+        raise HTTPException(status_code=422, detail="Unknown doctor status")
+    row = get_doctor_status(db, payload.facility_id)
+    row.status = payload.status
+    row.updated_at = utcnow()
+    db.commit()
+    db.refresh(row)
+    await hub.broadcast(payload.facility_id, {
+        "type": "availability_changed",
+        "status": row.status,
+    })
+    return DoctorStatusOut(
+        facility_id=row.facility_id,
+        status=row.status,
+        updated_by=row.updated_by,
+        updated_at=row.updated_at,
+    )
 
 
 @router.post("/encounters", response_model=dict, status_code=201,

@@ -359,7 +359,7 @@ def district_dashboard(
             fu_counts[t.status] += 1
     followup_status = [FunnelStage(stage=s, count=fu_counts[s]) for s in fu_counts]
 
-    all_ready = [o for f in facilities
+    all_ready = [o.tat_seconds for f in facilities
                  for o in db.query(LabOrder)
                  .filter(LabOrder.facility_id == f.id, LabOrder.status == "report_ready").all()
                  if o.tat_seconds is not None]

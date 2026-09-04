@@ -69,6 +69,7 @@ h2 { font-size: 15px; margin: 0 0 10px; }
 .grid { display: grid; gap: 14px; }
 .grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
 .grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.grid.cols-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 .card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: 12px; padding: 14px 16px; margin-bottom: 14px;
@@ -136,6 +137,10 @@ button {
 }
 button:hover { background: var(--green-dark); }
 button.secondary { background: #e7edea; color: var(--green-dark); }
+#avail-btns .avail.active { background: var(--green); color: #fff; }
+#avail-btns .avail[data-status="busy"].active { background: #b26a00; }
+#avail-btns .avail[data-status="on_break"].active { background: #d97f1f; }
+#avail-btns .avail[data-status="offline"].active { background: var(--red); }
 button.danger { background: var(--red); }
 button.warn { background: #b26a00; }
 button.small { padding: 5px 10px; font-size: 12px; margin-top: 0; }

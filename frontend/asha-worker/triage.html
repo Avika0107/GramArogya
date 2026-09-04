@@ -45,6 +45,17 @@
 
     <div class="card">
       <h2 data-i18n="triage.symptoms">Symptoms</h2>
+      <div class="voice-wrap">
+        <button id="voice-btn" class="voice-btn" type="button">🎤 <span data-i18n="ai.voice.btn">Voice fill symptoms</span></button>
+        <select id="voice-lang" class="voice-lang" aria-label="Voice language">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी</option>
+          <option value="mr">मराठी</option>
+        </select>
+      </div>
+      <p id="voice-status" class="voice-status" hidden></p>
+      <div id="voice-detected" class="voice-detected" hidden></div>
+      <div id="voice-clear-wrap" hidden><button id="voice-clear" class="small voice-clear" type="button"><span data-i18n="ai.voice.clear">🗑 Clear auto-filled</span></button></div>
       <div id="symptom-grid" class="symptom-grid"></div>
     </div>
 
@@ -64,8 +75,41 @@
       </div>
     </div>
 
+    <div class="card">
+      <h2 data-i18n="ai.ctx">Known background (for the AI advice)</h2>
+      <p class="muted" data-i18n="ai.ctx.hint">Tick only what is already known: pregnancy, diabetes or high BP.</p>
+      <div class="symptom-grid">
+        <label><input type="checkbox" id="ctx-pregnant"><span data-i18n="hr.pregnant">Pregnant</span></label>
+        <label><input type="checkbox" id="ctx-diabetic"><span data-i18n="hr.diabetic">Diabetic</span></label>
+        <label><input type="checkbox" id="ctx-htn"><span data-i18n="hr.htn">High BP (HTN)</span></label>
+      </div>
+    </div>
+
     <button id="assess-btn" data-i18n="btn.assess">Assess patient</button>
+    <button id="ai-btn" class="secondary" data-i18n="ai.run">🤖 AI suggestions</button>
+    <button id="reset-btn" class="secondary" data-i18n="btn.reset">🗑 New patient — clear all</button>
     <div id="triage-result"></div>
+    <div id="ai-result"></div>
+
+    <div class="card" id="checkin-card">
+      <h2 data-i18n="ci.title">🩺 OPD check-in / token</h2>
+      <p class="muted" data-i18n="ci.hint">Book the OPD slot for this patient and get the GA-… token. Needs internet — tokens are issued by the PHC server.</p>
+      <div class="row">
+        <div>
+          <label data-i18n="ci.priority">Priority</label>
+          <select id="ci-priority">
+            <option value="routine">Routine</option>
+            <option value="urgent">Urgent</option>
+            <option value="emergency">Emergency</option>
+            <option value="pregnant_woman">Pregnant woman</option>
+            <option value="child">Child</option>
+            <option value="elderly">Elderly</option>
+          </select>
+        </div>
+      </div>
+      <button id="ci-btn" data-i18n="ci.btn">🎫 Generate OPD token</button>
+      <div id="ci-result"></div>
+    </div>
   </main>
 
   <!-- Emergency SOS modal -->
@@ -105,6 +149,8 @@
 
   <div id="toast" class="toast"></div>
   <script src="db.js"></script>
+  <script src="ai-i18n.js"></script>
+  <script src="ai.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

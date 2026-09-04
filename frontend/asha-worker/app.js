@@ -285,6 +285,19 @@ const I18N = {
     'v.temp': 'Temperature (\u00b0C)',
     'v.rr': 'Resp. rate (/min)',
     'btn.assess': 'Assess patient',
+    'btn.reset': '🗑 New patient — clear all',
+    'btn.reset.done': 'Form cleared — ready for the next patient',
+    'ci.title': '🩺 OPD check-in / token',
+    'ci.hint': 'Book the OPD slot and get the GA-… token. Needs internet — tokens are issued by the PHC server.',
+    'ci.priority': 'Priority',
+    'ci.btn': '🎫 Generate OPD token',
+    'ci.badabha': 'Enter a valid 14-digit ABHA ID first.',
+    'ci.offline': 'You are offline — OPD tokens are issued by the PHC server. Triage is still saved offline.',
+    'ci.thinking': 'Booking the OPD slot…',
+    'ci.notfound': 'Patient not found — save the patient first.',
+    'ci.nofac': 'No facility available for check-in.',
+    'ci.failed': 'Token failed: {0}',
+    'ci.wait': 'est. wait ~{0} min',
     'sym.chest_pain': 'Chest pain',
     'sym.difficulty_breathing': 'Difficulty breathing',
     'sym.unconscious': 'Unconscious / not responding',
@@ -302,6 +315,19 @@ const I18N = {
     'sym.cough_cold': 'Cough / cold',
     'sym.fatigue': 'Fatigue / weakness',
     'sym.body_ache': 'Body ache',
+    'sym.urination_problem': 'Frequent / painful urination',
+    'sym.sore_throat': 'Sore throat / throat pain',
+    'sym.joint_pain': 'Joint pain / swelling',
+    'sym.back_pain': 'Back pain',
+    'sym.skin_rash': 'Skin rash / itching',
+    'sym.eye_problem': 'Eye redness / watering / pain',
+    'sym.ear_pain': 'Ear pain / discharge',
+    'sym.dizziness': 'Dizziness / giddiness',
+    'sym.acidity': 'Acidity / indigestion / gas',
+    'sym.constipation': 'Constipation',
+    'sym.toothache': 'Toothache / gum problem',
+    'sym.numbness': 'Numbness / tingling',
+    'sym.swelling': 'Swelling (face / hands / feet)',
     'color.RED': 'RED',
     'color.YELLOW': 'YELLOW',
     'color.GREEN': 'GREEN',
@@ -635,6 +661,19 @@ const I18N = {
     'v.temp': '\u0924\u093e\u092a\u092e\u093e\u0928 (\u00b0C)',
     'v.rr': '\u0938\u093e\u0901\u0938 \u0926\u0930 (/min)',
     'btn.assess': '\u092e\u0930\u0940\u091c\u093c \u0915\u0940 \u091c\u093e\u0901\u091a \u0915\u0930\u0947\u0902',
+    'btn.reset': '🗑 नया मरीज़ — सब हटाएँ',
+    'btn.reset.done': 'फ़ॉर्म साफ़ हुआ — अगले मरीज़ के लिए तैयार',
+    'ci.title': '🩺 OPD चेक-इन / टोकन',
+    'ci.hint': 'OPD स्लॉट बुक करें और GA-… टोकन पाएँ। इंटरनेट चाहिए — टोकन PHC सर्वर देता है।',
+    'ci.priority': 'प्राथमिकता',
+    'ci.btn': '🎫 OPD टोकन बनाएँ',
+    'ci.badabha': 'पहले 14 अंकों का सही ABHA ID दर्ज करें।',
+    'ci.offline': 'आप ऑफ़लाइन हैं — OPD टोकन PHC सर्वर देता है। ट्रायेज ऑफ़लाइन सहेजा जाता है।',
+    'ci.thinking': 'OPD स्लॉट बुक हो रहा है…',
+    'ci.notfound': 'मरीज़ नहीं मिला — पहले मरीज़ सहेजें।',
+    'ci.nofac': 'चेक-इन के लिए कोई सुविधा उपलब्ध नहीं है।',
+    'ci.failed': 'टोकन विफल: {0}',
+    'ci.wait': 'अनुमानित प्रतीक्षा ~{0} मिनट',
     'sym.chest_pain': '\u0938\u0940\u0928\u0947 \u092e\u0947\u0902 \u0926\u0930\u094d\u0926',
     'sym.difficulty_breathing': '\u0938\u093e\u0901\u0938 \u0932\u0947\u0928\u0947 \u092e\u0947\u0902 \u0915\u0920\u093f\u0928\u093e\u0908',
     'sym.unconscious': '\u092c\u0947\u0939\u094b\u0936 / \u092a\u094d\u0930\u0924\u093f\u0915\u094d\u0930\u093f\u092f\u093e \u0928\u0939\u0940\u0902',
@@ -652,6 +691,19 @@ const I18N = {
     'sym.cough_cold': '\u0916\u093e\u0901\u0938\u0940 / \u091c\u093c\u0941\u0915\u093e\u092e',
     'sym.fatigue': '\u0925\u0915\u093e\u0928 / \u0915\u092e\u091c\u093c\u094b\u0930\u0940',
     'sym.body_ache': '\u0936\u0930\u0940\u0930 \u092e\u0947\u0902 \u0926\u0930\u094d\u0926',
+    'sym.urination_problem': '\u092c\u093e\u0930-\u092c\u093e\u0930 / \u0926\u0930\u094d\u0926 \u0915\u0947 \u0938\u093e\u0925 \u092a\u0947\u0936\u093e\u092c',
+    'sym.sore_throat': '\u0917\u0932\u0947 \u092e\u0947\u0902 \u0916\u0930\u093e\u0936 / \u0926\u0930\u094d\u0926',
+    'sym.joint_pain': '\u091c\u094b\u0921\u093c\u094b\u0902 \u092e\u0947\u0902 \u0926\u0930\u094d\u0926 / \u0938\u0942\u091c\u0928',
+    'sym.back_pain': '\u092a\u0940\u0920 \u0926\u0930\u094d\u0926',
+    'sym.skin_rash': '\u0924\u094d\u0935\u091a\u093e \u092a\u0930 \u0926\u093e\u0928\u0947 / \u0916\u0941\u091c\u0932\u0940',
+    'sym.eye_problem': '\u0906\u0901\u0916 \u0932\u093e\u0932 / \u092a\u093e\u0928\u0940 / \u0926\u0930\u094d\u0926',
+    'sym.ear_pain': '\u0915\u093e\u0928 \u0926\u0930\u094d\u0926 / \u092c\u0939\u093e\u0935',
+    'sym.dizziness': '\u091a\u0915\u094d\u0915\u0930 / \u091a\u092e\u0915',
+    'sym.acidity': '\u090f\u0938\u093f\u0921\u093f\u091f\u0940 / \u0905\u092a\u091a / \u0917\u0948\u0938',
+    'sym.constipation': '\u0915\u092c\u094d\u091c\u093c',
+    'sym.toothache': '\u0926\u093e\u0901\u0924 \u0926\u0930\u094d\u0926 / \u092e\u0938\u0942\u0921\u093c\u093e \u0938\u092e\u0938\u094d\u092f\u093e',
+    'sym.numbness': '\u0938\u0941\u0928\u094d\u0928\u0924\u093e / \u091d\u0902\u091d\u0928\u093e\u0939\u091f',
+    'sym.swelling': '\u0938\u0942\u091c\u0928 (\u091a\u0947\u0939\u0930\u093e / \u0939\u093e\u0925 / \u092a\u0948\u0930)',
     'color.RED': '\u0932\u093e\u0932 (RED)',
     'color.YELLOW': '\u092a\u0940\u0932\u093e (YELLOW)',
     'color.GREEN': '\u0939\u0930\u093e (GREEN)',
@@ -981,6 +1033,19 @@ const I18N = {
     'v.temp': '\u0924\u093e\u092a\u092e\u093e\u0928 (\u00b0C)',
     'v.rr': '\u0936\u094d\u0935\u0938\u0928 \u0926\u0930 (/min)',
     'btn.assess': '\u0930\u0941\u0917\u094d\u0923\u093e\u091a\u0940 \u0924\u092a\u093e\u0938\u0923\u0940 \u0915\u0930\u093e',
+    'btn.reset': '🗑 नवीन रुग्ण — सर्व हटवा',
+    'btn.reset.done': 'फॉर्म साफ झाला — पुढील रुग्णासाठी तयार',
+    'ci.title': '🩺 OPD चेक-इन / टोकन',
+    'ci.hint': 'OPD स्लॉट बुक करा आणि GA-… टोकन मिळवा. इंटरनेट हवे — टोकन PHC सर्व्हर देतो.',
+    'ci.priority': 'प्राथमिकता',
+    'ci.btn': '🎫 OPD टोकन तयार करा',
+    'ci.badabha': 'आधी 14 अंकांचा योग्य ABHA ID टाका.',
+    'ci.offline': 'तुम्ही ऑफलाइन आहात — OPD टोकन PHC सर्व्हर देतो. ट्रायेज ऑफलाइन सेव्ह होते.',
+    'ci.thinking': 'OPD स्लॉट बुक होत आहे…',
+    'ci.notfound': 'रुग्ण सापडला नाही — आधी रुग्ण सेव्ह करा.',
+    'ci.nofac': 'चेक-इनसाठी कोणतीही सुविधा उपलब्ध नाही.',
+    'ci.failed': 'टोकन अयशस्वी: {0}',
+    'ci.wait': 'अंदाजे प्रतीक्षा ~{0} मिनिटे',
     'sym.chest_pain': '\u091b\u093e\u0924\u0940\u0924 \u0926\u0941\u0916\u0923\u0947',
     'sym.difficulty_breathing': '\u0936\u094d\u0935\u093e\u0938 \u0918\u0947\u0923\u094d\u092f\u093e\u0938 \u0924\u094d\u0930\u093e\u0938',
     'sym.unconscious': '\u092c\u0947\u0936\u0941\u0926\u094d\u0927 / \u092a\u094d\u0930\u0924\u093f\u0938\u093e\u0926 \u0928\u093e\u0939\u0940',
@@ -998,6 +1063,19 @@ const I18N = {
     'sym.cough_cold': '\u0916\u094b\u0915\u0932\u093e / \u0938\u0930\u094d\u0926\u0940',
     'sym.fatigue': '\u0925\u0915\u0935\u093e / \u0905\u0936\u0915\u094d\u0924\u0924\u093e',
     'sym.body_ache': '\u0905\u0902\u0917\u0926\u0941\u0916\u0940',
+    'sym.urination_problem': '\u0935\u093e\u0930\u0902\u0935\u093e\u0930 / \u0935\u0947\u0926\u0928\u093e\u0926\u093e\u092f\u0915 \u0932\u0918\u094d\u0928\u094d\u092f\u093e\u0938',
+    'sym.sore_throat': '\u0918\u093e\u0938\u093e / \u0918\u0938\u093e\u0926\u0942\u0916\u0940',
+    'sym.joint_pain': '\u0938\u093e\u0902\u0927\u094d\u092f\u093e\u0938\u093e\u0902\u0927\u0940 \u0926\u0941\u0916\u0923\u0947 / \u0938\u0942\u091c',
+    'sym.back_pain': '\u092a\u093e\u0920\u0940\u0926\u0941\u0916\u0940',
+    'sym.skin_rash': '\u0924\u094d\u0935\u091a\u0947\u0935\u0930 \u092a\u0941\u0930\u091f\u0947 / \u0916\u0941\u091c',
+    'sym.eye_problem': '\u0921\u094b\u0933\u094d\u092f\u093e\u0932\u093e \u0932\u093e\u0932 / \u092a\u093e\u0923\u0940 / \u0926\u0941\u0916\u0923\u0947',
+    'sym.ear_pain': '\u0915\u093e\u0928 \u0926\u0941\u0916\u0923\u0947 / \u092a\u093e\u0933',
+    'sym.dizziness': '\u091a\u0915\u094d\u0915\u0930 / \u0917\u093f\u0926\u094d\u0926\u093f',
+    'sym.acidity': '\u090f\u0938\u093f\u0921\u093f\u091f\u0940 / \u0905\u092a\u091a / \u0917\u0948\u0938',
+    'sym.constipation': '\u092c\u0926\u092c\u0926',
+    'sym.toothache': '\u0926\u093e\u0902\u0924 \u0926\u0941\u0916\u0923\u0947 / \u0939\u093f\u0930\u0921\u0940 \u0938\u092e\u0938\u094d\u092f\u093e',
+    'sym.numbness': '\u0938\u0941\u0928\u094d\u0928 \u0939\u094b\u0923\u0947 / \u092e\u0941\u0939\u094b\u0930\u0940',
+    'sym.swelling': '\u0938\u0942\u091c (\u091a\u0939\u0947\u0930\u093e / \u0939\u093e\u0925 / \u092a\u093e\u092f)',
     'color.RED': '\u0932\u093e\u0932 (RED)',
     'color.YELLOW': '\u092a\u093f\u0935\u0933\u093e (YELLOW)',
     'color.GREEN': '\u0939\u093f\u0930\u0935\u093e (GREEN)',
@@ -1327,6 +1405,19 @@ const I18N = {
     'v.temp': '\u09a4\u09be\u09aa\u09ae\u09be\u09a4\u09cd\u09b0\u09be (\u00b0C)',
     'v.rr': '\u09b6\u09cd\u09ac\u09be\u09b8\u09c7\u09b0 \u09b9\u09be\u09b0 (/min)',
     'btn.assess': '\u09b0\u09cb\u0997\u09c0\u09b0 \u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09af\u09bc\u09a8 \u0995\u09b0\u09c1\u09a8',
+    'btn.reset': '🗑 নতুন রোগী — সব মুছুন',
+    'btn.reset.done': 'ফর্ম সাফ — পরের রোগীর জন্য প্রস্তুত',
+    'ci.title': '🩺 OPD চেক-ইন / টোকেন',
+    'ci.hint': 'OPD স্লট বুক করুন এবং GA-… টোকেন নিন। ইন্টারনেট দরকার — টোকেন PHC সার্ভার দেয়।',
+    'ci.priority': 'অগ্রাধিকার',
+    'ci.btn': '🎫 OPD টোকেন তৈরি করুন',
+    'ci.badabha': 'আগে ১৪ সংখ্যার সঠিক ABHA ID দিন।',
+    'ci.offline': 'আপনি অফলাইনে — OPD টোকেন PHC সার্ভার দেয়। ট্রায়েজ অফলাইনে সেভ হয়।',
+    'ci.thinking': 'OPD স্লট বুক হচ্ছে…',
+    'ci.notfound': 'রোগী পাওয়া যায়নি — আগে রোগী সেভ করুন।',
+    'ci.nofac': 'চেক-ইনের জন্য কোনো সুবিধা নেই।',
+    'ci.failed': 'টোকেন ব্যর্থ: {0}',
+    'ci.wait': 'আনুমানিক অপেক্ষা ~{0} মিনিট',
     'sym.chest_pain': '\u09ac\u09c1\u0995\u09c7 \u09ac\u09cd\u09af\u09a5\u09be',
     'sym.difficulty_breathing': '\u09b6\u09cd\u09ac\u09be\u09b8 \u09a8\u09bf\u09a4\u09c7 \u0995\u09b7\u09cd\u099f',
     'sym.unconscious': '\u0985\u099c\u09cd\u099e\u09be\u09a8 / \u09b8\u09be\u09a1\u09bc\u09be \u09a8\u09c7\u0987',
@@ -1344,6 +1435,19 @@ const I18N = {
     'sym.cough_cold': '\u0995\u09be\u09b6\u09bf / \u09b8\u09b0\u09cd\u09a6\u09bf',
     'sym.fatigue': '\u0995\u09cd\u09b2\u09be\u09a8\u09cd\u09a4\u09bf / \u09a6\u09c1\u09b0\u09cd\u09ac\u09b2\u09a4\u09be',
     'sym.body_ache': '\u09b6\u09b0\u09c0\u09b0\u09c7 \u09ac\u09cd\u09af\u09a5\u09be',
+    'sym.urination_problem': '\u09ac\u09be\u09b0\u09ac\u09be\u09b0 / \u09af\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3\u09be\u09af\u09bc \u09b8\u09ae\u09b8\u09cd\u09af\u09be',
+    'sym.sore_throat': '\u0997\u09b2\u09be \u09ac\u09cd\u09af\u09a5\u09be / \u0997\u09b2\u09be\u09af\u09bc \u09ac\u09cd\u09af\u09a5\u09be',
+    'sym.joint_pain': '\u0997\u09c1\u09a1\u09bc\u09be\u09b2\u09c7 \u09ac\u09cd\u09af\u09a5\u09be / \u09ab\u09c1\u09b2\u09c7\u0989',
+    'sym.back_pain': '\u09aa\u09bf\u09a0\u09c7\u09b0 \u09ac\u09cd\u09af\u09a5\u09be',
+    'sym.skin_rash': '\u099a\u09be\u09ae\u09a1\u09bc\u09be\u09af\u09bc \u09b0\u09be\u09b6 / \u099a\u09c1\u09b2\u0995\u09be\u09a8\u09bf',
+    'sym.eye_problem': '\u099a\u09cb\u0996 \u09b2\u09be\u09b2 / \u09aa\u09be\u09a8\u09bf / \u09ac\u09cd\u09af\u09a5\u09be',
+    'sym.ear_pain': '\u0995\u09be\u09a8 \u09ac\u09cd\u09af\u09a5\u09be / \u09b8\u09cd\u09b0\u09be\u09ac',
+    'sym.dizziness': '\u09ae\u09c1\u0996 \u0998\u09c1\u09b0\u09be\u09a8\u09cb / \u099a\u09ae\u0995',
+    'sym.acidity': '\u098f\u09b8\u09bf\u09a1\u09bf\u099f\u09bf / \u09ac\u09c2\u0995\u09be / \u0997\u09cd\u09af\u09be\u09b8',
+    'sym.constipation': '\u0995\u09cb\u09b7\u09a0\u0995\u09cd\u0995\u09a4\u09be',
+    'sym.toothache': '\u09a6\u09be\u0981\u09a4 \u09ac\u09cd\u09af\u09a5\u09be / \u09ae\u09a1\u09bc\u09bf \u09b8\u09ae\u09b8\u09cd\u09af\u09be',
+    'sym.numbness': '\u0985\u09ac\u09b6 \u09b9\u09ac\u09be / \u099d\u09bf\u09a8\u099d\u09bf\u09a8\u09bf',
+    'sym.swelling': '\u09ab\u09c1\u09b2\u09c7\u0989 (\u09ae\u09c1\u0996 / \u09b9\u09be\u09a4 / \u09aa\u09be)',
     'color.RED': '\u09b2\u09be\u09b2 (RED)',
     'color.YELLOW': '\u09b9\u09b2\u09c1\u09a6 (YELLOW)',
     'color.GREEN': '\u09b8\u09ac\u09c1\u099c (GREEN)',
@@ -1436,8 +1540,14 @@ function setLang(lang) {
 }
 
 function t(key, vars) {
-  const dict = I18N[currentLang()] || I18N.en;
-  let s = dict[key] !== undefined ? dict[key] : (I18N.en[key] !== undefined ? I18N.en[key] : key);
+  const lang = currentLang();
+  const dict = I18N[lang] || I18N.en;
+  let s;
+  if (dict[key] !== undefined) s = dict[key];
+  else if (I18N.en[key] !== undefined) s = I18N.en[key];
+  else if (typeof AI_I18N !== 'undefined' && AI_I18N[lang] && AI_I18N[lang][key] !== undefined) s = AI_I18N[lang][key];
+  else if (typeof AI_I18N !== 'undefined' && AI_I18N.en && AI_I18N.en[key] !== undefined) s = AI_I18N.en[key];
+  else s = key;
   if (vars !== undefined) {
     s = s.replace(/\{(\d+)\}/g, (m, i) => (vars[i] !== undefined ? String(vars[i]) : m));
   }
@@ -1498,6 +1608,18 @@ function toast(message, kind = 'info') {
   toast._t = setTimeout(() => { el.className = 'toast'; }, 4000);
 }
 
+/* Resolve `promise` unless it takes longer than `ms`, then reject so the UI
+ * never hangs silently (used for the online AI chat). */
+function withTimeout(ms, promise) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('timeout')), ms);
+    promise.then(
+      (v) => { clearTimeout(timer); resolve(v); },
+      (e) => { clearTimeout(timer); reject(e); }
+    );
+  });
+}
+
 async function apiFetch(path, options = {}) {
   if (!isOnline()) {
     const err = new Error('OFFLINE \u2014 request not sent, record queued locally');
@@ -1527,7 +1649,9 @@ async function apiFetch(path, options = {}) {
 const RED_SYMPTOMS = ['chest_pain', 'difficulty_breathing', 'unconscious', 'severe_bleeding', 'stiff_neck', 'pregnancy_complication'];
 const YELLOW_SYMPTOMS = ['high_fever', 'continuous_vomiting', 'severe_headache', 'dehydration', 'severe_abdominal_pain', 'severe_injury'];
 const MODERATE_SYMPTOMS = ['abdominal_pain', 'diarrhea', 'cough_cold', 'fatigue', 'body_ache'];
-const SYMPTOM_ORDER = RED_SYMPTOMS.concat(YELLOW_SYMPTOMS, MODERATE_SYMPTOMS);
+// Common outpatient problems added for wider coverage (voice fill)
+const COMMON_SYMPTOMS = ['urination_problem', 'sore_throat', 'joint_pain', 'back_pain', 'skin_rash', 'eye_problem', 'ear_pain', 'dizziness', 'acidity', 'constipation', 'toothache', 'numbness', 'swelling'];
+const SYMPTOM_ORDER = RED_SYMPTOMS.concat(YELLOW_SYMPTOMS, MODERATE_SYMPTOMS, COMMON_SYMPTOMS);
 
 function num(vitals, key) {
   const v = vitals[key];
@@ -2161,6 +2285,11 @@ function initTriagePage() {
   updateNetPill();
   initSOS();
   buildSymptomGrid();
+  initVoiceFill();
+  initAiAutoRefresh();
+  const resetBtn = document.getElementById('reset-btn');
+  if (resetBtn) resetBtn.addEventListener('click', resetTriageForm);
+  initCheckin();
 
   // Pre-fill ABHA when arriving from "New Triage" on a patient card
   const preAbha = new URLSearchParams(location.search).get('abha');
@@ -2176,11 +2305,13 @@ function initTriagePage() {
       applyStaticI18n();
       updateNetPill();
       buildSymptomGrid();
+      refreshVoiceUI();
       if (lastTriageData) {
         const rerun = localTriage(lastTriageData.symptoms, lastTriageData.vitals);
         renderTriageResult(rerun);
         if (rerun.color === 'RED') renderEmergencyPanel();
       }
+      if (lastAiData) renderAiPanel();
     });
   }
 
@@ -2233,6 +2364,9 @@ function initTriagePage() {
     }
     if (result.color === 'RED') renderEmergencyPanel();
   });
+
+  const aiBtn = document.getElementById('ai-btn');
+  if (aiBtn) aiBtn.addEventListener('click', runAiSuggestions);
 }
 
 function renderTriageResult(result) {
@@ -2244,6 +2378,435 @@ function renderTriageResult(result) {
     '<ul>' + result.reasons.map((r) => '<li>' + r + '</li>').join('') + '</ul>' +
     '<p><b>' + t('action') + ':</b> ' + result.recommendation +    '</p>' +
     '</div>';
+}
+
+/* ------------------------------------------------------------------ */
+/* Voice symptom fill (Web Speech API). Keywords + detection live in   */
+/* ai.js so the mapping is unit-testable offline; this section only    */
+/* manages the microphone, transcript box and auto-ticking the grid.   */
+/* ------------------------------------------------------------------ */
+const AI_VOICE_SR = { en: 'en-US', hi: 'hi-IN', mr: 'mr-IN' };
+let voiceRecognition = null; // active SpeechRecognition instance
+let voiceLang = null;        // en | hi | mr
+let voiceFilled = {};        // symptom keys auto-filled by voice this session
+let voiceLastTranscript = '';
+
+function speechRecognitionCtor() {
+  const w = window;
+  return w.SpeechRecognition || w.webkitSpeechRecognition || null;
+}
+
+function voiceSrLang() {
+  if (!voiceLang) {
+    voiceLang = (currentLang() === 'hi' || currentLang() === 'mr') ? currentLang() : 'en';
+  }
+  return AI_VOICE_SR[voiceLang] || 'en-US';
+}
+
+function voiceBtn() { return document.getElementById('voice-btn'); }
+
+function setVoiceStatus(text, isErr) {
+  const el = document.getElementById('voice-status');
+  if (!el) return;
+  if (text === null) {
+    el.hidden = true;
+    el.textContent = '';
+    return;
+  }
+  el.hidden = false;
+  el.textContent = text;
+  el.className = 'voice-status' + (isErr ? ' err' : '');
+}
+
+function renderVoiceFilled() {
+  const wrap = document.getElementById('voice-detected');
+  const clearWrap = document.getElementById('voice-clear-wrap');
+  if (!wrap || !clearWrap) return;
+  const keys = Object.keys(voiceFilled);
+  if (!keys.length) {
+    wrap.hidden = true;
+    wrap.innerHTML = '';
+    clearWrap.hidden = true;
+    return;
+  }
+  wrap.hidden = false;
+  wrap.innerHTML = '<b>' + esc(t('ai.voice.filled')) + '</b>' +
+    keys.map((k) => '<span class="voice-chip">✓ ' + esc(symptomLabel(k)) + '</span>').join('');
+  clearWrap.hidden = false;
+}
+
+function applyVoiceDetection(detected) {
+  const grid = document.getElementById('symptom-grid');
+  if (!grid || !detected || !detected.found || !detected.found.length) return;
+  let added = 0;
+  detected.found.forEach((key) => {
+    if (voiceFilled[key]) return;
+    voiceFilled[key] = true;
+    added += 1;
+    const cb = grid.querySelector('input[value="' + key + '"]');
+    if (cb) cb.checked = true;
+  });
+  if (added > 0) {
+    renderVoiceFilled();
+    toast(t('ai.voice.toast', [added]), 'ok');
+  }
+  maybeRefreshAiPanel();
+}
+
+function startVoiceListening() {
+  const SR = speechRecognitionCtor();
+  if (!SR) return;
+  stopVoiceListening();
+  const rec = new SR();
+  rec.lang = voiceSrLang();
+  rec.continuous = false;
+  rec.interimResults = true;
+  rec.maxAlternatives = 1;
+  voiceRecognition = rec;
+  voiceLastTranscript = '';
+
+  const btn = voiceBtn();
+  const setUi = (listening) => {
+    if (!btn) return;
+    btn.classList.toggle('listening', listening);
+    const label = btn.querySelector('span');
+    if (label) label.textContent = listening ? t('ai.voice.stop') : t('ai.voice.btn');
+  };
+  setUi(true);
+  setVoiceStatus(t('ai.voice.listening'), false);
+
+  rec.onresult = (event) => {
+    let finalTxt = '';
+    let interim = '';
+    for (let i = 0; i < event.results.length; i++) {
+      const r = event.results[i];
+      if (r.isFinal) finalTxt += r[0].transcript + ' ';
+      else interim += r[0].transcript;
+    }
+    const shown = (finalTxt + ' ' + interim).trim();
+    voiceLastTranscript = finalTxt.trim();
+    setVoiceStatus(t('ai.voice.live', [shown]), false);
+    if (typeof GramArogyaAI !== 'undefined' && GramArogyaAI.detectFromTranscript) {
+      applyVoiceDetection(GramArogyaAI.detectFromTranscript(shown));
+    }
+  };
+
+  rec.onerror = () => {
+    setUi(false);
+    setVoiceStatus(t('ai.voice.err'), true);
+  };
+
+  rec.onend = () => {
+    if (voiceRecognition === rec) voiceRecognition = null;
+    setUi(false);
+    const total = Object.keys(voiceFilled).length;
+    if (!total && !voiceLastTranscript) {
+      setVoiceStatus(t('ai.voice.none'), false);
+    } else if (!total && voiceLastTranscript) {
+      setVoiceStatus(t('ai.voice.live', [voiceLastTranscript]) + ' — ' + t('ai.voice.none'), false);
+    } else {
+      setVoiceStatus(t('ai.voice.live', [voiceLastTranscript || '…']), false);
+    }
+  };
+
+  try {
+    rec.start();
+  } catch (e) {
+    voiceRecognition = null;
+    setUi(false);
+    setVoiceStatus(t('ai.voice.err'), true);
+  }
+}
+
+function stopVoiceListening() {
+  if (voiceRecognition) {
+    try { voiceRecognition.stop(); } catch (e) { /* noop */ }
+  }
+  voiceRecognition = null;
+}
+
+function clearVoiceFills() {
+  const grid = document.getElementById('symptom-grid');
+  if (grid) {
+    Object.keys(voiceFilled).forEach((key) => {
+      const cb = grid.querySelector('input[value="' + key + '"]');
+      if (cb) cb.checked = false;
+    });
+  }
+  voiceFilled = {};
+  maybeRefreshAiPanel();
+  renderVoiceFilled();
+}
+
+function refreshVoiceUI() {
+  renderVoiceFilled();
+  const btn = voiceBtn();
+  if (!btn) return;
+  const label = btn.querySelector('span');
+  if (label) {
+    label.textContent = btn.classList.contains('listening') ? t('ai.voice.stop') : t('ai.voice.btn');
+  }
+}
+
+function initVoiceFill() {
+  const btn = voiceBtn();
+  if (!btn) return;
+  if (!speechRecognitionCtor()) {
+    btn.disabled = true;
+    setVoiceStatus(t('ai.voice.unsupported'), true);
+    return;
+  }
+  btn.addEventListener('click', () => {
+    if (voiceRecognition) stopVoiceListening();
+    else startVoiceListening();
+  });
+  const langSel = document.getElementById('voice-lang');
+  if (langSel) {
+    langSel.value = (currentLang() === 'hi' || currentLang() === 'mr') ? currentLang() : 'en';
+    langSel.addEventListener('change', () => { voiceLang = langSel.value; });
+  }
+  const clearBtn = document.getElementById('voice-clear');
+  if (clearBtn) clearBtn.addEventListener('click', clearVoiceFills);
+  renderVoiceFilled();
+}
+
+/* ------------------------------------------------------------------ */
+/* AI assistant panel — rule suggestions when the doctor is not        */
+/* available. Engine lives in ai.js; rendered here through t().         */
+/* ------------------------------------------------------------------ */
+let lastAiData = null;
+
+function aiBox() { return document.getElementById('ai-result'); }
+
+function hasAiInput(pd) {
+  const anySym = Object.keys(pd.symptoms || {}).length > 0;
+  const vit = pd.vitals || {};
+  const anyVital = Object.keys(vit).some((k) => {
+    const v = vit[k];
+    return v !== null && v !== undefined && v !== '';
+  });
+  return anySym || anyVital;
+}
+
+function collectTriageForm() {
+  const symptoms = {};
+  const grid = document.getElementById('symptom-grid');
+  if (grid) {
+    grid.querySelectorAll('input:checked').forEach((cb) => { symptoms[cb.value] = true; });
+  }
+  const n = (id) => {
+    const el = document.getElementById(id);
+    const v = el ? el.value : '';
+    return v === '' ? null : Number(v);
+  };
+  const vitals = {
+    pulse: n('v-pulse'),
+    systolic_bp: n('v-sbp'),
+    diastolic_bp: n('v-dbp'),
+    spo2: n('v-spo2'),
+    temperature: n('v-temp'),
+    respiratory_rate: n('v-rr'),
+  };
+  const ck = (id) => { const el = document.getElementById(id); return !!(el && el.checked); };
+  const history = {
+    pregnant: ck('ctx-pregnant'),
+    diabetic: ck('ctx-diabetic'),
+    hypertension: ck('ctx-htn'),
+  };
+  return { symptoms, vitals, history };
+}
+
+function runAiSuggestions() {
+  const pd = collectTriageForm();
+  if (!hasAiInput(pd)) {
+    toast(t('ai.need'), 'warn');
+    return;
+  }
+  lastAiData = pd;
+  renderAiPanel();
+}
+
+/* ------------------------------------------------------------------ */
+/* OPD check-in / token generation (ASHA_WORKER role)                  */
+/* Issues a GA-... token for this patient at the worker's PHC. Tokens   */
+/* are sequenced by the facility server, so check-in needs connectivity; */
+/* field triage itself still works fully offline.                       */
+/* ------------------------------------------------------------------ */
+let workerFacCache = null;
+
+async function workerFacility() {
+  if (workerFacCache) return workerFacCache;
+  try {
+    const facs = await apiFetch('/facilities');
+    workerFacCache = facs.find((f) => f.facility_type === 'phc') || facs[0] || null;
+  } catch (e) {
+    workerFacCache = null;
+  }
+  return workerFacCache;
+}
+
+function initCheckin() {
+  const btn = document.getElementById('ci-btn');
+  if (!btn) return;
+  btn.addEventListener('click', runCheckin);
+}
+
+async function runCheckin() {
+  const abha = (document.getElementById('t-abha').value || '').trim();
+  const out = document.getElementById('ci-result');
+  if (!/^\d{14}$/.test(abha)) {
+    out.innerHTML = '<p class="ai-warn">' + esc(t('ci.badabha')) + '</p>';
+    return;
+  }
+  if (!isOnline()) {
+    out.innerHTML = '<p class="ai-warn">' + esc(t('ci.offline')) + '</p>';
+    return;
+  }
+  out.innerHTML = '<p class="muted">' + esc(t('ci.thinking')) + '</p>';
+  try {
+    const pats = await apiFetch('/patients?q=' + encodeURIComponent(abha));
+    const pat = (pats || []).find((p) => p.abha_id === abha);
+    if (!pat) {
+      out.innerHTML = '<p class="ai-warn">' + esc(t('ci.notfound')) + '</p>';
+      return;
+    }
+    const fac = await workerFacility();
+    if (!fac) {
+      out.innerHTML = '<p class="ai-warn">' + esc(t('ci.nofac')) + '</p>';
+      return;
+    }
+    const appt = await apiFetch('/appointments', {
+      method: 'POST',
+      body: JSON.stringify({
+        patient_id: pat.id,
+        facility_id: fac.id,
+        priority: document.getElementById('ci-priority').value,
+        reason: 'OPD check-in (ASHA)',
+        department: 'GMED',
+        counter: 'WEB01',
+      }),
+    });
+    out.innerHTML = '<div class="ci-token"><b>' + esc(appt.token_label) + '</b><br>' +
+      '<span class="muted small">' + esc(fac.name) + ' · ' +
+      esc(t('ci.wait', [appt.est_wait_min || 0])) + '</span></div>';
+    toast(t('ci.btn'), 'ok');
+  } catch (e) {
+    out.innerHTML = '<p class="ai-warn">' + esc(t('ci.failed', [e.message])) + '</p>';
+  }
+}
+
+/* One-tap reset for the NEXT patient: clears symptoms, vitals, background,
+ * ABHA, triage result and the AI panel — no page refresh needed. */
+function resetTriageForm() {
+  clearVoiceFills();
+  const grid = document.getElementById('symptom-grid');
+  if (grid) grid.querySelectorAll('input:checked').forEach((cb) => { cb.checked = false; });
+  ['v-pulse', 'v-sbp', 'v-dbp', 'v-spo2', 'v-temp', 'v-rr'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  ['ctx-pregnant', 'ctx-diabetic', 'ctx-htn'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.checked = false;
+  });
+  const abha = document.getElementById('t-abha');
+  if (abha) abha.value = '';
+  lastTriageData = null;
+  lastAiData = null;
+  const tr = document.getElementById('triage-result');
+  if (tr) tr.innerHTML = '';
+  const ai = document.getElementById('ai-result');
+  if (ai) ai.innerHTML = '';
+  const ci = document.getElementById('ci-result');
+  if (ci) ci.innerHTML = '';
+  toast(t('btn.reset.done'), 'ok');
+}
+
+/* Re-run the panel from the live form, but only if it is already shown
+ * (so ticking symptoms/vitals never re-renders before the first run). */
+function maybeRefreshAiPanel() {
+  if (!lastAiData) return;
+  lastAiData = collectTriageForm();
+  renderAiPanel();
+}
+
+/* Live re-analysis: once the AI suggestions are shown, any change to
+ * symptoms / vitals / background ticks updates the plan immediately
+ * (no refresh, no need to click the button again). */
+function initAiAutoRefresh() {
+  const grid = document.getElementById('symptom-grid');
+  if (grid) grid.addEventListener('change', maybeRefreshAiPanel);
+  ['v-pulse', 'v-sbp', 'v-dbp', 'v-spo2', 'v-temp', 'v-rr'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', maybeRefreshAiPanel);
+  });
+  ['ctx-pregnant', 'ctx-diabetic', 'ctx-htn'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('change', maybeRefreshAiPanel);
+  });
+}
+
+function riskLevel(score) {
+  return score > 70 ? 'RED' : score > 40 ? 'YELLOW' : 'GREEN';
+}
+
+/* Render the ONE combined plan: all detected problems, a single
+ * ordered action list, and the combined why/caution. */
+function unifiedPlanHtml(plan) {
+  const conds = plan.conditions.map((id, i) =>
+    '<span class="ai-cond">' + esc(t(plan.titleKeys[i], plan.titleVars[i])) + '</span>'
+  ).join('');
+  const acts = plan.acts.map((k) => '<li>' + esc(t(k)) + '</li>').join('');
+  const whys = plan.whyKeys.map((k) => '<li>' + esc(t(k)) + '</li>').join('');
+  const warns = plan.warnKeys.map((k) => '<li>' + esc(t(k)) + '</li>').join('');
+  const cta = plan.severity === 'RED'
+    ? '<div class="ai-cta">' +
+      '<a class="btn-link" href="tel:108">' + esc(t('ai.red.108')) + '</a>' +
+      '<button type="button" class="btn-link ai-sos">' + esc(t('ai.red.sos')) + '</button>' +
+      '</div>'
+    : '';
+  return '<div class="ai-card ' + plan.severity + ' ai-plan">' +
+    '<h3>' + esc(t('ai.plan.detected')) + '</h3>' +
+    '<div class="ai-conds">' + conds + '</div>' +
+    '<p class="muted">' + esc(t('ai.plan.advice')) + '</p>' +
+    '<b>' + esc(t('ai.plan.actions')) + ':</b><ol class="ai-acts">' + acts + '</ol>' +
+    '<p class="ai-why"><b>' + esc(t('ai.why')) + ':</b></p><ul class="ai-list">' + whys + '</ul>' +
+    '<p class="ai-warn"><b>' + esc(t('ai.warn')) + ':</b></p><ul class="ai-list">' + warns + '</ul>' +
+    cta +
+    '</div>';
+}
+
+function renderAiPanel() {
+  const box = aiBox();
+  if (!box || !lastAiData) return;
+  if (typeof GramArogyaAI === 'undefined' || !GramArogyaAI.generateUnifiedPlan) return;
+  const plan = GramArogyaAI.generateUnifiedPlan(lastAiData);
+  const risk = GramArogyaAI.calculateRiskScore ? GramArogyaAI.calculateRiskScore(lastAiData) : 0;
+  // The badge level follows the CLINICAL severity of the combined plan,
+  // so a RED finding is always flagged "HIGH RISK — act now" even if the
+  // raw heuristic score is low. The score is shown below as a reference.
+  const level = plan ? plan.severity : riskLevel(risk);
+  const riskTxt = level === 'RED' ? t('ai.risk.high')
+    : level === 'YELLOW' ? t('ai.risk.medium')
+    : t('ai.risk.low');
+  const body = plan
+    ? unifiedPlanHtml(plan)
+    : '<p class="ai-none"><span>🩺</span>' + esc(t('ai.none')) + '</p>';
+  box.innerHTML =
+    '<div class="ai-box">' +
+    '<h2>' + esc(t('ai.title')) + '</h2>' +
+    '<p class="ai-sub">' + esc(t('ai.sub')) + '</p>' +
+    '<div><span class="risk-badge ' + level + '">' + esc(riskTxt) + '</span></div>' +
+    '<p class="risk-desc">' + esc(t('ai.risk', [risk])) + '</p>' +
+    body +
+    '<p class="ai-disclaimer">' + esc(t('ai.disclaimer')) + '</p>' +
+    '</div>';
+  box.querySelectorAll('.ai-sos').forEach((b) => {
+    b.addEventListener('click', () => {
+      const sos = document.getElementById('sos-btn');
+      if (sos) sos.click();
+    });
+  });
 }
 
 /* ------------------------------------------------------------------ */
