@@ -404,7 +404,7 @@ def seed_modules_if_empty(db) -> bool:
                 patient_id=p.id, facility_id=fac.id,
                 scheduled_for=datetime.combine(day, datetime.min.time())
                 + timedelta(hours=hour, minutes=token * 18),
-                token=token, priority=priority,
+                token=token, department="GMED", priority=priority,
                 reason=priority_reasons.get(priority, "OPD consultation"),
                 status=status,
             ))

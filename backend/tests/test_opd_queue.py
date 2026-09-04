@@ -124,6 +124,63 @@ def test_kiosk_endpoints_require_kiosk_role(client):
     assert res.status_code == 403
 
 
+def test_legacy_null_department_tokens_continue_sequence(client):
+    """Rows created before the department column existed (department=NULL)
+    must still count toward the daily sequence, so a new booking continues
+    after them instead of restarting at token #1."""
+    from app.database import SessionLocal
+    from app.models import Appointment, utcnow
+
+    phc = _phc(client)
+    pat = _patient(client)
+
+    db = SessionLocal()
+    try:
+        # Clear the seeded demo queue, then simulate a legacy row that was
+        # created when the department column did not exist yet.
+        db.query(Appointment).filter(Appointment.facility_id == phc["id"]).delete()
+        db.add(Appointment(
+            patient_id=pat["id"], facility_id=phc["id"],
+            scheduled_for=utcnow(), token=3, department=None,
+            priority="routine", status="waiting",
+        ))
+        db.commit()
+    finally:
+        db.close()
+
+    res = _book(client, phc["id"], pat["id"]).json()
+    assert res["token"] == 4, res
+    assert res["token_label"].endswith("000004"), res["token_label"]
+
+
+def test_kiosk_queue_sorts_by_priority(client):
+    """Urgent tokens must appear above routine ones on the kiosk queue board,
+    matching the doctor-portal ordering (priority first, then token)."""
+    phc = _phc(client)
+    pat = _patient(client)
+
+    def book(priority):
+        return client.post(
+            "/api/v1/appointments",
+            json={"patient_id": pat["id"], "facility_id": phc["id"],
+                  "priority": priority, "reason": "x", "department": "GMED",
+                  "counter": "WEB01"},
+            headers={"X-GramArogya-Role": "asha"},
+        ).json()
+
+    routine = book("routine")
+    urgent = book("urgent")
+    assert int(urgent["token"]) > int(routine["token"])
+
+    rows = client.get(
+        "/api/v1/kiosk/queue", params={"facility_id": phc["id"]}
+    ).json()
+    waiting = [r for r in rows if r["status"] == "waiting"]
+    ids = [r["id"] for r in waiting]
+    assert ids.index(urgent["id"]) < ids.index(routine["id"]), \
+        [r["priority"] for r in waiting]
+
+
 def test_queue_today_exposes_token_label(client):
     phc = _phc(client)
     pat = _patient(client)
