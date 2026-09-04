@@ -128,7 +128,8 @@ for _name, _sub in (("asha", "asha-worker"),
                     ("doctor", "doctor-portal"),
                     ("lab", "lab-portal"),
                     ("admin", "admin-dashboard"),
-                    ("kiosk", "kiosk")):
+                    ("kiosk", "kiosk"),
+                    ("portal", "portal")):
     _dir = settings.frontend_dir / _sub
     if _dir.is_dir():
         app.mount(f"/{_name}", StaticFiles(directory=_dir, html=True), name=_name)

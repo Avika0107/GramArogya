@@ -25,7 +25,7 @@ from ..services.opd import (
     next_token_seq,
 )
 from ..services.ws_manager import hub
-from .appointments import _day_bounds, _to_out, WAIT_MIN_PER_PATIENT
+from .appointments import _day_bounds, _to_out, PRIORITY_ORDER, WAIT_MIN_PER_PATIENT
 
 router = APIRouter(prefix="/kiosk", tags=["kiosk"])
 
@@ -90,10 +90,12 @@ def kiosk_queue(
     if facility_id:
         query = query.filter(Appointment.facility_id == facility_id)
     rows = query.all()
+    # Same ordering as the doctor-portal queue: completed/no-show at the end,
+    # then priority (emergency jumps the line), then arrival sequence.
     rows.sort(key=lambda a: (a.status == "completed", a.status == "no_show",
-                             a.token))
+                             PRIORITY_ORDER.get(a.priority, 9), a.token))
     out: list[AppointmentOut] = []
-    for a in rows:
-        ahead = sum(1 for b in rows if b.status == "waiting" and b.token < a.token)
+    for i, a in enumerate(rows):
+        ahead = sum(1 for b in rows[:i] if b.status == "waiting")
         out.append(_to_out(db, a, ahead * WAIT_MIN_PER_PATIENT if a.status == "waiting" else None))
     return out

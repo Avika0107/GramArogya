@@ -264,7 +264,6 @@ table.queue th { color: var(--muted); font-weight: 600; }
 .toast.warn { background: var(--yellow); color: #3c2a00; }
 .toast.error { background: var(--red); }
 
-/* QR modal */
 .modal-overlay {
   position: fixed; inset: 0; background: rgba(0, 0, 0, 0.55);
   display: none; align-items: center; justify-content: center; z-index: 40; padding: 20px;
@@ -274,28 +273,6 @@ table.queue th { color: var(--muted); font-weight: 600; }
   background: #fff; border-radius: 14px; padding: 18px; width: 100%; max-width: 420px;
   max-height: 80vh; overflow-y: auto;
 }
-.qr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-.qr-card {
-  border: 1px solid var(--border); border-radius: 10px; padding: 10px;
-  text-align: center; cursor: pointer; background: #fbfdfc;
-}
-.qr-card:hover { border-color: var(--green); }
-.qr-box {
-  width: 64px; height: 64px; margin: 0 auto 6px;
-  background:
-    repeating-linear-gradient(0deg, #222 0 4px, transparent 4px 8px),
-    repeating-linear-gradient(90deg, #222 0 4px, transparent 4px 8px);
-  border-radius: 6px;
-  position: relative;
-}
-.qr-box::after {
-  content: ""; position: absolute; inset: 8px;
-  background:
-    repeating-linear-gradient(45deg, #fff 0 3px, transparent 3px 6px),
-    #222;
-  border-radius: 3px;
-}
-.qr-card small { color: var(--muted); display: block; }
 
 .hint {
   background: #e8f4ef; border: 1px solid #bcded1; border-radius: 10px;

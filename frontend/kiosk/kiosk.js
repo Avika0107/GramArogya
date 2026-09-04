@@ -20,6 +20,27 @@ function esc(s) {
     .replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+/* Convert any Unicode decimal digits (Devanagari, Bengali, Arabic, …) to
+ * ASCII and strip separators/spaces, so a pasted or localized ABHA ID
+ * still reads as plain 0-9 digits. */
+function toAsciiDigits(s) {
+  const BLOCKS = [
+    [0x0660, 0x0669], [0x06F0, 0x06F9], [0x0966, 0x096F], [0x09E6, 0x09EF],
+    [0x0A66, 0x0A6F], [0x0AE6, 0x0AEF], [0x0B66, 0x0B6F], [0x0BE6, 0x0BEF],
+    [0x0C66, 0x0C6F], [0x0CE6, 0x0CEF], [0x0D66, 0x0D6F], [0x0DE6, 0x0DEF],
+    [0x0E50, 0x0E59], [0x0ED0, 0x0ED9], [0x0F20, 0x0F29], [0x1040, 0x1049],
+    [0x17E0, 0x17E9], [0x1810, 0x1819], [0xFF10, 0xFF19],
+  ];
+  return String(s || '').replace(/\p{Nd}/gu, (d) => {
+    const cp = d.codePointAt(0);
+    if (cp >= 48 && cp <= 57) return d;
+    for (const [lo, hi] of BLOCKS) {
+      if (cp >= lo && cp <= hi) return String.fromCharCode(48 + cp - lo);
+    }
+    return d;
+  }).replace(/\D/g, '');
+}
+
 async function api(path, options = {}) {
   const headers = Object.assign({ 'Content-Type': 'application/json', 'X-GramArogya-Role': ROLE }, options.headers || {});
   const res = await fetch(API + path, Object.assign({}, options, { headers }));
@@ -65,8 +86,12 @@ const abhaInput = document.getElementById('k-abha');
 const hint = document.getElementById('k-patient-hint');
 
 async function lookupPatient() {
-  const abha = (abhaInput.value || '').trim();
-  if (!/^\d{14}$/.test(abha)) { hint.textContent = 'Enter the full 14-digit ABHA ID.'; SELECTED_PATIENT = null; return; }
+  const abha = toAsciiDigits(abhaInput.value);
+  if (!/^\d{14}$/.test(abha)) {
+    hint.textContent = 'Enter the full 14-digit ABHA ID.';
+    SELECTED_PATIENT = null;
+    return null;
+  }
   try {
     const rows = await api('/patients?q=' + encodeURIComponent(abha));
     const pat = rows.find((p) => p.abha_id === abha);
@@ -77,12 +102,24 @@ async function lookupPatient() {
       SELECTED_PATIENT = null;
       hint.textContent = 'ABHA not registered yet — please see the staff desk.';
     }
-  } catch (e) { hint.textContent = e.message; SELECTED_PATIENT = null; }
+    return pat || null;
+  } catch (e) {
+    hint.textContent = e.message;
+    SELECTED_PATIENT = null;
+    return null;
+  }
 }
 
 async function issueToken() {
   const out = document.getElementById('k-result');
-  if (!SELECTED_PATIENT) { toast('Enter a valid registered ABHA ID first', 'warn'); return; }
+  const abha = toAsciiDigits(abhaInput.value);
+  if (!/^\d{14}$/.test(abha)) { toast('Enter the full 14-digit ABHA ID first', 'warn'); return; }
+  // The debounced search may still be pending (or the field was edited after a
+  // previous match) — resolve the patient now instead of trusting stale state.
+  if (!SELECTED_PATIENT || SELECTED_PATIENT.abha_id !== abha) {
+    const pat = await lookupPatient();
+    if (!pat) { toast('ABHA not registered yet — please see the staff desk.', 'warn'); return; }
+  }
   try {
     out.innerHTML = '<p class="muted">Issuing token…</p>';
     const appt = await api('/kiosk/token', {
@@ -164,6 +201,12 @@ function connectSocket() {
 /* ------------------------------------------------------------------ */
 (async function init() {
   await ensureFacility();
+  // Keep the ABHA field clean as the visitor types/pastes: convert localized
+  // digits to ASCII and drop separators, capped at 14.
+  abhaInput.addEventListener('input', () => {
+    const clean = toAsciiDigits(abhaInput.value).slice(0, 14);
+    if (clean !== abhaInput.value) abhaInput.value = clean;
+  });
   abhaInput.addEventListener('input', debounce(lookupPatient, 400));
   document.getElementById('k-issue').addEventListener('click', issueToken);
   abhaInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') issueToken(); });

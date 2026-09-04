@@ -32,7 +32,7 @@
   <main>
     <div class="hint" data-i18n-html="hint.index">
       <b>Offline-first</b>
-      Works without internet. Enter a 14-digit ABHA ID, or scan the placeholder QR below.
+      Works without internet. Enter a 14-digit ABHA ID.
       Records save locally and sync when you toggle back Online.
     </div>
 
@@ -42,7 +42,6 @@
       <div class="row">
         <input id="abha-input" type="text" inputmode="numeric" maxlength="14"
                data-i18n-placeholder="ph.abha_search">
-        <button id="scan-btn" class="secondary" style="margin-top:0; flex:0 0 auto; width:auto;">📷 QR</button>
       </div>
       <button id="search-btn" data-i18n="find.btn">Search patient</button>
       <div id="patient-result"></div>
@@ -155,17 +154,6 @@
       </div>
     </div>
   </main>
-
-  <!-- Placeholder QR scanner -->
-  <div id="qr-modal" class="modal-overlay">
-    <div class="modal">
-      <h2 style="margin-top:0" data-i18n="qr.title">Demo QR scanner (placeholder)</h2>
-      <p class="muted" data-i18n-html="qr.desc">In production this would read the ABHA QR code printed on the
-        beneficiary's card. Tap a card to simulate a scan:</p>
-      <div id="qr-grid" class="qr-grid"></div>
-      <button id="qr-close" class="secondary" data-i18n="btn.close">Close</button>
-    </div>
-  </div>
 
   <!-- Doctor teleconsult request (Feature 5) -->
   <div id="tele-modal" class="modal-overlay">

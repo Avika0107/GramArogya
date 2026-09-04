@@ -19,6 +19,8 @@ import re
 from datetime import datetime, time, timedelta
 from typing import Optional, Tuple
 
+from sqlalchemy import or_
+
 from ..models import Appointment, DoctorStatus, Facility
 
 
@@ -52,14 +54,23 @@ def next_token_seq(db, facility_id: str, department: Optional[str],
                    when: datetime) -> int:
     """Next per-day sequence number for this facility + department."""
     start, end = day_bounds(when)
-    existing = (
+    dept = (department or "GMED")
+    query = (
         db.query(Appointment)
         .filter(Appointment.facility_id == facility_id,
-                Appointment.department == (department or "GMED"),
                 Appointment.scheduled_for >= start,
                 Appointment.scheduled_for < end)
-        .all()
     )
+    if dept == "GMED":
+        # Legacy rows created before the department column existed (or seeded
+        # without one) have NULL, which historically meant the default GMED
+        # department — count them in so new tokens continue the sequence
+        # instead of restarting at #1.
+        query = query.filter(or_(Appointment.department == "GMED",
+                                 Appointment.department.is_(None)))
+    else:
+        query = query.filter(Appointment.department == dept)
+    existing = query.all()
     return max([a.token for a in existing] or [0]) + 1
 
 

@@ -238,7 +238,7 @@ const I18N = {
     'pill.offline': 'offline',
 
     // index page
-    'hint.index': '<b>Offline-first</b> Works without internet. Enter a 14-digit ABHA ID, or scan the placeholder QR below. Records save locally and sync when you toggle back Online.',
+    'hint.index': '<b>Offline-first</b> Works without internet. Enter a 14-digit ABHA ID. Records save locally and sync when you toggle back Online.',
     'find.title': 'Find patient by ABHA ID',
     'ph.abha_search': '14-digit ABHA (e.g. 91214455667701)',
     'find.btn': 'Search patient',
@@ -267,9 +267,6 @@ const I18N = {
     'unit.yrs': 'yrs',
     'alert.allergy': '⚠ Allergies: {0}',
 
-    // QR modal
-    'qr.title': 'Demo QR scanner (placeholder)',
-    'qr.desc': 'In production this would read the ABHA QR code printed on the beneficiary\u2019s card. Tap a card to simulate a scan:',
     'btn.close': 'Close',
 
     // triage page
@@ -378,7 +375,6 @@ const I18N = {
     't.not_found_offline': 'Patient not found (offline cache miss)',
     't.loaded_server': 'Patient loaded from server',
     't.loaded_cache': 'Patient loaded from local cache',
-    't.qr_scanned': 'QR scanned: {0}',
     't.fill_required': 'Please fill the required fields: {0}',
     't.phone_invalid': 'Enter a valid 10-digit mobile number',
     't.pincode_invalid': 'Enter a valid 6-digit PIN code',
@@ -618,7 +614,7 @@ const I18N = {
     'nav.sync': '\u0938\u093f\u0902\u0915',
     'pill.online': '\u0911\u0928\u0932\u093e\u0907\u0928',
     'pill.offline': '\u0911\u092b\u093c\u0932\u093e\u0907\u0928',
-    'hint.index': '<b>\u0911\u092b\u093c\u0932\u093e\u0907\u0928-\u092a\u0939\u0932\u0947</b> \u092c\u093f\u0928\u093e \u0907\u0902\u091f\u0930\u0928\u0947\u091f \u0915\u0947 \u092d\u0940 \u0915\u093e\u092e \u0915\u0930\u0924\u093e \u0939\u0948\u0964 14 \u0905\u0902\u0915\u094b\u0902 \u0915\u0940 ABHA ID \u0926\u0930\u094d\u091c \u0915\u0930\u0947\u0902 \u092f\u093e \u0928\u0940\u091a\u0947 QR \u0938\u094d\u0915\u0948\u0928 \u0915\u0930\u0947\u0902\u0964 \u0930\u093f\u0915\u0949\u0930\u094d\u0921 \u0921\u093f\u0935\u093e\u0907\u0938 \u092e\u0947\u0902 \u0938\u0947\u0935 \u0939\u094b\u0924\u0947 \u0939\u0948\u0902 \u0914\u0930 \u0911\u0928\u0932\u093e\u0907\u0928 \u0939\u094b\u0924\u0947 \u0939\u0940 \u0938\u093f\u0902\u0915 \u0939\u094b \u091c\u093e\u0924\u0947 \u0939\u0948\u0902\u0964',
+    'hint.index': '<b>\u0911\u092b\u093c\u0932\u093e\u0907\u0928-\u092a\u0939\u0932\u0947</b> \u092c\u093f\u0928\u093e \u0907\u0902\u091f\u0930\u0928\u0947\u091f \u0915\u0947 \u092d\u0940 \u0915\u093e\u092e \u0915\u0930\u0924\u093e \u0939\u0948\u0964 14 \u0905\u0902\u0915\u094b\u0902 \u0915\u0940 ABHA ID \u0926\u0930\u094d\u091c \u0915\u0930\u0947\u0902\u0964 \u0930\u093f\u0915\u0949\u0930\u094d\u0921 \u0921\u093f\u0935\u093e\u0907\u0938 \u092e\u0947\u0902 \u0938\u0947\u0935 \u0939\u094b\u0924\u0947 \u0939\u0948\u0902 \u0914\u0930 \u0911\u0928\u0932\u093e\u0907\u0928 \u0939\u094b\u0924\u0947 \u0939\u0940 \u0938\u093f\u0902\u0915 \u0939\u094b \u091c\u093e\u0924\u0947 \u0939\u0948\u0902\u0964',
     'find.title': 'ABHA ID \u0938\u0947 \u092e\u0930\u0940\u091c\u093c \u0916\u094b\u091c\u0947\u0902',
     'ph.abha_search': '14 \u0905\u0902\u0915\u094b\u0902 \u0915\u0940 ABHA (\u091c\u0948\u0938\u0947 91214455667701)',
     'find.btn': '\u092e\u0930\u0940\u091c\u093c \u0916\u094b\u091c\u0947\u0902',
@@ -646,8 +642,6 @@ const I18N = {
     'card.unknown': '\u0905\u091c\u094d\u091e\u093e\u0924',
     'unit.yrs': '\u0935\u0930\u094d\u0937',
     'alert.allergy': '\u26a0 \u090f\u0932\u0930\u094d\u091c\u0940: {0}',
-    'qr.title': '\u0921\u0947\u092e\u094b QR \u0938\u094d\u0915\u0948\u0928\u0930 (\u0905\u0938\u094d\u0925\u093e\u092f\u0940)',
-    'qr.desc': '\u0905\u0938\u0932 \u092e\u0947\u0902 \u092f\u0939 \u0932\u093e\u092d\u093e\u0930\u094d\u0925\u0940 \u0915\u0947 \u0915\u093e\u0930\u094d\u0921 \u092a\u0930 \u091b\u092a\u0947 ABHA QR \u0915\u094b\u0921 \u0915\u094b \u092a\u0922\u093c\u0947\u0917\u093e\u0964 \u0938\u094d\u0915\u0948\u0928 \u0915\u093e \u0905\u0928\u0941\u0915\u0930\u0923 \u0915\u0930\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u0915\u093e\u0930\u094d\u0921 \u092a\u0930 \u091f\u0948\u092a \u0915\u0930\u0947\u0902:',
     'btn.close': '\u092c\u0902\u0926 \u0915\u0930\u0947\u0902',
     'hint.triage': '<b>\u0921\u093f\u091c\u093f\u091f\u0932 \u091f\u094d\u0930\u093e\u0907\u090f\u091c \u0915\u0948\u0932\u0915\u0941\u0932\u0947\u091f\u0930</b> \u0932\u0915\u094d\u0937\u0923 \u091a\u0941\u0928\u0947\u0902 \u0914\u0930 \u0935\u093e\u0907\u091f\u0932\u094d\u0938 \u0926\u0930\u094d\u091c \u0915\u0930\u0947\u0902, \u092b\u093f\u0930 <b>\u091c\u093e\u0901\u091a \u0915\u0930\u0947\u0902</b> \u0926\u092c\u093e\u090f\u0901\u0964 \u092f\u0939 \u0921\u093f\u0935\u093e\u0907\u0938 \u092a\u0930 \u0939\u0940 \u091a\u0932\u0924\u093e \u0939\u0948 \u2014 \u092a\u0942\u0930\u0940 \u0924\u0930\u0939 \u0911\u092b\u093c\u0932\u093e\u0907\u0928 \u0915\u093e\u092e \u0915\u0930\u0924\u093e \u0939\u0948\u0964 \u092a\u0930\u093f\u0923\u093e\u092e \u0911\u0928\u0932\u093e\u0907\u0928 \u0939\u094b\u0924\u0947 \u0939\u0940 PHC \u0921\u0949\u0915\u094d\u091f\u0930 \u0915\u0940 \u0915\u0924\u093e\u0930 \u092e\u0947\u0902 \u0938\u093f\u0902\u0915 \u0939\u094b\u0924\u0947 \u0939\u0948\u0902\u0964',
     'patient.title': '\u092e\u0930\u0940\u091c\u093c',
@@ -750,7 +744,6 @@ const I18N = {
     't.not_found_offline': '\u092e\u0930\u0940\u091c\u093c \u0928\u0939\u0940\u0902 \u092e\u093f\u0932\u093e (\u0911\u092b\u093c\u0932\u093e\u0907\u0928 \u0915\u0948\u0936 \u092e\u0947\u0902 \u0928\u0939\u0940\u0902)',
     't.loaded_server': '\u092e\u0930\u0940\u091c\u093c \u0938\u0930\u094d\u0935\u0930 \u0938\u0947 \u092e\u093f\u0932\u093e',
     't.loaded_cache': '\u092e\u0930\u0940\u091c\u093c \u0932\u094b\u0915\u0932 \u0915\u0948\u0936 \u0938\u0947 \u092e\u093f\u0932\u093e',
-    't.qr_scanned': 'QR \u0938\u094d\u0915\u0948\u0928 \u0939\u0941\u0906: {0}',
     't.fill_required': '\u0915\u0943\u092a\u092f\u093e \u0906\u0935\u0936\u094d\u092f\u0915 \u091c\u093e\u0928\u0915\u093e\u0930\u0940 \u092d\u0930\u0947\u0902: {0}',
     't.phone_invalid': '\u0938\u0939\u0940 10 \u0905\u0902\u0915\u094b\u0902 \u0915\u093e \u092e\u094b\u092c\u093e\u0907\u0932 \u0928\u0902\u092c\u0930 \u0926\u0930\u094d\u091c \u0915\u0930\u0947\u0902',
     't.pincode_invalid': '\u0938\u0939\u0940 6 \u0905\u0902\u0915\u094b\u0902 \u0915\u093e \u092a\u093f\u0928 \u0915\u094b\u0921 \u0926\u0930\u094d\u091c \u0915\u0930\u0947\u0902',
@@ -990,7 +983,7 @@ const I18N = {
     'nav.sync': '\u0938\u093f\u0902\u0915',
     'pill.online': '\u0911\u0928\u0932\u093e\u0907\u0928',
     'pill.offline': '\u0911\u092b\u0932\u093e\u0907\u0928',
-    'hint.index': '<b>\u092a\u094d\u0930\u0925\u092e \u0911\u092b\u0932\u093e\u0907\u0928</b> \u0907\u0902\u091f\u0930\u0928\u0947\u091f\u0936\u093f\u0935\u093e\u092f \u0915\u093e\u0930\u094d\u092f\u0930\u0924. 14 \u0905\u0902\u0915\u0940 ABHA ID \u091f\u093e\u0915\u093e \u0915\u093f\u0902\u0935\u093e \u0916\u093e\u0932\u0940\u0932 QR \u0938\u094d\u0915\u0948\u0928 \u0915\u0930\u093e. \u0928\u094b\u0902\u0926\u0940 \u0921\u093f\u0935\u094d\u0939\u093e\u0907\u0938\u0935\u0930 \u091c\u0924\u0928 \u0939\u094b\u0924\u093e\u0924 \u0906\u0923\u093f \u0911\u0928\u0932\u093e\u0907\u0928 \u091d\u093e\u0932\u094d\u092f\u093e\u0935\u0930 \u0938\u093f\u0902\u0915 \u0939\u094b\u0924\u093e\u0924.',
+    'hint.index': '<b>\u092a\u094d\u0930\u0925\u092e \u0911\u092b\u0932\u093e\u0907\u0928</b> \u0907\u0902\u091f\u0930\u0928\u0947\u091f\u0936\u093f\u0935\u093e\u092f \u0915\u093e\u0930\u094d\u092f\u0930\u0924. 14 \u0905\u0902\u0915\u0940 ABHA ID \u091f\u093e\u0915\u093e. \u0928\u094b\u0902\u0926\u0940 \u0921\u093f\u0935\u094d\u0939\u093e\u0907\u0938\u0935\u0930 \u091c\u0924\u0928 \u0939\u094b\u0924\u093e\u0924 \u0906\u0923\u093f \u0911\u0928\u0932\u093e\u0907\u0928 \u091d\u093e\u0932\u094d\u092f\u093e\u0935\u0930 \u0938\u093f\u0902\u0915 \u0939\u094b\u0924\u093e\u0924.',
     'find.title': 'ABHA ID \u0928\u0947 \u0930\u0941\u0917\u094d\u0923 \u0936\u094b\u0927\u093e',
     'ph.abha_search': '14 \u0905\u0902\u0915\u0940 ABHA (\u0909\u0926\u093e. 91214455667701)',
     'find.btn': '\u0930\u0941\u0917\u094d\u0923 \u0936\u094b\u0927\u093e',
@@ -1018,8 +1011,6 @@ const I18N = {
     'card.unknown': '\u0905\u091c\u094d\u091e\u093e\u0924',
     'unit.yrs': '\u0935\u0930\u094d\u0937\u0947',
     'alert.allergy': '\u26a0 \u0905\u094d\u0932\u0930\u094d\u091c\u0940: {0}',
-    'qr.title': '\u0921\u0947\u092e\u094b QR \u0938\u094d\u0915\u0948\u0928\u0930 (\u0924\u093e\u0924\u094d\u092a\u0941\u0930\u0924\u0947)',
-    'qr.desc': '\u092a\u094d\u0930\u0924\u094d\u092f\u0915\u094d\u0937\u093e\u0924 \u0939\u0947 \u0932\u093e\u092d\u093e\u0930\u094d\u0925\u0940\u091a\u094d\u092f\u093e \u0915\u093e\u0930\u094d\u0921\u0935\u0930 \u091b\u093e\u092a\u0932\u0947\u0932\u093e ABHA QR \u0915\u094b\u0921 \u0935\u093e\u091a\u0947\u0932. \u0938\u094d\u0915\u0948\u0928 \u0938\u093f\u092e\u094d\u092f\u0941\u0932\u0947\u091f \u0915\u0930\u0923\u094d\u092f\u093e\u0938\u093e\u0920\u0940 \u0915\u093e\u0930\u094d\u0921\u0935\u0930 \u091f\u0947\u092a \u0915\u0930\u093e:',
     'btn.close': '\u092c\u0902\u0926 \u0915\u0930\u093e',
     'hint.triage': '<b>\u0921\u093f\u091c\u093f\u091f\u0932 \u091f\u094d\u0930\u093e\u092f\u091c \u0915\u0948\u0932\u094d\u0915\u0941\u0932\u0947\u091f\u0930</b> \u0932\u0915\u094d\u0937\u0923\u0947 \u0928\u093f\u0935\u0921\u093e \u0906\u0923\u093f \u0935\u094d\u0939\u093e\u092f\u091f\u0932\u094d\u0938 \u092d\u0930\u093e, \u0928\u0902\u0924\u0930 <b>\u0924\u092a\u093e\u0938\u0923\u0940 \u0915\u0930\u093e</b> \u0926\u093e\u092c\u093e. \u0939\u0947 \u0921\u093f\u0935\u094d\u0939\u093e\u0907\u0938\u0935\u0930\u091a \u091a\u093e\u0932\u0924\u0947 \u2014 \u092a\u0942\u0930\u094d\u0923\u092a\u0923\u0947 \u0911\u092b\u0932\u093e\u0907\u0928 \u0915\u093e\u0930\u094d\u092f\u0930\u0924. \u092a\u0930\u093f\u0923\u093e\u092e \u0911\u0928\u0932\u093e\u0907\u0928 \u091d\u093e\u0932\u094d\u092f\u093e\u0935\u0930 PHC \u0921\u0949\u0915\u094d\u091f\u0930\u091a\u094d\u092f\u093e \u0930\u093e\u0902\u0917\u0947\u0924 \u0938\u093f\u0902\u0915 \u0939\u094b\u0924\u093e\u0924.',
     'patient.title': '\u0930\u0941\u0917\u094d\u0923',
@@ -1122,7 +1113,6 @@ const I18N = {
     't.not_found_offline': '\u0930\u0941\u0917\u094d\u0923 \u0938\u093e\u092a\u0921\u0932\u093e \u0928\u093e\u0939\u0940 (\u0911\u092b\u0932\u093e\u0907\u0928 \u0915\u0948\u0936\u092e\u0927\u094d\u092f\u0947 \u0928\u093e\u0939\u0940)',
     't.loaded_server': '\u0930\u0941\u0917\u094d\u0923 \u0938\u0930\u094d\u0935\u0939\u0930\u0935\u0930\u0942\u0928 \u092e\u093f\u0933\u093e\u0932\u093e',
     't.loaded_cache': '\u0930\u0941\u0917\u094d\u0923 \u0932\u094b\u0915\u0932 \u0915\u0948\u0936\u092e\u0927\u0942\u0928 \u092e\u093f\u0933\u093e\u0932\u093e',
-    't.qr_scanned': 'QR \u0938\u094d\u0915\u0948\u0928 \u091d\u093e\u0932\u0947: {0}',
     't.fill_required': '\u0915\u0943\u092a\u092f\u093e \u0906\u0935\u0936\u094d\u092f\u0915 \u092e\u093e\u0939\u093f\u0924\u0940 \u092d\u0930\u093e: {0}',
     't.phone_invalid': '\u092f\u094b\u0917\u094d\u092f 10 \u0905\u0902\u0915\u0940 \u092e\u094b\u092c\u093e\u0907\u0932 \u0915\u094d\u0930\u092e\u093e\u0902\u0915 \u092a\u094d\u0930\u0935\u093f\u0937\u094d\u091f \u0915\u0930\u093e',
     't.pincode_invalid': '\u092f\u094b\u0917\u094d\u092f 6 \u0905\u0902\u0915\u0940 \u092a\u093f\u0928 \u0915\u094b\u0921 \u092a\u094d\u0930\u0935\u093f\u0937\u094d\u091f \u0915\u0930\u093e',
@@ -1362,7 +1352,7 @@ const I18N = {
     'nav.sync': '\u09b8\u09bf\u0982\u0995',
     'pill.online': '\u0985\u09a8\u09b2\u09be\u0987\u09a8',
     'pill.offline': '\u0985\u09ab\u09b2\u09be\u0987\u09a8',
-    'hint.index': '<b>\u09aa\u09cd\u09b0\u09a5\u09ae\u09c7 \u0985\u09ab\u09b2\u09be\u0987\u09a8</b> \u0987\u09a8\u09cd\u099f\u09be\u09b0\u09a8\u09c7\u099f \u099b\u09be\u09a1\u09bc\u09be\u0987 \u0995\u09be\u099c \u0995\u09b0\u09c7\u0964 14 \u0985\u0982\u0995\u09c7\u09b0 ABHA ID \u09a6\u09bf\u09a8, \u0985\u09a5\u09ac\u09be \u09a8\u09c0\u099a\u09c7\u09b0 QR \u09b8\u09cd\u0995\u09cd\u09af\u09be\u09a8 \u0995\u09b0\u09c1\u09a8\u0964 \u09b0\u09c7\u0995\u09b0\u09cd\u09a1 \u09a1\u09bf\u09ad\u09be\u0987\u09b8\u09c7 \u09b8\u0982\u09b0\u0995\u09cd\u09b7\u09bf\u09a4 \u09b9\u09df \u098f\u09ac\u0982 \u0985\u09a8\u09b2\u09be\u0987\u09a8\u09c7 \u09ab\u09bf\u09b0\u09b2\u09c7 \u09b8\u09bf\u0982\u0995 \u09b9\u09df\u0964',
+    'hint.index': '<b>\u09aa\u09cd\u09b0\u09a5\u09ae\u09c7 \u0985\u09ab\u09b2\u09be\u0987\u09a8</b> \u0987\u09a8\u09cd\u099f\u09be\u09b0\u09a8\u09c7\u099f \u099b\u09be\u09a1\u09bc\u09be\u0987 \u0995\u09be\u099c \u0995\u09b0\u09c7\u0964 14 \u0985\u0982\u0995\u09c7\u09b0 ABHA ID \u09a6\u09bf\u09a8\u0964 \u09b0\u09c7\u0995\u09b0\u09cd\u09a1 \u09a1\u09bf\u09ad\u09be\u0987\u09b8\u09c7 \u09b8\u0982\u09b0\u0995\u09cd\u09b7\u09bf\u09a4 \u09b9\u09df \u098f\u09ac\u0982 \u0985\u09a8\u09b2\u09be\u0987\u09a8\u09c7 \u09ab\u09bf\u09b0\u09b2\u09c7 \u09b8\u09bf\u0982\u0995 \u09b9\u09df\u0964',
     'find.title': 'ABHA ID \u09a6\u09bf\u09af\u09bc\u09c7 \u09b0\u09cb\u0997\u09c0 \u0996\u09c1\u0981\u099c\u09c1\u09a8',
     'ph.abha_search': '14 \u0985\u0982\u0995\u09c7\u09b0 ABHA (\u09af\u09c7\u09ae\u09a8 91214455667701)',
     'find.btn': '\u09b0\u09cb\u0997\u09c0 \u0996\u09c1\u0981\u099c\u09c1\u09a8',
@@ -1390,8 +1380,6 @@ const I18N = {
     'card.unknown': '\u0985\u099c\u09be\u09a8\u09be',
     'unit.yrs': '\u09ac\u099b\u09b0',
     'alert.allergy': '\u26a0 \u0985\u09cd\u09af\u09be\u09b2\u09be\u09b0\u09cd\u099c\u09bf: {0}',
-    'qr.title': '\u09a1\u09c7\u09ae\u09cb QR \u09b8\u09cd\u0995\u09cd\u09af\u09be\u09a8\u09be\u09b0 (\u0985\u09b8\u09cd\u09a5\u09be\u09af\u09bc\u09c0)',
-    'qr.desc': '\u09aa\u09cd\u09b0\u0995\u09c3\u09a4\u09aa\u0995\u09cd\u09b7\u09c7 \u098f\u099f\u09bf \u09b2\u09be\u09ad\u099c\u09a8\u0995\u09c7\u09b0 \u0995\u09be\u09b0\u09cd\u09a1\u09c7 \u099b\u09be\u09aa\u09be ABHA QR \u0995\u09cb\u09a1 \u09aa\u09a1\u09bc\u09ac\u09c7\u0964 \u09b8\u09cd\u0995\u09cd\u09af\u09be\u09a8 \u0985\u09a8\u09c1\u0995\u09b0\u09a3 \u0995\u09b0\u09a4\u09c7 \u0995\u09be\u09b0\u09cd\u09a1\u09c7 \u099f\u09cd\u09af\u09be\u09aa \u0995\u09b0\u09c1\u09a8:',
     'btn.close': '\u09ac\u09a8\u09cd\u09a7 \u0995\u09b0\u09c1\u09a8',
     'hint.triage': '<b>\u09a1\u09bf\u099c\u09bf\u099f\u09be\u09b2 \u099f\u09cd\u09b0\u09be\u09af\u09be\u099c \u0995\u09cd\u09af\u09be\u09b2\u0995\u09c1\u09b2\u09c7\u099f\u09b0</b> \u0989\u09aa\u09b8\u09b0\u09cd\u0997 \u09ac\u09be\u099b\u09c1\u09a8 \u0993 \u09ad\u09be\u0987\u099f\u09be\u09b2 \u09a6\u09bf\u09a8, \u09a4\u09be\u09b0\u09aa\u09b0 <b>\u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09af\u09bc\u09a8</b> \u099a\u09be\u09aa\u09c1\u09a8\u0964 \u098f\u099f\u09bf \u09a1\u09bf\u09ad\u09be\u0987\u09b8\u09c7\u0987 \u099a\u09be\u09b2\u09c7 \u2014 \u09b8\u09ae\u09cd\u09aa\u09c2\u09b0\u09cd\u09a3 \u0985\u09ab\u09b2\u09be\u0987\u09a8\u09c7 \u0995\u09be\u099c \u0995\u09b0\u09c7\u0964 \u0985\u09a8\u09b2\u09be\u0987\u09a8\u09c7 \u09ab\u09bf\u09b0\u09b2\u09c7 \u09ab\u09b2\u09be\u09ab\u09b2 PHC \u09a1\u09be\u0995\u09cd\u09a4\u09be\u09b0\u09c7\u09b0 \u09b8\u09be\u09b0\u09bf\u09a4\u09c7 \u09b8\u09bf\u0982\u0995 \u09b9\u09df\u0964',
     'patient.title': '\u09b0\u09cb\u0997\u09c0',
@@ -1494,7 +1482,6 @@ const I18N = {
     't.not_found_offline': '\u09b0\u09cb\u0997\u09c0 \u09aa\u09be\u0993\u09af\u09bc\u09be \u09af\u09be\u09af\u09bc\u09a8\u09bf (\u0985\u09ab\u09b2\u09be\u0987\u09a8 \u0995\u09cd\u09af\u09be\u09b6\u09c7 \u09a8\u09c7\u0987)',
     't.loaded_server': '\u09b0\u09cb\u0997\u09c0 \u09b8\u09be\u09b0\u09cd\u09ac\u09be\u09b0 \u09a5\u09c7\u0995\u09c7 \u09aa\u09be\u0993\u09af\u09bc\u09be \u0997\u09c7\u099b\u09c7',
     't.loaded_cache': '\u09b0\u09cb\u0997\u09c0 \u09b2\u09cb\u0995\u09be\u09b2 \u0995\u09cd\u09af\u09be\u09b6\u09c7 \u09a5\u09c7\u0995\u09c7 \u09aa\u09be\u0993\u09af\u09bc\u09be \u0997\u09c7\u099b\u09c7',
-    't.qr_scanned': 'QR \u09b8\u09cd\u0995\u09cd\u09af\u09be\u09a8 \u09b9\u09df\u09c7\u099b\u09c7: {0}',
     't.fill_required': '\u0985\u09a8\u09c1\u0997\u09cd\u09b0\u09b9 \u0995\u09b0\u09c7 \u09aa\u09cd\u09b0\u09af\u09bc\u09cb\u099c\u09a8\u09c0\u09af\u09bc \u09a4\u09a5\u09cd\u09af \u09aa\u09c2\u09b0\u09a3 \u0995\u09b0\u09c1\u09a8: {0}',
     't.phone_invalid': '\u09b8\u09a0\u09bf\u0995 10 \u0985\u0982\u0995\u09c7\u09b0 \u09ae\u09cb\u09ac\u09be\u0987\u09b2 \u09a8\u09ae\u09cd\u09ac\u09b0 \u09a6\u09bf\u09a8',
     't.pincode_invalid': '\u09b8\u09a0\u09bf\u0995 6 \u0985\u0982\u0995\u09c7\u09b0 \u09aa\u09bf\u09a8 \u0995\u09cb\u09a1 \u09a6\u09bf\u09a8',
@@ -1597,6 +1584,28 @@ function newClientId() {
 
 function utcNowIso() {
   return new Date().toISOString();
+}
+
+/* Convert any Unicode decimal digits (Devanagari, Bengali, Arabic, …) to
+ * ASCII and strip separators/spaces, so a pasted or localized ABHA ID
+ * (e.g. "९१२१-४४५५-६६७७-०१") still reads as plain 0-9 digits. */
+function toAsciiDigits(s) {
+  // (start, end) code-point pairs of Unicode decimal-digit blocks
+  const BLOCKS = [
+    [0x0660, 0x0669], [0x06F0, 0x06F9], [0x0966, 0x096F], [0x09E6, 0x09EF],
+    [0x0A66, 0x0A6F], [0x0AE6, 0x0AEF], [0x0B66, 0x0B6F], [0x0BE6, 0x0BEF],
+    [0x0C66, 0x0C6F], [0x0CE6, 0x0CEF], [0x0D66, 0x0D6F], [0x0DE6, 0x0DEF],
+    [0x0E50, 0x0E59], [0x0ED0, 0x0ED9], [0x0F20, 0x0F29], [0x1040, 0x1049],
+    [0x17E0, 0x17E9], [0x1810, 0x1819], [0xFF10, 0xFF19],
+  ];
+  return String(s || '').replace(/\p{Nd}/gu, (d) => {
+    const cp = d.codePointAt(0);
+    if (cp >= 48 && cp <= 57) return d;
+    for (const [lo, hi] of BLOCKS) {
+      if (cp >= lo && cp <= hi) return String.fromCharCode(48 + cp - lo);
+    }
+    return d;
+  }).replace(/\D/g, '');
 }
 
 function toast(message, kind = 'info') {
@@ -1862,7 +1871,7 @@ function updateNetPill() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Index page: ABHA search + QR placeholder + ABHA-first registration  */
+/* Index page: ABHA search + ABHA-first registration                  */
 /* ------------------------------------------------------------------ */
 function regMode() {
   const checked = document.querySelector('input[name="abha-exists"]:checked');
@@ -2084,7 +2093,6 @@ function initIndexPage() {
 
   const abhaInput = document.getElementById('abha-input');
   const searchBtn = document.getElementById('search-btn');
-  const scanBtn = document.getElementById('scan-btn');
   const registerBtn = document.getElementById('register-btn');
 
   const doSearch = async () => {
@@ -2103,31 +2111,6 @@ function initIndexPage() {
   };
   searchBtn.addEventListener('click', doSearch);
   abhaInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
-
-  // ---- Placeholder QR scanner -------------------------------------------
-  const modal = document.getElementById('qr-modal');
-  const grid = document.getElementById('qr-grid');
-  const DEMO_PATIENTS = [
-    { abha: '91214455667701', name: 'Sunita Devi' },
-    { abha: '91214455667702', name: 'Ram Prasad' },
-    { abha: '91214455667703', name: 'Meena Kumari' },
-    { abha: '91214455667706', name: 'Mohan Lal' },
-  ];
-  DEMO_PATIENTS.forEach((p) => {
-    const card = document.createElement('div');
-    card.className = 'qr-card';
-    card.innerHTML = '<div class="qr-box"></div><b>' + p.name + '</b><small>' + p.abha + '</small>';
-    card.addEventListener('click', () => {
-      abhaInput.value = p.abha;
-      modal.classList.remove('open');
-      toast(t('t.qr_scanned', [p.name]), 'ok');
-      doSearch();
-    });
-    grid.appendChild(card);
-  });
-  scanBtn.addEventListener('click', () => modal.classList.add('open'));
-  document.getElementById('qr-close').addEventListener('click', () => modal.classList.remove('open'));
-  modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
 
   // ---- Doctor teleconsult request (Feature 5) -----------------------------
   const teleModal = document.getElementById('tele-modal');
@@ -2649,10 +2632,19 @@ function initCheckin() {
   const btn = document.getElementById('ci-btn');
   if (!btn) return;
   btn.addEventListener('click', runCheckin);
+  // Keep the ABHA field clean as the worker types/pastes: convert localized
+  // digits (Devanagari/Bengali/…) to ASCII and drop separators, capped at 14.
+  const abhaInput = document.getElementById('t-abha');
+  if (abhaInput) {
+    abhaInput.addEventListener('input', () => {
+      const clean = toAsciiDigits(abhaInput.value).slice(0, 14);
+      if (clean !== abhaInput.value) abhaInput.value = clean;
+    });
+  }
 }
 
 async function runCheckin() {
-  const abha = (document.getElementById('t-abha').value || '').trim();
+  const abha = toAsciiDigits(document.getElementById('t-abha').value);
   const out = document.getElementById('ci-result');
   if (!/^\d{14}$/.test(abha)) {
     out.innerHTML = '<p class="ai-warn">' + esc(t('ci.badabha')) + '</p>';

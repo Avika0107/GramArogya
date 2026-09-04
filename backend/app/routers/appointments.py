@@ -130,11 +130,9 @@ def opd_queue_today(
                              PRIORITY_ORDER.get(a.priority, 9), a.token))
 
     out: list[AppointmentOut] = []
-    for a in rows:
-        ahead = sum(
-            1 for b in rows
-            if b.status == "waiting" and b.token < a.token
-        )
+    for i, a in enumerate(rows):
+        # Patients physically ahead in the displayed (priority) order.
+        ahead = sum(1 for b in rows[:i] if b.status == "waiting")
         out.append(_to_out(db, a, ahead * WAIT_MIN_PER_PATIENT if a.status == "waiting" else None))
     return out
 

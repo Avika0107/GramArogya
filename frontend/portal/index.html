@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b6e4f">
+  <meta name="description" content="GramArogya — healthcare connectivity portal. One login for ASHA workers, doctors, admins and lab technicians.">
+  <title>GramArogya — Connectivity Portal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Low-bandwidth / offline banner (shown by JS when navigator.connection is slow) -->
+  <div id="net-banner" class="net-banner" role="status" aria-live="polite" hidden>
+    <span id="net-icon">📶</span>
+    <span id="net-msg">Low connectivity — the portal still works. Forms save locally and sync when back online.</span>
+  </div>
+
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-mark">🏥</span>
+      <div>
+        <h1>GramArogya</h1>
+        <p>Healthcare Connectivity Portal</p>
+      </div>
+    </div>
+    <a href="/" class="home-link" aria-label="Back to main site">←</a>
+  </header>
+
+  <main id="main" class="shell">
+
+    <!-- ================================================================
+         VIEW 1: LOGIN
+         Role selector sits at the very top (visible without scrolling),
+         with a prominent "Register" link for new users.
+    ================================================================= -->
+    <section id="view-login" class="view" aria-labelledby="login-title">
+      <h2 id="login-title" class="view-title" tabindex="-1">Sign in to GramArogya</h2>
+
+      <div class="role-tabs" role="tablist" aria-label="Choose your role">
+        <button type="button" role="tab" id="tab-login-asha" aria-selected="true" aria-controls="login-form" class="role-tab active" data-role="asha">
+          <span class="role-icon" aria-hidden="true">👩‍⚕️</span>ASHA Worker
+        </button>
+        <button type="button" role="tab" id="tab-login-doctor" aria-selected="false" aria-controls="login-form" class="role-tab" data-role="doctor">
+          <span class="role-icon" aria-hidden="true">🩺</span>Doctor
+        </button>
+        <button type="button" role="tab" id="tab-login-admin" aria-selected="false" aria-controls="login-form" class="role-tab" data-role="admin">
+          <span class="role-icon" aria-hidden="true">🗂️</span>Admin
+        </button>
+        <button type="button" role="tab" id="tab-login-lab" aria-selected="false" aria-controls="login-form" class="role-tab" data-role="lab">
+          <span class="role-icon" aria-hidden="true">🧪</span>Lab Technician
+        </button>
+      </div>
+
+      <form id="login-form" class="card form" novalidate>
+        <div class="field">
+          <label for="login-user">Phone number or username</label>
+          <input type="text" id="login-user" name="login-user" autocomplete="username" inputmode="tel"
+                 aria-describedby="login-user-err" placeholder="e.g. 9876543210" data-rules="required" required>
+          <p class="err" id="login-user-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="login-pass">Password</label>
+          <div class="pw-wrap">
+            <input type="password" id="login-pass" name="login-pass" autocomplete="current-password"
+                   aria-describedby="login-pass-err" data-rules="required,password" required>
+            <button type="button" class="pw-toggle" data-for="login-pass" aria-label="Show password" aria-pressed="false">👁</button>
+          </div>
+          <p class="err" id="login-pass-err" aria-live="polite"></p>
+        </div>
+
+        <div class="row-between">
+          <label class="check-line" for="remember-role">
+            <input type="checkbox" id="remember-role" checked> Remember my role
+          </label>
+          <a href="#" id="forgot-link" class="link">Forgot password?</a>
+        </div>
+
+        <button type="submit" id="login-btn" class="btn primary">
+          <span class="btn-label">Sign in</span>
+        </button>
+        <p class="form-switch">New user?
+          <a href="#" id="to-register" class="link">Register here</a>
+        </p>
+
+        <!-- Demo credentials for the selected role (mock backend) -->
+        <div class="demo-hint" id="demo-hint" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- ================================================================
+         VIEW 2: REGISTER
+         Same role selector — switching back and forth keeps the role +
+         partially filled fields (navigation preserves state).
+    ================================================================= -->
+    <section id="view-register" class="view" hidden aria-labelledby="register-title">
+      <h2 id="register-title" class="view-title" tabindex="-1">Create an account</h2>
+
+      <div class="role-tabs" role="tablist" aria-label="Register as">
+        <button type="button" role="tab" id="tab-reg-asha" aria-selected="true" aria-controls="form-asha" class="role-tab active" data-role="asha">
+          <span class="role-icon" aria-hidden="true">👩‍⚕️</span>ASHA Worker
+        </button>
+        <button type="button" role="tab" id="tab-reg-doctor" aria-selected="false" aria-controls="form-doctor" class="role-tab" data-role="doctor">
+          <span class="role-icon" aria-hidden="true">🩺</span>Doctor
+        </button>
+        <button type="button" role="tab" id="tab-reg-admin" aria-selected="false" aria-controls="form-admin" class="role-tab" data-role="admin">
+          <span class="role-icon" aria-hidden="true">🗂️</span>Admin
+        </button>
+        <button type="button" role="tab" id="tab-reg-lab" aria-selected="false" aria-controls="form-lab" class="role-tab" data-role="lab">
+          <span class="role-icon" aria-hidden="true">🧪</span>Lab Technician
+        </button>
+      </div>
+
+      <!-- ------------------ ASHA WORKER REGISTRATION ------------------ -->
+      <form id="form-asha" class="card form role-form" data-role="asha" novalidate>
+        <h3 class="form-heading">ASHA Worker registration</h3>
+        <p class="form-sub">Fields marked <span class="req">*</span> are required.</p>
+
+        <div class="field">
+          <label for="asha-name">Full Name <span class="req">*</span></label>
+          <input type="text" id="asha-name" autocomplete="name" aria-describedby="asha-name-err" data-rules="required" required>
+          <p class="err" id="asha-name-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="asha-phone">Phone Number <span class="req">*</span></label>
+          <div class="phone-row">
+            <input type="tel" id="asha-phone" inputmode="numeric" maxlength="10" autocomplete="tel"
+                   aria-describedby="asha-phone-err asha-otp-status" data-rules="required,phone" required>
+            <button type="button" class="btn secondary otp-send" id="asha-otp-send" data-phone="asha-phone">Send OTP</button>
+          </div>
+          <p class="err" id="asha-phone-err" aria-live="polite"></p>
+          <div class="otp-row" id="asha-otp-row" hidden>
+            <label for="asha-otp">Enter the 6-digit OTP sent to your phone</label>
+            <div class="phone-row">
+              <input type="text" id="asha-otp" inputmode="numeric" maxlength="6" aria-describedby="asha-otp-status">
+              <button type="button" class="btn secondary" id="asha-otp-verify" data-phone="asha-phone" data-otp="asha-otp">Verify</button>
+            </div>
+          </div>
+          <p class="status" id="asha-otp-status" aria-live="polite"></p>
+        </div>
+
+        <fieldset class="fieldset">
+          <legend>Address</legend>
+          <div class="grid2">
+            <div class="field">
+              <label for="asha-village">Village / Ward <span class="req">*</span></label>
+              <input type="text" id="asha-village" aria-describedby="asha-village-err" data-rules="required" required>
+              <p class="err" id="asha-village-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="asha-block">Block <span class="req">*</span></label>
+              <input type="text" id="asha-block" aria-describedby="asha-block-err" data-rules="required" required>
+              <p class="err" id="asha-block-err" aria-live="polite"></p>
+            </div>
+          </div>
+          <div class="grid2">
+            <div class="field">
+              <label for="asha-district">District <span class="req">*</span></label>
+              <input type="text" id="asha-district" list="district-list" aria-describedby="asha-district-err" data-rules="required" required>
+              <datalist id="district-list"></datalist>
+              <p class="err" id="asha-district-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="asha-state">State <span class="req">*</span></label>
+              <select id="asha-state" aria-describedby="asha-state-err" data-rules="required" required>
+                <option value="">Select state</option>
+              </select>
+              <p class="err" id="asha-state-err" aria-live="polite"></p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="asha-pincode">PIN code <span class="req">*</span></label>
+            <input type="text" id="asha-pincode" inputmode="numeric" maxlength="6" aria-describedby="asha-pincode-err" data-rules="required,pincode" required>
+            <p class="err" id="asha-pincode-err" aria-live="polite"></p>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="asha-id">ASHA ID / Registration Number <span class="req">*</span></label>
+          <input type="text" id="asha-id" aria-describedby="asha-id-err" placeholder="e.g. 1012345678" data-rules="required,ashaId" required>
+          <p class="err" id="asha-id-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="asha-phc">Nearest PHC <span class="req">*</span></label>
+          <div class="phc-row">
+            <input type="text" id="asha-phc" list="phc-list" aria-describedby="asha-phc-err" placeholder="Search or pick a PHC" data-rules="required" required>
+            <datalist id="phc-list"></datalist>
+            <button type="button" class="btn secondary" id="asha-phc-detect" data-phc="asha-phc">📍 Auto-detect</button>
+          </div>
+          <p class="err" id="asha-phc-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="asha-dob">Date of Birth <span class="req">*</span></label>
+          <input type="date" id="asha-dob" aria-describedby="asha-dob-err" data-rules="required,dob" required>
+          <p class="err" id="asha-dob-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="asha-pass">Set Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="asha-pass" autocomplete="new-password" aria-describedby="asha-pass-err" data-rules="required,password" required>
+            <button type="button" class="pw-toggle" data-for="asha-pass" aria-label="Show password" aria-pressed="false">👁</button>
+          </div>
+          <p class="err" id="asha-pass-err" aria-live="polite"></p>
+          <p class="strength" id="asha-pass-strength" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="asha-pass2">Confirm Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="asha-pass2" autocomplete="new-password" aria-describedby="asha-pass2-err" data-rules="required,confirm" required>
+            <button type="button" class="pw-toggle" data-for="asha-pass2" aria-label="Show password" aria-pressed="false">👁</button>
+          </div>
+          <p class="err" id="asha-pass2-err" aria-live="polite"></p>
+        </div>
+
+        <button type="submit" class="btn primary submit-btn" data-form="asha">
+          <span class="btn-label">Create ASHA Worker account</span>
+        </button>
+        <p class="form-switch">Already registered?
+          <a href="#" class="link to-login">Sign in</a>
+        </p>
+      </form>
+
+      <!-- -------------------- DOCTOR REGISTRATION --------------------- -->
+      <form id="form-doctor" class="card form role-form" data-role="doctor" hidden novalidate>
+        <h3 class="form-heading">Doctor registration</h3>
+        <p class="form-sub">Fields marked <span class="req">*</span> are required.</p>
+
+        <div class="notice">⏳ Registrations need <b>admin approval</b> before you can sign in.</div>
+
+        <div class="field">
+          <label for="doc-name">Full Name <span class="req">*</span></label>
+          <input type="text" id="doc-name" autocomplete="name" aria-describedby="doc-name-err" data-rules="required" required>
+          <p class="err" id="doc-name-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="doc-regno">Medical Registration Number <span class="req">*</span></label>
+          <input type="text" id="doc-regno" aria-describedby="doc-regno-err" data-rules="required,regNo" required>
+          <p class="err" id="doc-regno-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="doc-council">Council Name <span class="req">*</span></label>
+          <select id="doc-council" aria-describedby="doc-council-err" data-rules="required" required>
+            <option value="">Select council</option>
+          </select>
+          <p class="err" id="doc-council-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="doc-spec">Specialization <span class="req">*</span></label>
+          <select id="doc-spec" aria-describedby="doc-spec-err" data-rules="required" required>
+            <option value="">Select specialization</option>
+          </select>
+          <p class="err" id="doc-spec-err" aria-live="polite"></p>
+        </div>
+
+        <div class="grid2">
+          <div class="field">
+            <label for="doc-phone">Phone Number <span class="req">*</span></label>
+            <input type="tel" id="doc-phone" inputmode="numeric" maxlength="10" autocomplete="tel" aria-describedby="doc-phone-err" data-rules="required,phone" required>
+            <p class="err" id="doc-phone-err" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="doc-email">Email</label>
+            <input type="email" id="doc-email" autocomplete="email" aria-describedby="doc-email-err" data-rules="email">
+            <p class="err" id="doc-email-err" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="doc-phc">Assigned PHC / Hospital <span class="req">*</span></label>
+          <div class="phc-row">
+            <input type="text" id="doc-phc" list="phc-list" aria-describedby="doc-phc-err" placeholder="Search or pick a facility" data-rules="required" required>
+            <button type="button" class="btn secondary" id="doc-phc-detect" data-phc="doc-phc">📍 Auto-detect</button>
+          </div>
+          <p class="err" id="doc-phc-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="doc-exp">Years of Experience <span class="req">*</span></label>
+          <input type="number" id="doc-exp" min="0" max="60" inputmode="numeric" aria-describedby="doc-exp-err" data-rules="required,exp" required>
+          <p class="err" id="doc-exp-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="doc-pass">Set Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="doc-pass" autocomplete="new-password" aria-describedby="doc-pass-err" data-rules="required,password" required>
+            <button type="button" class="pw-toggle" data-for="doc-pass" aria-label="Show password" aria-pressed="false">👁</button>
+          </div>
+          <p class="err" id="doc-pass-err" aria-live="polite"></p>
+          <p class="strength" id="doc-pass-strength" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="doc-pass2">Confirm Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="doc-pass2" autocomplete="new-password" aria-describedby="doc-pass2-err" data-rules="required,confirm" required>
+            <button type="button" class="pw-toggle" data-for="doc-pass2" aria-label="Show password" aria-pressed="false">👁</button>
+          </div>
+          <p class="err" id="doc-pass2-err" aria-live="polite"></p>
+        </div>
+
+        <button type="submit" class="btn primary submit-btn" data-form="doctor">
+          <span class="btn-label">Submit for approval</span>
+        </button>
+        <p class="form-switch">Already registered?
+          <a href="#" class="link to-login">Sign in</a>
+        </p>
+      </form>
+
+      <!-- --------------------- ADMIN REGISTRATION --------------------- -->
+      <form id="form-admin" class="card form role-form" data-role="admin" hidden novalidate>
+        <h3 class="form-heading">Admin registration</h3>
+        <p class="form-sub">Fields marked <span class="req">*</span> are required.</p>
+
+        <div class="field">
+          <label for="adm-name">Full Name <span class="req">*</span></label>
+          <input type="text" id="adm-name" autocomplete="name" aria-describedby="adm-name-err" data-rules="required" required>
+          <p class="err" id="adm-name-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="adm-empid">Employee ID <span class="req">*</span></label>
+          <input type="text" id="adm-empid" aria-describedby="adm-empid-err" data-rules="required,empId" required>
+          <p class="err" id="adm-empid-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="adm-jurisdiction">Department / Jurisdiction <span class="req">*</span></label>
+          <select id="adm-jurisdiction" aria-describedby="adm-jurisdiction-err" data-rules="required" required>
+            <option value="">Select level</option>
+            <option value="district">District</option>
+            <option value="block">Block</option>
+            <option value="phc">PHC</option>
+          </select>
+          <p class="err" id="adm-jurisdiction-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field" id="adm-jur-name-wrap">
+          <label for="adm-jur-name">Jurisdiction name <span class="req">*</span></label>
+          <input type="text" id="adm-jur-name" aria-describedby="adm-jur-name-err" data-rules="required" required>
+          <p class="err" id="adm-jur-name-err" aria-live="polite"></p>
+        </div>
+
+        <div class="grid2">
+          <div class="field">
+            <label for="adm-phone">Phone Number <span class="req">*</span></label>
+            <input type="tel" id="adm-phone" inputmode="numeric" maxlength="10" autocomplete="tel" aria-describedby="adm-phone-err" data-rules="required,phone" required>
+            <p class="err" id="adm-phone-err" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="adm-email">Email</label>
+            <input type="email" id="adm-email" autocomplete="email" aria-describedby="adm-email-err" data-rules="email">
+            <p class="err" id="adm-email-err" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="label-inline">Admin Access Level <span class="req">*</span></span>
+          <div class="seg" role="radiogroup" aria-label="Admin access level">
+            <label class="seg-btn"><input type="radio" name="adm-level" value="Super Admin" data-rules="radioRequired"> Super Admin</label>
+            <label class="seg-btn"><input type="radio" name="adm-level" value="District Admin" data-rules="radioRequired"> District Admin</label>
+            <label class="seg-btn"><input type="radio" name="adm-level" value="Block Admin" data-rules="radioRequired"> Block Admin</label>
+          </div>
+          <p class="err" id="adm-level-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="adm-pass">Set Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="adm-pass" autocomplete="new-password" aria-describedby="adm-pass-err" data-rules="required,password" required>
+            <button type="button" class="pw-toggle" data-for="adm-pass" aria-label="Show password" aria-pressed="false">👁</button>
+          </div>
+          <p class="err" id="adm-pass-err" aria-live="polite"></p>
+          <p class="strength" id="adm-pass-strength" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="adm-pass2">Confirm Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="adm-pass2" autocomplete="new-password" aria-describedby="adm-pass2-err" data-rules="required,confirm" required>
+            <button type="button" class="pw-toggle" data-for="adm-pass2" aria-label="Show password" aria-pressed="false">👁</button>
+          </div>
+          <p class="err" id="adm-pass2-err" aria-live="polite"></p>
+        </div>
+
+        <button type="submit" class="btn primary submit-btn" data-form="admin">
+          <span class="btn-label">Create admin account</span>
+        </button>
+        <p class="form-switch">Already registered?
+          <a href="#" class="link to-login">Sign in</a>
+        </p>
+      </form>
+
+      <!-- ------------------ LAB TECHNICIAN REGISTRATION ---------------- -->
+      <form id="form-lab" class="card form role-form" data-role="lab" hidden novalidate>
+        <h3 class="form-heading">Lab Technician registration</h3>
+        <p class="form-sub">Fields marked <span class="req">*</span> are required.</p>
+
+        <div class="field">
+          <label for="lab-name">Full Name <span class="req">*</span></label>
+          <input type="text" id="lab-name" autocomplete="name" aria-describedby="lab-name-err" data-rules="required" required>
+          <p class="err" id="lab-name-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="lab-empid">Employee ID <span class="req">*</span></label>
+          <input type="text" id="lab-empid" aria-describedby="lab-empid-err" data-rules="required,empId" required>
+          <p class="err" id="lab-empid-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="lab-cert">Lab Certification Number <span class="req">*</span></label>
+          <input type="text" id="lab-cert" aria-describedby="lab-cert-err" data-rules="required,certNo" required>
+          <p class="err" id="lab-cert-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="lab-phc">Assigned PHC / Lab <span class="req">*</span></label>
+          <div class="phc-row">
+            <input type="text" id="lab-phc" list="phc-list" aria-describedby="lab-phc-err" placeholder="Search or pick a facility" data-rules="required" required>
+            <button type="button" class="btn secondary" id="lab-phc-detect" data-phc="lab-phc">📍 Auto-detect</button>
+          </div>
+          <p class="err" id="lab-phc-err" aria-live="polite"></p>
+        </div>
+
+        <div class="grid2">
+          <div class="field">
+            <label for="lab-phone">Phone Number <span class="req">*</span></label>
+            <input type="tel" id="lab-phone" inputmode="numeric" maxlength="10" autocomplete="tel" aria-describedby="lab-phone-err" data-rules="required,phone" required>
+            <p class="err" id="lab-phone-err" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="lab-email">Email</label>
+            <input type="email" id="lab-email" autocomplete="email" aria-describedby="lab-email-err" data-rules="email">
+            <p class="err" id="lab-email-err" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="lab-pass">Set Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="lab-pass" autocomplete="new-password" aria-describedby="lab-pass-err" data-rules="required,password" required>
+            <button type="button" class="pw-toggle" data-for="lab-pass" aria-label="Show password" aria-pressed="false">👁</button>
+          </div>
+          <p class="err" id="lab-pass-err" aria-live="polite"></p>
+          <p class="strength" id="lab-pass-strength" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="lab-pass2">Confirm Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="lab-pass2" autocomplete="new-password" aria-describedby="lab-pass2-err" data-rules="required,confirm" required>
+            <button type="button" class="pw-toggle" data-for="lab-pass2" aria-label="Show password" aria-pressed="false">👁</button>
+          </div>
+          <p class="err" id="lab-pass2-err" aria-live="polite"></p>
+        </div>
+
+        <button type="submit" class="btn primary submit-btn" data-form="lab">
+          <span class="btn-label">Create lab account</span>
+        </button>
+        <p class="form-switch">Already registered?
+          <a href="#" class="link to-login">Sign in</a>
+        </p>
+      </form>
+    </section>
+
+    <!-- ================================================================
+         VIEW 3: FORGOT PASSWORD
+         Simple 2-step flow: phone -> OTP -> new password.
+    ================================================================= -->
+    <section id="view-forgot" class="view" hidden aria-labelledby="forgot-title">
+      <h2 id="forgot-title" class="view-title" tabindex="-1">Reset your password</h2>
+
+      <form id="forgot-form" class="card form" novalidate>
+        <div class="field">
+          <label for="forgot-phone">Registered phone number</label>
+          <div class="phone-row">
+            <input type="tel" id="forgot-phone" inputmode="numeric" maxlength="10" autocomplete="tel"
+                   aria-describedby="forgot-phone-err forgot-otp-status" data-rules="required,phone" required>
+            <button type="button" class="btn secondary otp-send" id="forgot-otp-send" data-phone="forgot-phone">Send OTP</button>
+          </div>
+          <p class="err" id="forgot-phone-err" aria-live="polite"></p>
+          <div class="otp-row" id="forgot-otp-row" hidden>
+            <label for="forgot-otp">Enter the 6-digit OTP sent to your phone</label>
+            <div class="phone-row">
+              <input type="text" id="forgot-otp" inputmode="numeric" maxlength="6" aria-describedby="forgot-otp-status">
+              <button type="button" class="btn secondary" id="forgot-otp-verify" data-phone="forgot-phone" data-otp="forgot-otp">Verify</button>
+            </div>
+          </div>
+          <p class="status" id="forgot-otp-status" aria-live="polite"></p>
+        </div>
+
+        <div class="field" id="forgot-new-wrap" hidden>
+          <label for="forgot-pass">New Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="forgot-pass" autocomplete="new-password" aria-describedby="forgot-pass-err" data-rules="required,password" required>
+            <button type="button" class="pw-toggle" data-for="forgot-pass" aria-label="Show password" aria-pressed="false">👁</button>
+          </div>
+          <p class="err" id="forgot-pass-err" aria-live="polite"></p>
+          <p class="strength" id="forgot-pass-strength" aria-live="polite"></p>
+        </div>
+
+        <div class="field" id="forgot-confirm-wrap" hidden>
+          <label for="forgot-pass2">Confirm New Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="forgot-pass2" autocomplete="new-password" aria-describedby="forgot-pass2-err" data-rules="required,confirm" required>
+            <button type="button" class="pw-toggle" data-for="forgot-pass2" aria-label="Show password" aria-pressed="false">👁</button>
+          </div>
+          <p class="err" id="forgot-pass2-err" aria-live="polite"></p>
+        </div>
+
+        <button type="submit" id="forgot-submit" class="btn primary" hidden>
+          <span class="btn-label">Reset password</span>
+        </button>
+        <p class="form-switch">Remembered it?
+          <a href="#" class="link to-login">Back to sign in</a>
+        </p>
+      </form>
+    </section>
+
+    <!-- ================================================================
+         VIEW 4: SUCCESS (post-registration / post-login)
+    ================================================================= -->
+    <section id="view-success" class="view" hidden aria-labelledby="success-title">
+      <div class="card success-card">
+        <div class="success-icon" aria-hidden="true">✅</div>
+        <h2 id="success-title" class="view-title" tabindex="-1">Success!</h2>
+        <p id="success-msg" class="success-msg" aria-live="polite"></p>
+        <button type="button" id="success-done" class="btn primary">Continue</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>GramArogya · Smart India Hackathon prototype · <a href="/" class="link">Back to main site</a></p>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
