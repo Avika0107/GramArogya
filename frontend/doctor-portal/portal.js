@@ -64,6 +64,10 @@ function fmtDur(seconds) {
 function chip(label, extra) {
   return '<span class="badge ' + esc(extra || '') + '">' + esc(label) + '</span>';
 }
+function setDashUpdated(text) {
+  const el = document.getElementById('dash-updated');
+  if (el) el.textContent = text;
+}
 
 async function getFacilities() {
   if (FACILITIES) return FACILITIES;
@@ -147,12 +151,22 @@ async function bindFacilitySelect(selectId, onPick) {
 async function initDashboard() {
   await bindFacilitySelect('facility-select', () => loadDashboard());
   await loadDashboard();
+  setInterval(() => loadDashboard(), 20000);   // keep live: ASHA syncs, kiosk tokens, lab results
 }
 
 async function loadDashboard() {
   await ensureFacility();
   const facId = currentFacilityId;
-  const phc = await api('/dashboard/phc?facility_id=' + encodeURIComponent(facId));
+  let phc;
+  try {
+    phc = await api('/dashboard/phc?facility_id=' + encodeURIComponent(facId));
+  } catch (e) {
+    // Offline / backend briefly unreachable: keep showing the last data;
+    // the reconnect + periodic refresh below will pick up once we're online.
+    setDashUpdated('Update failed — retrying…');
+    return;
+  }
+  setDashUpdated('Updated ' + new Date().toLocaleTimeString());
 
   const statMap = {
     'Today\'s OPD': phc.opd_today, 'Patients in queue': phc.in_queue,
@@ -1103,4 +1117,19 @@ document.addEventListener('DOMContentLoaded', () => {
   if (PAGE === 'referrals') initReferrals();
   if (PAGE === 'pharmacy') initPharmacy();
   bindQueueLinks();
+
+  // Auto-refresh the moment the browser comes back online (or the tab regains
+  // focus) so data synced by ASHA workers / kiosk shows up without a reload.
+  const REFRESHERS = {
+    dashboard: () => loadDashboard(),
+    queue: () => loadQueue(),
+    referrals: () => loadReferrals(),
+    teleconsult: () => loadTeleconsult(),
+    pharmacy: () => loadInventory(),
+  };
+  const pageRefresh = REFRESHERS[PAGE];
+  if (pageRefresh) {
+    window.addEventListener('online', pageRefresh);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) pageRefresh(); });
+  }
 });

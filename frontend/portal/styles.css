@@ -357,6 +357,28 @@ input.invalid, select.invalid { border-color: var(--red); background: #fef6f5; }
 .toast.bad { background: var(--red); }
 
 /* ---- Desktop: slightly wider, centered column -------------------------------- */
+/* ---- Language switcher (header) ------------------------------------------- */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.app-header .lang-switch {
+  width: auto;
+  margin: 0;
+  padding: 6px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-appearance: auto;
+  appearance: auto;
+}
+.lang-switch option { color: var(--text); background: #fff; }
+
 @media (min-width: 640px) {
   .shell { max-width: 560px; padding-top: 28px; }
   .role-tab { font-size: 12.5px; min-height: 64px; }

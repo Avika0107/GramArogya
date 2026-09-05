@@ -1564,10 +1564,15 @@ function genderLabel(value) {
 /* Network simulation                                                    */
 /* ------------------------------------------------------------------ */
 function isOnline() {
-  // Offline-first: a fresh install (nothing stored yet) starts OFFLINE, so
-  // every record queues on the device and only leaves when the worker
-  // explicitly flips the "Simulate Network State" toggle to Online.
-  return localStorage.getItem('gramarogya_online') === 'online';
+  // A stored "Simulate Network State" toggle always wins: it is only written
+  // when the worker flips the switch on the Sync page (demo mode).
+  const sim = localStorage.getItem('gramarogya_online');
+  if (sim === 'online' || sim === 'offline') return sim === 'online';
+  // Otherwise follow the device's real connectivity: the portal comes up
+  // ONLINE whenever there is a connection and only queues records during a
+  // genuine outage (the browser fires 'offline' when the link drops). This
+  // keeps queued records syncing automatically instead of staying offline.
+  return navigator.onLine !== false;
 }
 
 function setNetworkState(state) {
@@ -1750,7 +1755,15 @@ async function flushPending(opts = {}) {
         body: JSON.stringify({ records: batch, device_id: deviceId }),
       });
     } catch (e) {
-      // Network/server error: flag the whole batch, keep for retry
+      // Connection-level failures (offline, a dropped network request, or a
+      // transient 5xx from a starting/restarting server) mean the batch was
+      // not processed: leave the records queued and let auto-sync retry them
+      // later instead of flagging them "Failed".
+      if (e.offline || e instanceof TypeError || /^HTTP 5\d\d/.test(e.message || '')) {
+        if (opts.onProgress) opts.onProgress(i + 1, batches.length);
+        throw e;
+      }
+      // Real server rejection: flag the whole batch, keep for retry
       for (const rec of batch) {
         await db.savePending(Object.assign({}, rec, { sync_failed: true, error: e.message }));
       }
@@ -1784,6 +1797,31 @@ async function fullSync(onProgress) {
   const syncRes = await flushPending({ onProgress: onProgress });
   const msgRes = await dispatchMessages();
   return { syncRes, msgRes };
+}
+
+/* Push records queued during an outage as soon as the backend is reachable
+ * again. Runs on page load and from a background timer; failures keep the
+ * records queued (not "Failed") so the next attempt retries them.
+ */
+let pendingSyncBusy = false;
+async function autoSyncPending({ silent = false } = {}) {
+  if (pendingSyncBusy || !isOnline()) return 0;
+  pendingSyncBusy = true;
+  try {
+    const pending = await db.getPending();
+    if (!pending.length) return 0;
+    const { syncRes } = await fullSync();
+    updateNetPill();
+    if (PAGE === 'sync') renderSyncPage();
+    const n = syncRes ? (syncRes.synced || 0) : 0;
+    if (n > 0 && !silent) toast(t('t.bg_sync_done', [n]), 'ok');
+    return n;
+  } catch (e) {
+    // Backend not reachable yet — records stay queued; retried next tick.
+    return 0;
+  } finally {
+    pendingSyncBusy = false;
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -3964,11 +4002,23 @@ document.addEventListener('DOMContentLoaded', () => {
   if (PAGE === 'referral') initReferralPage();
   if (PAGE === 'tracking') initTrackingPage();
 
-  // Auto-sync queued records when the network comes back
+  // Real connectivity changes update the header pill everywhere, and queued
+  // records auto-sync as soon as a connection comes back — no manual steps.
   window.addEventListener('online', () => {
+    updateNetPill();
+    if (PAGE === 'sync') updateNetworkUI();
     if (isOnline()) {
       toast(t('sync.auto_sync'), 'info');
       flushPending().catch(() => {});
     }
   });
+  window.addEventListener('offline', () => {
+    updateNetPill();
+    if (PAGE === 'sync') updateNetworkUI();
+  });
+
+  // Self-healing: each page load plus a background timer push records that
+  // were queued during an outage as soon as the backend is reachable again.
+  autoSyncPending();
+  setInterval(() => autoSyncPending({ silent: true }), 20000);
 });
