@@ -19,7 +19,7 @@
       <option value="mr">मराठी</option>
       <option value="bn">বাংলা</option>
     </select>
-    <span id="net-pill" class="status-pill">online</span>
+    <span id="net-pill" class="status-pill offline">offline</span>
   </header>
 
   <nav class="tabs">
@@ -42,11 +42,11 @@
     <div class="card">
       <div class="toggle-wrap">
         <div>
-          <div id="network-label" class="network-label online">Network: Online</div>
-          <div class="muted" id="network-sub">Records sync immediately</div>
+          <div id="network-label" class="network-label offline">Network: Offline</div>
+          <div class="muted" id="network-sub">Records queue locally until you toggle Online</div>
         </div>
         <label class="switch">
-          <input type="checkbox" id="network-toggle" checked>
+          <input type="checkbox" id="network-toggle">
           <span class="slider"></span>
         </label>
       </div>

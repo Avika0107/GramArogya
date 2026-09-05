@@ -1564,7 +1564,10 @@ function genderLabel(value) {
 /* Network simulation                                                    */
 /* ------------------------------------------------------------------ */
 function isOnline() {
-  return localStorage.getItem('gramarogya_online') !== 'offline';
+  // Offline-first: a fresh install (nothing stored yet) starts OFFLINE, so
+  // every record queues on the device and only leaves when the worker
+  // explicitly flips the "Simulate Network State" toggle to Online.
+  return localStorage.getItem('gramarogya_online') === 'online';
 }
 
 function setNetworkState(state) {
@@ -3227,6 +3230,11 @@ function updateNetworkUI() {
 async function renderSyncPage() {
   const pending = await db.getPending();
   const byType = {};
+
+  // Keep the Sync button consistent with the network toggle on every
+  // render (init + 4s poll) — offline: disabled, online: enabled.
+  const syncBtn = document.getElementById('sync-now');
+  if (syncBtn) syncBtn.disabled = !isOnline();
   pending.forEach((r) => { byType[r.type] = (byType[r.type] || 0) + 1; });
 
   const countsEl = document.getElementById('sync-counts');

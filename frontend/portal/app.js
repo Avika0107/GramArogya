@@ -90,7 +90,50 @@ const ROLE_LABELS = {
    -------------------------------------------------------------------------- */
 const API_DELAY = 900;
 
-function postMock(url, body) {
+/* Real backend endpoints (served by the FastAPI app at /api/v1). OTP stays
+   local-mock (no SMS gateway in the prototype) so only register / login /
+   reset hit the server; everything falls back to the in-page mock below
+   when the backend is unreachable (offline / file:// demo). */
+const REAL_AUTH = {
+  '/api/auth/register': '/api/v1/auth/register',
+  '/api/auth/login': '/api/v1/auth/login',
+  '/api/auth/reset-password': '/api/v1/auth/reset-password',
+};
+
+async function realPost(url, body) {
+  const real = REAL_AUTH[url];
+  if (!real) return null;  // not a backend endpoint (e.g. OTP) — stay mock
+
+  // Demo hint allows signing in with the demo NAME; the backend matches on
+  // phone, so normalise before sending.
+  if (url === '/api/auth/login' && DEMO_USERS[body.role] &&
+      body.username === DEMO_USERS[body.role].name) {
+    body = { ...body, username: DEMO_USERS[body.role].phone };
+  }
+
+  try {
+    const res = await fetch(real, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || ('HTTP ' + res.status));
+    return data;
+  } catch (err) {
+    // Network-level failure only -> local mock fallback. Validation errors
+    // from the server (401/403/409) are real and must surface as-is.
+    if (err instanceof TypeError) return null;
+    throw err;
+  }
+}
+
+async function postMock(url, body) {
+  const real = await realPost(url, body);
+  if (real) {
+    console.info('[api POST]', url, real);
+    return real;
+  }
   console.info('[mock POST]', url, body);
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -593,6 +636,9 @@ function collectForm(form) {
     } else if (input.type === 'checkbox') {
       data[CANONICAL_KEYS[input.id] || input.id] = input.checked;
     } else if (input.type !== 'submit' && input.type !== 'button') {
+      // Confirm-password fields are validation-only — never part of the
+      // payload sent to the backend (it would land in the profile JSON).
+      if (input.id.endsWith('-pass2')) return;
       data[CANONICAL_KEYS[input.id] || input.id] = input.value.trim();
     }
   });
@@ -644,6 +690,7 @@ function wireForgot() {
     setLoading(btn, true, 'Resetting…');
     try {
       await postMock('/api/auth/reset-password', {
+        role: state.role,
         phone: $('#forgot-phone').value.trim(),
         password: $('#forgot-pass').value,
       });

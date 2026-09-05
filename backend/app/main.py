@@ -25,6 +25,7 @@ from .icons import icon_png
 from .models import Base
 from .routers import (
     appointments,
+    auth,
     dashboard,
     doctor,
     facilities,
@@ -40,7 +41,7 @@ from .routers import (
     triage,
     ws,
 )
-from .seed import seed_if_empty, seed_modules_if_empty
+from .seed import seed_if_empty, seed_modules_if_empty, seed_portal_users_if_empty
 
 logger = logging.getLogger("gramarogya")
 logging.basicConfig(level=logging.INFO)
@@ -64,6 +65,8 @@ async def lifespan(_app: FastAPI):
             logger.info("Seeded demo data (facilities, patients, inventory, referrals).")
         if seed_modules_if_empty(db):
             logger.info("Backfilled module demo data (appointments, lab, follow-ups, teleconsults).")
+        if seed_portal_users_if_empty(db):
+            logger.info("Seeded demo portal accounts (login + doctor approval demo).")
     finally:
         db.close()
     yield
@@ -86,6 +89,7 @@ app.add_middleware(
 
 # ---- REST API ---------------------------------------------------------------
 api = APIRouter(prefix="/api/v1")
+api.include_router(auth.router)
 api.include_router(patients.router)
 api.include_router(facilities.router)
 api.include_router(triage.router)

@@ -552,6 +552,52 @@ class LabOrderOut(BaseModel):
 
 
 # ---------------------------------------------------------------------------
+# Portal auth + doctor-approval
+# ---------------------------------------------------------------------------
+class AuthRegister(BaseModel):
+    """Portal registration. Role-specific fields (specialization, regNo,
+    phc, ashaId, empId, accessLevel, ...) are allowed as extras and stored
+    into `profile` — the admin approval card reads them back."""
+
+    model_config = ConfigDict(extra="allow")
+
+    role: str  # asha | doctor | admin | lab
+    name: str
+    phone: str
+    password: str
+    email: Optional[str] = None
+
+
+class AuthLogin(BaseModel):
+    role: str
+    username: str  # phone number
+    password: str
+
+
+class AuthResetPassword(BaseModel):
+    role: str
+    phone: str
+    password: str
+
+
+class PortalUserOut(BaseModel):
+    id: str
+    role: str
+    name: str
+    phone: str
+    email: Optional[str] = None
+    status: str  # pending | approved | declined
+    profile: Dict[str, Any] = Field(default_factory=dict)
+    reviewed_by: Optional[str] = None
+    reviewed_at: Optional[datetime] = None
+    created_at: Optional[datetime] = None
+
+
+class DoctorReview(BaseModel):
+    action: Literal["approve", "decline"]
+
+
+# ---------------------------------------------------------------------------
 # Teleconsultation
 # ---------------------------------------------------------------------------
 class TeleconsultCreate(BaseModel):

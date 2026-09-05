@@ -139,6 +139,74 @@ function barColor(stage) {
   return map[stage] || '';
 }
 
+/* ------------------------------------------------------------------
+ * Pending doctor approvals — doctors registered on /portal/ land here
+ * and can only sign in after the district admin approves them.
+ * ------------------------------------------------------------------ */
+let approvalSeen = {};  // id -> status, so we can toast only on change
+
+async function loadApprovals() {
+  const card = document.getElementById('approvals-card');
+  const empty = document.getElementById('approvals-empty');
+  const table = document.getElementById('approvals-table');
+  const countEl = document.getElementById('approvals-count');
+  const tbody = document.getElementById('approvals-body');
+  if (!tbody || !card) return;
+
+  let rows = [];
+  try {
+    rows = await api('/auth/doctors?status=pending');
+  } catch (e) {
+    return; // backend without the module — leave the card hidden
+  }
+
+  // Toast when a brand-new pending doctor appears (the "notification").
+  const fresh = rows.filter((r) => !approvalSeen[r.id]);
+  if (fresh.length && Object.keys(approvalSeen).length > 0) {
+    toast('🔔 ' + fresh.map((r) => r.name).join(', ') +
+      (fresh.length === 1 ? ' registered — review & approve' : ' registered — review & approve'), 'ok');
+  }
+  rows.forEach((r) => { approvalSeen[r.id] = r.status; });
+
+  const n = rows.length;
+  countEl.textContent = n;
+  countEl.classList.toggle('waiting', n > 0);
+  empty.hidden = n > 0;
+  table.hidden = n === 0;
+
+  tbody.innerHTML = rows.map((r) => {
+    const p = r.profile || {};
+    const exp = p.experience ? p.experience + ' yrs' : '—';
+    const when = r.created_at ? new Date(r.created_at).toLocaleString() : '';
+    return '<tr>' +
+      '<td><b>' + esc(r.name) + '</b><br><span class="patient-id">' + esc(r.phone) + '</span></td>' +
+      '<td>' + esc(p.regNo || '—') + '</td>' +
+      '<td>' + esc(p.specialization || '—') + '</td>' +
+      '<td>' + esc(p.phc || '—') + '</td>' +
+      '<td>' + exp + '</td>' +
+      '<td class="muted small">' + when + '</td>' +
+      '<td>' +
+        '<button class="small" onclick="reviewDoctor(\'' + r.id + '\',\'approve\')">Approve</button> ' +
+        '<button class="small danger" onclick="reviewDoctor(\'' + r.id + '\',\'decline\')">Decline</button>' +
+      '</td></tr>';
+  }).join('');
+}
+
+async function reviewDoctor(id, action) {
+  try {
+    await api('/auth/doctors/' + id, {
+      method: 'PATCH',
+      body: JSON.stringify({ action: action }),
+    });
+    toast(action === 'approve' ? '✅ Doctor approved — they can sign in now.' : 'Doctor registration declined.',
+      action === 'approve' ? 'ok' : 'error');
+    delete approvalSeen[id];
+    loadApprovals();
+  } catch (e) {
+    toast('Failed: ' + e.message, 'error');
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Default range = last 7 days
   const to = new Date();
@@ -147,6 +215,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('f-to').value = to.toISOString().slice(0, 10);
   document.getElementById('f-from').value = from.toISOString().slice(0, 10);
   document.getElementById('apply-filters').addEventListener('click', load);
-  document.getElementById('load-btn').addEventListener('click', load);
+  document.getElementById('load-btn').addEventListener('click', () => { load(); loadApprovals(); });
   load();
+  loadApprovals();
+  // Poll so a doctor registering on another laptop appears "live" on the card.
+  setInterval(loadApprovals, 15000);
 });

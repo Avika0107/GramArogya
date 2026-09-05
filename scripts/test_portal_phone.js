@@ -76,11 +76,16 @@ async function main() {
   const view = await evalJs(`document.getElementById('view-register').hidden === false`);
   console.log('Register view visible:', view);
 
+  // Unique phone per run — real registrations persist in the backend DB, so
+  // a fixed number would collide on the second run (and with demo seeds).
+  const phone = '9' + String(Date.now()).slice(-9);
+  console.log('Registering ASHA with phone:', phone);
+
   // 2. Type into the phone field with realistic events
   await evalJs(`(() => {
     const el = document.getElementById('asha-phone');
     el.focus();
-    el.value = '9876543210';
+    el.value = '${phone}';
     el.dispatchEvent(new Event('input', { bubbles: true }));
     el.dispatchEvent(new Event('change', { bubbles: true }));
     return { value: el.value, maxLength: el.maxLength };
@@ -141,7 +146,7 @@ async function main() {
   await sleep(400);
   await evalJs(`(() => {
     const set = (id, v) => { const el = document.getElementById(id); el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); };
-    set('login-user', '9876543210');
+    set('login-user', '${phone}');
     set('login-pass', 'Test@1234');
     document.getElementById('login-form').requestSubmit();
   })()`);

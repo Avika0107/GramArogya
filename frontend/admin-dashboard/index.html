@@ -39,6 +39,21 @@
       <button class="secondary small" id="load-btn" style="margin-top:0">↻ Load / refresh</button>
     </div>
 
+    <!-- Doctor registrations from the portal awaiting admin approval -->
+    <div class="card" id="approvals-card">
+      <div class="spread">
+        <h2 style="margin:0">👨‍⚕️ Doctor registrations <span class="badge waiting" id="approvals-count">0</span></h2>
+        <span class="muted small">Doctors who register on the portal need your approval before they can sign in.</span>
+      </div>
+      <div id="approvals-empty" class="empty">No doctors awaiting approval — new portal registrations will appear here automatically.</div>
+      <table id="approvals-table" hidden>
+        <thead><tr>
+          <th>Doctor</th><th>Reg no.</th><th>Specialization</th><th>Assigned PHC</th><th>Experience</th><th>Registered</th><th></th>
+        </tr></thead>
+        <tbody id="approvals-body"></tbody>
+      </table>
+    </div>
+
     <div class="card">
       <div class="filters">
         <div class="field"><label>District</label><input type="text" id="f-district" value="Barabanki" style="width:160px"></div>
