@@ -478,6 +478,38 @@ class TeleconsultRequest(Base):
         return next_status in self.ALLOWED_TRANSITIONS.get(self.status, set())
 
 
+class PortalUser(Base):
+    """Registered portal account (the /portal/ login + registration demo).
+
+    Doctors land in `pending` status and can only sign in after a district
+    admin approves them from the admin dashboard. The other roles are
+    approved automatically at registration. Demo-grade auth (passwords are
+    hashed with PBKDF2; a real identity provider can be swapped in later),
+    but the approval *workflow* is real so the doctor-onboarding story
+    demos end to end across laptops.
+    """
+
+    __tablename__ = "portal_users"
+
+    STATUSES = ["pending", "approved", "declined"]
+    ROLES = ["asha", "doctor", "admin", "lab"]
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=gen_uuid)
+    role: Mapped[str] = mapped_column(String(10), index=True)  # asha | doctor | admin | lab
+    name: Mapped[str] = mapped_column(String(120))
+    phone: Mapped[str] = mapped_column(String(15), unique=True, index=True)
+    email: Mapped[Optional[str]] = mapped_column(String(120), nullable=True)
+    password_hash: Mapped[str] = mapped_column(String(200))
+    status: Mapped[str] = mapped_column(String(10), default="approved", index=True)
+    # Role-specific registration fields (specialization, regNo, phc, village,
+    # empId, accessLevel, ...) — shown to the admin on the approval card.
+    profile: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
+    reviewed_by: Mapped[Optional[str]] = mapped_column(String(120), nullable=True)
+    reviewed_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
 class PendingMessage(Base):
     """Offline-aware notification queue.
 

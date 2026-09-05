@@ -322,3 +322,28 @@ CREATE TABLE IF NOT EXISTS teleconsult_requests (
     updated_at   TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS idx_tele_status ON teleconsult_requests (status);
+
+-- ---------------------------------------------------------------------------
+-- 13. PORTAL USERS (login/registration + doctor-approval)
+--     doctor registrations start as 'pending' until a district admin
+--     approves them from the admin dashboard; other roles are 'approved'
+--     immediately. Passwords stored as PBKDF2 hash (never plaintext).
+--     profile = JSON of role-specific registration fields (specialization,
+--     regNo, phc, ashaId, empId, ...) shown on the admin approval card.
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS portal_users (
+    id            UUID PRIMARY KEY,
+    role          VARCHAR(10) NOT NULL,                  -- asha | doctor | admin | lab
+    name          VARCHAR(120) NOT NULL,
+    phone         VARCHAR(15) NOT NULL UNIQUE,
+    email         VARCHAR(120),
+    password_hash VARCHAR(200) NOT NULL,
+    status        VARCHAR(10) NOT NULL DEFAULT 'approved', -- pending | approved | declined
+    profile       JSONB DEFAULT '{}'::jsonb,
+    reviewed_by   VARCHAR(120),
+    reviewed_at   TIMESTAMPTZ,
+    created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_portal_role_status ON portal_users (role, status);
+CREATE INDEX IF NOT EXISTS idx_portal_phone ON portal_users (phone);

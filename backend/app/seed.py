@@ -29,10 +29,12 @@ from .models import (
     PendingMessage,
     Prescription,
     Referral,
+    PortalUser,
     TeleconsultRequest,
     TriageRecord,
     utcnow,
 )
+from .routers.auth import hash_password
 from .services.triage import assess
 
 
@@ -585,6 +587,42 @@ def seed_modules_if_empty(db) -> bool:
     return True
 
 
+def seed_portal_users_if_empty(db) -> bool:
+    """Seed the demo portal accounts (login page + admin-approval demo).
+
+    Mirrors the DEMO_USERS shown on /portal/ (tap-to-fill credentials), all
+    pre-approved except one sample pending doctor so the admin approval card
+    is non-empty on first load. Runs on fresh AND existing databases.
+    """
+    if db.query(PortalUser).count() > 0:
+        return False
+
+    demo = [
+        # (role, name, phone, email, status, profile)
+        ("asha", "Sunita Devi", "9876543210", "sunita@gramarogya.in",
+         "approved", {"ashaId": "ASHA-BKN-00112", "phc": "PHC Sanda",
+                      "village": "Sanda", "district": "Barabanki"}),
+        ("doctor", "Dr. Rajesh Kumar", "9123456780", "rajesh@gramarogya.in",
+         "approved", {"regNo": "UP-45678", "council": "Uttar Pradesh Medical Council",
+                      "specialization": "General Medicine", "phc": "PHC Sanda"}),
+        ("doctor", "Dr. Neha Gupta", "9123456790", "neha@gramarogya.in",
+         "pending", {"regNo": "UP-91230", "council": "Uttar Pradesh Medical Council",
+                     "specialization": "Gynecology & Obstetrics", "phc": "CHC Barabanki"}),
+        ("admin", "Anita Sharma", "9000000001", "anita@gramarogya.in",
+         "approved", {"empId": "DHO-BKN-001", "accessLevel": "District Admin"}),
+        ("lab", "Ramesh Yadav", "9111111111", "ramesh@gramarogya.in",
+         "approved", {"empId": "LAB-PHC-09", "certNo": "DMLT-2241", "phc": "PHC Sanda"}),
+    ]
+    for role, name, phone, email, status, profile in demo:
+        db.add(PortalUser(
+            role=role, name=name, phone=phone, email=email,
+            password_hash=hash_password("demo@1234"),
+            status=status, profile=profile,
+        ))
+    db.commit()
+    return True
+
+
 if __name__ == "__main__":
     db = SessionLocal()
     try:
@@ -592,5 +630,7 @@ if __name__ == "__main__":
             print("Seeded demo data.")
         else:
             print("Database already has data — nothing to do.")
+        if seed_portal_users_if_empty(db):
+            print("Seeded demo portal accounts.")
     finally:
         db.close()
