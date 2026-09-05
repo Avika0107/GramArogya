@@ -132,7 +132,14 @@ function handleMockPost(url, body) {
   if (url === '/api/auth/register') {
     const exists = DB.users.some((u) => u.phone === body.phone);
     if (exists) throw new Error('An account with this phone number already exists.');
-    const user = { ...body, createdAt: new Date().toISOString() };
+    // Doctors need admin approval before they can sign in (mirrors the
+    // "Submit for approval" notice on the doctor form); everyone else is
+    // approved instantly in this mock.
+    const user = {
+      ...body,
+      approved: body.role !== 'doctor',
+      createdAt: new Date().toISOString(),
+    };
     DB.users.push(user);
     DB.save();
     return { ok: true, user };
@@ -140,7 +147,7 @@ function handleMockPost(url, body) {
   if (url === '/api/auth/reset-password') {
     const user = DB.users.find((u) => u.phone === body.phone);
     if (!user) throw new Error('No account found for this phone number.');
-    user.pass = body.password;
+    user.password = body.password;
     DB.save();
     return { ok: true };
   }
@@ -151,7 +158,10 @@ function handleMockPost(url, body) {
       return { ok: true, user: { ...demo, role } };
     }
     const user = DB.users.find((u) => u.role === role && u.phone === username && u.password === password);
-    if (user) return { ok: true, user: { name: user.name, phone: user.phone, role } };
+    if (user) {
+      if (user.approved === false) throw new Error('Your registration is awaiting admin approval. Please try again later.');
+      return { ok: true, user: { name: user.name, phone: user.phone, role } };
+    }
     throw new Error('Invalid phone number or password.');
   }
   throw new Error('Unknown mock endpoint: ' + url);
@@ -246,6 +256,7 @@ function showView(name) {
    -------------------------------------------------------------------------- */
 const RULES = {
   required: (v) => (v.trim() ? '' : 'This field is required.'),
+  name: (v) => (/^[\p{L}][\p{L}\p{M}\s.'-]*$/u.test(v.trim()) ? '' : 'Name can contain only letters, spaces, dots, apostrophes and hyphens.'),
   phone: (v) => (/^[6-9]\d{9}$/.test(v.trim()) ? '' : 'Enter a valid 10-digit mobile number.'),
   email: (v) => (!v.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : 'Enter a valid email address.'),
   pincode: (v) => (/^\d{6}$/.test(v.trim()) ? '' : 'Enter a valid 6-digit PIN code.'),
