@@ -22,7 +22,9 @@ from ..models import (
     Encounter,
     Facility,
     FollowUpTask,
+    HomeCollectionBooking,
     LabOrder,
+    LabTechnician,
     Patient,
     Prescription,
     Referral,
@@ -337,6 +339,26 @@ def patient_timeline(patient_id: str, db: Session = Depends(get_db)):
             detail=tc.diagnosis or tc.reason or "No notes",
             status=tc.status,
             occurred_at=tc.requested_at,
+        ))
+
+    # Home sample collection bookings — the doctor watches the dispatch state
+    # (assigned -> collected/cancelled) right on the patient's record.
+    for hc in db.query(HomeCollectionBooking).filter(
+        HomeCollectionBooking.patient_id == patient_id
+    ).all():
+        tech_name = ""
+        if hc.technician_id:
+            t = db.get(LabTechnician, hc.technician_id)
+            tech_name = f" ({t.name})" if t else ""
+        items.append(TimelineItem(
+            kind="home_collection",
+            title=f"🏠 Home collection {hc.booking_ref}: {hc.status_alias()}",
+            detail=(f"Technician assigned{tech_name}" if hc.technician_id else
+                    "Waiting for technician allocation") +
+                   ", tests: " +
+                   ", ".join((t.get("name") or "") for t in (hc.tests or [])) or "Tests",
+            status=hc.status_alias(),
+            occurred_at=hc.updated_at or hc.created_at,
         ))
 
     items.sort(key=lambda i: i.occurred_at or datetime.min, reverse=True)

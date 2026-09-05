@@ -18,6 +18,7 @@
       <a href="teleconsult.html">Teleconsult</a>
       <a href="referrals.html">Referrals</a>
       <a href="pharmacy.html">Pharmacy</a>
+      <a href="/lab/collect.html">Home Collection</a>
     </nav>
     <div class="who"><b>Dr. Anil Verma</b><span>Medical Officer · PHC Sanda</span></div>
     <div class="portals"><a href="/asha/">ASHA</a><a href="/lab/">Lab</a><a href="/admin/">Admin</a></div>
@@ -75,7 +76,23 @@
           <button class="secondary small" id="add-med-btn" style="margin-top:6px">+ Add medicine</button>
 
           <h2 style="margin-top:18px">🔬 Order lab tests</h2>
-          <div id="test-checks" class="small"></div>
+          <label style="display:flex;gap:8px;align-items:center;font-weight:600;color:var(--green-dark);background:#eef7f3;border:1px solid #bcded1;border-radius:8px;padding:8px 10px;margin-bottom:8px">
+            <input type="checkbox" id="hc-required" style="width:auto">
+            Require Home Sample Collection <span class="muted" style="font-weight:400">(blood / urine at patient's home)</span>
+          </label>
+
+          <div class="alert green small" id="home-tests-panel" hidden style="padding:8px 10px">
+            <b>🏠 Home collectable tests</b>
+            <div id="home-test-checks"></div>
+          </div>
+          <div class="alert blue small" id="hospital-tests-panel" style="padding:8px 10px;margin-top:8px">
+            <b>🏥 Hospital diagnostic tests (OPD visit)</b>
+            <div id="hospital-test-checks"></div>
+          </div>
+          <p class="muted small" id="hc-hint" hidden style="margin-top:6px">
+            Non-collectable tests (ECG, X-Ray, USG) are routed to a <b>Hospital Visit / OPD booking</b>,
+            never to home collection.
+          </p>
 
           <div class="row" style="margin-top:14px">
             <button id="save-consult-btn">Save consultation & prescription</button>

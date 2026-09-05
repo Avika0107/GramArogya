@@ -350,6 +350,12 @@ class LabTest(Base):
     ref_critical_low: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     ref_critical_high: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     is_radiology: Mapped[bool] = mapped_column(Boolean, default=False)
+    # Home-collection routing (Home Sample Collection feature):
+    #   collection_type = home (blood/urine — collectable at home),
+    #                     hospital (radiology/imaging — OPD visit only),
+    #                     both   (eligible either way, doctor decides)
+    collection_type: Mapped[str] = mapped_column(String(10), default="hospital")
+    home_collectable: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 
@@ -380,6 +386,9 @@ class LabOrder(Base):
     facility_id: Mapped[Optional[str]] = mapped_column(ForeignKey("facilities.id"), nullable=True, index=True)
     ordered_by: Mapped[Optional[str]] = mapped_column(String(120), nullable=True)  # doctor name
     tests: Mapped[Optional[list]] = mapped_column(JSON, nullable=True)
+    # home | hospital | both — where the samples were/are being collected
+    # (set to "home" by the home-collection workflow).
+    collection_mode: Mapped[str] = mapped_column(String(10), default="hospital")
     status: Mapped[str] = mapped_column(String(20), default="ordered", index=True)
     ordered_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     sample_collected_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
@@ -532,3 +541,137 @@ class PendingMessage(Base):
     error: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     sent_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
+class LabTechnician(Base):
+    """Phlebotomy / sample-collection staff pool (Home Sample Collection).
+
+    `status` gates the allocation engine (only available technicians receive
+    bookings); the round-robin cursor (`route_counter`) picks fairly when the
+    doctor triggers collection without naming a technician.
+    """
+
+    __tablename__ = "lab_technicians"
+
+    STATUSES = ["available", "on_visit", "offline"]
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=gen_uuid)
+    name: Mapped[str] = mapped_column(String(120))
+    phone: Mapped[str] = mapped_column(String(15), unique=True)
+    district: Mapped[Optional[str]] = mapped_column(String(120), nullable=True)
+    base_facility_id: Mapped[Optional[str]] = mapped_column(
+        ForeignKey("facilities.id"), nullable=True
+    )
+    status: Mapped[str] = mapped_column(String(15), default="available", index=True)
+    cert: Mapped[Optional[str]] = mapped_column(String(60), nullable=True)
+    route_counter: Mapped[int] = mapped_column(Integer, default=0)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class HomeCollectionBooking(Base):
+    """Home sample-collection dispatch + technician visit record.
+
+    Created by the doctor's "Require Home Sample Collection" flow. Status
+    machine (lowercase in DB; the API also exposes SCREAMING_CASE aliases):
+
+      home_collection_pending -> technician_assigned -> scheduled_visit
+             |                        |                       |
+             |      technician_assigned/scheduled_visit -- (collected) -> sample_collected
+             |                                                        -> lab pipeline
+             +--- first no-show: unavailable_rescheduled (slot auto-moved)
+             |        second no-show / patient cancel: sampling_cancelled
+
+    visit_number counts technician visits (1 = first, 2 = rescheduled attempt).
+    """
+
+    __tablename__ = "home_collection_bookings"
+
+    # Canonical states (lowercase, snake_case — consistent with the rest of
+    # the schema). HomeCollectionBooking.status_alias() maps to the
+    # spec's SCREAMING_SNAKE_CASE labels for API consumers.
+    STATUSES = [
+        "home_collection_pending",
+        "technician_assigned",
+        "scheduled_visit",
+        "unavailable_rescheduled",
+        "sample_collected",
+        "sampling_cancelled",
+    ]
+    STATUS_ALIASES = {
+        "home_collection_pending": "HOME_COLLECTION_PENDING",
+        "technician_assigned": "TECHNICIAN_ASSIGNED",
+        "scheduled_visit": "SCHEDULED_VISIT",
+        "unavailable_rescheduled": "UNAVAILABLE_RESCHEDULED",
+        "sample_collected": "SAMPLE_COLLECTED",
+        "sampling_cancelled": "SAMPLING_CANCELLED",
+    }
+    # Booking status -> allowed EVENT names (assign | collected | unavailable |
+    # cancel), enforced by HomeCollectionBooking.can_transition().
+    ALLOWED_TRANSITIONS: dict[str, set[str]] = {
+        "home_collection_pending": {"assign", "cancel"},
+        "technician_assigned": {"collected", "unavailable", "cancel"},
+        "scheduled_visit": {"collected", "unavailable", "cancel"},
+        "unavailable_rescheduled": {"collected", "unavailable", "cancel"},
+        "sample_collected": set(),
+        "sampling_cancelled": set(),
+    }
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=gen_uuid)
+    booking_ref: Mapped[str] = mapped_column(String(20), unique=True)  # HC-<fac>-<seq>
+    patient_id: Mapped[str] = mapped_column(ForeignKey("patients.id", ondelete="CASCADE"), index=True)
+    facility_id: Mapped[str] = mapped_column(ForeignKey("facilities.id"), index=True)
+    lab_order_id: Mapped[Optional[str]] = mapped_column(
+        ForeignKey("lab_orders.id", ondelete="SET NULL"), nullable=True
+    )
+    encounter_id: Mapped[Optional[str]] = mapped_column(
+        ForeignKey("encounters.id", ondelete="SET NULL"), nullable=True
+    )
+    ordered_by: Mapped[Optional[str]] = mapped_column(String(120), nullable=True)  # doctor name
+    tests: Mapped[Optional[list]] = mapped_column(JSON, nullable=True)  # [{code, name}]
+    status: Mapped[str] = mapped_column(String(30), default="home_collection_pending", index=True)
+    technician_id: Mapped[Optional[str]] = mapped_column(
+        ForeignKey("lab_technicians.id", ondelete="SET NULL"), nullable=True, index=True
+    )
+    visit_number: Mapped[int] = mapped_column(Integer, default=0)  # 0 pending | 1 first | 2 reschedule
+    scheduled_slot_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    assigned_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    started_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    collected_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    cancelled_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    cancel_reason: Mapped[Optional[str]] = mapped_column(String(120), nullable=True)
+    notes: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+    def can_transition(self, event: str) -> bool:
+        """True if `event` is a legal next step from the current status."""
+        return event in self.ALLOWED_TRANSITIONS.get(self.status, set())
+
+    def status_alias(self) -> str:
+        """Spec-facing label, e.g. 'technician_assigned' -> 'TECHNICIAN_ASSIGNED'."""
+        return self.STATUS_ALIASES.get(self.status, self.status.upper())
+
+
+class AuditLog(Base):
+    """Immutable audit trail for sensitive home-collection actions.
+
+    Every VIEW_PATIENT_ADDRESS, status UPDATE_STATUS and masked-call
+    INITIATE_MASKED_CALL request appends a row with actor + timestamp + the
+    booking it belongs to, so the technician workflow is fully traceable.
+    """
+
+    __tablename__ = "audit_logs"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=gen_uuid)
+    booking_id: Mapped[Optional[str]] = mapped_column(
+        ForeignKey("home_collection_bookings.id", ondelete="CASCADE"), nullable=True, index=True
+    )
+    patient_id: Mapped[Optional[str]] = mapped_column(
+        ForeignKey("patients.id", ondelete="SET NULL"), nullable=True
+    )
+    actor_id: Mapped[Optional[str]] = mapped_column(String(120), nullable=True)
+    actor_role: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
+    action: Mapped[str] = mapped_column(String(60))  # VIEW_PATIENT_ADDRESS | UPDATE_STATUS | ...
+    detail: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    meta: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)

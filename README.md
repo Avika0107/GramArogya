@@ -9,11 +9,18 @@ healthcare system. One FastAPI + PostgreSQL backend serves three web apps:
 | **PHC Doctor Portal** | `/doctor/` | PHC dashboard, OPD token queue, consultation + stock-aware e-prescription, lab ordering, teleconsult (audio/video/chat), referral tracking, pharmacy |
 | **Lab Technician Portal** | `/lab/` | Diagnostic order pipeline (sample → dispatch → process → ready), structured results with auto flags, report upload, turnaround time |
 | **District Admin Dashboard** | `/admin/` | District roll-ups + facility performance, referral funnel, follow-up compliance, diagnostic TAT, stock-out alerts, date/type filters |
+| **Home Sample Collection** | `/lab/collect.html` | Doctor-triggered blood/urine collection at home — strict test routing (radiology → OPD), technician allocation, two-visit no-show policy, masked-call proxy, audit trail, screenshot guard |
 | API docs | `/docs` | Interactive Swagger UI for all endpoints |
 
 > **Milestone status:** all four roles are implemented and runnable end-to-end
 > against one backend (SQLite or PostgreSQL). Roles are demo-gated with the
 > `X-GramArogya-Role` header (asha | doctor | lab | admin).
+>
+> **Home Sample Collection** (in the doctor + lab portals) adds: prescribed
+> home collection for the blood/urine catalogue only, technician round-robin
+> assignment, auto-reschedule after a first missed visit and auto-cancel +
+> doctor alert after a second, masked-call proxying (no raw phone numbers in
+> the UI), an audit trail, and a screenshot-protected technician view.
 
 ---
 
@@ -79,6 +86,11 @@ All routes are prefixed `/api/v1`. Open `/docs` for the interactive explorer.
 | GET/POST | `/followups` + `PATCH /{id}` | High-risk follow-up tasks (maternal, child, diabetes, hypertension, TB, elderly) with due-today/overdue buckets |
 | GET | `/lab/tests`, `GET/POST /lab/orders`, `PATCH …/status`, `POST …/results`, `POST …/report` | Diagnostic catalogue → order pipeline → structured results auto-flagged normal/high/low/critical, report upload, TAT |
 | GET/POST | `/teleconsult` + `PATCH …/action` `PATCH …/notes` | Assisted teleconsult queue: video/audio/chat requests, accept/decline/start/complete, notes written to the record |
+| POST | `/home-collection/prescribe` | Doctor prescribes with home-collection routing: home-collectable tests → booking, radiology → hospital OPD list, ineligible-home → 422 |
+| POST | `/home-collection/assign-technician` | Technician allocation engine (round-robin or named) → `TECHNICIAN_ASSIGNED` |
+| POST | `/home-collection/visit-status` | Visit events `collected` / `unavailable` / `cancel`: 1st unavailable → auto-reschedule, 2nd → `SAMPLING_CANCELLED` + doctor/patient SMS |
+| POST | `/home-collection/initiate-masked-call` · `GET …/bookings/{id}/address` | Masked-call proxy bridge (numbers stay masked) + audited address reveal (`VIEW_PATIENT_ADDRESS`) |
+| GET | `/home-collection/bookings` `/audit` `/technicians` | Dispatch board (masked phones), audit trail feed, phlebotomy pool |
 | POST | `/encounters` + `PATCH /encounters/{id}` | Doctor opens an OPD visit and writes back diagnosis/notes/advice/vitals/follow-up date |
 | GET | `/dashboard/phc?facility_id=` | Live PHC board: OPD count, queue depth, RED cases, pending referrals/lab, follow-ups due, stock-outs, weekly trend |
 | GET | `/dashboard/district?district=&facility_type=&date_from=&date_to=` | District roll-up + facility performance table, funnel, compliance, TAT |
@@ -90,7 +102,9 @@ All routes are prefixed `/api/v1`. Open `/docs` for the interactive explorer.
 `encounters` · `triage_records` · `referrals` (state machine) ·
 `appointments` (OPD tokens) · `follow_up_tasks` · `lab_tests`/`lab_orders`/
 `lab_results` · `teleconsult_requests` · `medicines` + `inventory` ·
-`prescriptions` · `pending_messages` (SMS queue). See
+`prescriptions` · `pending_messages` (SMS queue) · `lab_technicians` /
+`home_collection_bookings` (home sample collection dispatch + two-visit
+policy) · `audit_logs` (address reveals, status changes, masked calls). See
 [`backend/schema.sql`](backend/schema.sql).
 
 New tables are created automatically by `create_all` on startup; columns
@@ -147,6 +161,37 @@ provider class is the only thing that changes).
 5. **Admin stock-out** — the dashboard lists snake-venom serum at 0 units at
    the PHC (critical) with the nearby CHC holding stock 12 (8 km away) — the
    exact alert the doctor portal surfaces mid-prescription.
+
+## Home Sample Collection demo (doctor → technician → patient)
+
+1. **Doctor prescribes with home collection** — open `/doctor/patient.html?id=<id>`,
+   tick **☑ Require Home Sample Collection**, keep the 🏠 home-collectable tests
+   checked, also tick an ECG/X-Ray if you like, then **Save consultation**.
+   Eligible tests create a `HOME_COLLECTION_PENDING` booking; radiology tests
+   are returned as *hospital tests* (OPD) — they can never ride home collection
+   (`POST /api/v1/home-collection/prescribe` rejects them with a 422 if asked).
+2. **Technician mobile view** — open `/lab/collect.html`, pick a technician.
+   Unassigned bookings appear under *Awaiting technician* → **Assign to me**
+   (or use `POST /api/v1/home-collection/assign-technician` for the server's
+   round-robin engine) → status becomes `TECHNICIAN_ASSIGNED` and a slot is
+   auto-scheduled. Phones are masked (`+91-XXXX-XXX-3201`).
+3. **At the door** — **▶ Start visit** reveals the address (audit-logged as
+   `VIEW_PATIENT_ADDRESS`), then **📞 Call via proxy bridge** demonstrates the
+   masked-call endpoint (no raw number is ever served to the UI).
+4. **Two-visit policy** — report *Patient unavailable* once → booking
+   auto-reschedules (`UNAVAILABLE_RESCHEDULED`, visit 2). Report it again →
+   `SAMPLING_CANCELLED`, doctor + patient get queued SMS. *Samples collected*
+   moves the underlying lab order into the normal pipeline (dispatched →
+   received → processing → report ready on `/lab/`).
+5. **Watch the trail** — the technician's *Audit trail* tab (or
+   `GET /api/v1/home-collection/audit`) shows every sensitive action with the
+   actor, timestamp and booking.
+
+Security notes: the technician view blanks itself on print/screenshot key
+combos and pins zoom (best-effort Web equivalent of Android `FLAG_SECURE`;
+see the banner on `/lab/collect.html` for the native one-liner), and the
+lab/doctor portals identify callers via `X-GramArogya-Role` +
+`X-GramArogya-User` so the audit log can name the actor.
 
 ## Project layout
 

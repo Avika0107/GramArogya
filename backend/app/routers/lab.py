@@ -46,6 +46,8 @@ def _test_out(t: LabTest) -> LabTestOut:
     return LabTestOut(
         id=t.id, code=t.code, name=t.name, category=t.category, unit=t.unit,
         ref_low=t.ref_low, ref_high=t.ref_high, is_radiology=t.is_radiology,
+        collection_type=getattr(t, "collection_type", "hospital"),
+        home_collectable=getattr(t, "home_collectable", False),
         ref_display=ref,
     )
 
@@ -89,6 +91,7 @@ def _order_out(db: Session, order: LabOrder) -> LabOrderOut:
         ordered_by=order.ordered_by,
         tests=order.tests or [],
         status=order.status,
+        collection_mode=getattr(order, "collection_mode", "hospital"),
         ordered_at=order.ordered_at,
         sample_collected_at=order.sample_collected_at,
         dispatched_at=order.dispatched_at,

@@ -20,9 +20,11 @@ from .models import (
     Encounter,
     Facility,
     FollowUpTask,
+    HomeCollectionBooking,
     Inventory,
     LabOrder,
     LabResult,
+    LabTechnician,
     LabTest,
     Medicine,
     Patient,
@@ -623,6 +625,121 @@ def seed_portal_users_if_empty(db) -> bool:
     return True
 
 
+# ---------------------------------------------------------------------------
+# Home sample collection demo data (doctors' lab catalogue + phlebotomy pool)
+# ---------------------------------------------------------------------------
+def seed_home_collection_if_empty(db) -> bool:
+    """Backfill the home-collection catalogue flags, lab technicians and a
+    few dispatch bookings onto fresh AND existing databases.
+
+    Independent of the other module seeds so an upgraded DB still gets the
+    technicians/board. Also flips the strictly-home-collectable blood/urine
+    tests in lab_tests (feature 1) — idempotent, catalogue-row based.
+    """
+    seeded_any = False
+
+    # 1) Mark the home-collectable blood/urine subset on the existing lab
+    #    catalogue (radiology/imaging tests stay hospital-only).
+    home_flags = {
+        "FBS": "home", "HBA1C": "home", "LFT": "home", "CREAT": "home",
+        "TSH": "home", "CBC": "home", "PLT": "home", "TC": "home",
+        "DENGUE": "home", "MP": "home", "URINE": "home",
+    }
+    for code, ctype in home_flags.items():
+        test = db.query(LabTest).filter(LabTest.code == code).first()
+        if test and test.collection_type == "hospital":
+            test.collection_type = ctype
+            test.home_collectable = True
+            seeded_any = True
+
+    # 2) Phlebotomy pool (deliverable: technician allocation engine).
+    if db.query(LabTechnician).count() == 0:
+        phc = db.query(Facility).filter(Facility.hfr_id == "HFR09-200012").first()
+        db.add_all([
+            LabTechnician(
+                name="Rajesh Kumar", phone="+919811220001", district="Barabanki",
+                base_facility_id=phc.id if phc else None, status="available",
+                cert="DMLT — Phlebotomy", route_counter=0),
+            LabTechnician(
+                name="Priya Singh", phone="+919811220002", district="Barabanki",
+                base_facility_id=phc.id if phc else None, status="available",
+                cert="DMLT — Phlebotomy", route_counter=0),
+            LabTechnician(
+                name="Arun Verma", phone="+919811220003", district="Barabanki",
+                base_facility_id=phc.id if phc else None, status="available",
+                cert="Sample transport", route_counter=0),
+        ])
+        db.flush()  # ids + rows visible to the booking block below
+        seeded_any = True
+
+    # 3) A couple of demo bookings so the technician board is populated.
+    if db.query(HomeCollectionBooking).count() == 0:
+        by_abha = {p.abha_id: p for p in db.query(Patient).all()}
+        phc = db.query(Facility).filter(Facility.hfr_id == "HFR09-200012").first()
+        techs = db.query(LabTechnician).order_by(LabTechnician.name).all()
+        abdul = by_abha.get("91214455667704")   # diabetic follow-up
+        sunita = by_abha.get("91214455667701")  # hypertensive
+        if phc and abdul and sunita and techs:
+            now = utcnow()
+            abdul_order = db.query(LabOrder).filter(
+                LabOrder.patient_id == abdul.id, LabOrder.collection_mode == "home"
+            ).first()
+            if not abdul_order:
+                abdul_order = LabOrder(
+                    patient_id=abdul.id, facility_id=phc.id,
+                    ordered_by="Dr. Anil Verma", collection_mode="home",
+                    tests=[{"code": "FBS", "name": "Blood Sugar (Fasting)"},
+                           {"code": "HBA1C", "name": "HbA1c"}],
+                    status="ordered",
+                )
+                db.add(abdul_order)
+                db.flush()
+            booking1 = HomeCollectionBooking(
+                booking_ref="HC-200012-0001", patient_id=abdul.id,
+                facility_id=phc.id, lab_order_id=abdul_order.id,
+                ordered_by="Dr. Anil Verma",
+                tests=[{"code": "FBS", "name": "Blood Sugar (Fasting)"},
+                       {"code": "HBA1C", "name": "HbA1c"}],
+                status="technician_assigned", technician_id=techs[0].id,
+                visit_number=1,
+                scheduled_slot_at=(now + timedelta(days=1)).replace(
+                    hour=8, minute=0, second=0, microsecond=0),
+                assigned_at=now - timedelta(hours=3),
+                notes="Diabetic follow-up — fasting required",
+                created_at=now - timedelta(hours=4),
+            )
+
+            sunita_order = db.query(LabOrder).filter(
+                LabOrder.patient_id == sunita.id, LabOrder.collection_mode == "home"
+            ).first()
+            if not sunita_order:
+                sunita_order = LabOrder(
+                    patient_id=sunita.id, facility_id=phc.id,
+                    ordered_by="Dr. Anil Verma", collection_mode="home",
+                    tests=[{"code": "CBC", "name": "Complete Blood Count"},
+                           {"code": "LFT", "name": "Liver Function Test (ALT)"}],
+                    status="ordered",
+                )
+                db.add(sunita_order)
+                db.flush()
+            booking2 = HomeCollectionBooking(
+                booking_ref="HC-200012-0002", patient_id=sunita.id,
+                facility_id=phc.id, lab_order_id=sunita_order.id,
+                ordered_by="Dr. Anil Verma",
+                tests=[{"code": "CBC", "name": "Complete Blood Count"},
+                       {"code": "LFT", "name": "Liver Function Test (ALT)"}],
+                status="home_collection_pending",  # no technician yet
+                visit_number=0,
+                created_at=now - timedelta(hours=1),
+            )
+            db.add_all([booking1, booking2])
+            seeded_any = True
+
+    if seeded_any:
+        db.commit()
+    return seeded_any
+
+
 if __name__ == "__main__":
     db = SessionLocal()
     try:
@@ -632,5 +749,7 @@ if __name__ == "__main__":
             print("Database already has data — nothing to do.")
         if seed_portal_users_if_empty(db):
             print("Seeded demo portal accounts.")
+        if seed_home_collection_if_empty(db):
+            print("Seeded home-collection demo data.")
     finally:
         db.close()
