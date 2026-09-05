@@ -62,6 +62,23 @@ def ensure_columns(engine) -> None:
         for table, column, col_type in missing:
             conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {column} {col_type}"))
 
+    # Non-nullable columns introduced after a table was first created cannot
+    # ride the generic nullable-only diff above, so they get an explicit,
+    # additive ALTER with a DEFAULT backfilled for existing rows. No-op on
+    # fresh databases (create_all built them complete).
+    with engine.begin() as conn:
+        insp = inspect(engine)
+        live = {t: {c["name"] for c in insp.get_columns(t)} for t in insp.get_table_names()}
+        dialect = engine.dialect
+        for _table, _col, _ddl in (
+            # Home-collection routing columns on the existing lab tables
+            ("lab_tests", "collection_type", "VARCHAR(10) NOT NULL DEFAULT 'hospital'"),
+            ("lab_tests", "home_collectable", "BOOLEAN NOT NULL DEFAULT FALSE"),
+            ("lab_orders", "collection_mode", "VARCHAR(10) NOT NULL DEFAULT 'hospital'"),
+        ):
+            if _table in live and _col not in live[_table]:
+                conn.execute(text(f"ALTER TABLE {_table} ADD COLUMN {_col} {_ddl}"))
+
 
 def get_db():
     """FastAPI dependency that yields a database session per request."""

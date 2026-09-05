@@ -347,3 +347,70 @@ CREATE TABLE IF NOT EXISTS portal_users (
 );
 CREATE INDEX IF NOT EXISTS idx_portal_role_status ON portal_users (role, status);
 CREATE INDEX IF NOT EXISTS idx_portal_phone ON portal_users (phone);
+-- ---------------------------------------------------------------------------
+-- 14. HOME SAMPLE COLLECTION (blood/urine at home; radiology -> hospital OPD)
+--     A LabTest row drives routing: collection_type = home | hospital | both.
+--     home_collection_bookings is the technician dispatch + visit record; the
+--     actual tests ride on a LabOrder (home bookings reference lab_orders.id).
+--     LabOrder.collection_mode remembers where the sample was taken.
+-- ---------------------------------------------------------------------------
+ALTER TABLE lab_tests ADD COLUMN IF NOT EXISTS collection_type VARCHAR(10) NOT NULL DEFAULT 'hospital';  -- home|hospital|both
+ALTER TABLE lab_tests ADD COLUMN IF NOT EXISTS home_collectable BOOLEAN NOT NULL DEFAULT FALSE;
+ALTER TABLE lab_orders ADD COLUMN IF NOT EXISTS collection_mode VARCHAR(10) NOT NULL DEFAULT 'hospital'; -- home|hospital|both
+
+CREATE TABLE IF NOT EXISTS lab_technicians (
+    id            UUID PRIMARY KEY,
+    name          VARCHAR(120) NOT NULL,
+    phone         VARCHAR(15) NOT NULL UNIQUE,
+    district      VARCHAR(120),
+    base_facility_id UUID REFERENCES facilities (id),
+    status        VARCHAR(15) NOT NULL DEFAULT 'available',  -- available|on_visit|offline
+    cert          VARCHAR(60),
+    route_counter INTEGER NOT NULL DEFAULT 0,   -- round-robin assignment cursor
+    created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_tech_status ON lab_technicians (status);
+
+CREATE TABLE IF NOT EXISTS home_collection_bookings (
+    id                 UUID PRIMARY KEY,
+    booking_ref        VARCHAR(20) NOT NULL UNIQUE,          -- HC-<facility>-<seq>, human readable
+    patient_id         UUID NOT NULL REFERENCES patients (id) ON DELETE CASCADE,
+    facility_id        UUID NOT NULL REFERENCES facilities (id),
+    lab_order_id       UUID REFERENCES lab_orders (id) ON DELETE SET NULL,
+    encounter_id       UUID REFERENCES encounters (id) ON DELETE SET NULL,
+    ordered_by         VARCHAR(120),                          -- doctor name
+    tests              JSONB DEFAULT '[]'::jsonb,             -- [{code, name}] snapshot
+    status             VARCHAR(30) NOT NULL DEFAULT 'home_collection_pending',
+    technician_id      UUID REFERENCES lab_technicians (id) ON DELETE SET NULL,
+    visit_number       INTEGER NOT NULL DEFAULT 0,            -- 0 pending | 1 first | 2 rescheduled
+    scheduled_slot_at  TIMESTAMPTZ,                           -- next planned home visit
+    assigned_at        TIMESTAMPTZ,
+    started_at         TIMESTAMPTZ,                           -- technician starts the visit
+    collected_at       TIMESTAMPTZ,                           -- samples taken at home
+    cancelled_at       TIMESTAMPTZ,
+    cancel_reason      VARCHAR(120),                          -- second_no_show | patient_request ...
+    notes              TEXT,
+    created_at         TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at         TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_hc_status ON home_collection_bookings (status);
+CREATE INDEX IF NOT EXISTS idx_hc_technician ON home_collection_bookings (technician_id);
+CREATE INDEX IF NOT EXISTS idx_hc_patient ON home_collection_bookings (patient_id);
+
+-- ---------------------------------------------------------------------------
+-- 15. AUDIT LOGS — every sensitive action (VIEW_PATIENT_ADDRESS, masked-call
+--     requests, status updates) appends a row. actor_id is the portal user id
+--     when known, otherwise the role/display name sent by the portal.
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS audit_logs (
+    id           UUID PRIMARY KEY,
+    booking_id   UUID REFERENCES home_collection_bookings (id) ON DELETE CASCADE,
+    patient_id   UUID REFERENCES patients (id) ON DELETE SET NULL,
+    actor_id     VARCHAR(120),
+    actor_role   VARCHAR(20),
+    action       VARCHAR(60) NOT NULL,      -- e.g. VIEW_PATIENT_ADDRESS, UPDATE_STATUS, INITIATE_MASKED_CALL
+    detail       TEXT,
+    meta         JSONB DEFAULT '{}'::jsonb,
+    created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_audit_booking ON audit_logs (booking_id, created_at);

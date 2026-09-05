@@ -16,6 +16,21 @@ from fastapi import Header, HTTPException
 VALID_ROLES = {"asha", "doctor", "lab", "admin", "kiosk"}
 
 
+def current_actor(
+    x_gramarogya_role: Optional[str] = Header(default=None, alias="X-GramArogya-Role"),
+    x_gramarogya_user: Optional[str] = Header(default=None, alias="X-GramArogya-User"),
+) -> tuple[Optional[str], Optional[str]]:
+    """Capture the caller's identity for audit logging.
+
+    Returns (actor_id, actor_role): actor_id is the free-text staff name sent
+    by the portal in `X-GramArogya-User` (demo stand-in for a session user
+    id), falling back to the role when absent.
+    """
+    role = (x_gramarogya_role or "").strip().lower()
+    user = (x_gramarogya_user or "").strip()
+    return (user or None, role or None)
+
+
 def require_role(*roles: str) -> Callable:
     """FastAPI dependency factory: allow only the listed staff roles.
 

@@ -30,6 +30,7 @@ from .routers import (
     doctor,
     facilities,
     followups,
+    home_collection,
     inventory,
     kiosk,
     lab,
@@ -41,7 +42,12 @@ from .routers import (
     triage,
     ws,
 )
-from .seed import seed_if_empty, seed_modules_if_empty, seed_portal_users_if_empty
+from .seed import (
+    seed_home_collection_if_empty,
+    seed_if_empty,
+    seed_modules_if_empty,
+    seed_portal_users_if_empty,
+)
 
 logger = logging.getLogger("gramarogya")
 logging.basicConfig(level=logging.INFO)
@@ -67,6 +73,8 @@ async def lifespan(_app: FastAPI):
             logger.info("Backfilled module demo data (appointments, lab, follow-ups, teleconsults).")
         if seed_portal_users_if_empty(db):
             logger.info("Seeded demo portal accounts (login + doctor approval demo).")
+        if seed_home_collection_if_empty(db):
+            logger.info("Seeded home-collection demo data (technicians, home-collectable flags, bookings).")
     finally:
         db.close()
     yield
@@ -101,6 +109,7 @@ api.include_router(doctor.router)
 api.include_router(appointments.router)
 api.include_router(followups.router)
 api.include_router(lab.router)
+api.include_router(home_collection.router)
 api.include_router(teleconsult.router)
 api.include_router(dashboard.router)
 api.include_router(kiosk.router)

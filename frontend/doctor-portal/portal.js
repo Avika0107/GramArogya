@@ -420,6 +420,7 @@ let ENC_ID = Q.get('enc') || '';      // existing triage encounter (from queue)
 let APPT_ID = Q.get('appt') || '';
 let RX_ITEMS = [];
 let CHECKED_TESTS = [];
+let TEST_CATALOG = [];     // [{code, name, home_collectable, collection_type}]
 
 async function initPatient() {
   await ensureFacility();
@@ -430,6 +431,8 @@ async function initPatient() {
     document.getElementById('print-rx-btn').addEventListener('click', printPrescription);
     document.getElementById('add-med-btn').addEventListener('click', () => addRxRow());
     document.getElementById('save-consult-btn').addEventListener('click', saveConsultation);
+    const hc = document.getElementById('hc-required');
+    if (hc) hc.addEventListener('change', () => syncHomeCollectionUI(true));
   }
   await loadMedicineData();
 
@@ -499,16 +502,46 @@ async function renderTimeline() {
   } catch (e) { box.textContent = e.message; }
 }
 
+/* Split the lab catalogue (feature 1): the home-collectable blood/urine
+ * subset vs hospital diagnostic tests. Non-collectable tests (radiology)
+ * only ever appear under the Hospital group. */
 async function buildTestChecks() {
-  const box = document.getElementById('test-checks');
+  const homeBox = document.getElementById('home-test-checks');
+  const hospBox = document.getElementById('hospital-test-checks');
   try {
-    const tests = await api('/lab/tests');
+    TEST_CATALOG = await api('/lab/tests');
     CHECKED_TESTS = [];
-    box.innerHTML = tests.map((t) =>
+    const home = TEST_CATALOG.filter((t) => t.home_collectable || t.collection_type === 'home' || t.collection_type === 'both');
+    const hosp = TEST_CATALOG.filter((t) => !home.includes(t));
+    const checkbox = (t) =>
       '<label style="font-weight:400;display:inline-flex;gap:6px;margin:2px 10px 2px 0;align-items:center">' +
       '<input type="checkbox" value="' + t.code + '" data-name="' + esc(t.name) + '" style="width:auto"> ' +
-      esc(t.name) + (t.ref_display ? ' <span class="muted">(' + t.ref_display + ')</span>' : '') + '</label>').join('');
-  } catch (e) { box.textContent = 'Lab catalogue unavailable'; }
+      esc(t.name) + (t.ref_display ? ' <span class="muted">(' + t.ref_display + ')</span>' : '') +
+      (t.is_radiology ? ' <span class="muted">(imaging)</span>' : '') + '</label>';
+    homeBox.innerHTML = home.length
+      ? home.map(checkbox).join('')
+      : '<span class="muted">No home-collectable tests available.</span>';
+    hospBox.innerHTML = hosp.map(checkbox).join('');
+  } catch (e) {
+    homeBox.textContent = 'Lab catalogue unavailable';
+    hospBox.textContent = '';
+  }
+  syncHomeCollectionUI();
+}
+
+function syncHomeCollectionUI(autoSelect) {
+  const hc = document.getElementById('hc-required');
+  const panel = document.getElementById('home-tests-panel');
+  const hint = document.getElementById('hc-hint');
+  if (!hc || !panel) return;
+  panel.hidden = !hc.checked;
+  if (hint) hint.hidden = !hc.checked;
+  if (hc.checked && autoSelect) {
+    // Fired by the master toggle: pre-check the home-collectable tests so
+    // the doctor only unchecks what is truly not needed at home. The plain
+    // show/hide path (autoSelect falsy) never fights the doctor's choices.
+    document.querySelectorAll('#home-test-checks input').forEach((cb) => { cb.checked = true; });
+  }
 }
 
 function addRxRow() {
@@ -617,29 +650,72 @@ async function saveConsultation() {
       });
     }
 
-    // 4) Lab orders
+    // 4) Lab orders — split by collection route (feature 1)
+    //    home-collectable tests + the doctor's manual home-collection
+    //    checkbox -> /home-collection/prescribe (creates the dispatch
+    //    booking). Hospital diagnostic tests (ECG/X-Ray/USG) stay ordinary
+    //    lab orders = OPD visit.
+    const hcRequired = document.getElementById('hc-required').checked;
     const chosen = [];
-    document.querySelectorAll('#test-checks input:checked').forEach((cb) => {
-      chosen.push({ code: cb.value, name: cb.getAttribute('data-name') });
+    document.querySelectorAll('#home-test-checks input:checked').forEach((cb) => {
+      chosen.push({ code: cb.value, name: cb.getAttribute('data-name'), mode: 'home' });
     });
+    document.querySelectorAll('#hospital-test-checks input:checked').forEach((cb) => {
+      chosen.push({ code: cb.value, name: cb.getAttribute('data-name'), mode: 'hospital' });
+    });
+    let hcMsg = '';
+    let hospCount = 0;
     if (chosen.length) {
-      await api('/lab/orders', {
-        method: 'POST',
-        body: JSON.stringify({
-          patient_id: P.id,
-          encounter_id: ENC_ID,
-          facility_id: currentFacilityId,
-          ordered_by: DOCTOR_NAME,
-          tests: chosen,
-        }),
-      });
+      const homeTests = chosen.filter((t) => t.mode === 'home');
+      const hospTests = chosen.filter((t) => t.mode === 'hospital');
+      if (hcRequired && homeTests.length) {
+        const res = await api('/home-collection/prescribe', {
+          method: 'POST',
+          body: JSON.stringify({
+            patient_id: P.id,
+            encounter_id: ENC_ID,
+            facility_id: currentFacilityId,
+            doctor_name: DOCTOR_NAME,
+            diagnosis: payload.diagnosis,
+            notes: payload.notes,
+            home_collection_required: true,
+            tests: homeTests,
+          }),
+        });
+        const b = res.booking;
+        hcMsg = b ? ' · 🏠 home collection ' + b.booking_ref + ' (' + b.status_alias.replace(/_/g, ' ') + ')' : '';
+        if (res.rejected_tests && res.rejected_tests.length) {
+          toast('Some tests cannot be collected at home — routed to hospital OPD: ' +
+            res.rejected_tests.join(', '), 'warn');
+        }
+      } else {
+        // Hospital-only route (or home toggle off): keep the OPD lab order.
+        hospTests.push(...homeTests);
+      }
+      hospCount = hospTests.length;
+      if (hospTests.length) {
+        await api('/lab/orders', {
+          method: 'POST',
+          body: JSON.stringify({
+            patient_id: P.id,
+            encounter_id: ENC_ID,
+            facility_id: currentFacilityId,
+            ordered_by: DOCTOR_NAME,
+            tests: hospTests.map((t) => ({ code: t.code, name: t.name })),
+          }),
+        });
+      }
     }
 
-    toast('Consultation saved ✓ (diagnosis, ' + items.length + ' medicine(s)' +
-      (chosen.length ? ', ' + chosen.length + ' lab order(s)' : '') + ')', 'ok');
+    toast('Consultation saved ✓ (diagnosis, ' + items.length + ' medicine(s), ' +
+      chosen.length + ' lab test(s)' + hcMsg +
+      (hospCount ? ' · 🏥 ' + hospCount + ' OPD' : '') + ')', 'ok');
     renderTimeline();
     CHECKED_TESTS = chosen;
-    document.querySelectorAll('#test-checks input:checked').forEach((cb) => { cb.checked = false; });
+    document.querySelectorAll('#home-test-checks input:checked, #hospital-test-checks input:checked')
+      .forEach((cb) => { cb.checked = false; });
+    document.getElementById('hc-required').checked = false;
+    syncHomeCollectionUI(false);
   } catch (e) {
     toast('Save failed: ' + e.message, 'error');
   } finally {

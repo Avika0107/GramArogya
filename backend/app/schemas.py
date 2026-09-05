@@ -492,7 +492,127 @@ class LabTestOut(BaseModel):
     ref_low: Optional[float] = None
     ref_high: Optional[float] = None
     is_radiology: bool
+    # home (collectable at home) | hospital (OPD visit required) | both
+    collection_type: str = "hospital"
+    home_collectable: bool = False
     ref_display: Optional[str] = None
+
+
+# ---------------------------------------------------------------------------
+# Home sample collection (doctor prescribe + technician dispatch)
+# ---------------------------------------------------------------------------
+class TechnicianOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: str
+    name: str
+    phone: str
+    district: Optional[str] = None
+    status: str
+    cert: Optional[str] = None
+
+
+class HomeCollectionBookingOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: str
+    booking_ref: str
+    patient_id: str
+    patient_name: Optional[str] = None
+    abha_id: Optional[str] = None
+    patient_phone_masked: Optional[str] = None  # +91-XXXX-XX-3201 (real number never sent)
+    village: Optional[str] = None
+    patient_address: Optional[str] = None  # only populated by /address (audited)
+    facility_id: str
+    facility_name: Optional[str] = None
+    encounter_id: Optional[str] = None
+    lab_order_id: Optional[str] = None
+    ordered_by: Optional[str] = None
+    tests: List[Dict[str, str]] = Field(default_factory=list)
+    status: str  # snake_case canonical
+    status_alias: str = ""  # spec label, e.g. HOME_COLLECTION_PENDING
+    technician_id: Optional[str] = None
+    technician_name: Optional[str] = None
+    technician_phone: Optional[str] = None
+    visit_number: int = 0
+    scheduled_slot_at: Optional[datetime] = None
+    assigned_at: Optional[datetime] = None
+    collected_at: Optional[datetime] = None
+    cancelled_at: Optional[datetime] = None
+    cancel_reason: Optional[str] = None
+    notes: Optional[str] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+
+class TechnicianAssignRequest(BaseModel):
+    booking_id: str
+    technician_id: Optional[str] = None  # None = engine picks round-robin
+    scheduled_slot_at: Optional[datetime] = None
+
+
+class VisitStatusRequest(BaseModel):
+    booking_id: str
+    event: Literal["collected", "unavailable", "cancel"]
+    cancel_reason: Optional[str] = None
+    notes: Optional[str] = None
+
+
+class MaskedCallRequest(BaseModel):
+    booking_id: str
+
+
+class MaskedCallOut(BaseModel):
+    ok: bool
+    booking_id: str
+    masked_number: str  # e.g. +91-XXXX-XXX-201 — dial-through proxy display
+    dial_through_url: Optional[str] = None  # simulated "proxy bridge" route
+    notice: str
+
+
+class AuditLogOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: str
+    booking_id: Optional[str] = None
+    patient_id: Optional[str] = None
+    actor_id: Optional[str] = None
+    actor_role: Optional[str] = None
+    action: str
+    detail: Optional[str] = None
+    meta: Optional[Dict[str, Any]] = None
+    created_at: Optional[datetime] = None
+
+
+class HomeCollectionTestsIn(BaseModel):
+    """One ordered test with its routing.
+
+    mode == 'home'  -> strict home-collectable catalogue check; a non-eligible
+                       test raises 422 (must be routed to the OPD instead).
+    mode == 'both'  -> the catalogue allows both — home or hospital accepted.
+    mode == 'hospital' -> regular lab order / OPD booking path.
+    """
+
+    code: str
+    name: Optional[str] = None
+    mode: str = "home"  # home | hospital | both
+
+
+class PrescribeWithCollectionCreate(BaseModel):
+    patient_id: str
+    facility_id: str
+    encounter_id: Optional[str] = None
+    doctor_name: Optional[str] = None
+    home_collection_required: bool = False  # doctor's manual "[ ] Require Home Sample Collection"
+    diagnosis: Optional[str] = None
+    notes: Optional[str] = None
+    tests: List[HomeCollectionTestsIn] = Field(default_factory=list)
+
+
+class HomeCollectionPrescribeOut(BaseModel):
+    booking: Optional[HomeCollectionBookingOut] = None
+    hospital_tests: List[str] = Field(default_factory=list)  # codes routed to OPD
+    rejected_tests: List[str] = Field(default_factory=list)  # requested home but not eligible
 
 
 class LabOrderCreate(BaseModel):
@@ -540,6 +660,7 @@ class LabOrderOut(BaseModel):
     ordered_by: Optional[str] = None
     tests: List[Dict[str, str]] = Field(default_factory=list)
     status: str
+    collection_mode: str = "hospital"  # home | hospital — where samples are taken
     ordered_at: Optional[datetime] = None
     sample_collected_at: Optional[datetime] = None
     dispatched_at: Optional[datetime] = None
