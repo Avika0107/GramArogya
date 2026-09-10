@@ -914,7 +914,7 @@ async function queueJoinLinkSms(req, joinUrl) {
         }),
       });
       document.getElementById('join-hint').textContent =
-        '📨 SMS with the join link queued to ' + p.phone + ' (dispatch fires on ASHA Sync / server restart).';
+        '📨 SMS with the join link queued to ' + p.phone + ' (dispatch fires on community health worker Sync / server restart).';
     } else {
       document.getElementById('join-hint').textContent =
         'No phone number on file — share the link via SMS/WhatsApp manually.';

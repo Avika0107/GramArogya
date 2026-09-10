@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b6e4f">
-  <meta name="description" content="GramArogya — healthcare connectivity portal. One login for ASHA workers, doctors, admins and lab technicians.">
+  <meta name="description" content="GramArogya — healthcare connectivity portal. One login for community health workers, doctors, admins and lab technicians.">
   <title data-i18n="title.portal">GramArogya — Connectivity Portal</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -47,7 +47,7 @@
 
       <div class="role-tabs" role="tablist" data-i18n-aria="tabs.login_aria" aria-label="Choose your role">
         <button type="button" role="tab" id="tab-login-asha" aria-selected="true" aria-controls="login-form" class="role-tab active" data-role="asha">
-          <span class="role-icon" aria-hidden="true">👩‍⚕️</span><span class="role-label" data-i18n="role.asha">ASHA Worker</span>
+          <span class="role-icon" aria-hidden="true">👩‍⚕️</span><span class="role-label" data-i18n="role.asha">Community Health Worker</span>
         </button>
         <button type="button" role="tab" id="tab-login-doctor" aria-selected="false" aria-controls="login-form" class="role-tab" data-role="doctor">
           <span class="role-icon" aria-hidden="true">🩺</span><span class="role-label" data-i18n="role.doctor">Doctor</span>
@@ -108,7 +108,7 @@
 
       <div class="role-tabs" role="tablist" data-i18n-aria="tabs.register_aria" aria-label="Register as">
         <button type="button" role="tab" id="tab-reg-asha" aria-selected="true" aria-controls="form-asha" class="role-tab active" data-role="asha">
-          <span class="role-icon" aria-hidden="true">👩‍⚕️</span><span class="role-label" data-i18n="role.asha">ASHA Worker</span>
+          <span class="role-icon" aria-hidden="true">👩‍⚕️</span><span class="role-label" data-i18n="role.asha">Community Health Worker</span>
         </button>
         <button type="button" role="tab" id="tab-reg-doctor" aria-selected="false" aria-controls="form-doctor" class="role-tab" data-role="doctor">
           <span class="role-icon" aria-hidden="true">🩺</span><span class="role-label" data-i18n="role.doctor">Doctor</span>
@@ -121,9 +121,9 @@
         </button>
       </div>
 
-      <!-- ------------------ ASHA WORKER REGISTRATION ------------------ -->
+      <!-- ------------------ COMMUNITY HEALTH WORKER REGISTRATION ------------------ -->
       <form id="form-asha" class="card form role-form" data-role="asha" novalidate>
-        <h3 class="form-heading" data-i18n="reg.asha_heading">ASHA Worker registration</h3>
+        <h3 class="form-heading" data-i18n="reg.asha_heading">Community Health Worker registration</h3>
         <p class="form-sub" data-i18n-html="form.required_note">Fields marked <span class="req">*</span> are required.</p>
 
         <div class="field">
@@ -228,7 +228,7 @@
         </div>
 
         <button type="submit" class="btn primary submit-btn" data-form="asha">
-          <span class="btn-label" data-i18n="reg.asha_submit">Create ASHA Worker account</span>
+          <span class="btn-label" data-i18n="reg.asha_submit">Create Community Health Worker account</span>
         </button>
         <p class="form-switch"><span data-i18n="form.already">Already registered?</span>
           <a href="#" class="link to-login" data-i18n="login.btn">Sign in</a>

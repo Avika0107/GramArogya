@@ -76,7 +76,7 @@ def _queue_referral_notification(db: Session, r: Referral, event: str) -> None:
                      f"{dst_name}. No further action needed. — GramArogya")
     elif event == "no_show":
         patient_text = (f"Follow-up needed: you missed your appointment at {dst_name}. "
-                        f"Please contact your ASHA worker. — GramArogya")
+                        f"Please contact your community health worker. — GramArogya")
         asha_text = (f"⚠️ No-show: {patient_name} missed their appointment at "
                      f"{dst_name}. Please follow up. — GramArogya")
     elif event == "reject":
@@ -100,7 +100,7 @@ def _queue_referral_notification(db: Session, r: Referral, event: str) -> None:
             db,
             message_text=asha_text,
             recipient_phone=r.asha_phone or settings.asha_alert_phone,
-            recipient_name="ASHA Worker",
+            recipient_name="Community Health Worker",
         )
 
 

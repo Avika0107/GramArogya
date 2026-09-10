@@ -1,0 +1,41 @@
+INFO:     Will watch for changes in these directories: ['C:\\Users\\ASUS\\Desktop\\GramArogya\\backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [16564] using WatchFiles
+INFO:gramarogya:Mounted /asha -> C:\Users\ASUS\Desktop\GramArogya\frontend\asha-worker
+INFO:gramarogya:Mounted /doctor -> C:\Users\ASUS\Desktop\GramArogya\frontend\doctor-portal
+INFO:gramarogya:Mounted /lab -> C:\Users\ASUS\Desktop\GramArogya\frontend\lab-portal
+INFO:gramarogya:Mounted /admin -> C:\Users\ASUS\Desktop\GramArogya\frontend\admin-dashboard
+INFO:gramarogya:Mounted /kiosk -> C:\Users\ASUS\Desktop\GramArogya\frontend\kiosk
+INFO:gramarogya:Mounted /portal -> C:\Users\ASUS\Desktop\GramArogya\frontend\portal
+INFO:     Started server process [21120]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:61805 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61807 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61809 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61811 - "GET /api/v1/dashboard/phc?facility_id=1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61813 - "GET /api/v1/appointments/queue/today?facility_id=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61815 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61817 - "GET /api/v1/dashboard/phc?facility_id=47576af3-0213-4d95-9e04-0a1b1e5b256f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61819 - "GET /api/v1/appointments/queue/today?facility_id=47576af3-0213-4d95-9e04-0a1b1e5b256f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51342 - "GET /doctor/dashboard.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51342 - "GET /doctor/styles.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51758 - "GET /doctor/portal.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51758 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51758 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51342 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51342 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51342 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51342 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57491 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57491 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57491 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57491 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62229 - "GET /api/v1/dashboard/phc?facility_id=6a98e964-418a-44fd-859c-cc2d7d6da4fb HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62229 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62229 - "GET /api/v1/inventory?facility_id=6a98e964-418a-44fd-859c-cc2d7d6da4fb&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62229 - "GET /api/v1/appointments/queue/today?facility_id=6a98e964-418a-44fd-859c-cc2d7d6da4fb HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62229 - "GET /doctor/queue.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62229 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62229 - "GET /api/v1/doctor/status?facility_id=6a98e964-418a-44fd-859c-cc2d7d6da4fb HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62229 - "GET /api/v1/appointments/queue/today?facility_id=6a98e964-418a-44fd-859c-cc2d7d6da4fb HTTP/1.1" 200 OK

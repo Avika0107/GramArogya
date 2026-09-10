@@ -35,6 +35,17 @@ header.app-header {
 
 header.app-header h1 { font-size: 18px; margin: 0; flex: 1; }
 
+/* Personalized greeting strip under the dashboard heading (hidden until a
+   signed-in worker's session is available). */
+.greeting {
+  background: var(--green);
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0 16px 14px;
+}
+
 .status-pill {
   font-size: 12px;
   background: rgba(255, 255, 255, 0.18);
