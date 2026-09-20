@@ -287,7 +287,7 @@ def _sync_teleconsult(db, rec: SyncRecord) -> SyncRecordResult:
         patient_id=patient.id,
         encounter_id=data.get("encounter_id"),
         facility_id=rec.facility_id or data.get("facility_id"),
-        requested_by=data.get("requested_by") or "ASHA Worker",
+        requested_by=data.get("requested_by") or "Community Health Worker",
         mode=mode,
         reason=data.get("reason"),
         status="requested",

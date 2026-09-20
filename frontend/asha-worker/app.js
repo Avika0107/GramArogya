@@ -228,7 +228,8 @@ const I18N = {
     'asha_phone.cleared': 'Cleared',
 
     // headers / nav
-    'title.index': '🩺 GramArogya · ASHA',
+    'title.index': 'GramArogya – Community Health Worker',
+    'greet.hello': 'Hello, {0}',
     'title.triage': '🩺 GramArogya · Triage',
     'title.sync': '🩺 GramArogya · Sync',
     'nav.search': 'Patient Search',
@@ -606,7 +607,8 @@ const I18N = {
     'asha_phone.save': 'सहेजें',
     'asha_phone.saved': 'सहेजा गया — SMS अलर्ट यहाँ भेजे जाएँगे',
     'asha_phone.cleared': 'हटा दिया गया',
-    'title.index': '\ud83e\ude7a \u0917\u094d\u0930\u093e\u092e\u0906\u0930\u094b\u0917\u094d\u092f \u00b7 \u0906\u0936\u093e',
+    'title.index': 'ग्रामआरोग्य – सामुदायिक स्वास्थ्य कार्यकर्ता',
+    'greet.hello': 'नमस्ते, {0}',
     'title.triage': '\ud83e\ude7a \u0917\u094d\u0930\u093e\u092e\u0906\u0930\u094b\u0917\u094d\u092f \u00b7 \u091f\u094d\u0930\u093e\u0907\u090f\u091c',
     'title.sync': '\ud83e\ude7a \u0917\u094d\u0930\u093e\u092e\u0906\u0930\u094b\u0917\u094d\u092f \u00b7 \u0938\u093f\u0902\u0915',
     'nav.search': '\u092e\u0930\u0940\u091c\u093c \u0916\u094b\u091c\u0947\u0902',
@@ -975,7 +977,8 @@ const I18N = {
     'asha_phone.save': 'जतन करा',
     'asha_phone.saved': 'जतन झाले — SMS अलर्ट इथे येतील',
     'asha_phone.cleared': 'हटवले',
-    'title.index': '\ud83e\ude7a \u0917\u094d\u0930\u093e\u092e\u0906\u0930\u094b\u0917\u094d\u092f \u00b7 \u0906\u0936\u093e',
+    'title.index': 'ग्रामआरोग्य – सामुदायिक आरोग्य कार्यकर्ता',
+    'greet.hello': 'नमस्कार, {0}',
     'title.triage': '\ud83e\ude7a \u0917\u094d\u0930\u093e\u092e\u0906\u0930\u094b\u0917\u094d\u092f \u00b7 \u091f\u094d\u0930\u093e\u092f\u091c',
     'title.sync': '\ud83e\ude7a \u0917\u094d\u0930\u093e\u092e\u0906\u0930\u094b\u0917\u094d\u092f \u00b7 \u0938\u093f\u0902\u0915',
     'nav.search': '\u0930\u0941\u0917\u094d\u0923 \u0936\u094b\u0927',
@@ -1344,7 +1347,8 @@ const I18N = {
     'asha_phone.save': 'সংরক্ষণ',
     'asha_phone.saved': 'সংরক্ষিত — SMS সতর্কতা এখানে আসবে',
     'asha_phone.cleared': 'মুছে ফেলা হয়েছে',
-    'title.index': '\ud83e\ude7a \u0997\u09cd\u09b0\u09be\u09ae\u0986\u09b0\u09cb\u0997\u09cd\u09af \u00b7 \u0986\u09b6\u09be',
+    'title.index': 'গ্রামআরোগ্য – সামাজিক স্বাস্থ্যকর্মী',
+    'greet.hello': 'নমস্কার, {0}',
     'title.triage': '\ud83e\ude7a \u0997\u09cd\u09b0\u09be\u09ae\u0986\u09b0\u09cb\u0997\u09cd\u09af \u00b7 \u099f\u09cd\u09b0\u09be\u09af\u09be\u099c',
     'title.sync': '\ud83e\ude7a \u0997\u09cd\u09b0\u09be\u09ae\u0986\u09b0\u09cb\u0997\u09cd\u09af \u00b7 \u09b8\u09bf\u0982\u0995',
     'nav.search': '\u09b0\u09cb\u0997\u09c0 \u0996\u09c1\u0981\u099c\u09c1\u09a8',
@@ -1549,6 +1553,30 @@ function applyStaticI18n() {
   document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
   document.querySelectorAll('[data-i18n-html]').forEach((el) => { el.innerHTML = t(el.dataset.i18nHtml); });
   document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+  updateGreeting();
+}
+
+/* Signed-in worker profile, stored by the portal at sign-in (localStorage
+ * key 'gramarogya_profile'): { name, role, phone, signedInAt }. */
+function getSessionUser() {
+  try {
+    const raw = localStorage.getItem('gramarogya_profile');
+    if (raw) { const p = JSON.parse(raw); if (p && typeof p === 'object') return p; }
+  } catch (e) { /* corrupt entry — treat as signed out */ }
+  return null;
+}
+
+/* Show "Hello, <name>" under the dashboard heading using the signed-in
+ * worker's name, localized to the active language. Hidden when nobody is
+ * signed in (no session). */
+function updateGreeting() {
+  const el = document.getElementById('greeting');
+  if (!el) return; // pages other than the dashboard have no greeting element
+  const user = getSessionUser();
+  const name = (user && typeof user.name === 'string' && user.name.trim()) ? user.name.trim() : '';
+  if (!name) { el.textContent = ''; el.hidden = true; return; }
+  el.textContent = t('greet.hello', [name]);
+  el.hidden = false;
 }
 
 function symptomLabel(key) {
@@ -1564,10 +1592,15 @@ function genderLabel(value) {
 /* Network simulation                                                    */
 /* ------------------------------------------------------------------ */
 function isOnline() {
-  // Offline-first: a fresh install (nothing stored yet) starts OFFLINE, so
-  // every record queues on the device and only leaves when the worker
-  // explicitly flips the "Simulate Network State" toggle to Online.
-  return localStorage.getItem('gramarogya_online') === 'online';
+  // A stored "Simulate Network State" toggle always wins: it is only written
+  // when the worker flips the switch on the Sync page (demo mode).
+  const sim = localStorage.getItem('gramarogya_online');
+  if (sim === 'online' || sim === 'offline') return sim === 'online';
+  // Otherwise follow the device's real connectivity: the portal comes up
+  // ONLINE whenever there is a connection and only queues records during a
+  // genuine outage (the browser fires 'offline' when the link drops). This
+  // keeps queued records syncing automatically instead of staying offline.
+  return navigator.onLine !== false;
 }
 
 function setNetworkState(state) {
@@ -1750,7 +1783,15 @@ async function flushPending(opts = {}) {
         body: JSON.stringify({ records: batch, device_id: deviceId }),
       });
     } catch (e) {
-      // Network/server error: flag the whole batch, keep for retry
+      // Connection-level failures (offline, a dropped network request, or a
+      // transient 5xx from a starting/restarting server) mean the batch was
+      // not processed: leave the records queued and let auto-sync retry them
+      // later instead of flagging them "Failed".
+      if (e.offline || e instanceof TypeError || /^HTTP 5\d\d/.test(e.message || '')) {
+        if (opts.onProgress) opts.onProgress(i + 1, batches.length);
+        throw e;
+      }
+      // Real server rejection: flag the whole batch, keep for retry
       for (const rec of batch) {
         await db.savePending(Object.assign({}, rec, { sync_failed: true, error: e.message }));
       }
@@ -1784,6 +1825,31 @@ async function fullSync(onProgress) {
   const syncRes = await flushPending({ onProgress: onProgress });
   const msgRes = await dispatchMessages();
   return { syncRes, msgRes };
+}
+
+/* Push records queued during an outage as soon as the backend is reachable
+ * again. Runs on page load and from a background timer; failures keep the
+ * records queued (not "Failed") so the next attempt retries them.
+ */
+let pendingSyncBusy = false;
+async function autoSyncPending({ silent = false } = {}) {
+  if (pendingSyncBusy || !isOnline()) return 0;
+  pendingSyncBusy = true;
+  try {
+    const pending = await db.getPending();
+    if (!pending.length) return 0;
+    const { syncRes } = await fullSync();
+    updateNetPill();
+    if (PAGE === 'sync') renderSyncPage();
+    const n = syncRes ? (syncRes.synced || 0) : 0;
+    if (n > 0 && !silent) toast(t('t.bg_sync_done', [n]), 'ok');
+    return n;
+  } catch (e) {
+    // Backend not reachable yet — records stay queued; retried next tick.
+    return 0;
+  } finally {
+    pendingSyncBusy = false;
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -1974,7 +2040,7 @@ async function requestTeleconsult() {
       patient_id: p.id,
       mode: mode,
       reason: reason || null,
-      requested_by: 'ASHA Worker',
+      requested_by: 'Community Health Worker',
       requested_at: now,
     },
   });
@@ -2676,7 +2742,7 @@ async function runCheckin() {
         patient_id: pat.id,
         facility_id: fac.id,
         priority: document.getElementById('ci-priority').value,
-        reason: 'OPD check-in (ASHA)',
+        reason: 'OPD check-in (Community Health Worker)',
         department: 'GMED',
         counter: 'WEB01',
       }),
@@ -3964,11 +4030,23 @@ document.addEventListener('DOMContentLoaded', () => {
   if (PAGE === 'referral') initReferralPage();
   if (PAGE === 'tracking') initTrackingPage();
 
-  // Auto-sync queued records when the network comes back
+  // Real connectivity changes update the header pill everywhere, and queued
+  // records auto-sync as soon as a connection comes back — no manual steps.
   window.addEventListener('online', () => {
+    updateNetPill();
+    if (PAGE === 'sync') updateNetworkUI();
     if (isOnline()) {
       toast(t('sync.auto_sync'), 'info');
       flushPending().catch(() => {});
     }
   });
+  window.addEventListener('offline', () => {
+    updateNetPill();
+    if (PAGE === 'sync') updateNetworkUI();
+  });
+
+  // Self-healing: each page load plus a background timer push records that
+  // were queued during an outage as soon as the backend is reachable again.
+  autoSyncPending();
+  setInterval(() => autoSyncPending({ silent: true }), 20000);
 });
