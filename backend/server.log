@@ -1,41 +1,893 @@
 INFO:     Will watch for changes in these directories: ['C:\\Users\\ASUS\\Desktop\\GramArogya\\backend']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [16564] using WatchFiles
+INFO:     Started reloader process [29776] using WatchFiles
 INFO:gramarogya:Mounted /asha -> C:\Users\ASUS\Desktop\GramArogya\frontend\asha-worker
 INFO:gramarogya:Mounted /doctor -> C:\Users\ASUS\Desktop\GramArogya\frontend\doctor-portal
 INFO:gramarogya:Mounted /lab -> C:\Users\ASUS\Desktop\GramArogya\frontend\lab-portal
 INFO:gramarogya:Mounted /admin -> C:\Users\ASUS\Desktop\GramArogya\frontend\admin-dashboard
 INFO:gramarogya:Mounted /kiosk -> C:\Users\ASUS\Desktop\GramArogya\frontend\kiosk
 INFO:gramarogya:Mounted /portal -> C:\Users\ASUS\Desktop\GramArogya\frontend\portal
-INFO:     Started server process [21120]
+INFO:     Started server process [19376]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     127.0.0.1:61805 - "GET /api/v1/health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61807 - "GET /api/v1/health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61809 - "GET /api/v1/facilities HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61811 - "GET /api/v1/dashboard/phc?facility_id=1 HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:61813 - "GET /api/v1/appointments/queue/today?facility_id=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61815 - "GET /api/v1/facilities HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61817 - "GET /api/v1/dashboard/phc?facility_id=47576af3-0213-4d95-9e04-0a1b1e5b256f HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61819 - "GET /api/v1/appointments/queue/today?facility_id=47576af3-0213-4d95-9e04-0a1b1e5b256f HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51342 - "GET /doctor/dashboard.html HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51342 - "GET /doctor/styles.css HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51758 - "GET /doctor/portal.js HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51758 - "GET /api/v1/facilities HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51758 - "GET /favicon.ico HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:51342 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51342 - "GET /api/v1/followups HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51342 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51342 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57491 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57491 - "GET /api/v1/followups HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57491 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57491 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62229 - "GET /api/v1/dashboard/phc?facility_id=6a98e964-418a-44fd-859c-cc2d7d6da4fb HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62229 - "GET /api/v1/followups HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62229 - "GET /api/v1/inventory?facility_id=6a98e964-418a-44fd-859c-cc2d7d6da4fb&low_only=true HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62229 - "GET /api/v1/appointments/queue/today?facility_id=6a98e964-418a-44fd-859c-cc2d7d6da4fb HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62229 - "GET /doctor/queue.html HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62229 - "GET /api/v1/facilities HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62229 - "GET /api/v1/doctor/status?facility_id=6a98e964-418a-44fd-859c-cc2d7d6da4fb HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62229 - "GET /api/v1/appointments/queue/today?facility_id=6a98e964-418a-44fd-859c-cc2d7d6da4fb HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56276 - "GET /portal/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56279 - "GET / HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:59681 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:53044 - "GET /portal/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53044 - "GET /portal/styles.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53044 - "GET /portal/app.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64948 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:64948 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57598 - "GET /asha/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57701 - "GET /asha/db.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57598 - "GET /asha/styles.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57701 - "GET /asha/app.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57701 - "GET /api/v1/teleconsult/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57598 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55715 - "GET /asha/manifest.json HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57598 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57598 - "GET /asha/sync.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57598 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59602 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:59602 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59602 - "GET /asha/sync.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59602 - "GET /asha/styles.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58203 - "GET /asha/db.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55323 - "GET /asha/app.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61375 - "GET /asha/manifest.json HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55323 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59602 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55323 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:55323 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59602 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58203 - "GET /asha/icons/icon-192.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58203 - "GET /api/v1/messages?status=queued HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58203 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58203 - "GET /asha/index.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58203 - "GET /api/v1/teleconsult/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59602 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59602 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59602 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:58203 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:58203 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58203 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54979 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:54979 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54979 - "GET /api/v1/messages?status=queued HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54979 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60711 - "GET /api/v1/teleconsult/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57835 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57835 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:57835 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57835 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:57835 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57835 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50311 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:50311 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50311 - "GET /api/v1/messages?status=queued HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50311 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49667 - "GET /asha/tracking.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49667 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49667 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52410 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49671 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:52410 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49667 - "GET /api/v1/referrals HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:49671 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49671 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49671 - "GET /api/v1/teleconsult/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49667 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49667 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:49667 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49667 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:49667 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49667 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49667 - "GET /asha/triage.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49667 - "GET /asha/ai-i18n.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49671 - "GET /asha/ai.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49671 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49671 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:49671 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49667 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:49667 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49667 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:52299 - "GET /api/v1/teleconsult/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50785 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50785 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:50785 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50785 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:50785 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50785 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55398 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:55398 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57704 - "GET /doctor/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57704 - "GET /doctor/dashboard.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57704 - "GET /doctor/portal.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57704 - "GET /doctor/styles.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57704 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57704 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57704 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57704 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57704 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49738 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:49738 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63061 - "GET /doctor/dashboard.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63061 - "GET /doctor/styles.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50544 - "GET /doctor/portal.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50544 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50544 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50544 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50544 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50544 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59557 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59557 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59557 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59557 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50986 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:50986 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53754 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53754 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53754 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53754 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53754 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53754 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53754 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53754 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51015 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51015 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51015 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51015 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59940 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:59940 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55671 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55671 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55671 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55671 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51532 - "GET /doctor/teleconsult.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51532 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51532 - "GET /api/v1/teleconsult/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51532 - "GET /api/v1/teleconsult HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63783 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63783 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63783 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63783 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51532 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:51532 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63783 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57450 - "GET /doctor/patient.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57450 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57450 - "GET /api/v1/inventory/medicines HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53765 - "GET /api/v1/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53765 - "GET /doctor/queue.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53765 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53765 - "GET /api/v1/doctor/status?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53765 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53765 - "GET /api/v1/queue?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&hours=48 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65502 - "WebSocket /api/v1/ws/queue?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:65476 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65476 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65476 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65476 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53765 - "GET /doctor/referrals.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53765 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53765 - "GET /api/v1/referrals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53765 - "GET /api/v1/referrals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53765 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:53765 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62136 - "GET /doctor/pharmacy.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62136 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62136 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62136 - "GET /api/v1/inventory/medicine/430d0ebb-910b-42d9-b675-96eab793a01d/availability?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65298 - "GET /api/v1/inventory/medicine/bbcead8a-12e0-40ec-870c-669d59b85a7d/availability?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59424 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59424 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59424 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59424 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59424 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57939 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57939 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57939 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57939 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59424 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:59424 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59424 - "GET /asha/ HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59424 - "GET /api/v1/teleconsult/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56286 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56286 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:56286 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56286 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59424 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:59424 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56286 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56286 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56286 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56286 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56286 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56286 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56286 - "GET /lab/ HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56286 - "GET /lab/lab.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56286 - "GET /api/v1/lab/orders HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56286 - "GET /api/v1/lab/tests HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61852 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61852 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61852 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61852 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61855 - "GET /lab/collect.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61855 - "GET /lab/collect.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61855 - "GET /api/v1/home-collection/technicians HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51908 - "GET /api/v1/home-collection/bookings?status=HOME_COLLECTION_PENDING HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55837 - "GET /api/v1/home-collection/audit?limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61855 - "GET /api/v1/home-collection/bookings?technician_id=2b59d4d6-6299-4f4a-893a-3253cf98da4f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61573 - "GET /api/v1/lab/tests HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61573 - "GET /doctor/ HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61573 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61573 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61573 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61573 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61573 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57152 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57152 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57152 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57152 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61169 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:61169 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61169 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61169 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61169 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61169 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62602 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62602 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62602 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62602 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63062 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63062 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63062 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63062 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54651 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54651 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54651 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54651 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52990 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52990 - "GET /api/v1/referrals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52990 - "GET /api/v1/referrals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58764 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63039 - "GET /api/v1/inventory/medicines HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58764 - "GET /api/v1/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55625 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55625 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55625 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55625 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62236 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:62236 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50712 - "GET /api/v1/teleconsult/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52658 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52658 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:52658 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52658 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50712 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:52658 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:50712 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50712 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50712 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50712 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:50712 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50712 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52658 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:50712 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:50712 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50712 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62839 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62839 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62839 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62839 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53050 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53050 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:53050 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53050 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52514 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:53050 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:53050 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53050 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58041 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58041 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58041 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58041 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51634 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:51634 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51634 - "GET /api/v1/teleconsult/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50194 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50194 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:50194 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51634 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50194 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:50194 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51634 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51634 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61014 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61014 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:61014 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51444 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61014 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:51444 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61014 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61014 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:53813 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53813 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53813 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53813 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49320 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:49320 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61169 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:61169 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57794 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57794 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57794 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57794 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56349 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:56349 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50199 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50199 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50199 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50199 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57028 - "GET /api/v1/patients?q=91022925247598 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57028 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Queued sms message for 8601288288 (772113c9-f7e3-457e-84e1-8049e541d37c)
+INFO:     127.0.0.1:57028 - "POST /api/v1/appointments HTTP/1.1" 201 Created
+INFO:     127.0.0.1:57028 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:SMS sent to 8601288288: OPD appointment booked at PHC Sanda (Primary Health Centre) — token GA-PS-GMED-20260916-WEB01-000001. Please carry your ABHA card. — GramArogya
+INFO:gramarogya.messaging:Dispatch finished: 1 sent, 0 failed
+[MOCK SMS] SMS sent to 8601288288: OPD appointment booked at PHC Sanda (Primary Health Centre) — token GA-PS-GMED-20260916-WEB01-000001. Please carry your ABHA card. — GramArogya
+INFO:     127.0.0.1:57028 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53026 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53026 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53026 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53026 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64154 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:64154 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64487 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:64487 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64487 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59575 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59575 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59575 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59575 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56465 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:56465 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58972 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58972 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58972 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58972 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60565 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:60565 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58278 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58278 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58278 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58278 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59923 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:59923 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59923 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:59923 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52363 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:52363 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52363 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:52363 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52363 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:52363 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52363 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:52363 - "GET /api/v1/inventory/medicines HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59923 - "GET /api/v1/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59923 - "GET /asha/sw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64972 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64972 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64972 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64972 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58053 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50081 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65518 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65518 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:50081 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65518 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58053 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:64603 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60923 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60923 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60923 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60923 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64725 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:64725 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53937 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53937 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53937 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53937 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52308 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:52308 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57983 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57983 - "GET /api/v1/doctor/status?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57983 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57983 - "GET /api/v1/queue?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&hours=48 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65385 - "WebSocket /api/v1/ws/queue?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:57858 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57858 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57858 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57858 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59398 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:59398 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59398 - "GET /doctor/patient.html?id=479731d2-486a-4834-b499-8920e6fc89ca&appt=33d83d40-7926-40f1-af6f-3834bbf78b6b HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59398 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59398 - "GET /api/v1/inventory/medicines HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54954 - "GET /api/v1/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54954 - "GET /api/v1/patients/479731d2-486a-4834-b499-8920e6fc89ca HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59398 - "GET /api/v1/lab/tests HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54954 - "GET /api/v1/patients/479731d2-486a-4834-b499-8920e6fc89ca/timeline HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49870 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49870 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49870 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49870 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53797 - "GET /admin/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53797 - "GET /admin/admin.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57592 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53797 - "GET /api/v1/dashboard/district?district=Barabanki&date_from=2026-09-10&date_to=2026-09-16 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53797 - "GET /api/v1/dashboard/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53797 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:53797 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53522 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62837 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62837 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62837 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62837 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65532 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:65532 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65532 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62991 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62991 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62991 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62991 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51376 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56996 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56996 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56996 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56996 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65502 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58527 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55386 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55386 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55386 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55386 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62302 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:62302 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62302 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64659 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64659 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64659 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64659 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63104 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52761 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52761 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52761 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52761 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54853 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54352 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57877 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57877 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57877 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57877 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51602 - "POST /api/v1/sync HTTP/1.1" 200 OK
+INFO:gramarogya.messaging:Dispatch finished: 0 sent, 0 failed
+INFO:     127.0.0.1:51602 - "POST /api/v1/messages/dispatch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50763 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50763 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50763 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50763 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52849 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52849 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52849 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52849 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58917 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49744 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49744 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49744 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49744 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     192.168.1.33:58922 - "GET /portal/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61951 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61951 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61951 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61951 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52123 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52123 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52123 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52123 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51601 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61040 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61040 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61040 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61040 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50684 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50684 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50684 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50684 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61314 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61314 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61314 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61314 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56497 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65137 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59233 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59233 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59233 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59233 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63472 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     192.168.1.33:54045 - "GET /asha/ HTTP/1.1" 200 OK
+INFO:     192.168.1.33:54045 - "GET /asha/styles.css HTTP/1.1" 200 OK
+INFO:     192.168.1.33:54056 - "GET /asha/db.js HTTP/1.1" 200 OK
+INFO:     192.168.1.33:60752 - "GET /asha/app.js HTTP/1.1" 200 OK
+INFO:     192.168.1.33:63226 - "GET /asha/manifest.json HTTP/1.1" 200 OK
+INFO:     192.168.1.33:60752 - "GET /api/v1/teleconsult/config HTTP/1.1" 200 OK
+INFO:     192.168.1.33:54056 - "GET /api/v1/facilities HTTP/1.1" 200 OK
+INFO:     192.168.1.33:54056 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61360 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61360 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61360 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61360 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52021 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63277 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63277 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63277 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63277 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50929 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61856 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56721 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56721 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56721 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56721 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54765 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63869 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63869 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63869 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63869 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54721 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54721 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54721 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54721 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53883 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53883 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53883 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53883 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51104 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59348 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59348 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59348 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59348 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55939 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55939 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55939 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55939 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49862 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49862 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49862 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49862 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49698 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49698 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49698 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49698 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63733 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63733 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63733 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63733 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54394 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54394 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54394 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54394 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54619 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54619 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54619 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54619 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64232 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64232 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64232 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64232 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50878 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50878 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50878 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50878 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55785 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55785 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55785 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55785 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49900 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49900 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49900 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49900 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62259 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62259 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62259 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62259 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49666 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49666 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49666 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49666 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55457 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55457 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55457 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55457 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     192.168.1.14:43352 - "GET /portal/ HTTP/1.1" 200 OK
+INFO:     192.168.1.14:43352 - "GET /portal/styles.css HTTP/1.1" 200 OK
+INFO:     192.168.1.14:43366 - "GET /portal/app.js HTTP/1.1" 200 OK
+INFO:     192.168.1.14:43366 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54598 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54598 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54598 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54598 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55170 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55170 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55170 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55170 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53216 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53216 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53216 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53216 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51114 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51114 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51114 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51114 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52104 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52104 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52104 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52104 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52613 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54184 - "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62190 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62190 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62190 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62190 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54184 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49758 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55815 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55815 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55815 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55815 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51787 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58234 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58234 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58234 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58234 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57455 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53893 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62207 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62207 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62207 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62207 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65233 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49193 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49193 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49193 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49193 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64831 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64525 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64525 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64525 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64525 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58027 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51075 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51075 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51075 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51075 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64759 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60482 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59878 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59878 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59878 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59878 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54306 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58469 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58469 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58469 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58469 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63325 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50937 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50937 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50937 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50937 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57226 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60699 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58627 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58627 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58627 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58627 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63926 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57268 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57268 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57268 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57268 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57357 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64790 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64790 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64790 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64790 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62792 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56155 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63676 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63676 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63676 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63676 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52898 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65156 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65156 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65156 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65156 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56219 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56848 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56848 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56848 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56848 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65176 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57290 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57620 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57620 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57620 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57620 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52759 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65167 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65167 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65167 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65167 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51934 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58494 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58494 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58494 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58494 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58336 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51852 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61288 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61288 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61288 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61288 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54855 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50789 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50789 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50789 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50789 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52462 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54985 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54985 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54985 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54985 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64662 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54247 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50351 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50351 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50351 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50351 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58209 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49308 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49308 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49308 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49308 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51784 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58182 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58182 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58182 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58182 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61106 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61106 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61106 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61106 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63816 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64999 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58055 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58055 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58055 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58055 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52397 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51703 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51703 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51703 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51703 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56280 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49671 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49671 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49671 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49671 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49672 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55635 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54423 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54423 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54423 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54423 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62482 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53145 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53145 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53145 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53145 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56802 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51251 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51251 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51251 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51251 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53984 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57446 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65383 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65383 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65383 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65383 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63886 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59674 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59674 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59674 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59674 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56342 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62811 - "GET /api/v1/dashboard/phc?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62811 - "GET /api/v1/followups HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62811 - "GET /api/v1/inventory?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0&low_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62811 - "GET /api/v1/appointments/queue/today?facility_id=6d486f03-ebcc-4567-b233-fb77d3abebb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64806 - "GET /api/v1/auth/doctors?status=pending HTTP/1.1" 200 OK
